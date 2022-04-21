@@ -1,0 +1,8 @@
+namespace scyna
+{
+    class Service
+    {
+
+    }
+
+}

@@ -1,0 +1,10 @@
+{
+  "version": 2,
+  "dgSpecHash": "VyodWzHc7D6ar8SaDISlZElH8P1x7zMgeursRA1w6C6x1IWO3UxJ8GLlsM55owS9NaPAwKzq/6tosQppKkc3AQ==",
+  "success": true,
+  "projectFilePath": "/home/hongsan/scyna/csharp/csharp.csproj",
+  "expectedPackageFiles": [
+    "/home/hongsan/.nuget/packages/google.protobuf/3.19.4/google.protobuf.3.19.4.nupkg.sha512"
+  ],
+  "logs": []
+}

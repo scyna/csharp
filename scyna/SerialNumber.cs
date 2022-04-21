@@ -1,0 +1,7 @@
+namespace scyna
+{
+    class OneID
+    {
+        
+    }
+}
