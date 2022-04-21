@@ -1,6 +1,6 @@
 namespace scyna
 {
-    class ID
+    class Generator
     {
         
     }

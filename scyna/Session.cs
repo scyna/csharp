@@ -33,6 +33,7 @@ namespace scyna
 
         private static void OnUpdate(Object source, System.Timers.ElapsedEventArgs e)
         {
+            Console.WriteLine("Update Session");
             /*TODO: send update signal to Manager*/
         }
     }

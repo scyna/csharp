@@ -25,10 +25,10 @@ namespace scyna
         {
             var client = new HttpClient
             {
-                BaseAddress = new Uri("http://127.0.0.1:8081") /*FIXME*/
+                BaseAddress = new Uri("http://127.0.0.1:8081" + Path.SESSION_CREATE_URL)
             };
 
-            var auth = new proto.AuthenticationRequest
+            var auth = new proto.CreateSessionRequest
             {
                 Module = module,
                 Secret = secret,
@@ -45,7 +45,7 @@ namespace scyna
             var request = new ByteArrayContent(bytes);
             var result = await client.PostAsync("/apix/authenticate", request);
             /*TODO: timeout*/
-            var response = proto.AuthenticationResponse.Parser.ParseFrom(result.Content.ReadAsStream());
+            var response = proto.CreateSessionResponse.Parser.ParseFrom(result.Content.ReadAsStream());
             if (response != null) instance = new Engine(module, response.SessionID, response.Config);
             else throw new Exception(); //FIXME
         }
