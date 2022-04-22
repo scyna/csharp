@@ -25,29 +25,24 @@ namespace scyna
         static public async void Init(string managerURL, string module, string secret)
         {
             var client = new HttpClient();
-            var request = new proto.CreateSessionRequest
-            {
-                Module = module,
-                Secret = secret,
-            };
+            var request = new proto.CreateSessionRequest { Module = module, Secret = secret, };
 
-            byte[] bytes;
-
+            byte[] requestBody;
             using (MemoryStream stream = new MemoryStream())
             {
                 request.WriteTo(stream);
-                bytes = stream.ToArray();
+                requestBody = stream.ToArray();
             }
 
-            var result = client.PostAsync(managerURL + Path.SESSION_CREATE_URL, new ByteArrayContent(bytes));
-            if (!result.Wait(5000))
+            var task = client.PostAsync(managerURL + Path.SESSION_CREATE_URL, new ByteArrayContent(requestBody));
+            if (!task.Wait(5000))
             {
                 Console.WriteLine("Timeout");
                 throw new Exception();
             }
 
-            var body = await result.GetAwaiter().GetResult().Content.ReadAsByteArrayAsync();
-            var response = proto.CreateSessionResponse.Parser.ParseFrom(body);
+            var responseBody = await task.GetAwaiter().GetResult().Content.ReadAsByteArrayAsync();
+            var response = proto.CreateSessionResponse.Parser.ParseFrom(responseBody);
             if (response != null) instance = new Engine(module, response.SessionID, response.Config);
             else throw new Exception();
         }
