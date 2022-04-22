@@ -7,6 +7,7 @@ namespace scyna
         private static Engine? instance;
         private string module;
         private Session session;
+        private Logger logger;
         public static Engine? Instance
         {
             get { return instance; }
@@ -19,8 +20,10 @@ namespace scyna
         {
             this.module = module;
             session = new Session(sid);
+            logger = new Logger(sid, true);
+            /*TODO:NATS*/
+            /*TODO:Scylla*/
             Console.WriteLine("Enngine Created, SessionID:" + sid);
-            /*TODO:*/
         }
         static public async void Init(string managerURL, string module, string secret)
         {
