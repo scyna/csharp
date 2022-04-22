@@ -19,16 +19,13 @@ namespace scyna
         {
             this.module = module;
             session = new Session(sid);
-            /*TODO*/
+            Console.WriteLine("Enngine Created, SessionID:" + sid);
+            /*TODO:*/
         }
-        static public async void Init(string module, string secret)
+        static public async void Init(string managerURL, string module, string secret)
         {
-            var client = new HttpClient
-            {
-                BaseAddress = new Uri("http://127.0.0.1:8081" + Path.SESSION_CREATE_URL)
-            };
-
-            var auth = new proto.CreateSessionRequest
+            var client = new HttpClient();
+            var request = new proto.CreateSessionRequest
             {
                 Module = module,
                 Secret = secret,
@@ -38,16 +35,21 @@ namespace scyna
 
             using (MemoryStream stream = new MemoryStream())
             {
-                auth.WriteTo(stream);
+                request.WriteTo(stream);
                 bytes = stream.ToArray();
             }
 
-            var request = new ByteArrayContent(bytes);
-            var result = await client.PostAsync("/apix/authenticate", request);
-            /*TODO: timeout*/
-            var response = proto.CreateSessionResponse.Parser.ParseFrom(result.Content.ReadAsStream());
+            var result = client.PostAsync(managerURL + Path.SESSION_CREATE_URL, new ByteArrayContent(bytes));
+            if (!result.Wait(5000))
+            {
+                Console.WriteLine("Timeout");
+                throw new Exception();
+            }
+
+            var body = await result.GetAwaiter().GetResult().Content.ReadAsByteArrayAsync();
+            var response = proto.CreateSessionResponse.Parser.ParseFrom(body);
             if (response != null) instance = new Engine(module, response.SessionID, response.Config);
-            else throw new Exception(); //FIXME
+            else throw new Exception();
         }
     }
 }
