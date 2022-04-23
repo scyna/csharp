@@ -14,10 +14,7 @@ namespace scyna
             timer.Enabled = true;
         }
 
-        public ulong ID
-        {
-            get { return id; }
-        }
+        public ulong ID { get { return id; } }
 
         public ulong Sequence
         {
