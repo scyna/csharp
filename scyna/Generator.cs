@@ -28,8 +28,7 @@ namespace scyna
         {
             var nc = Engine.Instance.Connection;
             var signal = new proto.Request { CallID = 0, JSON = false, };
-            var data = signal.ToByteArray();
-            var msg = nc.Request(Utils.PublishURL(Path.GEN_GET_ID_URL), data, 5000);
+            var msg = nc.Request(Utils.PublishURL(Path.GEN_GET_ID_URL), signal.ToByteArray(), 5000);
             var response = proto.Response.Parser.ParseFrom(msg.Data);
             if (response == null || response.Code != 200) return false;
             var id = proto.GetIDResponse.Parser.ParseFrom(response.Body);

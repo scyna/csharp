@@ -19,8 +19,7 @@ namespace scyna
         public static void Emit(String channel, pb::IMessage message)
         {
             var nc = Engine.Instance.Connection;
-            var data = message.ToByteArray();
-            nc.Publish(channel, data);
+            nc.Publish(channel, message.ToByteArray());
         }
         public static void Register(String channel, Handler handler)
         {

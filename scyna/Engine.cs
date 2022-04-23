@@ -54,8 +54,7 @@ namespace scyna
         {
             var client = new HttpClient();
             var request = new proto.CreateSessionRequest { Module = module, Secret = secret, };
-            var requestBody = request.ToByteArray();
-            var task = client.PostAsync(managerURL + Path.SESSION_CREATE_URL, new ByteArrayContent(requestBody));
+            var task = client.PostAsync(managerURL + Path.SESSION_CREATE_URL, new ByteArrayContent(request.ToByteArray()));
             if (!task.Wait(5000))
             {
                 Console.WriteLine("Timeout");
