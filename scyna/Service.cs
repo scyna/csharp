@@ -12,7 +12,7 @@ namespace scyna
         protected string? reply;
         private static JsonFormatter formater = new JsonFormatter(new JsonFormatter.Settings(false));
 
-        public abstract int Execute();
+        public abstract void Execute();
 
         public static void register(string url, Service service)
         {

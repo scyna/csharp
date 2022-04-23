@@ -16,10 +16,7 @@ namespace scyna
         {
             lock (this)
             {
-                if (next < last)
-                {
-                    next++;
-                }
+                if (next < last) next++;
                 else
                 {
                     var request = new proto.GetSNRequest { Key = key };

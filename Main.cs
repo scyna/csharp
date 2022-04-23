@@ -2,6 +2,18 @@
 
 namespace Test
 {
+
+    class EchoService : Service.Base<scyna.proto.Request>
+    {
+        public override void Execute()
+        {
+            Console.WriteLine("Receive EchoRequest");
+            var request = parse();
+            if (request == null) return;
+            log.Info("Test Log from echo [C#]");
+            //Done(new  EchoResponse.newBuilder().setText(request.getText()).build());
+        }
+    }
     class Test
     {
         static void Main(string[] args)
