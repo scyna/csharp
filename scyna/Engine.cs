@@ -1,4 +1,5 @@
 using Google.Protobuf;
+using NATS.Client;
 
 namespace scyna
 {
@@ -8,22 +9,41 @@ namespace scyna
         private string module;
         private Session session;
         private Logger logger;
-        public static Engine? Instance
+        private IConnection connection;
+        public static Engine Instance
         {
-            get { return instance; }
+            get
+            {
+                if (instance == null) throw new Exception();
+                return instance;
+            }
         }
-        public string Module
-        {
-            get { return module; }
-        }
+        public string Module { get { return module; } }
+        public IConnection Connection { get { return connection; } }
         private Engine(string module, ulong sid, scyna.proto.Configuration config)
         {
             this.module = module;
             session = new Session(sid);
             logger = new Logger(sid, true);
-            /*TODO:NATS*/
-            /*TODO:Scylla*/
-            Console.WriteLine("Enngine Created, SessionID:" + sid);
+
+            /* NATS */
+            string[] servers = config.NatsUrl.Split(",");
+            Options opts = ConnectionFactory.GetDefaultOptions();
+            opts.MaxReconnect = 2;
+            opts.ReconnectWait = 1000;
+            opts.Servers = servers;
+            if (config.NatsUsername.Length > 0)
+            {
+                opts.User = config.NatsUsername;
+                opts.Password = config.NatsPassword;
+            }
+            connection = new ConnectionFactory().CreateConnection(opts);
+            Console.WriteLine("Connected to NATS");
+
+            /* ScyllaDB */
+            /*TODO*/
+
+            Console.WriteLine("Engine Created, SessionID:" + sid);
         }
         static public async void Init(string managerURL, string module, string secret)
         {
