@@ -8,7 +8,6 @@ namespace Test
         {
             Console.WriteLine("Hello World!");
             Engine.Init("http://127.0.0.1:8081", "scyna.test", "123456");
-            //var engine = Engine.Instance;
             Engine.LOG.Error("Test log form c#");
             Console.WriteLine("Engine Stopped");
         }
