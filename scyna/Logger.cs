@@ -19,7 +19,7 @@ namespace scyna
             this.session = session;
         }
 
-        public void reset(ulong id, bool enable)
+        public void Reset(ulong id, bool enable)
         {
             this.enable = enable;
             this.id = id;

@@ -24,6 +24,7 @@ namespace scyna
 
         public static Logger LOG { get { return Instance.logger; } }
         public static Generator ID { get { return Instance.id; } }
+        public static ulong SessionID { get { return Instance.session.ID; } }
         private Engine(string module, ulong sid, scyna.proto.Configuration config)
         {
             this.module = module;
@@ -63,8 +64,7 @@ namespace scyna
 
             var responseBody = await task.GetAwaiter().GetResult().Content.ReadAsByteArrayAsync();
             var response = proto.CreateSessionResponse.Parser.ParseFrom(responseBody);
-            if (response != null) instance = new Engine(module, response.SessionID, response.Config);
-            else throw new Exception();
+            instance = new Engine(module, response.SessionID, response.Config);
         }
     }
 }
