@@ -44,27 +44,27 @@ namespace scyna
             }
         }
 
-        public void info(string message)
+        public void Info(string message)
         {
             add(INFO, message);
         }
 
-        public void warning(string message)
+        public void Warning(string message)
         {
             add(WARNING, message);
         }
 
-        public void error(string message)
+        public void Error(string message)
         {
             add(ERROR, message);
         }
 
-        public void debug(string message)
+        public void Debug(string message)
         {
             add(DEBUG, message);
         }
 
-        public void fatal(string message)
+        public void Fatal(string message)
         {
             add(FATAL, message);
         }

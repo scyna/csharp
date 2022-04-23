@@ -20,6 +20,8 @@ namespace scyna
         }
         public string Module { get { return module; } }
         public IConnection Connection { get { return connection; } }
+
+        public static Logger LOG { get { return Instance.logger; } }
         private Engine(string module, ulong sid, scyna.proto.Configuration config)
         {
             this.module = module;
