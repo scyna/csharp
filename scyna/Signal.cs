@@ -1,5 +1,4 @@
 using Google.Protobuf;
-using NATS.Client;
 
 namespace scyna
 {
