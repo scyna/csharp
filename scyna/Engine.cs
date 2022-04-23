@@ -10,6 +10,7 @@ namespace scyna
         private Session session;
         private Logger logger;
         private IConnection connection;
+        private Generator id;
         public static Engine Instance
         {
             get
@@ -22,10 +23,12 @@ namespace scyna
         public IConnection Connection { get { return connection; } }
 
         public static Logger LOG { get { return Instance.logger; } }
+        public static Generator ID { get { return Instance.id; } }
         private Engine(string module, ulong sid, scyna.proto.Configuration config)
         {
             this.module = module;
             session = new Session(sid);
+            id = new Generator();
             logger = new Logger(sid, true);
 
             /* NATS */
@@ -51,14 +54,7 @@ namespace scyna
         {
             var client = new HttpClient();
             var request = new proto.CreateSessionRequest { Module = module, Secret = secret, };
-
-            byte[] requestBody;
-            using (MemoryStream stream = new MemoryStream())
-            {
-                request.WriteTo(stream);
-                requestBody = stream.ToArray();
-            }
-
+            var requestBody = request.ToByteArray();
             var task = client.PostAsync(managerURL + Path.SESSION_CREATE_URL, new ByteArrayContent(requestBody));
             if (!task.Wait(5000))
             {
