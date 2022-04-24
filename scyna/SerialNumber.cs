@@ -19,15 +19,15 @@ namespace scyna
                 if (next < last) next++;
                 else
                 {
-                    var request = new proto.GetSNRequest { Key = key };
-
-                    var response = Service.SendRequest(Path.GEN_GET_SN_URL, request);
-                    if (response != null && response.Code == 200)
+                    var response = Service.SendRequest<proto.GetSNResponse>(
+                        Path.GEN_GET_SN_URL,
+                        new proto.GetSNRequest { Key = key }
+                    );
+                    if (response != null)
                     {
-                        var r = proto.GetSNResponse.Parser.ParseFrom(response.Body);
-                        prefix = r.Prefix;
-                        next = r.Start;
-                        last = r.End;
+                        prefix = response.Prefix;
+                        next = response.Start;
+                        last = response.End;
                     }
                 }
                 return String.Format("%d%07d", prefix, next);
