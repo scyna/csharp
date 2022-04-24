@@ -20,6 +20,14 @@ namespace Test
         }
     }
 
+    class TestSignal : Signal.Handler<example.TestSignal>
+    {
+        public override void Execute(example.TestSignal data)
+        {
+            Console.WriteLine("Receive TestSignal:" + data.Text);
+        }
+    }
+
     class Test
     {
         static void Main(string[] args)
@@ -29,6 +37,7 @@ namespace Test
 
             Service.Register("/example/echo", new EchoService());
             Service.Register("/example/hello", new HelloService());
+            Signal.Register("example.signal.test", new TestSignal());
 
             Engine.LOG.Error("Test log form c#");
             Console.WriteLine("Test ID Generator:" + Engine.ID.next());
@@ -38,8 +47,9 @@ namespace Test
 
             var hello = Service.SendRequest<example.HelloResponse>("/example/hello", null);
             if (hello != null) Console.WriteLine("Hello Response:" + hello.Text);
+            Signal.Emit("example.signal.test", new example.TestSignal { Text = "test" });
 
-            //Engine.Start();
+            Engine.Start();
             Console.WriteLine("Engine Stopped");
         }
     }

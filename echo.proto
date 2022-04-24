@@ -17,3 +17,8 @@ message HelloResponse
 {
   string text = 1;
 }
+
+message TestSignal 
+{
+  string text = 1;
+}

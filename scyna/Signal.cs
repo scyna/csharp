@@ -34,6 +34,7 @@ namespace scyna
             {
                 try
                 {
+                    Console.WriteLine("Here");
                     Execute(parser.ParseFrom(data));
                 }
                 catch (Exception e)
