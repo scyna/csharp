@@ -27,7 +27,7 @@ namespace Test
             Console.WriteLine("Hello World!");
             Engine.Init("http://127.0.0.1:8081", "scyna.test", "123456");
 
-            Service.Register<example.EchoRequest>("/example/echo", new EchoService());
+            Service.Register("/example/echo", new EchoService());
             Service.Register("/example/hello", new HelloService());
 
             Engine.LOG.Error("Test log form c#");
@@ -39,7 +39,6 @@ namespace Test
             var hello = Service.SendRequest<example.HelloResponse>("/example/hello", null);
             if (hello != null) Console.WriteLine("Hello Response:" + hello.Text);
 
-            else Console.WriteLine("Fail");
             Console.WriteLine("Engine Stopped");
         }
     }

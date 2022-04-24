@@ -5,11 +5,6 @@ namespace scyna
     using pb = global::Google.Protobuf;
     class Signal
     {
-        public interface Handler
-        {
-            void execute(byte[] data);
-        }
-
         public static void Emit(String channel)
         {
             var nc = Engine.Instance.Connection;
@@ -21,14 +16,32 @@ namespace scyna
             var nc = Engine.Instance.Connection;
             nc.Publish(channel, message.ToByteArray());
         }
-        public static void Register(String channel, Handler handler)
+        public static void Register<T>(String channel, Handler<T> handler) where T : IMessage<T>, new()
         {
             Console.WriteLine("Register Signal:" + channel);
             var nc = Engine.Instance.Connection;
             var d = nc.SubscribeAsync(channel, Engine.Instance.Module, (sender, args) =>
             {
-                handler.execute(args.Message.Data);
+                handler.Run(args.Message.Data);
             });
         }
+
+        public abstract class Handler<T> where T : IMessage<T>, new()
+        {
+            private MessageParser<T> parser = new MessageParser<T>(() => new T());
+            public abstract void Execute(T data);
+            public void Run(byte[] data)
+            {
+                try
+                {
+                    Execute(parser.ParseFrom(data));
+                }
+                catch (Exception e)
+                {
+                    Console.WriteLine(e.ToString());
+                }
+            }
+        }
+
     }
 }
