@@ -21,7 +21,7 @@ namespace scyna
                 {
                     var request = new proto.GetSNRequest { Key = key };
 
-                    var response = Service.sendRequest(Path.GEN_GET_SN_URL, request);
+                    var response = Service.SendRequest(Path.GEN_GET_SN_URL, request);
                     if (response != null && response.Code == 200)
                     {
                         var r = proto.GetSNResponse.Parser.ParseFrom(response.Body);
@@ -33,6 +33,5 @@ namespace scyna
                 return String.Format("%d%07d", prefix, next);
             }
         }
-
     }
 }

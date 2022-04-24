@@ -5,39 +5,22 @@ namespace scyna
 {
     abstract class Service
     {
-        protected Logger log = new Logger(0, false);
-        protected bool json;
-        protected ByteString? requestBody;
-        protected string? requestSource;
-        protected string? reply;
         private static JsonFormatter formater = new JsonFormatter(new JsonFormatter.Settings(false));
-
-        public abstract void Execute();
-
-        public static void register(string url, Service service)
+        public static void Register<T>(string url, Service.Handler<T> handler) where T : IMessage<T>, new()
         {
             Console.WriteLine("Register Service:" + url);
             var nc = Engine.Instance.Connection;
-            var d = nc.SubscribeAsync(Utils.SubscribeURL(url), "API", (sender, args) =>
-            {
-                try
-                {
-                    var request = proto.Request.Parser.ParseFrom(args.Message.Data);
-                    service.log.Reset(request.CallID, true); // FIXME: 
-                    service.reply = args.Message.Reply;
-                    service.json = request.JSON;
-                    service.requestBody = request.Body;
-                    service.requestSource = request.Data;
-                    service.Execute();
-                }
-                catch (Exception e)
-                {
-                    Console.WriteLine(e.ToString());
-                }
-            });
+            var d = nc.SubscribeAsync(Utils.SubscribeURL(url), "API", (sender, args) => { handler.Run(args.Message); });
         }
 
-        public static proto.Response? sendRequest(string url, IMessage request)
+        public static void Register(string url, Service.EmptyHandler handler)
+        {
+            Console.WriteLine("Register Service:" + url);
+            var nc = Engine.Instance.Connection;
+            var d = nc.SubscribeAsync(Utils.SubscribeURL(url), "API", (sender, args) => { handler.Run(args.Message); });
+        }
+
+        public static proto.Response? SendRequest(string url, IMessage request)
         {
             var callID = Engine.ID.next();
             var req = new proto.Request { CallID = callID, JSON = false };
@@ -48,53 +31,86 @@ namespace scyna
                 var msg = Engine.Instance.Connection.Request(Utils.PublishURL(url), request.ToByteArray(), 10000);
                 return proto.Response.Parser.ParseFrom(msg.Data);
             }
-            catch (Exception)
+            catch (Exception) { return null; }
+        }
+
+        public abstract class BaseHandler
+        {
+            protected Logger log = new Logger(0, false);
+            protected bool json;
+            protected string? requestSource;
+            protected string? reply;
+            protected void Error(proto.Error error)
             {
-                return null;
+                flush(400, error);
             }
-        }
 
-        protected void error(proto.Error error)
-        {
-            flush(400, error);
-        }
-
-        protected void done(IMessage m)
-        {
-            flush(200, m);
-        }
-
-        protected void flush(int status, IMessage m)
-        {
-            try
+            protected void Done(IMessage m)
             {
-                ByteString body;
-                if (json) body = ByteString.CopyFrom(formater.Format(m), Encoding.ASCII);
-                else body = m.ToByteString();
-                var response = new proto.Response { Code = status, SessionID = Engine.SessionID, Body = body };
-                Engine.Instance.Connection.Publish(reply, response.ToByteArray());
+                flush(200, m);
             }
-            catch (InvalidProtocolBufferException e)
-            {
-                Console.WriteLine(e.ToString());
-            }
-        }
 
-        public abstract class Base<T> : Service where T : IMessage<T>, new()
-        {
-            private MessageParser<T> parser = new MessageParser<T>(() => new T());
-            protected T? parse()
+            protected void flush(int status, IMessage m)
             {
                 try
                 {
-                    if (requestBody == null) throw new Exception();
-                    if (json) return parser.ParseJson(requestBody.ToString(Encoding.ASCII));
-                    else return parser.ParseFrom(requestBody);
+                    ByteString body;
+                    if (json) body = ByteString.CopyFrom(formater.Format(m), Encoding.ASCII);
+                    else body = m.ToByteString();
+                    var response = new proto.Response { Code = status, SessionID = Engine.SessionID, Body = body };
+                    Engine.Instance.Connection.Publish(reply, response.ToByteArray());
                 }
-                catch (Exception)
+                catch (InvalidProtocolBufferException e)
                 {
-                    flush(400, Error.BAD_REQUEST);
-                    return default(T);
+                    Console.WriteLine(e.ToString());
+                }
+            }
+        }
+
+        public abstract class EmptyHandler : BaseHandler
+        {
+            public abstract void Execute();
+            public void Run(NATS.Client.Msg message)
+            {
+                try
+                {
+                    var request = proto.Request.Parser.ParseFrom(message.Data);
+                    log.Reset(request.CallID, true); // FIXME: 
+                    reply = message.Reply;
+                    json = request.JSON;
+                    requestSource = request.Data;
+                    Execute();
+                }
+                catch (Exception e)
+                {
+                    Console.WriteLine(e.ToString());
+                    flush(400, scyna.Error.BAD_REQUEST);
+                }
+            }
+        }
+
+        public abstract class Handler<T> : BaseHandler where T : IMessage<T>, new()
+        {
+            private MessageParser<T> parser = new MessageParser<T>(() => new T());
+            public abstract void Execute(T request);
+            public void Run(NATS.Client.Msg message)
+            {
+                try
+                {
+                    var request = proto.Request.Parser.ParseFrom(message.Data);
+                    log.Reset(request.CallID, true); // FIXME: 
+                    reply = message.Reply;
+                    json = request.JSON;
+                    requestSource = request.Data;
+
+                    if (request.Body == null) throw new Exception();
+                    if (json) Execute(parser.ParseJson(request.Body.ToString(Encoding.ASCII)));
+                    else Execute(parser.ParseFrom(request.Body));
+                }
+                catch (Exception e)
+                {
+                    Console.WriteLine(e.ToString());
+                    flush(400, scyna.Error.BAD_REQUEST);
                 }
             }
         }
