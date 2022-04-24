@@ -5,7 +5,7 @@ namespace scyna
 {
     abstract class Service
     {
-        private static JsonFormatter formater = new JsonFormatter(new JsonFormatter.Settings(false));
+        private static JsonFormatter formater = new JsonFormatter(new JsonFormatter.Settings(true));
         public static void Register<T>(string url, Service.Handler<T> handler) where T : IMessage<T>, new()
         {
             Console.WriteLine("Register Service:" + url);
@@ -25,10 +25,9 @@ namespace scyna
             var callID = Engine.ID.next();
             var req = new proto.Request { CallID = callID, JSON = false };
             if (request != null) req.Body = request.ToByteString();
-
             try
             {
-                var msg = Engine.Instance.Connection.Request(Utils.PublishURL(url), request.ToByteArray(), 10000);
+                var msg = Engine.Instance.Connection.Request(Utils.PublishURL(url), req.ToByteArray(), 10000);
                 return proto.Response.Parser.ParseFrom(msg.Data);
             }
             catch (Exception) { return null; }
@@ -44,12 +43,10 @@ namespace scyna
             {
                 flush(400, error);
             }
-
             protected void Done(IMessage m)
             {
                 flush(200, m);
             }
-
             protected void flush(int status, IMessage m)
             {
                 try
