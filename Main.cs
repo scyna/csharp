@@ -32,12 +32,12 @@ namespace Test
             Engine.LOG.Error("Test log form c#");
             Console.WriteLine("Test ID Generator:" + Engine.ID.next());
 
-            var response = Service.SendRequest("/example/echo", new example.EchoRequest { Text = "Hello World" });
-            if (response != null && response.Code == 200)
-            {
-                var r = example.EchoResponse.Parser.ParseFrom(response.Body);
-                Console.WriteLine("Response:" + r.Text);
-            }
+            var response = Service.SendRequest<example.EchoResponse>("/example/echo", new example.EchoRequest { Text = "Echo" });
+            if (response != null) Console.WriteLine("Echo Response:" + response.Text);
+
+            var hello = Service.SendRequest<example.HelloResponse>("/example/hello", null);
+            if (hello != null) Console.WriteLine("Hello Response:" + hello.Text);
+
             else Console.WriteLine("Fail");
             Console.WriteLine("Engine Stopped");
         }

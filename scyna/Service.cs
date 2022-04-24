@@ -20,7 +20,7 @@ namespace scyna
             var d = nc.SubscribeAsync(Utils.SubscribeURL(url), "API", (sender, args) => { handler.Run(args.Message); });
         }
 
-        public static proto.Response? SendRequest(string url, IMessage request)
+        public static proto.Response? SendRequest(string url, IMessage? request)
         {
             var callID = Engine.ID.next();
             var req = new proto.Request { CallID = callID, JSON = false };
@@ -31,6 +31,22 @@ namespace scyna
                 return proto.Response.Parser.ParseFrom(msg.Data);
             }
             catch (Exception) { return null; }
+        }
+
+        public static T? SendRequest<T>(string url, IMessage? request) where T : IMessage<T>, new()
+        {
+            var callID = Engine.ID.next();
+            var req = new proto.Request { CallID = callID, JSON = false };
+            if (request != null) req.Body = request.ToByteString();
+            try
+            {
+                var msg = Engine.Instance.Connection.Request(Utils.PublishURL(url), req.ToByteArray(), 10000);
+                var response = proto.Response.Parser.ParseFrom(msg.Data);
+                if (response.Code != 200) return default(T);
+                MessageParser<T> parser = new MessageParser<T>(() => new T());
+                return parser.ParseFrom(response.Body);
+            }
+            catch (Exception) { return default(T); }
         }
 
         public abstract class BaseHandler
