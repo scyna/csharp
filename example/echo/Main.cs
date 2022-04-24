@@ -1,50 +1,8 @@
 ﻿using scyna;
 
-namespace Test
+namespace Example
 {
-    class HelloService : Service.EmptyHandler
-    {
-        public override void Execute()
-        {
-            Console.WriteLine("Receive HelloRequest");
-            LOG.Info("Test Service log from HelloService");
-            Done(new example.HelloResponse { Text = "Hello World" });
-        }
-    }
-    class EchoService : Service.Handler<example.EchoRequest>
-    {
-        public override void Execute(example.EchoRequest request)
-        {
-            Console.WriteLine("Receive EchoRequest");
-            Done(new example.EchoResponse { Text = request.Text });
-        }
-    }
-
-    class TestSignal : Signal.Handler<example.TestSignal>
-    {
-        public override void Execute(example.TestSignal data)
-        {
-            Console.WriteLine("Receive TestSignal:" + data.Text);
-        }
-    }
-
-    class EmptySignal : Signal.EmptyHandler
-    {
-        public override void Execute()
-        {
-            Console.WriteLine("Receive EmptySignal");
-        }
-    }
-
-    class TestEvent : Event.Handler<example.TestEvent>
-    {
-        public override void Execute(example.TestEvent data)
-        {
-            Console.WriteLine("Receive TestEvent:" + data.Text);
-        }
-    }
-
-    class Test
+    class EchoTest
     {
         static void Main(string[] args)
         {
