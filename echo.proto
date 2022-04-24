@@ -12,3 +12,8 @@ message EchoResponse
 {
   string text = 1;
 }
+
+message HelloResponse 
+{
+  string text = 1;
+}

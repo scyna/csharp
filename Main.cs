@@ -7,7 +7,7 @@ namespace Test
         public override void Execute()
         {
             Console.WriteLine("Receive HelloRequest");
-            Done(new example.EchoResponse { Text = "Hello World" });
+            Done(new example.HelloResponse { Text = "Hello World" });
         }
     }
     class EchoService : Service.Handler<example.EchoRequest>
