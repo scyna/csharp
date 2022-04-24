@@ -1,5 +1,6 @@
 using Google.Protobuf;
 using NATS.Client;
+using NATS.Client.JetStream;
 
 namespace scyna
 {
@@ -11,6 +12,8 @@ namespace scyna
         private Logger logger;
         private IConnection connection;
         private Generator id;
+
+        private IJetStream stream;
         public static Engine Instance
         {
             get
@@ -21,6 +24,7 @@ namespace scyna
         }
         public string Module { get { return module; } }
         public IConnection Connection { get { return connection; } }
+        public IJetStream Stream { get { return stream; } }
 
         public static Logger LOG { get { return Instance.logger; } }
         public static Generator ID { get { return Instance.id; } }
@@ -44,6 +48,7 @@ namespace scyna
                 opts.Password = config.NatsPassword;
             }
             connection = new ConnectionFactory().CreateConnection(opts);
+            stream = connection.CreateJetStreamContext();
             Console.WriteLine("Connected to NATS");
 
             /* ScyllaDB */

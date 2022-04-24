@@ -10,14 +10,14 @@ namespace scyna
         {
             Console.WriteLine("Register Service:" + url);
             var nc = Engine.Instance.Connection;
-            var d = nc.SubscribeAsync(Utils.SubscribeURL(url), "API", (sender, args) => { handler.Run(args.Message); });
+            nc.SubscribeAsync(Utils.SubscribeURL(url), "API", (sender, args) => { handler.Run(args.Message); });
         }
 
         public static void Register(string url, Service.EmptyHandler handler)
         {
             Console.WriteLine("Register Service:" + url);
             var nc = Engine.Instance.Connection;
-            var d = nc.SubscribeAsync(Utils.SubscribeURL(url), "API", (sender, args) => { handler.Run(args.Message); });
+            nc.SubscribeAsync(Utils.SubscribeURL(url), "API", (sender, args) => { handler.Run(args.Message); });
         }
 
         public static proto.Response? SendRequest(string url, IMessage? request)

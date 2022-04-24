@@ -28,6 +28,15 @@ namespace Test
         }
     }
 
+    class EmptySignal : Signal.EmptyHandler
+    {
+        public override void Execute()
+        {
+            Console.WriteLine("Receive EmptySignal");
+        }
+    }
+
+
     class Test
     {
         static void Main(string[] args)
@@ -38,6 +47,7 @@ namespace Test
             Service.Register("/example/echo", new EchoService());
             Service.Register("/example/hello", new HelloService());
             Signal.Register("example.signal.test", new TestSignal());
+            Signal.Register("example.signal.empty", new EmptySignal());
 
             Engine.LOG.Error("Test log form c#");
             Console.WriteLine("Test ID Generator:" + Engine.ID.next());
@@ -47,7 +57,9 @@ namespace Test
 
             var hello = Service.SendRequest<example.HelloResponse>("/example/hello", null);
             if (hello != null) Console.WriteLine("Hello Response:" + hello.Text);
+
             Signal.Emit("example.signal.test", new example.TestSignal { Text = "test" });
+            Signal.Emit("example.signal.empty");
 
             Engine.Start();
             Console.WriteLine("Engine Stopped");
