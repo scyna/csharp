@@ -10,6 +10,7 @@
   <ItemGroup>
     <PackageReference Include="Google.Protobuf" Version="3.19.4" />
     <PackageReference Include="NATS.Client" Version="0.14.5" />
+    <PackageReference Include="Scylla.Net" Version="0.0.1-alpha1" />
   </ItemGroup>
 
 </Project>

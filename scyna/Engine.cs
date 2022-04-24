@@ -12,6 +12,7 @@ namespace scyna
         private Logger logger;
         private IConnection connection;
         private Generator id;
+        private DB db;
 
         private IJetStream stream;
         public static Engine Instance
@@ -23,9 +24,11 @@ namespace scyna
             }
         }
         public string Module { get { return module; } }
+
         public IConnection Connection { get { return connection; } }
         public IJetStream Stream { get { return stream; } }
 
+        public static DB DB { get { return Instance.db; } }
         public static Logger LOG { get { return Instance.logger; } }
         public static Generator ID { get { return Instance.id; } }
         public static ulong SessionID { get { return Instance.session.ID; } }
@@ -52,7 +55,9 @@ namespace scyna
             Console.WriteLine("Connected to NATS");
 
             /* ScyllaDB */
-            /*TODO*/
+            string[] hosts = config.DBHost.Split(",");
+            db = DB.Init(hosts, config.DBUsername, config.DBPassword);
+            Console.WriteLine("Connected to ScyllaDB");
 
             Console.WriteLine("Engine Created, SessionID:" + sid);
         }
