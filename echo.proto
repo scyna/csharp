@@ -22,3 +22,8 @@ message TestSignal
 {
   string text = 1;
 }
+
+message TestEvent
+{
+  string text = 1;
+}
