@@ -16,7 +16,7 @@ namespace Example
             //Event.Register("example.event.test", "consumer", new TestEvent());
 
             Engine.LOG.Error("Test log form c#");
-            Console.WriteLine("Test ID Generator:" + Engine.ID.next());
+            Console.WriteLine("Test ID Generator:" + Engine.ID.Next());
 
             var response = Service.SendRequest<example.EchoResponse>("/example/echo", new example.EchoRequest { Text = "Echo" });
             if (response != null) Console.WriteLine("Echo Response:" + response.Text);

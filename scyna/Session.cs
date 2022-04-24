@@ -2,19 +2,17 @@ namespace scyna
 {
     class Session
     {
-        private ulong id;
+        public ulong ID { get; }
         private ulong sequence;
 
         public Session(ulong id)
         {
-            this.id = id;
+            this.ID = id;
             var timer = new System.Timers.Timer(1000 * 60 * 10);
             timer.Elapsed += OnUpdate;
             timer.AutoReset = true;
             timer.Enabled = true;
         }
-
-        public ulong ID { get { return id; } }
 
         public ulong Sequence
         {

@@ -22,7 +22,7 @@ namespace scyna
 
         public static proto.Response? SendRequest(string url, IMessage? request)
         {
-            var callID = Engine.ID.next();
+            var callID = Engine.ID.Next();
             var req = new proto.Request { CallID = callID, JSON = false };
             if (request != null) req.Body = request.ToByteString();
             try
@@ -35,7 +35,7 @@ namespace scyna
 
         public static T? SendRequest<T>(string url, IMessage? request) where T : IMessage<T>, new()
         {
-            var callID = Engine.ID.next();
+            var callID = Engine.ID.Next();
             var req = new proto.Request { CallID = callID, JSON = false };
             if (request != null) req.Body = request.ToByteString();
             try

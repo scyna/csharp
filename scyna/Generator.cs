@@ -7,7 +7,7 @@ namespace scyna
         private ulong value;
         private ulong end;
 
-        public ulong next()
+        public ulong Next()
         {
             lock (this)
             {
