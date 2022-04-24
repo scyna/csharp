@@ -51,9 +51,9 @@ namespace scyna
 
         public abstract class BaseHandler
         {
-            protected Logger log = new Logger(0, false);
-            protected bool json;
-            protected string? requestSource;
+            protected Logger LOG = new Logger(0, false);
+            protected bool JSON;
+            protected string? source;
             protected string? reply;
             protected void Error(proto.Error error)
             {
@@ -68,7 +68,7 @@ namespace scyna
                 try
                 {
                     ByteString body;
-                    if (json) body = ByteString.CopyFrom(formater.Format(m), Encoding.ASCII);
+                    if (JSON) body = ByteString.CopyFrom(formater.Format(m), Encoding.ASCII);
                     else body = m.ToByteString();
                     var response = new proto.Response { Code = status, SessionID = Engine.SessionID, Body = body };
                     Engine.Instance.Connection.Publish(reply, response.ToByteArray());
@@ -88,10 +88,10 @@ namespace scyna
                 try
                 {
                     var request = proto.Request.Parser.ParseFrom(message.Data);
-                    log.Reset(request.CallID, true); // FIXME: 
+                    LOG.Reset(request.CallID, true); // FIXME: 
                     reply = message.Reply;
-                    json = request.JSON;
-                    requestSource = request.Data;
+                    JSON = request.JSON;
+                    source = request.Data;
                     Execute();
                 }
                 catch (Exception e)
@@ -111,13 +111,13 @@ namespace scyna
                 try
                 {
                     var request = proto.Request.Parser.ParseFrom(message.Data);
-                    log.Reset(request.CallID, true); // FIXME: 
+                    LOG.Reset(request.CallID, true); // FIXME: 
                     reply = message.Reply;
-                    json = request.JSON;
-                    requestSource = request.Data;
+                    JSON = request.JSON;
+                    source = request.Data;
 
                     if (request.Body == null) throw new Exception();
-                    if (json) Execute(parser.ParseJson(request.Body.ToString(Encoding.ASCII)));
+                    if (JSON) Execute(parser.ParseJson(request.Body.ToString(Encoding.ASCII)));
                     else Execute(parser.ParseFrom(request.Body));
                 }
                 catch (Exception e)
