@@ -39,6 +39,7 @@ namespace Test
             var hello = Service.SendRequest<example.HelloResponse>("/example/hello", null);
             if (hello != null) Console.WriteLine("Hello Response:" + hello.Text);
 
+            //Engine.Start();
             Console.WriteLine("Engine Stopped");
         }
     }

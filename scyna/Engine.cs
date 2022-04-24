@@ -66,5 +66,10 @@ namespace scyna
             var response = proto.CreateSessionResponse.Parser.ParseFrom(responseBody);
             instance = new Engine(module, response.SessionID, response.Config);
         }
+
+        static public void Start()
+        {
+            while (true) { } //FIXME:
+        }
     }
 }
