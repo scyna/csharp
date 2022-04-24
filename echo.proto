@@ -1,0 +1,14 @@
+syntax = "proto3";
+package io.velo.echo.proto;
+option java_multiple_files = true;
+option csharp_namespace = "example";
+
+message EchoRequest 
+{
+  string text = 1;
+}
+
+message EchoResponse 
+{
+  string text = 1;
+}

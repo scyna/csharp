@@ -2,26 +2,23 @@
 
 namespace Test
 {
-    class EmptyService : Service.EmptyHandler
+    class HelloService : Service.EmptyHandler
     {
         public override void Execute()
         {
-            Console.WriteLine("Receive EchoRequest");
-            log.Info("Test Log from echo [C#]");
-            Error(scyna.Error.REQUEST_INVALID);
-            Done(new scyna.proto.Response { });
+            Console.WriteLine("Receive HelloRequest");
+            Done(new example.EchoResponse { Text = "Hello World" });
         }
     }
-    class EchoService : Service.Handler<scyna.proto.Request>
+    class EchoService : Service.Handler<example.EchoRequest>
     {
-        public override void Execute(scyna.proto.Request request)
+        public override void Execute(example.EchoRequest request)
         {
             Console.WriteLine("Receive EchoRequest");
-            log.Info("Test Log from echo [C#]");
-            Error(scyna.Error.REQUEST_INVALID);
-            Done(new scyna.proto.Response { });
+            Done(new example.EchoResponse { Text = request.Text });
         }
     }
+
     class Test
     {
         static void Main(string[] args)
@@ -30,7 +27,7 @@ namespace Test
             Engine.Init("http://127.0.0.1:8081", "scyna.test", "123456");
 
             Service.Register("", new EchoService());
-            Service.Register("", new EmptyService());
+            Service.Register("", new HelloService());
 
             Engine.LOG.Error("Test log form c#");
             Console.WriteLine("Test ID Generator:" + Engine.ID.next());
