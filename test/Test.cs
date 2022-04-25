@@ -24,4 +24,16 @@ class EchoTest
             200
         );
     }
+
+    [Test]
+    public void TestEchoCode()
+    {
+        scyna.Test.TestService("/example/echo", new example.EchoRequest { Text = "Hello" }, 200);
+    }
+
+    [Test]
+    public void TestCallService()
+    {
+        var r = scyna.Test.CallService<example.EchoResponse>("/example/echo", new example.EchoRequest { Text = "Hello" });
+    }
 }
