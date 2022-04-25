@@ -1,7 +1,7 @@
 using scyna;
 namespace Example
 {
-    class TestSignal : Signal.Handler<example.TestSignal>
+    class TestSignal : Signal.StatefulHandler<example.TestSignal>
     {
         public override void Execute()
         {
@@ -9,7 +9,7 @@ namespace Example
         }
     }
 
-    class EmptySignal : Signal.EmptyHandler
+    class EmptySignal : Signal.StatelessHandler
     {
         public override void Execute()
         {

@@ -16,7 +16,7 @@ namespace scyna
             var nc = Engine.Instance.Connection;
             nc.Publish(channel, message.ToByteArray());
         }
-        public static void Register<T>(string channel, Handler<T> handler) where T : IMessage<T>, new()
+        public static void Register<T>(string channel, StatefulHandler<T> handler) where T : IMessage<T>, new()
         {
             Console.WriteLine("Register Signal:" + channel);
             var nc = Engine.Instance.Connection;
@@ -26,14 +26,14 @@ namespace scyna
             });
         }
 
-        public static void Register(string channel, EmptyHandler handler)
+        public static void Register(string channel, StatelessHandler handler)
         {
             Console.WriteLine("Register Signal:" + channel);
             var nc = Engine.Instance.Connection;
             nc.SubscribeAsync(channel, Engine.Instance.Module, (sender, args) => { handler.Execute(); });
         }
 
-        public abstract class Handler<T> where T : IMessage<T>, new()
+        public abstract class StatefulHandler<T> where T : IMessage<T>, new()
         {
             private MessageParser<T> parser = new MessageParser<T>(() => new T());
             protected T data;
@@ -52,7 +52,7 @@ namespace scyna
             }
         }
 
-        public abstract class EmptyHandler
+        public abstract class StatelessHandler
         {
             public abstract void Execute();
         }
