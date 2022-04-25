@@ -105,7 +105,8 @@ namespace scyna
         public abstract class Handler<T> : BaseHandler where T : IMessage<T>, new()
         {
             private MessageParser<T> parser = new MessageParser<T>(() => new T());
-            public abstract void Execute(T request);
+            protected T request;
+            public abstract void Execute();
             public void Run(NATS.Client.Msg message)
             {
                 try
@@ -117,8 +118,16 @@ namespace scyna
                     source = request.Data;
 
                     if (request.Body == null) throw new Exception();
-                    if (JSON) Execute(parser.ParseJson(request.Body.ToString(Encoding.ASCII)));
-                    else Execute(parser.ParseFrom(request.Body));
+                    if (JSON)
+                    {
+                        this.request = parser.ParseJson(request.Body.ToString(Encoding.ASCII));
+                        Execute();
+                    }
+                    else
+                    {
+                        this.request = parser.ParseFrom(request.Body);
+                        Execute();
+                    }
                 }
                 catch (Exception e)
                 {

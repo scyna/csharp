@@ -13,7 +13,7 @@ namespace Example
 
     class EchoService : Service.Handler<example.EchoRequest>
     {
-        public override void Execute(example.EchoRequest request)
+        public override void Execute()
         {
             Console.WriteLine("Receive EchoRequest");
             Done(new example.EchoResponse { Text = request.Text });
