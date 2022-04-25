@@ -8,5 +8,4 @@ namespace Example
             Console.WriteLine("Receive TestEvent:" + data.Text);
         }
     }
-
 }

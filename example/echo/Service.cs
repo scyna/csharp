@@ -1,7 +1,7 @@
 using scyna;
 namespace Example
 {
-    class HelloService : Service.EmptyHandler
+    class HelloService : Service.StatelessHandler
     {
         public override void Execute()
         {
@@ -11,7 +11,7 @@ namespace Example
         }
     }
 
-    class EchoService : Service.Handler<example.EchoRequest>
+    class EchoService : Service.StatefulHandler<example.EchoRequest>
     {
         public override void Execute()
         {
