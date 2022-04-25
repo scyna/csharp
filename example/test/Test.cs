@@ -34,6 +34,7 @@ class EchoTest
     [Test]
     public void TestCallService()
     {
-        var r = scyna.Test.CallService<example.EchoResponse>("/example/echo", new example.EchoRequest { Text = "Hello" });
+        var r = scyna.Test.CallService<example.EchoResponse>("/example/echo", new example.EchoRequest { Text = "echo" });
+        Assert.AreEqual(r.Text, "echo");
     }
 }

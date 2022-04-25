@@ -15,8 +15,8 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\scyna\scyna.csproj" />
-    <ProjectReference Include="..\example\echo\echo.csproj" />
+    <ProjectReference Include="..\..\scyna\scyna.csproj" />
+    <ProjectReference Include="..\echo\echo.csproj" />
   </ItemGroup>
 
 </Project>
