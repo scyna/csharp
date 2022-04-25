@@ -1,1 +1,1 @@
-protoc -I=. --csharp_out=. echo.proto
+protoc -I=. --csharp_out=. basic.proto
