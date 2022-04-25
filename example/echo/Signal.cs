@@ -3,7 +3,7 @@ namespace Example
 {
     class TestSignal : Signal.Handler<example.TestSignal>
     {
-        public override void Execute(example.TestSignal data)
+        public override void Execute()
         {
             Console.WriteLine("Receive TestSignal:" + data.Text);
         }

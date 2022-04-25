@@ -26,13 +26,14 @@ namespace scyna
         public abstract class Handler<T> where T : IMessage<T>, new()
         {
             private MessageParser<T> parser = new MessageParser<T>(() => new T());
-            public abstract void Execute(T data);
+            protected T data;
+            public abstract void Execute();
             public void Run(byte[] data)
             {
                 try
                 {
-                    Console.WriteLine("Here");
-                    Execute(parser.ParseFrom(data));
+                    this.data = parser.ParseFrom(data);
+                    Execute();
                 }
                 catch (Exception e)
                 {
