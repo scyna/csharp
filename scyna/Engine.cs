@@ -24,7 +24,6 @@ namespace scyna
             }
         }
         public string Module { get { return module; } }
-
         public IConnection Connection { get { return connection; } }
         public IJetStream Stream { get { return stream; } }
 
@@ -58,7 +57,6 @@ namespace scyna
             string[] hosts = config.DBHost.Split(",");
             db = DB.Init(hosts, config.DBUsername, config.DBPassword);
             Console.WriteLine("Connected to ScyllaDB");
-
             Console.WriteLine("Engine Created, SessionID:" + sid);
         }
         static public async void Init(string managerURL, string module, string secret)

@@ -19,5 +19,4 @@ namespace Example
             Done(new example.EchoResponse { Text = request.Text });
         }
     }
-
 }
