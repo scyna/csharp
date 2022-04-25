@@ -19,3 +19,14 @@ public class EchoService : Service.StatefulHandler<example.EchoRequest>
         Done(new example.EchoResponse { Text = request.Text });
     }
 }
+
+public class AddService : Service.StatefulHandler<example.AddRequest>
+{
+    public override void Execute()
+    {
+        Console.WriteLine("Receive EchoRequest");
+        var sum = request.A + request.B;
+        if (sum > 100) Error(Example.Error.TOO_BIG);
+        else Done(new example.AddResponse { Sum = sum });
+    }
+}
