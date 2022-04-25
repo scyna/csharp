@@ -9,20 +9,20 @@ namespace scyna
         {
             var res = Service.SendRequest(url, request);
             Assert.IsNotNull(res);
-            Assert.Equals(res.Code, code);
+            Assert.AreEqual(res.Code, code);
         }
 
         public static void TestService<T>(string url, IMessage request, T response, uint code) where T : IMessage<T>, new()
         {
             var res = Service.SendRequest(url, request);
             Assert.IsNotNull(res);
-            Assert.Equals(res.Code, code);
+            Assert.AreEqual(res.Code, code);
 
             try
             {
                 MessageParser<T> parser = new MessageParser<T>(() => new T());
                 var r = parser.ParseFrom(res.Body);
-                Assert.True(response.Equals(r));
+                Assert.IsTrue(response.Equals(r));
             }
             catch
             {
@@ -34,7 +34,7 @@ namespace scyna
         {
             var res = Service.SendRequest(url, request);
             Assert.IsNotNull(res);
-            Assert.Equals(res.Code, 200);
+            Assert.AreEqual(res.Code, 200);
 
             try
             {
