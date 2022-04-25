@@ -1,60 +1,59 @@
 using Google.Protobuf;
+using pb = global::Google.Protobuf;
 
-namespace scyna
+namespace scyna;
+
+public class Signal
 {
-    using pb = global::Google.Protobuf;
-    class Signal
+    public static void Emit(string channel)
     {
-        public static void Emit(string channel)
-        {
-            var nc = Engine.Instance.Connection;
-            nc.Publish(channel, null);
-        }
+        var nc = Engine.Instance.Connection;
+        nc.Publish(channel, null);
+    }
 
-        public static void Emit(string channel, pb::IMessage message)
+    public static void Emit(string channel, pb::IMessage message)
+    {
+        var nc = Engine.Instance.Connection;
+        nc.Publish(channel, message.ToByteArray());
+    }
+    public static void Register<T>(string channel, StatefulHandler<T> handler) where T : IMessage<T>, new()
+    {
+        Console.WriteLine("Register Signal:" + channel);
+        var nc = Engine.Instance.Connection;
+        nc.SubscribeAsync(channel, Engine.Instance.Module, (sender, args) =>
         {
-            var nc = Engine.Instance.Connection;
-            nc.Publish(channel, message.ToByteArray());
-        }
-        public static void Register<T>(string channel, StatefulHandler<T> handler) where T : IMessage<T>, new()
+            handler.Run(args.Message.Data);
+        });
+    }
+
+    public static void Register(string channel, StatelessHandler handler)
+    {
+        Console.WriteLine("Register Signal:" + channel);
+        var nc = Engine.Instance.Connection;
+        nc.SubscribeAsync(channel, Engine.Instance.Module, (sender, args) => { handler.Execute(); });
+    }
+
+    public abstract class StatefulHandler<T> where T : IMessage<T>, new()
+    {
+        private MessageParser<T> parser = new MessageParser<T>(() => new T());
+        protected T data;
+        public abstract void Execute();
+        public void Run(byte[] data)
         {
-            Console.WriteLine("Register Signal:" + channel);
-            var nc = Engine.Instance.Connection;
-            nc.SubscribeAsync(channel, Engine.Instance.Module, (sender, args) =>
+            try
             {
-                handler.Run(args.Message.Data);
-            });
-        }
-
-        public static void Register(string channel, StatelessHandler handler)
-        {
-            Console.WriteLine("Register Signal:" + channel);
-            var nc = Engine.Instance.Connection;
-            nc.SubscribeAsync(channel, Engine.Instance.Module, (sender, args) => { handler.Execute(); });
-        }
-
-        public abstract class StatefulHandler<T> where T : IMessage<T>, new()
-        {
-            private MessageParser<T> parser = new MessageParser<T>(() => new T());
-            protected T data;
-            public abstract void Execute();
-            public void Run(byte[] data)
+                this.data = parser.ParseFrom(data);
+                Execute();
+            }
+            catch (Exception e)
             {
-                try
-                {
-                    this.data = parser.ParseFrom(data);
-                    Execute();
-                }
-                catch (Exception e)
-                {
-                    Console.WriteLine(e.ToString());
-                }
+                Console.WriteLine(e.ToString());
             }
         }
+    }
 
-        public abstract class StatelessHandler
-        {
-            public abstract void Execute();
-        }
+    public abstract class StatelessHandler
+    {
+        public abstract void Execute();
     }
 }

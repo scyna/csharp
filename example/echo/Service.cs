@@ -1,22 +1,21 @@
 using scyna;
-namespace Example
-{
-    class HelloService : Service.StatelessHandler
-    {
-        public override void Execute()
-        {
-            Console.WriteLine("Receive HelloRequest");
-            LOG.Info("Test Service log from HelloService");
-            Done(new example.HelloResponse { Text = "Hello World" });
-        }
-    }
+namespace Example;
 
-    class EchoService : Service.StatefulHandler<example.EchoRequest>
+public class HelloService : Service.StatelessHandler
+{
+    public override void Execute()
     {
-        public override void Execute()
-        {
-            Console.WriteLine("Receive EchoRequest");
-            Done(new example.EchoResponse { Text = request.Text });
-        }
+        Console.WriteLine("Receive HelloRequest");
+        LOG.Info("Test Service log from HelloService");
+        Done(new example.HelloResponse { Text = "Hello World" });
+    }
+}
+
+public class EchoService : Service.StatefulHandler<example.EchoRequest>
+{
+    public override void Execute()
+    {
+        Console.WriteLine("Receive EchoRequest");
+        Done(new example.EchoResponse { Text = request.Text });
     }
 }

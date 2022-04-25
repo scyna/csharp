@@ -1,11 +1,10 @@
 using scyna;
-namespace Example
+namespace Example;
+
+public class TestEvent : Event.Handler<example.TestEvent>
 {
-    class TestEvent : Event.Handler<example.TestEvent>
+    public override void Execute()
     {
-        public override void Execute()
-        {
-            Console.WriteLine("Receive TestEvent:" + data.Text);
-        }
+        Console.WriteLine("Receive TestEvent:" + data.Text);
     }
 }

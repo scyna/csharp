@@ -3,7 +3,7 @@ using Google.Protobuf;
 
 namespace scyna
 {
-    class Test
+    public class Test
     {
         public static void TestService(string url, IMessage request, uint code)
         {

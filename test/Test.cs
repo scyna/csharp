@@ -2,6 +2,8 @@ using NUnit.Framework;
 using scyna;
 using Example;
 
+namespace test;
+
 [TestFixture]
 class EchoTest
 {

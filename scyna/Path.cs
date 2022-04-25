@@ -1,4 +1,6 @@
-class Path
+namespace scyna;
+
+public class Path
 {
     public static String GEN_GET_ID_URL = "/scyna/generator/id";
     public static String GEN_GET_SN_URL = "/scyna/generator/sn";

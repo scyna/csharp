@@ -1,35 +1,34 @@
-namespace scyna
+namespace scyna;
+
+public class Session
 {
-    class Session
+    public ulong ID { get; }
+    private ulong sequence;
+
+    public Session(ulong id)
     {
-        public ulong ID { get; }
-        private ulong sequence;
+        this.ID = id;
+        var timer = new System.Timers.Timer(1000 * 60 * 10);
+        timer.Elapsed += OnUpdate;
+        timer.AutoReset = true;
+        timer.Enabled = true;
+    }
 
-        public Session(ulong id)
+    public ulong Sequence
+    {
+        get
         {
-            this.ID = id;
-            var timer = new System.Timers.Timer(1000 * 60 * 10);
-            timer.Elapsed += OnUpdate;
-            timer.AutoReset = true;
-            timer.Enabled = true;
-        }
-
-        public ulong Sequence
-        {
-            get
+            lock (this)
             {
-                lock (this)
-                {
-                    sequence++;
-                    return sequence;
-                }
+                sequence++;
+                return sequence;
             }
         }
+    }
 
-        private static void OnUpdate(Object source, System.Timers.ElapsedEventArgs e)
-        {
-            Console.WriteLine("Update Session");
-            /*TODO: send update signal to Manager*/
-        }
+    private static void OnUpdate(Object source, System.Timers.ElapsedEventArgs e)
+    {
+        Console.WriteLine("Update Session");
+        /*TODO: send update signal to Manager*/
     }
 }

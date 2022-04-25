@@ -1,37 +1,36 @@
-namespace scyna
+namespace scyna;
+
+public class SerialNumber
 {
-    class SerialNumber
+    private string key;
+    private uint prefix = 0;
+    private ulong last = 0;
+    private ulong next = 0;
+
+    public SerialNumber(string key)
     {
-        private string key;
-        private uint prefix = 0;
-        private ulong last = 0;
-        private ulong next = 0;
+        this.key = key;
+    }
 
-        public SerialNumber(string key)
+    public string Next()
+    {
+        lock (this)
         {
-            this.key = key;
-        }
-
-        public string Next()
-        {
-            lock (this)
+            if (next < last) next++;
+            else
             {
-                if (next < last) next++;
-                else
+                var response = Service.SendRequest<proto.GetSNResponse>(
+                    Path.GEN_GET_SN_URL,
+                    new proto.GetSNRequest { Key = key }
+                );
+                if (response != null)
                 {
-                    var response = Service.SendRequest<proto.GetSNResponse>(
-                        Path.GEN_GET_SN_URL,
-                        new proto.GetSNRequest { Key = key }
-                    );
-                    if (response != null)
-                    {
-                        prefix = response.Prefix;
-                        next = response.Start;
-                        last = response.End;
-                    }
+                    prefix = response.Prefix;
+                    next = response.Start;
+                    last = response.End;
                 }
-                return String.Format("%d%07d", prefix, next);
             }
+            return String.Format("%d%07d", prefix, next);
         }
     }
 }
