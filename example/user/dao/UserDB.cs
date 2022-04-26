@@ -44,16 +44,25 @@ class UserDB : IUserDB
 
     public void Update(scyna.Logger LOG, User user)
     {
-
+        /*TODO*/
     }
 
     public void AddFriend(scyna.Logger LOG, ulong userID, ulong friendID)
     {
-
+        /*TODO*/
     }
 
-    public List<User> ListFriend(scyna.Logger LOG, ulong userID)
+    public IEnumerable<User> ListFriend(scyna.Logger LOG, ulong userID)
     {
-        throw new DBException(scyna.Error.BAD_REQUEST);
+        try
+        {
+            var mapper = Engine.DB.Mapper;
+            IEnumerable<User> users = mapper.Fetch<User>("FROM users WHERE name = ?", "aaa"); //FIXME
+            return users;
+        }
+        catch (Exception)
+        {
+            throw new DBException(scyna.Error.BAD_REQUEST);
+        }
     }
 }

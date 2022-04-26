@@ -14,7 +14,7 @@ public interface IUserDB
     bool Exist(scyna.Logger LOG, string email);
     void Update(scyna.Logger LOG, User user);
     void AddFriend(scyna.Logger LOG, ulong userID, ulong friendID);
-    List<User> ListFriend(scyna.Logger LOG, ulong userID);
+    IEnumerable<User> ListFriend(scyna.Logger LOG, ulong userID);
 }
 
 public class DBException : Exception
