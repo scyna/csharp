@@ -1,7 +1,7 @@
 namespace ex.User;
 using scyna;
 
-public class EchoService : Service.StatefulHandler<proto.CreateUserRequest>
+public class CreateUser : Service.StatefulHandler<proto.CreateUserRequest>
 {
     public override void Execute()
     {
