@@ -1,9 +1,10 @@
-namespace ex.User.DAO;
+namespace dao;
 
 class UserDAO : IUserDAO
 {
     public void Create(scyna.Logger LOG, User user)
     {
+
         throw new DBException(scyna.Error.BAD_REQUEST);
     }
 

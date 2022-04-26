@@ -9,7 +9,7 @@ using pb = global::Google.Protobuf;
 using pbc = global::Google.Protobuf.Collections;
 using pbr = global::Google.Protobuf.Reflection;
 using scg = global::System.Collections.Generic;
-namespace ex.User.Proto {
+namespace proto {
 
   /// <summary>Holder for reflection information generated from API.proto</summary>
   public static partial class APIReflection {
@@ -33,19 +33,19 @@ namespace ex.User.Proto {
             "c3QSDQoFZW1haWwYASABKAkiOQoPR2V0VXNlclJlc3BvbnNlEiYKBHVzZXIY",
             "ASABKAsyGC5pby52ZWxvLnVzZXIucHJvdG8uVXNlciIiChFMaXN0RnJpZW5k",
             "UmVxdWVzdBINCgVlbWFpbBgBIAEoCSI/ChJMaXN0RnJpZW5kUmVzcG9uc2US",
-            "KQoHZnJpZW5kcxgBIAMoCzIYLmlvLnZlbG8udXNlci5wcm90by5Vc2VyQhJQ",
-            "AaoCDWV4LlVzZXIuUHJvdG9iBnByb3RvMw=="));
+            "KQoHZnJpZW5kcxgBIAMoCzIYLmlvLnZlbG8udXNlci5wcm90by5Vc2VyQgpQ",
+            "AaoCBXByb3RvYgZwcm90bzM="));
       descriptor = pbr::FileDescriptor.FromGeneratedCode(descriptorData,
           new pbr::FileDescriptor[] { },
           new pbr::GeneratedClrTypeInfo(null, null, new pbr::GeneratedClrTypeInfo[] {
-            new pbr::GeneratedClrTypeInfo(typeof(global::ex.User.Proto.User), global::ex.User.Proto.User.Parser, new[]{ "Id", "Email", "Name", "Password" }, null, null, null, null),
-            new pbr::GeneratedClrTypeInfo(typeof(global::ex.User.Proto.CreateUserRequest), global::ex.User.Proto.CreateUserRequest.Parser, new[]{ "User" }, null, null, null, null),
-            new pbr::GeneratedClrTypeInfo(typeof(global::ex.User.Proto.CreateUserResponse), global::ex.User.Proto.CreateUserResponse.Parser, new[]{ "Id" }, null, null, null, null),
-            new pbr::GeneratedClrTypeInfo(typeof(global::ex.User.Proto.UpdateUserRequest), global::ex.User.Proto.UpdateUserRequest.Parser, new[]{ "User" }, null, null, null, null),
-            new pbr::GeneratedClrTypeInfo(typeof(global::ex.User.Proto.GetUserRequest), global::ex.User.Proto.GetUserRequest.Parser, new[]{ "Email" }, null, null, null, null),
-            new pbr::GeneratedClrTypeInfo(typeof(global::ex.User.Proto.GetUserResponse), global::ex.User.Proto.GetUserResponse.Parser, new[]{ "User" }, null, null, null, null),
-            new pbr::GeneratedClrTypeInfo(typeof(global::ex.User.Proto.ListFriendRequest), global::ex.User.Proto.ListFriendRequest.Parser, new[]{ "Email" }, null, null, null, null),
-            new pbr::GeneratedClrTypeInfo(typeof(global::ex.User.Proto.ListFriendResponse), global::ex.User.Proto.ListFriendResponse.Parser, new[]{ "Friends" }, null, null, null, null)
+            new pbr::GeneratedClrTypeInfo(typeof(global::proto.User), global::proto.User.Parser, new[]{ "Id", "Email", "Name", "Password" }, null, null, null, null),
+            new pbr::GeneratedClrTypeInfo(typeof(global::proto.CreateUserRequest), global::proto.CreateUserRequest.Parser, new[]{ "User" }, null, null, null, null),
+            new pbr::GeneratedClrTypeInfo(typeof(global::proto.CreateUserResponse), global::proto.CreateUserResponse.Parser, new[]{ "Id" }, null, null, null, null),
+            new pbr::GeneratedClrTypeInfo(typeof(global::proto.UpdateUserRequest), global::proto.UpdateUserRequest.Parser, new[]{ "User" }, null, null, null, null),
+            new pbr::GeneratedClrTypeInfo(typeof(global::proto.GetUserRequest), global::proto.GetUserRequest.Parser, new[]{ "Email" }, null, null, null, null),
+            new pbr::GeneratedClrTypeInfo(typeof(global::proto.GetUserResponse), global::proto.GetUserResponse.Parser, new[]{ "User" }, null, null, null, null),
+            new pbr::GeneratedClrTypeInfo(typeof(global::proto.ListFriendRequest), global::proto.ListFriendRequest.Parser, new[]{ "Email" }, null, null, null, null),
+            new pbr::GeneratedClrTypeInfo(typeof(global::proto.ListFriendResponse), global::proto.ListFriendResponse.Parser, new[]{ "Friends" }, null, null, null, null)
           }));
     }
     #endregion
@@ -64,7 +64,7 @@ namespace ex.User.Proto {
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     public static pbr::MessageDescriptor Descriptor {
-      get { return global::ex.User.Proto.APIReflection.Descriptor.MessageTypes[0]; }
+      get { return global::proto.APIReflection.Descriptor.MessageTypes[0]; }
     }
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
@@ -347,7 +347,7 @@ namespace ex.User.Proto {
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     public static pbr::MessageDescriptor Descriptor {
-      get { return global::ex.User.Proto.APIReflection.Descriptor.MessageTypes[1]; }
+      get { return global::proto.APIReflection.Descriptor.MessageTypes[1]; }
     }
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
@@ -375,9 +375,9 @@ namespace ex.User.Proto {
 
     /// <summary>Field number for the "user" field.</summary>
     public const int UserFieldNumber = 1;
-    private global::ex.User.Proto.User user_;
+    private global::proto.User user_;
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
-    public global::ex.User.Proto.User User {
+    public global::proto.User User {
       get { return user_; }
       set {
         user_ = value;
@@ -463,7 +463,7 @@ namespace ex.User.Proto {
       }
       if (other.user_ != null) {
         if (user_ == null) {
-          User = new global::ex.User.Proto.User();
+          User = new global::proto.User();
         }
         User.MergeFrom(other.User);
       }
@@ -483,7 +483,7 @@ namespace ex.User.Proto {
             break;
           case 10: {
             if (user_ == null) {
-              User = new global::ex.User.Proto.User();
+              User = new global::proto.User();
             }
             input.ReadMessage(User);
             break;
@@ -504,7 +504,7 @@ namespace ex.User.Proto {
             break;
           case 10: {
             if (user_ == null) {
-              User = new global::ex.User.Proto.User();
+              User = new global::proto.User();
             }
             input.ReadMessage(User);
             break;
@@ -528,7 +528,7 @@ namespace ex.User.Proto {
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     public static pbr::MessageDescriptor Descriptor {
-      get { return global::ex.User.Proto.APIReflection.Descriptor.MessageTypes[2]; }
+      get { return global::proto.APIReflection.Descriptor.MessageTypes[2]; }
     }
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
@@ -703,7 +703,7 @@ namespace ex.User.Proto {
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     public static pbr::MessageDescriptor Descriptor {
-      get { return global::ex.User.Proto.APIReflection.Descriptor.MessageTypes[3]; }
+      get { return global::proto.APIReflection.Descriptor.MessageTypes[3]; }
     }
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
@@ -731,9 +731,9 @@ namespace ex.User.Proto {
 
     /// <summary>Field number for the "user" field.</summary>
     public const int UserFieldNumber = 1;
-    private global::ex.User.Proto.User user_;
+    private global::proto.User user_;
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
-    public global::ex.User.Proto.User User {
+    public global::proto.User User {
       get { return user_; }
       set {
         user_ = value;
@@ -819,7 +819,7 @@ namespace ex.User.Proto {
       }
       if (other.user_ != null) {
         if (user_ == null) {
-          User = new global::ex.User.Proto.User();
+          User = new global::proto.User();
         }
         User.MergeFrom(other.User);
       }
@@ -839,7 +839,7 @@ namespace ex.User.Proto {
             break;
           case 10: {
             if (user_ == null) {
-              User = new global::ex.User.Proto.User();
+              User = new global::proto.User();
             }
             input.ReadMessage(User);
             break;
@@ -860,7 +860,7 @@ namespace ex.User.Proto {
             break;
           case 10: {
             if (user_ == null) {
-              User = new global::ex.User.Proto.User();
+              User = new global::proto.User();
             }
             input.ReadMessage(User);
             break;
@@ -887,7 +887,7 @@ namespace ex.User.Proto {
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     public static pbr::MessageDescriptor Descriptor {
-      get { return global::ex.User.Proto.APIReflection.Descriptor.MessageTypes[4]; }
+      get { return global::proto.APIReflection.Descriptor.MessageTypes[4]; }
     }
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
@@ -1059,7 +1059,7 @@ namespace ex.User.Proto {
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     public static pbr::MessageDescriptor Descriptor {
-      get { return global::ex.User.Proto.APIReflection.Descriptor.MessageTypes[5]; }
+      get { return global::proto.APIReflection.Descriptor.MessageTypes[5]; }
     }
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
@@ -1087,9 +1087,9 @@ namespace ex.User.Proto {
 
     /// <summary>Field number for the "user" field.</summary>
     public const int UserFieldNumber = 1;
-    private global::ex.User.Proto.User user_;
+    private global::proto.User user_;
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
-    public global::ex.User.Proto.User User {
+    public global::proto.User User {
       get { return user_; }
       set {
         user_ = value;
@@ -1175,7 +1175,7 @@ namespace ex.User.Proto {
       }
       if (other.user_ != null) {
         if (user_ == null) {
-          User = new global::ex.User.Proto.User();
+          User = new global::proto.User();
         }
         User.MergeFrom(other.User);
       }
@@ -1195,7 +1195,7 @@ namespace ex.User.Proto {
             break;
           case 10: {
             if (user_ == null) {
-              User = new global::ex.User.Proto.User();
+              User = new global::proto.User();
             }
             input.ReadMessage(User);
             break;
@@ -1216,7 +1216,7 @@ namespace ex.User.Proto {
             break;
           case 10: {
             if (user_ == null) {
-              User = new global::ex.User.Proto.User();
+              User = new global::proto.User();
             }
             input.ReadMessage(User);
             break;
@@ -1243,7 +1243,7 @@ namespace ex.User.Proto {
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     public static pbr::MessageDescriptor Descriptor {
-      get { return global::ex.User.Proto.APIReflection.Descriptor.MessageTypes[6]; }
+      get { return global::proto.APIReflection.Descriptor.MessageTypes[6]; }
     }
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
@@ -1415,7 +1415,7 @@ namespace ex.User.Proto {
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     public static pbr::MessageDescriptor Descriptor {
-      get { return global::ex.User.Proto.APIReflection.Descriptor.MessageTypes[7]; }
+      get { return global::proto.APIReflection.Descriptor.MessageTypes[7]; }
     }
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
@@ -1443,11 +1443,11 @@ namespace ex.User.Proto {
 
     /// <summary>Field number for the "friends" field.</summary>
     public const int FriendsFieldNumber = 1;
-    private static readonly pb::FieldCodec<global::ex.User.Proto.User> _repeated_friends_codec
-        = pb::FieldCodec.ForMessage(10, global::ex.User.Proto.User.Parser);
-    private readonly pbc::RepeatedField<global::ex.User.Proto.User> friends_ = new pbc::RepeatedField<global::ex.User.Proto.User>();
+    private static readonly pb::FieldCodec<global::proto.User> _repeated_friends_codec
+        = pb::FieldCodec.ForMessage(10, global::proto.User.Parser);
+    private readonly pbc::RepeatedField<global::proto.User> friends_ = new pbc::RepeatedField<global::proto.User>();
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
-    public pbc::RepeatedField<global::ex.User.Proto.User> Friends {
+    public pbc::RepeatedField<global::proto.User> Friends {
       get { return friends_; }
     }
 
