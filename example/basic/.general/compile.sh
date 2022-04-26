@@ -1,1 +1,1 @@
-protoc -I=. --csharp_out=.. basic.proto
+protoc -I=. --csharp_out=.. API.proto
