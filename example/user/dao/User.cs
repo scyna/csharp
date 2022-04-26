@@ -8,9 +8,9 @@ public class User
     public string Name { get; set; }
     public string Password { get; set; }
 
-    private static IUserDAO instance;
-    public static void Init(IUserDAO dao) { instance = dao; }
-    public static IUserDAO Instance()
+    private static IUserDB instance;
+    public static void Init(IUserDB db) { instance = db; }
+    public static IUserDB DB()
     {
         if (instance == null) throw new DBException(Error.DAO_NOT_READY);
         return instance;

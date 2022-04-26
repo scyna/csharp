@@ -1,6 +1,6 @@
 namespace dao;
 
-class UserDAO : IUserDAO
+class UserDB : IUserDB
 {
     public void Create(scyna.Logger LOG, User user)
     {

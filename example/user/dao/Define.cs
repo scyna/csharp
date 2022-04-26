@@ -7,7 +7,7 @@ public class Error
     public static scyna.proto.Error USER_EXIST = new scyna.proto.Error { Code = 102, Message = "User Exist" };
 }
 
-public interface IUserDAO
+public interface IUserDB
 {
     void Create(scyna.Logger LOG, User user);
     User Get(scyna.Logger LOG, ulong userID);

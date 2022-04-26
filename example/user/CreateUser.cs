@@ -6,13 +6,13 @@ public class EchoService : Service.StatefulHandler<proto.CreateUserRequest>
     public override void Execute()
     {
         Console.WriteLine("Receive CreateUserRequest");
-        var userDAO = dao.User.Instance();
+        var userDB = dao.User.DB();
         try
         {
-            if (userDAO.Exist(LOG, request.User.Email)) throw new dao.DBException(dao.Error.USER_EXIST);
+            if (userDB.Exist(LOG, request.User.Email)) throw new dao.DBException(dao.Error.USER_EXIST);
             var user = dao.User.FromProto(request.User);
             user.ID = Engine.ID.Next();
-            userDAO.Create(LOG, user);
+            userDB.Create(LOG, user);
         }
         catch (dao.DBException e)
         {
