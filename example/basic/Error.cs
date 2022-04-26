@@ -1,4 +1,4 @@
-namespace Example;
+namespace ex.Basic;
 
 public class Error
 {

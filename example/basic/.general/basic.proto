@@ -1,7 +1,7 @@
 syntax = "proto3";
 package io.velo.echo.proto;
 option java_multiple_files = true;
-option csharp_namespace = "example";
+option csharp_namespace = "ex.Basic.Proto";
 
 message EchoRequest 
 {

@@ -1,7 +1,7 @@
+namespace ex.Basic;
 using scyna;
-namespace Example;
 
-public class TestEvent : Event.Handler<example.TestEvent>
+public class TestEvent : Event.Handler<Proto.TestEvent>
 {
     public override void Execute()
     {

@@ -1,7 +1,7 @@
+namespace ex.Basic;
 using scyna;
-namespace Example;
 
-public class TestSignal : Signal.StatefulHandler<example.TestSignal>
+public class TestSignal : Signal.StatefulHandler<Proto.TestSignal>
 {
     public override void Execute()
     {

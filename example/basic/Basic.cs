@@ -9,7 +9,7 @@ using pb = global::Google.Protobuf;
 using pbc = global::Google.Protobuf.Collections;
 using pbr = global::Google.Protobuf.Reflection;
 using scg = global::System.Collections.Generic;
-namespace example {
+namespace ex.Basic.Proto {
 
   /// <summary>Holder for reflection information generated from basic.proto</summary>
   public static partial class BasicReflection {
@@ -29,17 +29,18 @@ namespace example {
             "KAkiHQoNSGVsbG9SZXNwb25zZRIMCgR0ZXh0GAEgASgJIiIKCkFkZFJlcXVl",
             "c3QSCQoBYRgBIAEoBRIJCgFiGAIgASgFIhoKC0FkZFJlc3BvbnNlEgsKA3N1",
             "bRgBIAEoBSIaCgpUZXN0U2lnbmFsEgwKBHRleHQYASABKAkiGQoJVGVzdEV2",
-            "ZW50EgwKBHRleHQYASABKAlCDFABqgIHZXhhbXBsZWIGcHJvdG8z"));
+            "ZW50EgwKBHRleHQYASABKAlCE1ABqgIOZXguQmFzaWMuUHJvdG9iBnByb3Rv",
+            "Mw=="));
       descriptor = pbr::FileDescriptor.FromGeneratedCode(descriptorData,
           new pbr::FileDescriptor[] { },
           new pbr::GeneratedClrTypeInfo(null, null, new pbr::GeneratedClrTypeInfo[] {
-            new pbr::GeneratedClrTypeInfo(typeof(global::example.EchoRequest), global::example.EchoRequest.Parser, new[]{ "Text" }, null, null, null, null),
-            new pbr::GeneratedClrTypeInfo(typeof(global::example.EchoResponse), global::example.EchoResponse.Parser, new[]{ "Text" }, null, null, null, null),
-            new pbr::GeneratedClrTypeInfo(typeof(global::example.HelloResponse), global::example.HelloResponse.Parser, new[]{ "Text" }, null, null, null, null),
-            new pbr::GeneratedClrTypeInfo(typeof(global::example.AddRequest), global::example.AddRequest.Parser, new[]{ "A", "B" }, null, null, null, null),
-            new pbr::GeneratedClrTypeInfo(typeof(global::example.AddResponse), global::example.AddResponse.Parser, new[]{ "Sum" }, null, null, null, null),
-            new pbr::GeneratedClrTypeInfo(typeof(global::example.TestSignal), global::example.TestSignal.Parser, new[]{ "Text" }, null, null, null, null),
-            new pbr::GeneratedClrTypeInfo(typeof(global::example.TestEvent), global::example.TestEvent.Parser, new[]{ "Text" }, null, null, null, null)
+            new pbr::GeneratedClrTypeInfo(typeof(global::ex.Basic.Proto.EchoRequest), global::ex.Basic.Proto.EchoRequest.Parser, new[]{ "Text" }, null, null, null, null),
+            new pbr::GeneratedClrTypeInfo(typeof(global::ex.Basic.Proto.EchoResponse), global::ex.Basic.Proto.EchoResponse.Parser, new[]{ "Text" }, null, null, null, null),
+            new pbr::GeneratedClrTypeInfo(typeof(global::ex.Basic.Proto.HelloResponse), global::ex.Basic.Proto.HelloResponse.Parser, new[]{ "Text" }, null, null, null, null),
+            new pbr::GeneratedClrTypeInfo(typeof(global::ex.Basic.Proto.AddRequest), global::ex.Basic.Proto.AddRequest.Parser, new[]{ "A", "B" }, null, null, null, null),
+            new pbr::GeneratedClrTypeInfo(typeof(global::ex.Basic.Proto.AddResponse), global::ex.Basic.Proto.AddResponse.Parser, new[]{ "Sum" }, null, null, null, null),
+            new pbr::GeneratedClrTypeInfo(typeof(global::ex.Basic.Proto.TestSignal), global::ex.Basic.Proto.TestSignal.Parser, new[]{ "Text" }, null, null, null, null),
+            new pbr::GeneratedClrTypeInfo(typeof(global::ex.Basic.Proto.TestEvent), global::ex.Basic.Proto.TestEvent.Parser, new[]{ "Text" }, null, null, null, null)
           }));
     }
     #endregion
@@ -58,7 +59,7 @@ namespace example {
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     public static pbr::MessageDescriptor Descriptor {
-      get { return global::example.BasicReflection.Descriptor.MessageTypes[0]; }
+      get { return global::ex.Basic.Proto.BasicReflection.Descriptor.MessageTypes[0]; }
     }
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
@@ -230,7 +231,7 @@ namespace example {
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     public static pbr::MessageDescriptor Descriptor {
-      get { return global::example.BasicReflection.Descriptor.MessageTypes[1]; }
+      get { return global::ex.Basic.Proto.BasicReflection.Descriptor.MessageTypes[1]; }
     }
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
@@ -402,7 +403,7 @@ namespace example {
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     public static pbr::MessageDescriptor Descriptor {
-      get { return global::example.BasicReflection.Descriptor.MessageTypes[2]; }
+      get { return global::ex.Basic.Proto.BasicReflection.Descriptor.MessageTypes[2]; }
     }
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
@@ -574,7 +575,7 @@ namespace example {
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     public static pbr::MessageDescriptor Descriptor {
-      get { return global::example.BasicReflection.Descriptor.MessageTypes[3]; }
+      get { return global::ex.Basic.Proto.BasicReflection.Descriptor.MessageTypes[3]; }
     }
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
@@ -782,7 +783,7 @@ namespace example {
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     public static pbr::MessageDescriptor Descriptor {
-      get { return global::example.BasicReflection.Descriptor.MessageTypes[4]; }
+      get { return global::ex.Basic.Proto.BasicReflection.Descriptor.MessageTypes[4]; }
     }
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
@@ -954,7 +955,7 @@ namespace example {
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     public static pbr::MessageDescriptor Descriptor {
-      get { return global::example.BasicReflection.Descriptor.MessageTypes[5]; }
+      get { return global::ex.Basic.Proto.BasicReflection.Descriptor.MessageTypes[5]; }
     }
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
@@ -1126,7 +1127,7 @@ namespace example {
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     public static pbr::MessageDescriptor Descriptor {
-      get { return global::example.BasicReflection.Descriptor.MessageTypes[6]; }
+      get { return global::ex.Basic.Proto.BasicReflection.Descriptor.MessageTypes[6]; }
     }
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]

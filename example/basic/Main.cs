@@ -1,8 +1,7 @@
-﻿using scyna;
+﻿namespace ex.Basic;
+using scyna;
 
-namespace Example;
-
-class EchoTest
+class Basic
 {
     static void Main(string[] args)
     {
