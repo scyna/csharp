@@ -1,4 +1,4 @@
-namespace dao;
+namespace ex.User.DAO;
 
 public class DBException : Exception
 {
@@ -34,12 +34,12 @@ public class User
         return DAO;
     }
 
-    public static User FromProto(example.User user)
+    public static User FromProto(Proto.User user)
     {
         return new User();
     }
 
-    public example.User ToProto()
+    public Proto.User ToProto()
     {
         return null;
     }

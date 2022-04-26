@@ -1,4 +1,4 @@
-namespace dao;
+namespace ex.User.DAO;
 
 class UserDAO : IUserDAO
 {
