@@ -8,7 +8,6 @@ class UserDB : IUserDB
         try
         {
             var mapper = Engine.DB.Mapper;
-            user.ID = Engine.ID.Next();
             mapper.Insert(user);
         }
         catch (Exception)

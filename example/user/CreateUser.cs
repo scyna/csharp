@@ -4,14 +4,14 @@ using FluentValidation;
 
 public class CreateUser : Service.StatefulHandler<proto.CreateUserRequest>
 {
-    UserValidator validator = new UserValidator();
+    CreateUserValidator validator = new CreateUserValidator();
     public override void Execute()
     {
         Console.WriteLine("Receive CreateUserRequest");
         var userDB = dao.User.DB();
         try
         {
-            if (!validator.Validate(request.User).IsValid) throw new dao.DBException(scyna.Error.REQUEST_INVALID);
+            validator.ValidateAndThrow(request.User);
             if (userDB.Exist(LOG, request.User.Email)) throw new dao.DBException(dao.Error.USER_EXIST);
             var user = dao.User.FromProto(request.User);
             user.ID = Engine.ID.Next();
@@ -21,12 +21,15 @@ public class CreateUser : Service.StatefulHandler<proto.CreateUserRequest>
         {
             Error(e.Error);
         }
+        catch (ValidationException)
+        {
+            Error(scyna.Error.REQUEST_INVALID);
+        }
     }
 }
-
-public class UserValidator : AbstractValidator<proto.User>
+public class CreateUserValidator : AbstractValidator<proto.User>
 {
-    public UserValidator()
+    public CreateUserValidator()
     {
         RuleFor(u => u.Name).NotNull();
         RuleFor(u => u.Email).NotNull().EmailAddress();
