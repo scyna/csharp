@@ -1,5 +1,5 @@
 namespace dao;
-using ex.User;
+using Scylla.Net.Mapping;
 
 public class User
 {
@@ -9,7 +9,18 @@ public class User
     public string Password { get; set; }
 
     private static IUserDB instance;
-    public static void Init(IUserDB db) { instance = db; }
+    public static void Init(IUserDB db)
+    {
+        MappingConfiguration.Global.Define(new Map<User>()
+            .TableName("users")
+            .PartitionKey(u => u.ID)
+            .Column(u => u.ID, cm => cm.WithName("id"))
+            .Column(u => u.Email, cm => cm.WithName("email"))
+            .Column(u => u.Name, cm => cm.WithName("name"))
+            .Column(u => u.Password, cm => cm.WithName("password"))
+        );
+        instance = db;
+    }
     public static IUserDB DB()
     {
         if (instance == null) throw new DBException(Error.DAO_NOT_READY);

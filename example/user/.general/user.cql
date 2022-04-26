@@ -1,3 +1,5 @@
+DROP KEYSPACE IF EXISTS ex;
+CREATE KEYSPACE ex WITH REPLICATION = { 'class' : 'SimpleStrategy', 'replication_factor' : 1 };
 
 DROP TABLE IF EXISTS ex.user;
 CREATE TABLE ex.user
