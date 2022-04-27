@@ -16,7 +16,7 @@
 
   <ItemGroup>
     <ProjectReference Include="..\..\scyna\scyna.csproj" />
-    <ProjectReference Include="..\user\user.csproj" />
+    <ProjectReference Include="..\scylla\scylla.csproj" />
   </ItemGroup>
 
 </Project>

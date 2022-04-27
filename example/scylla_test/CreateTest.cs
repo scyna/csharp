@@ -1,13 +1,14 @@
 namespace ex.Scylla.Test;
 
 using NUnit.Framework;
+using ex.Scylla;
 using scyna;
-using ex.User;
+
 
 [TestFixture]
 class CreateTest
 {
-    [SetUp]
+    [OneTimeSetUp]
     public void Setup()
     {
         Engine.Init("http://127.0.0.1:8081", "scyna.test", "123456");
@@ -35,6 +36,7 @@ class CreateTest
         CleanUp();
     }
 
+    [Test]
     public void TestCreateNoEmail()
     {
         scyna.Test.TestService("/example/user/create", new proto.CreateUserRequest
