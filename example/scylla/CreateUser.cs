@@ -1,4 +1,4 @@
-namespace ex.User;
+namespace ex.Scylla;
 using scyna;
 using FluentValidation;
 

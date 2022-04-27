@@ -11,9 +11,9 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "basic", "example\basic\basi
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "basic_test", "example\basic_test\basic_test.csproj", "{AB28728F-5D78-47A5-B6DE-1793F79C41A6}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "user", "example\user\user.csproj", "{39280B59-6314-4A80-9B02-AD626230B012}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "scylla", "example\scylla\scylla.csproj", "{39280B59-6314-4A80-9B02-AD626230B012}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "user_test", "example\user_test\user_test.csproj", "{59EB6A9D-6A26-4E9F-ADFA-49D88D718FDE}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "user_test", "example\scylla_test\scylla_test.csproj", "{59EB6A9D-6A26-4E9F-ADFA-49D88D718FDE}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

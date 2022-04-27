@@ -1,4 +1,4 @@
-namespace ex.User.Test;
+namespace ex.Scylla.Test;
 
 using NUnit.Framework;
 using scyna;
