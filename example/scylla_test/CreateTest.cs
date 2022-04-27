@@ -17,6 +17,13 @@ class CreateTest
         dao.User.ScyllaInit();
     }
 
+    [OneTimeTearDown]
+    public void TearDown()
+    {
+        CleanUp();
+        Engine.Release();
+    }
+
     [SetUp]
     public void CleanUp()
     {

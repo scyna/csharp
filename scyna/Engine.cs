@@ -78,5 +78,19 @@ public class Engine
     static public void Start()
     {
         while (true) { } //FIXME:
+        Instance.Close();
+    }
+
+    static public void Release()
+    {
+        Instance.Close();
+        Console.WriteLine("Engine stopped");
+    }
+
+
+    private void Close()
+    {
+        connection.Close();
+        db.Close();
     }
 }

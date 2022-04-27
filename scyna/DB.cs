@@ -24,4 +24,8 @@ public class DB
     {
         return new DB(hosts, username, password);
     }
+    public void Close()
+    {
+        cluster.Shutdown();
+    }
 }
