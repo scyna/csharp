@@ -6,11 +6,17 @@ using ex.Basic;
 [TestFixture]
 class AddTest
 {
-    [SetUp]
+    [OneTimeSetUp]
     public void Setup()
     {
         Engine.Init("http://127.0.0.1:8081", "scyna.test", "123456");
         Service.Register("/example/basic/add", new AddService());
+    }
+
+    [OneTimeTearDown]
+    public void TearDown()
+    {
+        Engine.Release();
     }
 
     [Test]

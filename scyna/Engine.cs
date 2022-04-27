@@ -75,7 +75,7 @@ public class Engine
         instance = new Engine(module, response.SessionID, response.Config);
     }
 
-    static public async void Start()
+    static public async void Start() //FIXME: this solution is not work
     {
         Console.WriteLine("Engine is running");
         var tcs = new TaskCompletionSource();
@@ -89,7 +89,10 @@ public class Engine
 
         AppDomain.CurrentDomain.ProcessExit += (_, _) =>
         {
-            if (!sigintReceived) tcs.SetResult();
+            if (!sigintReceived)
+            {
+                tcs.SetResult();
+            }
         };
 
         await tcs.Task;
@@ -99,12 +102,12 @@ public class Engine
     static public void Release()
     {
         Instance.Close();
-        Console.WriteLine("Engine stopped");
     }
 
     private void Close()
     {
         connection.Close();
         db.Close();
+        Console.WriteLine("Engine stopped");
     }
 }

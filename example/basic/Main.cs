@@ -13,7 +13,7 @@ class Basic
 
         Signal.Register("example.basic.signal.test", new TestSignal());
         Signal.Register("example.basic.signal.empty", new EmptySignal());
-        Event.Register("example.basic.event.test", "consumer", new TestEvent());
+        //Event.Register("example.basic.event.test", "consumer", new TestEvent());
 
         Engine.Start();
     }
