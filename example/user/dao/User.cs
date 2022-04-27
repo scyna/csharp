@@ -8,7 +8,7 @@ public class User
     public string? Name { get; set; }
     public string? Password { get; set; }
 
-    private static IUserDB? instance;
+    private static IUserRepository? instance;
     public static void ScyllaInit()
     {
         MappingConfiguration.Global.Define(new Map<User>()
@@ -19,9 +19,9 @@ public class User
             .Column(u => u.Name, cm => cm.WithName("name"))
             .Column(u => u.Password, cm => cm.WithName("password"))
         );
-        instance = new UserDB();
+        instance = new UserRepository();
     }
-    public static IUserDB DB()
+    public static IUserRepository DB()
     {
         if (instance == null) throw new DBException(Error.DAO_NOT_READY);
         return instance;

@@ -1,7 +1,7 @@
 namespace dao;
 using scyna;
 
-class UserDB : IUserDB
+class UserRepository : IUserRepository
 {
     public void Create(scyna.Logger LOG, User user)
     {
