@@ -11,6 +11,7 @@ public interface IUserDB
 {
     void Create(scyna.Logger LOG, User user);
     User Get(scyna.Logger LOG, ulong userID);
+    User Get(scyna.Logger LOG, string email);
     bool Exist(scyna.Logger LOG, string email);
     void Update(scyna.Logger LOG, User user);
     void AddFriend(scyna.Logger LOG, ulong userID, ulong friendID);

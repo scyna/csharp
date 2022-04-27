@@ -29,6 +29,19 @@ class UserDB : IUserDB
         }
     }
 
+    public User Get(scyna.Logger LOG, string email)
+    {
+        try
+        {
+            var mapper = Engine.DB.Mapper;
+            return mapper.Single<User>("WHERE email = ?", email);
+        }
+        catch (Exception)
+        {
+            throw new DBException(dao.Error.USER_NOT_EXIST);
+        }
+    }
+
     public bool Exist(scyna.Logger LOG, string email)
     {
         try
