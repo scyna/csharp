@@ -15,7 +15,14 @@ class CreateTest
         Service.Register("/example/user/create", new CreateUser());
         Service.Register("/example/user/get", new GetUser());
         dao.User.ScyllaInit();
-        CleanUp();
+    }
+
+    [SetUp]
+    public void CleanUp()
+    {
+        var session = Engine.DB.Session;
+        var query = session.Prepare("TRUNCATE ex.user").Bind();
+        session.Execute(query);
     }
 
     [Test]
@@ -31,9 +38,7 @@ class CreateTest
 
             }
         }, 200);
-
         scyna.Test.TestService("/example/user/get", new proto.GetUserRequest { Email = "a@gmail.com" }, 200);
-        CleanUp();
     }
 
     [Test]
@@ -47,12 +52,5 @@ class CreateTest
                 Password = "123456"
             }
         }, scyna.Error.REQUEST_INVALID, 400);
-    }
-
-    private void CleanUp()
-    {
-        var session = Engine.DB.Session;
-        var query = session.Prepare("TRUNCATE ex.user").Bind();
-        session.Execute(query);
     }
 }
