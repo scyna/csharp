@@ -75,7 +75,7 @@ public class Engine
         instance = new Engine(module, response.SessionID, response.Config);
     }
 
-    static public async void Start()
+    static public void Start()
     {
         Console.WriteLine("Engine is running");
         bool running = true;
