@@ -75,28 +75,18 @@ public class Engine
         instance = new Engine(module, response.SessionID, response.Config);
     }
 
-    static public async void Start() //FIXME: this solution is not work
+    static public async void Start()
     {
         Console.WriteLine("Engine is running");
-        var tcs = new TaskCompletionSource();
-        var sigintReceived = false;
+        bool running = true;
         Console.CancelKeyPress += (_, ea) =>
         {
             ea.Cancel = true;
-            tcs.SetResult();
-            sigintReceived = true;
+            Instance.Close();
+            running = false;
         };
 
-        AppDomain.CurrentDomain.ProcessExit += (_, _) =>
-        {
-            if (!sigintReceived)
-            {
-                tcs.SetResult();
-            }
-        };
-
-        await tcs.Task;
-        Instance.Close();
+        while (running) { Thread.Sleep(1000); }
     }
 
     static public void Release()
