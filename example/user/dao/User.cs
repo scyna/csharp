@@ -4,11 +4,11 @@ using Scylla.Net.Mapping;
 public class User
 {
     public ulong ID { get; set; }
-    public string Email { get; set; }
-    public string Name { get; set; }
-    public string Password { get; set; }
+    public string? Email { get; set; }
+    public string? Name { get; set; }
+    public string? Password { get; set; }
 
-    private static IUserDB instance;
+    private static IUserDB? instance;
     public static void ScyllaInit()
     {
         MappingConfiguration.Global.Define(new Map<User>()

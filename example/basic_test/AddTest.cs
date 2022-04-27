@@ -16,14 +16,14 @@ class AddTest
     [Test]
     public void TestAddSuccess()
     {
-        scyna.Test.TestService("/example/basic/add", new Proto.AddRequest { A = 3, B = 5 }, new Proto.AddResponse { Sum = 8 }, 200);
-        scyna.Test.TestService("/example/basic/add", new Proto.AddRequest { A = 9, B = 12 }, new Proto.AddResponse { Sum = 21 }, 200);
+        scyna.Test.TestService("/example/basic/add", new proto.AddRequest { A = 3, B = 5 }, new proto.AddResponse { Sum = 8 }, 200);
+        scyna.Test.TestService("/example/basic/add", new proto.AddRequest { A = 9, B = 12 }, new proto.AddResponse { Sum = 21 }, 200);
     }
 
     [Test]
     public void TestAddTooBig()
     {
-        scyna.Test.TestService("/example/basic/add", new Proto.AddRequest { A = 90, B = 75 }, ex.Basic.Error.TOO_BIG, 400);
-        scyna.Test.TestService("/example/basic/add", new Proto.AddRequest { A = 92, B = 9 }, ex.Basic.Error.TOO_BIG, 400);
+        scyna.Test.TestService("/example/basic/add", new proto.AddRequest { A = 90, B = 75 }, ex.Basic.Error.TOO_BIG, 400);
+        scyna.Test.TestService("/example/basic/add", new proto.AddRequest { A = 92, B = 9 }, ex.Basic.Error.TOO_BIG, 400);
     }
 }

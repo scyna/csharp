@@ -18,8 +18,8 @@ class EchoTest
     {
         scyna.Test.TestService(
             "/example/basic/echo",
-            new Proto.EchoRequest { Text = "Hello" },
-            new Proto.EchoResponse { Text = "Hello" },
+            new proto.EchoRequest { Text = "Hello" },
+            new proto.EchoResponse { Text = "Hello" },
             200
         );
     }
@@ -27,13 +27,13 @@ class EchoTest
     [Test]
     public void TestEchoCode()
     {
-        scyna.Test.TestService("/example/basic/echo", new Proto.EchoRequest { Text = "Hello" }, 200);
+        scyna.Test.TestService("/example/basic/echo", new proto.EchoRequest { Text = "Hello" }, 200);
     }
 
     [Test]
     public void TestCallService()
     {
-        var r = scyna.Test.CallService<Proto.EchoResponse>("/example/basic/echo", new Proto.EchoRequest { Text = "echo" });
+        var r = scyna.Test.CallService<proto.EchoResponse>("/example/basic/echo", new proto.EchoRequest { Text = "echo" });
         Assert.AreEqual(r.Text, "echo");
     }
 }
