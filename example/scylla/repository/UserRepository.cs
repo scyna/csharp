@@ -1,4 +1,4 @@
-namespace dao;
+namespace db;
 using scyna;
 
 class UserRepository : IUserRepository
@@ -10,10 +10,10 @@ class UserRepository : IUserRepository
             var mapper = Engine.DB.Mapper;
             mapper.Insert(user);
         }
-        catch (Exception e)
+        catch (System.Exception e)
         {
             Console.WriteLine(e);
-            throw new DBException(scyna.Error.SERVER_ERROR);
+            throw new Exception(scyna.Error.SERVER_ERROR);
         }
     }
 
@@ -24,9 +24,9 @@ class UserRepository : IUserRepository
             var mapper = Engine.DB.Mapper;
             return mapper.Single<User>("WHERE id = ?", userID);
         }
-        catch (Exception)
+        catch (System.Exception)
         {
-            throw new DBException(dao.Error.USER_NOT_EXIST);
+            throw new Exception(db.Error.USER_NOT_EXIST);
         }
     }
 
@@ -37,9 +37,9 @@ class UserRepository : IUserRepository
             var mapper = Engine.DB.Mapper;
             return mapper.Single<User>("WHERE email = ?", email);
         }
-        catch (Exception)
+        catch (System.Exception)
         {
-            throw new DBException(dao.Error.USER_NOT_EXIST);
+            throw new Exception(db.Error.USER_NOT_EXIST);
         }
     }
 
@@ -51,7 +51,7 @@ class UserRepository : IUserRepository
             var user = mapper.Single<User>("WHERE email = ?", email);
             return true;
         }
-        catch (Exception) { }
+        catch (System.Exception) { }
         return false;
     }
 
@@ -73,9 +73,9 @@ class UserRepository : IUserRepository
             IEnumerable<User> users = mapper.Fetch<User>("FROM users WHERE name = ?", "aaa"); //FIXME
             return users;
         }
-        catch (Exception)
+        catch (System.Exception)
         {
-            throw new DBException(scyna.Error.BAD_REQUEST);
+            throw new Exception(scyna.Error.BAD_REQUEST);
         }
     }
 }

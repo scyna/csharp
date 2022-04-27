@@ -7,13 +7,13 @@ public class GetUser : Service.StatefulHandler<proto.GetUserRequest>
     public override void Execute()
     {
         Console.WriteLine("Receive GetUserRequest");
-        var userDB = dao.User.DB();
+        var userDB = db.User.Repository();
         try
         {
             var user = userDB.Get(LOG, request.Email);
             Done(new proto.GetUserResponse { User = user.ToProto() });
         }
-        catch (dao.DBException e)
+        catch (db.Exception e)
         {
             Error(e.Error);
         }

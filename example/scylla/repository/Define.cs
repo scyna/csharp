@@ -1,4 +1,4 @@
-namespace dao;
+namespace db;
 
 public class Error
 {
@@ -18,11 +18,8 @@ public interface IUserRepository
     IEnumerable<User> ListFriend(scyna.Logger LOG, ulong userID);
 }
 
-public class DBException : Exception
+public class Exception : System.Exception
 {
     public scyna.proto.Error Error { get; }
-    public DBException(scyna.proto.Error error)
-    {
-        this.Error = error;
-    }
+    public Exception(scyna.proto.Error error) { this.Error = error; }
 }

@@ -1,4 +1,4 @@
-namespace dao;
+namespace db;
 using Scylla.Net.Mapping;
 
 public class User
@@ -8,7 +8,7 @@ public class User
     public string? Name { get; set; }
     public string? Password { get; set; }
 
-    private static IUserRepository? instance;
+    private static IUserRepository? repository;
     public static void ScyllaInit()
     {
         MappingConfiguration.Global.Define(new Map<User>()
@@ -19,12 +19,12 @@ public class User
             .Column(u => u.Name, cm => cm.WithName("name"))
             .Column(u => u.Password, cm => cm.WithName("password"))
         );
-        instance = new UserRepository();
+        repository = new UserRepository();
     }
-    public static IUserRepository DB()
+    public static IUserRepository Repository()
     {
-        if (instance == null) throw new DBException(Error.DAO_NOT_READY);
-        return instance;
+        if (repository == null) throw new Exception(Error.DAO_NOT_READY);
+        return repository;
     }
 
     public static User FromProto(proto.User user)

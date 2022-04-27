@@ -14,7 +14,7 @@ class CreateTest
         Engine.Init("http://127.0.0.1:8081", "scyna.test", "123456");
         Service.Register("/example/user/create", new CreateUser());
         Service.Register("/example/user/get", new GetUser());
-        dao.User.ScyllaInit();
+        db.User.ScyllaInit();
     }
 
     [OneTimeTearDown]
@@ -84,7 +84,7 @@ class CreateTest
                 Password = "123456"
 
             }
-        }, dao.Error.USER_EXIST, 400);
+        }, db.Error.USER_EXIST, 400);
     }
 
     [Test]
