@@ -87,7 +87,6 @@ public class Engine
         Console.WriteLine("Engine stopped");
     }
 
-
     private void Close()
     {
         connection.Close();

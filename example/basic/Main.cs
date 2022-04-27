@@ -7,13 +7,14 @@ class Basic
     {
         Engine.Init("http://127.0.0.1:8081", "scyna.test", "123456");
 
-        Service.Register("/example/echo", new EchoService());
-        Service.Register("/example/hello", new HelloService());
-        Signal.Register("example.signal.test", new TestSignal());
-        Signal.Register("example.signal.empty", new EmptySignal());
-        Event.Register("example.event.test", "consumer", new TestEvent());
+        Service.Register("/example/basic/echo", new EchoService());
+        Service.Register("/example/basic/hello", new HelloService());
+        Service.Register("/example/basic/add", new HelloService());
+
+        Signal.Register("example.basic.signal.test", new TestSignal());
+        Signal.Register("example.basic.signal.empty", new EmptySignal());
+        Event.Register("example.basic.event.test", "consumer", new TestEvent());
 
         Engine.Start();
-        Console.WriteLine("Engine Stopped");
     }
 }
