@@ -9,14 +9,14 @@ public class Test
     {
         var res = Service.SendRequest(url, request);
         Assert.IsNotNull(res);
-        Assert.AreEqual(res.Code, code);
+        Assert.AreEqual(code, res.Code);
     }
 
     public static void TestService<T>(string url, IMessage request, T response, uint code) where T : IMessage<T>, new()
     {
         var res = Service.SendRequest(url, request);
         Assert.IsNotNull(res);
-        Assert.AreEqual(res.Code, code);
+        Assert.AreEqual(code, res.Code);
 
         try
         {
@@ -34,7 +34,7 @@ public class Test
     {
         var res = Service.SendRequest(url, request);
         Assert.IsNotNull(res);
-        Assert.AreEqual(res.Code, 200);
+        Assert.AreEqual(200, res.Code);
 
         try
         {

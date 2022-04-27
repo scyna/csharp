@@ -3,7 +3,7 @@ using Scylla.Net.Mapping;
 
 public class User
 {
-    public ulong ID { get; set; }
+    public long ID { get; set; }
     public string? Email { get; set; }
     public string? Name { get; set; }
     public string? Password { get; set; }
@@ -12,7 +12,7 @@ public class User
     public static void ScyllaInit()
     {
         MappingConfiguration.Global.Define(new Map<User>()
-            .TableName("users")
+            .TableName("ex.user")
             .PartitionKey(u => u.ID)
             .Column(u => u.ID, cm => cm.WithName("id"))
             .Column(u => u.Email, cm => cm.WithName("email"))
@@ -31,7 +31,7 @@ public class User
     {
         return new User
         {
-            ID = user.Id,
+            ID = (long)user.Id,
             Email = user.Email,
             Name = user.Name,
             Password = user.Password
@@ -42,7 +42,7 @@ public class User
     {
         return new proto.User
         {
-            Id = ID,
+            Id = (ulong)ID,
             Email = Email,
             Name = Name,
             Password = Password

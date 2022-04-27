@@ -31,7 +31,7 @@ class CreateTest
             }
         }, 200);
 
-        scyna.Test.TestService("/example/user/create", new proto.GetUserRequest { Email = "a@gmail.com" }, 200);
+        scyna.Test.TestService("/example/user/get", new proto.GetUserRequest { Email = "a@gmail.com" }, 200);
         CleanUp();
     }
 

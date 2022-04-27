@@ -10,8 +10,9 @@ class UserRepository : IUserRepository
             var mapper = Engine.DB.Mapper;
             mapper.Insert(user);
         }
-        catch (Exception)
+        catch (Exception e)
         {
+            Console.WriteLine(e);
             throw new DBException(scyna.Error.SERVER_ERROR);
         }
     }
