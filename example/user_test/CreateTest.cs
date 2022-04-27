@@ -32,10 +32,25 @@ class CreateTest
         }, 200);
 
         scyna.Test.TestService("/example/user/create", new proto.GetUserRequest { Email = "a@gmail.com" }, 200);
+        CleanUp();
+    }
+
+    public void TestCreateNoEmail()
+    {
+        scyna.Test.TestService("/example/user/create", new proto.CreateUserRequest
+        {
+            User = new proto.User
+            {
+                Name = "Nguyen Van A",
+                Password = "123456"
+            }
+        }, scyna.Error.REQUEST_INVALID, 400);
     }
 
     private void CleanUp()
     {
-        /*TODO: truncate table user*/
+        var session = Engine.DB.Session;
+        var query = session.Prepare("TRUNCATE ex.user").Bind();
+        session.Execute(query);
     }
 }

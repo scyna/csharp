@@ -33,6 +33,11 @@ message GetUserRequest
   string email = 1;
 }
 
+message GetUserByIDRequest 
+{
+  uint64 id = 1;
+}
+
 message GetUserResponse
 {
   User user = 1;
