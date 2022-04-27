@@ -75,9 +75,24 @@ public class Engine
         instance = new Engine(module, response.SessionID, response.Config);
     }
 
-    static public void Start()
+    static public async void Start()
     {
-        while (true) { } //FIXME:
+        Console.WriteLine("Engine is running");
+        var tcs = new TaskCompletionSource();
+        var sigintReceived = false;
+        Console.CancelKeyPress += (_, ea) =>
+        {
+            ea.Cancel = true;
+            tcs.SetResult();
+            sigintReceived = true;
+        };
+
+        AppDomain.CurrentDomain.ProcessExit += (_, _) =>
+        {
+            if (!sigintReceived) tcs.SetResult();
+        };
+
+        await tcs.Task;
         Instance.Close();
     }
 
