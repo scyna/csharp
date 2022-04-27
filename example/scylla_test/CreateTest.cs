@@ -53,4 +53,45 @@ class CreateTest
             }
         }, scyna.Error.REQUEST_INVALID, 400);
     }
+
+    [Test]
+    public void TestCreateExisted()
+    {
+        scyna.Test.TestService("/example/user/create", new proto.CreateUserRequest
+        {
+            User = new proto.User
+            {
+                Name = "Nguyen Van A",
+                Email = "a@gmail.com",
+                Password = "123456"
+
+            }
+        }, 200);
+
+        scyna.Test.TestService("/example/user/create", new proto.CreateUserRequest
+        {
+            User = new proto.User
+            {
+                Name = "Nguyen Van A",
+                Email = "a@gmail.com",
+                Password = "123456"
+
+            }
+        }, dao.Error.USER_EXIST, 400);
+    }
+
+    [Test]
+    public void TestCreateWrongPassword()
+    {
+        scyna.Test.TestService("/example/user/create", new proto.CreateUserRequest
+        {
+            User = new proto.User
+            {
+                Name = "Nguyen Van A",
+                Email = "a@gmail.com",
+                Password = "1"
+
+            }
+        }, scyna.Error.REQUEST_INVALID, 400);
+    }
 }
