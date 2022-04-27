@@ -9,7 +9,7 @@ public class User
     public string Password { get; set; }
 
     private static IUserDB instance;
-    public static void Init(IUserDB db)
+    public static void ScyllaInit()
     {
         MappingConfiguration.Global.Define(new Map<User>()
             .TableName("users")
@@ -19,7 +19,7 @@ public class User
             .Column(u => u.Name, cm => cm.WithName("name"))
             .Column(u => u.Password, cm => cm.WithName("password"))
         );
-        instance = db;
+        instance = new UserDB();
     }
     public static IUserDB DB()
     {
