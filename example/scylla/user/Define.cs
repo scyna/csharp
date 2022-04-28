@@ -1,4 +1,4 @@
-namespace db;
+namespace ex.User;
 
 public class Error
 {

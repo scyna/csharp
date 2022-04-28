@@ -1,4 +1,4 @@
-namespace db;
+namespace ex.User;
 using Scylla.Net.Mapping;
 
 public class User
@@ -11,7 +11,7 @@ public class User
     private static IUserRepository? repository;
     public static void ScyllaInit()
     {
-        MappingConfiguration.Global.Define(new Map<User>()
+        Scylla.Net.Mapping.MappingConfiguration.Global.Define(new Map<User>()
             .TableName("ex.user")
             .PartitionKey(u => u.ID)
             .Column(u => u.ID, cm => cm.WithName("id"))
@@ -19,7 +19,7 @@ public class User
             .Column(u => u.Name, cm => cm.WithName("name"))
             .Column(u => u.Password, cm => cm.WithName("password"))
         );
-        repository = new UserRepository();
+        repository = new ScyllaRepository();
     }
     public static IUserRepository Repository()
     {

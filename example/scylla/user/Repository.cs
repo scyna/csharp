@@ -1,13 +1,12 @@
-namespace db;
-using scyna;
+namespace ex.User;
 
-class UserRepository : IUserRepository
+class ScyllaRepository : IUserRepository
 {
     public void Create(scyna.Logger LOG, User user)
     {
         try
         {
-            var mapper = Engine.DB.Mapper;
+            var mapper = scyna.Engine.DB.Mapper;
             mapper.Insert(user);
         }
         catch (System.Exception e)
@@ -21,12 +20,12 @@ class UserRepository : IUserRepository
     {
         try
         {
-            var mapper = Engine.DB.Mapper;
+            var mapper = scyna.Engine.DB.Mapper;
             return mapper.Single<User>("WHERE id = ?", userID);
         }
         catch (System.Exception)
         {
-            throw new Exception(db.Error.USER_NOT_EXIST);
+            throw new Exception(Error.USER_NOT_EXIST);
         }
     }
 
@@ -34,12 +33,12 @@ class UserRepository : IUserRepository
     {
         try
         {
-            var mapper = Engine.DB.Mapper;
+            var mapper = scyna.Engine.DB.Mapper;
             return mapper.Single<User>("WHERE email = ?", email);
         }
         catch (System.Exception)
         {
-            throw new Exception(db.Error.USER_NOT_EXIST);
+            throw new Exception(Error.USER_NOT_EXIST);
         }
     }
 
@@ -47,7 +46,7 @@ class UserRepository : IUserRepository
     {
         try
         {
-            var mapper = Engine.DB.Mapper;
+            var mapper = scyna.Engine.DB.Mapper;
             var user = mapper.Single<User>("WHERE email = ?", email);
             return true;
         }
@@ -69,7 +68,7 @@ class UserRepository : IUserRepository
     {
         try
         {
-            var mapper = Engine.DB.Mapper;
+            var mapper = scyna.Engine.DB.Mapper;
             IEnumerable<User> users = mapper.Fetch<User>("FROM users WHERE name = ?", "aaa"); //FIXME
             return users;
         }

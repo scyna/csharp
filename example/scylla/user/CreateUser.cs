@@ -1,25 +1,24 @@
-namespace ex.Scylla;
-using scyna;
+namespace ex.User;
 using FluentValidation;
 
-public class CreateUser : Service.StatefulHandler<proto.CreateUserRequest>
+public class CreateUser : scyna.Service.StatefulHandler<proto.CreateUserRequest>
 {
     CreateUserValidator validator = new CreateUserValidator();
     public override void Execute()
     {
         Console.WriteLine("Receive CreateUserRequest");
-        var userDB = db.User.Repository();
+        var userDB = User.Repository();
         try
         {
             validator.ValidateAndThrow(request.User);
 
-            if (userDB.Exist(LOG, request.User.Email)) throw new db.Exception(db.Error.USER_EXIST);
-            var user = db.User.FromProto(request.User);
-            user.ID = (long)Engine.ID.Next();
+            if (userDB.Exist(LOG, request.User.Email)) throw new Exception(ex.User.Error.USER_EXIST);
+            var user = User.FromProto(request.User);
+            user.ID = (long)scyna.Engine.ID.Next();
             userDB.Create(LOG, user);
             Done(new proto.CreateUserResponse { Id = (ulong)user.ID });
         }
-        catch (db.Exception e)
+        catch (Exception e)
         {
             Console.WriteLine(e.Error.Message);
             Error(e.Error);

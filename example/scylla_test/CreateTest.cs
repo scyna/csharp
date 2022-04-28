@@ -1,7 +1,7 @@
-namespace ex.Scylla.Test;
+namespace ex.UserTest;
 
 using NUnit.Framework;
-using ex.Scylla;
+using ex.User;
 using scyna;
 
 
@@ -14,7 +14,7 @@ class CreateTest
         Engine.Init("http://127.0.0.1:8081", "scyna.test", "123456");
         Service.Register("/example/user/create", new CreateUser());
         Service.Register("/example/user/get", new GetUser());
-        db.User.ScyllaInit();
+        ex.User.User.ScyllaInit();
     }
 
     [OneTimeTearDown]
@@ -84,7 +84,7 @@ class CreateTest
                 Password = "123456"
 
             }
-        }, db.Error.USER_EXIST, 400);
+        }, ex.User.Error.USER_EXIST, 400);
     }
 
     [Test]
