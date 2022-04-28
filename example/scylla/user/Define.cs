@@ -7,6 +7,12 @@ public class Error
     public static scyna.proto.Error USER_EXIST = new scyna.proto.Error { Code = 102, Message = "User Exist" };
 }
 
+public class Path
+{
+    public static String CREATE_USER_URL = "/example/user/create";
+    public static String GET_USER_URL = "/example/user/get";
+}
+
 public interface IUserRepository
 {
     void Create(scyna.Logger LOG, User user);

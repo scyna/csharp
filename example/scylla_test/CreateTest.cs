@@ -12,8 +12,8 @@ class CreateTest
     public void Setup()
     {
         Engine.Init("http://127.0.0.1:8081", "scyna.test", "123456");
-        Service.Register("/example/user/create", new CreateUser());
-        Service.Register("/example/user/get", new GetUser());
+        Service.Register(Path.CREATE_USER_URL, new CreateUser());
+        Service.Register(Path.GET_USER_URL, new GetUser());
         ex.User.User.ScyllaInit();
     }
 
@@ -35,7 +35,7 @@ class CreateTest
     [Test]
     public void TestCreateSuccess()
     {
-        scyna.Test.TestService("/example/user/create", new proto.CreateUserRequest
+        scyna.Test.TestService(Path.CREATE_USER_URL, new proto.CreateUserRequest
         {
             User = new proto.User
             {
@@ -45,13 +45,13 @@ class CreateTest
 
             }
         }, 200);
-        scyna.Test.TestService("/example/user/get", new proto.GetUserRequest { Email = "a@gmail.com" }, 200);
+        scyna.Test.TestService(Path.GET_USER_URL, new proto.GetUserRequest { Email = "a@gmail.com" }, 200);
     }
 
     [Test]
     public void TestCreateNoEmail()
     {
-        scyna.Test.TestService("/example/user/create", new proto.CreateUserRequest
+        scyna.Test.TestService(Path.CREATE_USER_URL, new proto.CreateUserRequest
         {
             User = new proto.User
             {
@@ -64,7 +64,7 @@ class CreateTest
     [Test]
     public void TestCreateExisted()
     {
-        scyna.Test.TestService("/example/user/create", new proto.CreateUserRequest
+        scyna.Test.TestService(Path.CREATE_USER_URL, new proto.CreateUserRequest
         {
             User = new proto.User
             {
@@ -75,7 +75,7 @@ class CreateTest
             }
         }, 200);
 
-        scyna.Test.TestService("/example/user/create", new proto.CreateUserRequest
+        scyna.Test.TestService(Path.CREATE_USER_URL, new proto.CreateUserRequest
         {
             User = new proto.User
             {
@@ -88,9 +88,9 @@ class CreateTest
     }
 
     [Test]
-    public void TestCreateWrongPassword()
+    public void TestCreateBadPassword()
     {
-        scyna.Test.TestService("/example/user/create", new proto.CreateUserRequest
+        scyna.Test.TestService(Path.CREATE_USER_URL, new proto.CreateUserRequest
         {
             User = new proto.User
             {
@@ -101,4 +101,18 @@ class CreateTest
             }
         }, scyna.Error.REQUEST_INVALID, 400);
     }
+    public void TestCreateBadEmail()
+    {
+        scyna.Test.TestService(Path.CREATE_USER_URL, new proto.CreateUserRequest
+        {
+            User = new proto.User
+            {
+                Name = "Nguyen Van A",
+                Email = "a+gmail.com",
+                Password = "123456"
+
+            }
+        }, scyna.Error.REQUEST_INVALID, 400);
+    }
+
 }
