@@ -88,12 +88,11 @@ public class Signal
             handler.Run(args.Message.Data);
         });
     }
-    public static void Send(string channel, pb::IMessage message)
+    public static void Fire(string channel, pb::IMessage message)
     {
         var nc = Engine.Instance.Connection;
         nc.Publish(channel, message.ToByteArray());
     }
-
     public abstract class Handler<T> where T : IMessage<T>, new()
     {
         private MessageParser<T> parser = new MessageParser<T>(() => new T());
