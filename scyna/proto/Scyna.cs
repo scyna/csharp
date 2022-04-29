@@ -28,13 +28,15 @@ namespace scyna.proto {
             "KAQSDAoEQm9keRgCIAEoDBIMCgRKU09OGAMgASgIEgwKBERhdGEYBCABKAki",
             "WQoIUmVzcG9uc2USDAoEQ29kZRgBIAEoBRIMCgRCb2R5GAIgASgMEhEKCVNl",
             "c3Npb25JRBgDIAEoBBINCgVUb2tlbhgEIAEoCRIPCgdFeHBpcmVkGAUgASgE",
-            "QisKDmlvLnNjeW5hLnByb3RvSAJQAVoHLjtzY3luYaoCC3NjeW5hLnByb3Rv",
-            "YgZwcm90bzM="));
+            "IjsKDUV2ZW50T3JTaWduYWwSDgoGQ2FsbElEGAEgASgEEgwKBEJvZHkYAiAB",
+            "KAwSDAoERGF0YRgDIAEoCUIrCg5pby5zY3luYS5wcm90b0gCUAFaBy47c2N5",
+            "bmGqAgtzY3luYS5wcm90b2IGcHJvdG8z"));
       descriptor = pbr::FileDescriptor.FromGeneratedCode(descriptorData,
           new pbr::FileDescriptor[] { },
           new pbr::GeneratedClrTypeInfo(null, null, new pbr::GeneratedClrTypeInfo[] {
             new pbr::GeneratedClrTypeInfo(typeof(global::scyna.proto.Request), global::scyna.proto.Request.Parser, new[]{ "CallID", "Body", "JSON", "Data" }, null, null, null, null),
-            new pbr::GeneratedClrTypeInfo(typeof(global::scyna.proto.Response), global::scyna.proto.Response.Parser, new[]{ "Code", "Body", "SessionID", "Token", "Expired" }, null, null, null, null)
+            new pbr::GeneratedClrTypeInfo(typeof(global::scyna.proto.Response), global::scyna.proto.Response.Parser, new[]{ "Code", "Body", "SessionID", "Token", "Expired" }, null, null, null, null),
+            new pbr::GeneratedClrTypeInfo(typeof(global::scyna.proto.EventOrSignal), global::scyna.proto.EventOrSignal.Parser, new[]{ "CallID", "Body", "Data" }, null, null, null, null)
           }));
     }
     #endregion
@@ -628,6 +630,250 @@ namespace scyna.proto {
           }
           case 40: {
             Expired = input.ReadUInt64();
+            break;
+          }
+        }
+      }
+    }
+    #endif
+
+  }
+
+  public sealed partial class EventOrSignal : pb::IMessage<EventOrSignal>
+  #if !GOOGLE_PROTOBUF_REFSTRUCT_COMPATIBILITY_MODE
+      , pb::IBufferMessage
+  #endif
+  {
+    private static readonly pb::MessageParser<EventOrSignal> _parser = new pb::MessageParser<EventOrSignal>(() => new EventOrSignal());
+    private pb::UnknownFieldSet _unknownFields;
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public static pb::MessageParser<EventOrSignal> Parser { get { return _parser; } }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public static pbr::MessageDescriptor Descriptor {
+      get { return global::scyna.proto.ScynaReflection.Descriptor.MessageTypes[2]; }
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    pbr::MessageDescriptor pb::IMessage.Descriptor {
+      get { return Descriptor; }
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public EventOrSignal() {
+      OnConstruction();
+    }
+
+    partial void OnConstruction();
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public EventOrSignal(EventOrSignal other) : this() {
+      callID_ = other.callID_;
+      body_ = other.body_;
+      data_ = other.data_;
+      _unknownFields = pb::UnknownFieldSet.Clone(other._unknownFields);
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public EventOrSignal Clone() {
+      return new EventOrSignal(this);
+    }
+
+    /// <summary>Field number for the "CallID" field.</summary>
+    public const int CallIDFieldNumber = 1;
+    private ulong callID_;
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public ulong CallID {
+      get { return callID_; }
+      set {
+        callID_ = value;
+      }
+    }
+
+    /// <summary>Field number for the "Body" field.</summary>
+    public const int BodyFieldNumber = 2;
+    private pb::ByteString body_ = pb::ByteString.Empty;
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public pb::ByteString Body {
+      get { return body_; }
+      set {
+        body_ = pb::ProtoPreconditions.CheckNotNull(value, "value");
+      }
+    }
+
+    /// <summary>Field number for the "Data" field.</summary>
+    public const int DataFieldNumber = 3;
+    private string data_ = "";
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public string Data {
+      get { return data_; }
+      set {
+        data_ = pb::ProtoPreconditions.CheckNotNull(value, "value");
+      }
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public override bool Equals(object other) {
+      return Equals(other as EventOrSignal);
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public bool Equals(EventOrSignal other) {
+      if (ReferenceEquals(other, null)) {
+        return false;
+      }
+      if (ReferenceEquals(other, this)) {
+        return true;
+      }
+      if (CallID != other.CallID) return false;
+      if (Body != other.Body) return false;
+      if (Data != other.Data) return false;
+      return Equals(_unknownFields, other._unknownFields);
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public override int GetHashCode() {
+      int hash = 1;
+      if (CallID != 0UL) hash ^= CallID.GetHashCode();
+      if (Body.Length != 0) hash ^= Body.GetHashCode();
+      if (Data.Length != 0) hash ^= Data.GetHashCode();
+      if (_unknownFields != null) {
+        hash ^= _unknownFields.GetHashCode();
+      }
+      return hash;
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public override string ToString() {
+      return pb::JsonFormatter.ToDiagnosticString(this);
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public void WriteTo(pb::CodedOutputStream output) {
+    #if !GOOGLE_PROTOBUF_REFSTRUCT_COMPATIBILITY_MODE
+      output.WriteRawMessage(this);
+    #else
+      if (CallID != 0UL) {
+        output.WriteRawTag(8);
+        output.WriteUInt64(CallID);
+      }
+      if (Body.Length != 0) {
+        output.WriteRawTag(18);
+        output.WriteBytes(Body);
+      }
+      if (Data.Length != 0) {
+        output.WriteRawTag(26);
+        output.WriteString(Data);
+      }
+      if (_unknownFields != null) {
+        _unknownFields.WriteTo(output);
+      }
+    #endif
+    }
+
+    #if !GOOGLE_PROTOBUF_REFSTRUCT_COMPATIBILITY_MODE
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    void pb::IBufferMessage.InternalWriteTo(ref pb::WriteContext output) {
+      if (CallID != 0UL) {
+        output.WriteRawTag(8);
+        output.WriteUInt64(CallID);
+      }
+      if (Body.Length != 0) {
+        output.WriteRawTag(18);
+        output.WriteBytes(Body);
+      }
+      if (Data.Length != 0) {
+        output.WriteRawTag(26);
+        output.WriteString(Data);
+      }
+      if (_unknownFields != null) {
+        _unknownFields.WriteTo(ref output);
+      }
+    }
+    #endif
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public int CalculateSize() {
+      int size = 0;
+      if (CallID != 0UL) {
+        size += 1 + pb::CodedOutputStream.ComputeUInt64Size(CallID);
+      }
+      if (Body.Length != 0) {
+        size += 1 + pb::CodedOutputStream.ComputeBytesSize(Body);
+      }
+      if (Data.Length != 0) {
+        size += 1 + pb::CodedOutputStream.ComputeStringSize(Data);
+      }
+      if (_unknownFields != null) {
+        size += _unknownFields.CalculateSize();
+      }
+      return size;
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public void MergeFrom(EventOrSignal other) {
+      if (other == null) {
+        return;
+      }
+      if (other.CallID != 0UL) {
+        CallID = other.CallID;
+      }
+      if (other.Body.Length != 0) {
+        Body = other.Body;
+      }
+      if (other.Data.Length != 0) {
+        Data = other.Data;
+      }
+      _unknownFields = pb::UnknownFieldSet.MergeFrom(_unknownFields, other._unknownFields);
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public void MergeFrom(pb::CodedInputStream input) {
+    #if !GOOGLE_PROTOBUF_REFSTRUCT_COMPATIBILITY_MODE
+      input.ReadRawMessage(this);
+    #else
+      uint tag;
+      while ((tag = input.ReadTag()) != 0) {
+        switch(tag) {
+          default:
+            _unknownFields = pb::UnknownFieldSet.MergeFieldFrom(_unknownFields, input);
+            break;
+          case 8: {
+            CallID = input.ReadUInt64();
+            break;
+          }
+          case 18: {
+            Body = input.ReadBytes();
+            break;
+          }
+          case 26: {
+            Data = input.ReadString();
+            break;
+          }
+        }
+      }
+    #endif
+    }
+
+    #if !GOOGLE_PROTOBUF_REFSTRUCT_COMPATIBILITY_MODE
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    void pb::IBufferMessage.InternalMergeFrom(ref pb::ParseContext input) {
+      uint tag;
+      while ((tag = input.ReadTag()) != 0) {
+        switch(tag) {
+          default:
+            _unknownFields = pb::UnknownFieldSet.MergeFieldFrom(_unknownFields, ref input);
+            break;
+          case 8: {
+            CallID = input.ReadUInt64();
+            break;
+          }
+          case 18: {
+            Body = input.ReadBytes();
+            break;
+          }
+          case 26: {
+            Data = input.ReadString();
             break;
           }
         }

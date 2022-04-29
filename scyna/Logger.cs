@@ -11,7 +11,6 @@ public class Logger
     public const uint FATAL = 5;
     private ulong id;
     private bool session;
-    private bool enable = true;
 
     public Logger(ulong id, bool session)
     {
@@ -19,9 +18,8 @@ public class Logger
         this.session = session;
     }
 
-    public void Reset(ulong id, bool enable)
+    public void Reset(ulong id)
     {
-        this.enable = enable;
         this.id = id;
     }
 
@@ -30,7 +28,7 @@ public class Logger
     {
         messgage = format(messgage);
         Console.WriteLine(messgage);
-        if (enable)
+        if (id > 0)
         {
             var signal = new proto.WriteLogSignal
             {
@@ -40,7 +38,7 @@ public class Logger
                 Text = messgage,
                 Session = session,
             };
-            Signal.Emit(Path.LOG_WRITE_CHANNEL, signal);
+            Signal.Send(Path.LOG_WRITE_CHANNEL, signal);
         }
     }
 

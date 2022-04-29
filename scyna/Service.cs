@@ -88,7 +88,7 @@ public abstract class Service
             try
             {
                 var request = proto.Request.Parser.ParseFrom(message.Data);
-                LOG.Reset(request.CallID, true); // FIXME: 
+                LOG.Reset(request.CallID);
                 reply = message.Reply;
                 JSON = request.JSON;
                 source = request.Data;
@@ -112,7 +112,7 @@ public abstract class Service
             try
             {
                 var request = proto.Request.Parser.ParseFrom(message.Data);
-                LOG.Reset(request.CallID, true); // FIXME: 
+                LOG.Reset(request.CallID);
                 reply = message.Reply;
                 JSON = request.JSON;
                 source = request.Data;
