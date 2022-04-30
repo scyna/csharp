@@ -33,86 +33,97 @@ class CreateTest
     }
 
     [Test]
-    public void TestCreateSuccess()
+    public void TestCreateThenGet()
     {
-        scyna.Test.TestService(Path.CREATE_USER_URL, new proto.CreateUserRequest
-        {
-            User = new proto.User
+        scyna.ServiceTest.New(Path.CREATE_USER_URL)
+            .WithRequest(new proto.CreateUserRequest
             {
-                Name = "Nguyen Van A",
-                Email = "a@gmail.com",
-                Password = "123456"
+                User = new proto.User
+                {
+                    Name = "Nguyen Van A",
+                    Email = "a@gmail.com",
+                    Password = "123456"
 
-            }
-        }, 200);
-        scyna.Test.TestService(Path.GET_USER_URL, new proto.GetUserRequest { Email = "a@gmail.com" }, 200);
+                }
+            }).ExpectSuccess().Run();
+
+        var r = scyna.ServiceTest.New(Path.GET_USER_URL)
+            .WithRequest(new proto.GetUserRequest { Email = "a@gmail.com" })
+            .Run<proto.GetUserResponse>();
+
+        Assert.AreEqual("Nguyen Van A", r.User.Name);
     }
 
     [Test]
     public void TestCreateNoEmail()
     {
-        scyna.Test.TestService(Path.CREATE_USER_URL, new proto.CreateUserRequest
-        {
-            User = new proto.User
+        scyna.ServiceTest.New(Path.CREATE_USER_URL)
+            .WithRequest(new proto.CreateUserRequest
             {
-                Name = "Nguyen Van A",
-                Password = "123456"
-            }
-        }, scyna.Error.REQUEST_INVALID, 400);
+                User = new proto.User
+                {
+                    Name = "Nguyen Van A",
+                    Password = "123456"
+
+                }
+            }).ExpectError(scyna.Error.REQUEST_INVALID).Run();
     }
 
     [Test]
     public void TestCreateExisted()
     {
-        scyna.Test.TestService(Path.CREATE_USER_URL, new proto.CreateUserRequest
-        {
-            User = new proto.User
+        scyna.ServiceTest.New(Path.CREATE_USER_URL)
+            .WithRequest(new proto.CreateUserRequest
             {
-                Name = "Nguyen Van A",
-                Email = "a@gmail.com",
-                Password = "123456"
+                User = new proto.User
+                {
+                    Name = "Nguyen Van A",
+                    Email = "a@gmail.com",
+                    Password = "123456"
 
-            }
-        }, 200);
+                }
+            }).ExpectSuccess().Run();
 
-        scyna.Test.TestService(Path.CREATE_USER_URL, new proto.CreateUserRequest
-        {
-            User = new proto.User
+        scyna.ServiceTest.New(Path.CREATE_USER_URL)
+            .WithRequest(new proto.CreateUserRequest
             {
-                Name = "Nguyen Van A",
-                Email = "a@gmail.com",
-                Password = "123456"
+                User = new proto.User
+                {
+                    Name = "Nguyen Van A",
+                    Email = "a@gmail.com",
+                    Password = "123456"
 
-            }
-        }, ex.User.Error.USER_EXIST, 400);
+                }
+            }).ExpectError(ex.User.Error.USER_EXIST).Run();
     }
 
     [Test]
     public void TestCreateBadPassword()
     {
-        scyna.Test.TestService(Path.CREATE_USER_URL, new proto.CreateUserRequest
-        {
-            User = new proto.User
+        scyna.ServiceTest.New(Path.CREATE_USER_URL)
+            .WithRequest(new proto.CreateUserRequest
             {
-                Name = "Nguyen Van A",
-                Email = "a@gmail.com",
-                Password = "1"
+                User = new proto.User
+                {
+                    Name = "Nguyen Van A",
+                    Email = "a@gmail.com",
+                    Password = "1"
 
-            }
-        }, scyna.Error.REQUEST_INVALID, 400);
+                }
+            }).ExpectError(scyna.Error.REQUEST_INVALID).Run();
     }
     public void TestCreateBadEmail()
     {
-        scyna.Test.TestService(Path.CREATE_USER_URL, new proto.CreateUserRequest
-        {
-            User = new proto.User
+        scyna.ServiceTest.New(Path.CREATE_USER_URL)
+            .WithRequest(new proto.CreateUserRequest
             {
-                Name = "Nguyen Van A",
-                Email = "a+gmail.com",
-                Password = "123456"
+                User = new proto.User
+                {
+                    Name = "Nguyen Van A",
+                    Email = "a+gmail.com",
+                    Password = "123456"
 
-            }
-        }, scyna.Error.REQUEST_INVALID, 400);
+                }
+            }).ExpectError(scyna.Error.REQUEST_INVALID).Run();
     }
-
 }

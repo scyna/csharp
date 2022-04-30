@@ -59,6 +59,7 @@ public class ServiceTest
     {
         var res = Service.SendRequest(url, request);
         Assert.IsNotNull(res);
+        Assert.AreEqual(200, res.Code);
         MessageParser<T> parser = new MessageParser<T>(() => new T());
         return parser.ParseFrom(res.Body);
     }

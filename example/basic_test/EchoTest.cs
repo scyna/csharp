@@ -42,7 +42,6 @@ class EchoTest
     {
         var r = scyna.ServiceTest.New(Path.ECHO_USER_URL)
             .WithRequest(new proto.EchoRequest { Text = "Hello" })
-            .ExpectSuccess()
             .Run<proto.EchoResponse>();
 
         Assert.AreEqual("Hello", r.Text);
