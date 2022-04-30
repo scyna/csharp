@@ -11,6 +11,7 @@ public class Engine
     private Session session;
     private Logger logger;
     private IConnection connection;
+    private ISetting setting;
     private Generator id;
     private DB db;
 
@@ -25,6 +26,7 @@ public class Engine
     }
     public string Module { get { return module; } }
     public IConnection Connection { get { return connection; } }
+    public ISetting Setting { get { return setting; } }
     public IJetStream Stream { get { return stream; } }
 
     public static DB DB { get { return Instance.db; } }
@@ -37,6 +39,7 @@ public class Engine
         session = new Session(sid);
         id = new Generator();
         logger = new Logger(sid, true);
+        setting = new Setting();
 
         /* NATS */
         string[] servers = config.NatsUrl.Split(",");
@@ -57,6 +60,11 @@ public class Engine
         string[] hosts = config.DBHost.Split(",");
         db = DB.Init(hosts, config.DBUsername, config.DBPassword);
         Console.WriteLine("Connected to ScyllaDB");
+
+        /*setting*/
+        Signal.Register(Path.SETTING_UPDATE_CHANNEL + module, new Setting.UpdatedSignal());
+        Signal.Register(Path.SETTING_REMOVE_CHANNEL + module, new Setting.RemovedSignal());
+
         Console.WriteLine("Engine Created, SessionID:" + sid);
     }
     static public async void Init(string managerURL, string module, string secret)

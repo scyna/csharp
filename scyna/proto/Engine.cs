@@ -31,41 +31,43 @@ namespace scyna.proto {
             "Q3JlYXRlU2Vzc2lvblJlcXVlc3QSDgoGTW9kdWxlGAEgASgJEg4KBlNlY3Jl",
             "dBgCIAEoCSJQChVDcmVhdGVTZXNzaW9uUmVzcG9uc2USEQoJU2Vzc2lvbklE",
             "GAEgASgEEiQKBkNvbmZpZxgFIAEoCzIULnNjeW5hLkNvbmZpZ3VyYXRpb24i",
-            "LAoQRW5kU2Vzc2lvblNpZ25hbBIKCgJJRBgBIAEoBBIMCgRDb2RlGAIgASgN",
-            "IiEKE1VwZGF0ZVNlc3Npb25TaWduYWwSCgoCSUQYASABKAQiOwoNR2V0SURS",
-            "ZXNwb25zZRIOCgZwcmVmaXgYASABKA0SDQoFc3RhcnQYAiABKAQSCwoDZW5k",
-            "GAMgASgEIhsKDEdldFNOUmVxdWVzdBILCgNrZXkYASABKAkiOwoNR2V0U05S",
-            "ZXNwb25zZRIOCgZwcmVmaXgYASABKA0SDQoFc3RhcnQYAiABKAQSCwoDZW5k",
-            "GAMgASgEImUKDldyaXRlTG9nU2lnbmFsEgwKBHRpbWUYASABKAQSDQoFbGV2",
-            "ZWwYAiABKA0SDAoEdGV4dBgDIAEoCRIKCgJpZBgEIAEoBBILCgNzZXEYBSAB",
-            "KAQSDwoHc2Vzc2lvbhgGIAEoCCJBChNXcml0ZVNldHRpbmdSZXF1ZXN0Eg4K",
-            "Bk1vZHVsZRgBIAEoCRILCgNLZXkYAiABKAkSDQoFVmFsdWUYAyABKAkiMQoS",
-            "UmVhZFNldHRpbmdSZXF1ZXN0Eg4KBk1vZHVsZRgBIAEoCRILCgNLZXkYAiAB",
-            "KAkiJAoTUmVhZFNldHRpbmdSZXNwb25zZRINCgVWYWx1ZRgBIAEoCSJCChRT",
-            "ZXR0aW5nVXBkYXRlZFNpZ25hbBIOCgZNb2R1bGUYASABKAkSCwoDS2V5GAIg",
-            "ASgJEg0KBVZhbHVlGAMgASgJIjMKFFJlbW92ZVNldHRpbmdSZXF1ZXN0Eg4K",
-            "Bk1vZHVsZRgBIAEoCRILCgNLZXkYAiABKAkitAEKD1dyaXRlQ2FsbFNpZ25h",
-            "bBIKCgJpZBgBIAEoBBIOCgZzb3VyY2UYAiABKAkSEQoJY2FsbGVyX2lkGAMg",
-            "ASgJEhIKCnNlc3Npb25faWQYBCABKAQSEAoIZHVyYXRpb24YBSABKA0SDwoH",
-            "cmVxdWVzdBgGIAEoDBIQCghyZXNwb25zZRgHIAEoDBIOCgZzdGF0dXMYCCAB",
-            "KA0SDAoEdGltZRgJIAEoBBILCgNkYXkYCiABKA0iVwoRQ3JlYXRlQXV0aFJl",
-            "cXVlc3QSFAoMT3JnYW5pemF0aW9uGAEgASgJEg4KBlNlY3JldBgCIAEoCRIO",
-            "CgZVc2VySUQYAyABKAkSDAoEQXBwcxgEIAMoCSI0ChJDcmVhdGVBdXRoUmVz",
-            "cG9uc2USDQoFVG9rZW4YASABKAkSDwoHRXhwaXJlZBgCIAEoBCIsCg5HZXRB",
-            "dXRoUmVxdWVzdBINCgVUb2tlbhgBIAEoCRILCgNBcHAYAiABKAkiQQoPR2V0",
-            "QXV0aFJlc3BvbnNlEg0KBVRva2VuGAEgASgJEg8KB0V4cGlyZWQYAiABKAQS",
-            "DgoGVXNlcklEGAMgASgJIlQKDUxvZ291dFJlcXVlc3QSFAoMT3JnYW5pemF0",
-            "aW9uGAEgASgJEg4KBlNlY3JldBgCIAEoCRIOCgZVc2VySUQYAyABKAkSDQoF",
-            "VG9rZW4YBCABKAlCKwoOaW8uc2N5bmEucHJvdG9IAlABWgcuO3NjeW5hqgIL",
-            "c2N5bmEucHJvdG9iBnByb3RvMw=="));
+            "PAoQRW5kU2Vzc2lvblNpZ25hbBIKCgJJRBgBIAEoBBIMCgRDb2RlGAIgASgJ",
+            "Eg4KBk1vZHVsZRgDIAEoCSIxChNVcGRhdGVTZXNzaW9uU2lnbmFsEgoKAklE",
+            "GAEgASgEEg4KBk1vZHVsZRgCIAEoCSI7Cg1HZXRJRFJlc3BvbnNlEg4KBnBy",
+            "ZWZpeBgBIAEoDRINCgVzdGFydBgCIAEoBBILCgNlbmQYAyABKAQiGwoMR2V0",
+            "U05SZXF1ZXN0EgsKA2tleRgBIAEoCSI7Cg1HZXRTTlJlc3BvbnNlEg4KBnBy",
+            "ZWZpeBgBIAEoDRINCgVzdGFydBgCIAEoBBILCgNlbmQYAyABKAQiZQoOV3Jp",
+            "dGVMb2dTaWduYWwSDAoEdGltZRgBIAEoBBINCgVsZXZlbBgCIAEoDRIMCgR0",
+            "ZXh0GAMgASgJEgoKAmlkGAQgASgEEgsKA3NlcRgFIAEoBBIPCgdzZXNzaW9u",
+            "GAYgASgIIkEKE1dyaXRlU2V0dGluZ1JlcXVlc3QSDgoGTW9kdWxlGAEgASgJ",
+            "EgsKA0tleRgCIAEoCRINCgVWYWx1ZRgDIAEoCSIxChJSZWFkU2V0dGluZ1Jl",
+            "cXVlc3QSDgoGTW9kdWxlGAEgASgJEgsKA0tleRgCIAEoCSIkChNSZWFkU2V0",
+            "dGluZ1Jlc3BvbnNlEg0KBVZhbHVlGAEgASgJIkIKFFNldHRpbmdVcGRhdGVk",
+            "U2lnbmFsEg4KBk1vZHVsZRgBIAEoCRILCgNLZXkYAiABKAkSDQoFVmFsdWUY",
+            "AyABKAkiMwoUU2V0dGluZ1JlbW92ZWRTaWduYWwSDgoGTW9kdWxlGAEgASgJ",
+            "EgsKA0tleRgCIAEoCSIzChRSZW1vdmVTZXR0aW5nUmVxdWVzdBIOCgZNb2R1",
+            "bGUYASABKAkSCwoDS2V5GAIgASgJIrQBCg9Xcml0ZUNhbGxTaWduYWwSCgoC",
+            "aWQYASABKAQSDgoGc291cmNlGAIgASgJEhEKCWNhbGxlcl9pZBgDIAEoCRIS",
+            "CgpzZXNzaW9uX2lkGAQgASgEEhAKCGR1cmF0aW9uGAUgASgNEg8KB3JlcXVl",
+            "c3QYBiABKAwSEAoIcmVzcG9uc2UYByABKAwSDgoGc3RhdHVzGAggASgNEgwK",
+            "BHRpbWUYCSABKAQSCwoDZGF5GAogASgNIlcKEUNyZWF0ZUF1dGhSZXF1ZXN0",
+            "EhQKDE9yZ2FuaXphdGlvbhgBIAEoCRIOCgZTZWNyZXQYAiABKAkSDgoGVXNl",
+            "cklEGAMgASgJEgwKBEFwcHMYBCADKAkiNAoSQ3JlYXRlQXV0aFJlc3BvbnNl",
+            "Eg0KBVRva2VuGAEgASgJEg8KB0V4cGlyZWQYAiABKAQiLAoOR2V0QXV0aFJl",
+            "cXVlc3QSDQoFVG9rZW4YASABKAkSCwoDQXBwGAIgASgJIkEKD0dldEF1dGhS",
+            "ZXNwb25zZRINCgVUb2tlbhgBIAEoCRIPCgdFeHBpcmVkGAIgASgEEg4KBlVz",
+            "ZXJJRBgDIAEoCSJUCg1Mb2dvdXRSZXF1ZXN0EhQKDE9yZ2FuaXphdGlvbhgB",
+            "IAEoCRIOCgZTZWNyZXQYAiABKAkSDgoGVXNlcklEGAMgASgJEg0KBVRva2Vu",
+            "GAQgASgJQisKDmlvLnNjeW5hLnByb3RvSAJQAVoHLjtzY3luYaoCC3NjeW5h",
+            "LnByb3RvYgZwcm90bzM="));
       descriptor = pbr::FileDescriptor.FromGeneratedCode(descriptorData,
           new pbr::FileDescriptor[] { },
           new pbr::GeneratedClrTypeInfo(null, null, new pbr::GeneratedClrTypeInfo[] {
             new pbr::GeneratedClrTypeInfo(typeof(global::scyna.proto.Configuration), global::scyna.proto.Configuration.Parser, new[]{ "NatsUrl", "NatsUsername", "NatsPassword", "DBHost", "DBUsername", "DBPassword", "DBLocation" }, null, null, null, null),
             new pbr::GeneratedClrTypeInfo(typeof(global::scyna.proto.CreateSessionRequest), global::scyna.proto.CreateSessionRequest.Parser, new[]{ "Module", "Secret" }, null, null, null, null),
             new pbr::GeneratedClrTypeInfo(typeof(global::scyna.proto.CreateSessionResponse), global::scyna.proto.CreateSessionResponse.Parser, new[]{ "SessionID", "Config" }, null, null, null, null),
-            new pbr::GeneratedClrTypeInfo(typeof(global::scyna.proto.EndSessionSignal), global::scyna.proto.EndSessionSignal.Parser, new[]{ "ID", "Code" }, null, null, null, null),
-            new pbr::GeneratedClrTypeInfo(typeof(global::scyna.proto.UpdateSessionSignal), global::scyna.proto.UpdateSessionSignal.Parser, new[]{ "ID" }, null, null, null, null),
+            new pbr::GeneratedClrTypeInfo(typeof(global::scyna.proto.EndSessionSignal), global::scyna.proto.EndSessionSignal.Parser, new[]{ "ID", "Code", "Module" }, null, null, null, null),
+            new pbr::GeneratedClrTypeInfo(typeof(global::scyna.proto.UpdateSessionSignal), global::scyna.proto.UpdateSessionSignal.Parser, new[]{ "ID", "Module" }, null, null, null, null),
             new pbr::GeneratedClrTypeInfo(typeof(global::scyna.proto.GetIDResponse), global::scyna.proto.GetIDResponse.Parser, new[]{ "Prefix", "Start", "End" }, null, null, null, null),
             new pbr::GeneratedClrTypeInfo(typeof(global::scyna.proto.GetSNRequest), global::scyna.proto.GetSNRequest.Parser, new[]{ "Key" }, null, null, null, null),
             new pbr::GeneratedClrTypeInfo(typeof(global::scyna.proto.GetSNResponse), global::scyna.proto.GetSNResponse.Parser, new[]{ "Prefix", "Start", "End" }, null, null, null, null),
@@ -74,6 +76,7 @@ namespace scyna.proto {
             new pbr::GeneratedClrTypeInfo(typeof(global::scyna.proto.ReadSettingRequest), global::scyna.proto.ReadSettingRequest.Parser, new[]{ "Module", "Key" }, null, null, null, null),
             new pbr::GeneratedClrTypeInfo(typeof(global::scyna.proto.ReadSettingResponse), global::scyna.proto.ReadSettingResponse.Parser, new[]{ "Value" }, null, null, null, null),
             new pbr::GeneratedClrTypeInfo(typeof(global::scyna.proto.SettingUpdatedSignal), global::scyna.proto.SettingUpdatedSignal.Parser, new[]{ "Module", "Key", "Value" }, null, null, null, null),
+            new pbr::GeneratedClrTypeInfo(typeof(global::scyna.proto.SettingRemovedSignal), global::scyna.proto.SettingRemovedSignal.Parser, new[]{ "Module", "Key" }, null, null, null, null),
             new pbr::GeneratedClrTypeInfo(typeof(global::scyna.proto.RemoveSettingRequest), global::scyna.proto.RemoveSettingRequest.Parser, new[]{ "Module", "Key" }, null, null, null, null),
             new pbr::GeneratedClrTypeInfo(typeof(global::scyna.proto.WriteCallSignal), global::scyna.proto.WriteCallSignal.Parser, new[]{ "Id", "Source", "CallerId", "SessionId", "Duration", "Request", "Response", "Status", "Time", "Day" }, null, null, null, null),
             new pbr::GeneratedClrTypeInfo(typeof(global::scyna.proto.CreateAuthRequest), global::scyna.proto.CreateAuthRequest.Parser, new[]{ "Organization", "Secret", "UserID", "Apps" }, null, null, null, null),
@@ -934,6 +937,7 @@ namespace scyna.proto {
     public EndSessionSignal(EndSessionSignal other) : this() {
       iD_ = other.iD_;
       code_ = other.code_;
+      module_ = other.module_;
       _unknownFields = pb::UnknownFieldSet.Clone(other._unknownFields);
     }
 
@@ -955,12 +959,23 @@ namespace scyna.proto {
 
     /// <summary>Field number for the "Code" field.</summary>
     public const int CodeFieldNumber = 2;
-    private uint code_;
+    private string code_ = "";
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
-    public uint Code {
+    public string Code {
       get { return code_; }
       set {
-        code_ = value;
+        code_ = pb::ProtoPreconditions.CheckNotNull(value, "value");
+      }
+    }
+
+    /// <summary>Field number for the "Module" field.</summary>
+    public const int ModuleFieldNumber = 3;
+    private string module_ = "";
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public string Module {
+      get { return module_; }
+      set {
+        module_ = pb::ProtoPreconditions.CheckNotNull(value, "value");
       }
     }
 
@@ -979,6 +994,7 @@ namespace scyna.proto {
       }
       if (ID != other.ID) return false;
       if (Code != other.Code) return false;
+      if (Module != other.Module) return false;
       return Equals(_unknownFields, other._unknownFields);
     }
 
@@ -986,7 +1002,8 @@ namespace scyna.proto {
     public override int GetHashCode() {
       int hash = 1;
       if (ID != 0UL) hash ^= ID.GetHashCode();
-      if (Code != 0) hash ^= Code.GetHashCode();
+      if (Code.Length != 0) hash ^= Code.GetHashCode();
+      if (Module.Length != 0) hash ^= Module.GetHashCode();
       if (_unknownFields != null) {
         hash ^= _unknownFields.GetHashCode();
       }
@@ -1007,9 +1024,13 @@ namespace scyna.proto {
         output.WriteRawTag(8);
         output.WriteUInt64(ID);
       }
-      if (Code != 0) {
-        output.WriteRawTag(16);
-        output.WriteUInt32(Code);
+      if (Code.Length != 0) {
+        output.WriteRawTag(18);
+        output.WriteString(Code);
+      }
+      if (Module.Length != 0) {
+        output.WriteRawTag(26);
+        output.WriteString(Module);
       }
       if (_unknownFields != null) {
         _unknownFields.WriteTo(output);
@@ -1024,9 +1045,13 @@ namespace scyna.proto {
         output.WriteRawTag(8);
         output.WriteUInt64(ID);
       }
-      if (Code != 0) {
-        output.WriteRawTag(16);
-        output.WriteUInt32(Code);
+      if (Code.Length != 0) {
+        output.WriteRawTag(18);
+        output.WriteString(Code);
+      }
+      if (Module.Length != 0) {
+        output.WriteRawTag(26);
+        output.WriteString(Module);
       }
       if (_unknownFields != null) {
         _unknownFields.WriteTo(ref output);
@@ -1040,8 +1065,11 @@ namespace scyna.proto {
       if (ID != 0UL) {
         size += 1 + pb::CodedOutputStream.ComputeUInt64Size(ID);
       }
-      if (Code != 0) {
-        size += 1 + pb::CodedOutputStream.ComputeUInt32Size(Code);
+      if (Code.Length != 0) {
+        size += 1 + pb::CodedOutputStream.ComputeStringSize(Code);
+      }
+      if (Module.Length != 0) {
+        size += 1 + pb::CodedOutputStream.ComputeStringSize(Module);
       }
       if (_unknownFields != null) {
         size += _unknownFields.CalculateSize();
@@ -1057,8 +1085,11 @@ namespace scyna.proto {
       if (other.ID != 0UL) {
         ID = other.ID;
       }
-      if (other.Code != 0) {
+      if (other.Code.Length != 0) {
         Code = other.Code;
+      }
+      if (other.Module.Length != 0) {
+        Module = other.Module;
       }
       _unknownFields = pb::UnknownFieldSet.MergeFrom(_unknownFields, other._unknownFields);
     }
@@ -1078,8 +1109,12 @@ namespace scyna.proto {
             ID = input.ReadUInt64();
             break;
           }
-          case 16: {
-            Code = input.ReadUInt32();
+          case 18: {
+            Code = input.ReadString();
+            break;
+          }
+          case 26: {
+            Module = input.ReadString();
             break;
           }
         }
@@ -1100,8 +1135,12 @@ namespace scyna.proto {
             ID = input.ReadUInt64();
             break;
           }
-          case 16: {
-            Code = input.ReadUInt32();
+          case 18: {
+            Code = input.ReadString();
+            break;
+          }
+          case 26: {
+            Module = input.ReadString();
             break;
           }
         }
@@ -1141,6 +1180,7 @@ namespace scyna.proto {
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     public UpdateSessionSignal(UpdateSessionSignal other) : this() {
       iD_ = other.iD_;
+      module_ = other.module_;
       _unknownFields = pb::UnknownFieldSet.Clone(other._unknownFields);
     }
 
@@ -1160,6 +1200,17 @@ namespace scyna.proto {
       }
     }
 
+    /// <summary>Field number for the "Module" field.</summary>
+    public const int ModuleFieldNumber = 2;
+    private string module_ = "";
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public string Module {
+      get { return module_; }
+      set {
+        module_ = pb::ProtoPreconditions.CheckNotNull(value, "value");
+      }
+    }
+
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     public override bool Equals(object other) {
       return Equals(other as UpdateSessionSignal);
@@ -1174,6 +1225,7 @@ namespace scyna.proto {
         return true;
       }
       if (ID != other.ID) return false;
+      if (Module != other.Module) return false;
       return Equals(_unknownFields, other._unknownFields);
     }
 
@@ -1181,6 +1233,7 @@ namespace scyna.proto {
     public override int GetHashCode() {
       int hash = 1;
       if (ID != 0UL) hash ^= ID.GetHashCode();
+      if (Module.Length != 0) hash ^= Module.GetHashCode();
       if (_unknownFields != null) {
         hash ^= _unknownFields.GetHashCode();
       }
@@ -1201,6 +1254,10 @@ namespace scyna.proto {
         output.WriteRawTag(8);
         output.WriteUInt64(ID);
       }
+      if (Module.Length != 0) {
+        output.WriteRawTag(18);
+        output.WriteString(Module);
+      }
       if (_unknownFields != null) {
         _unknownFields.WriteTo(output);
       }
@@ -1214,6 +1271,10 @@ namespace scyna.proto {
         output.WriteRawTag(8);
         output.WriteUInt64(ID);
       }
+      if (Module.Length != 0) {
+        output.WriteRawTag(18);
+        output.WriteString(Module);
+      }
       if (_unknownFields != null) {
         _unknownFields.WriteTo(ref output);
       }
@@ -1225,6 +1286,9 @@ namespace scyna.proto {
       int size = 0;
       if (ID != 0UL) {
         size += 1 + pb::CodedOutputStream.ComputeUInt64Size(ID);
+      }
+      if (Module.Length != 0) {
+        size += 1 + pb::CodedOutputStream.ComputeStringSize(Module);
       }
       if (_unknownFields != null) {
         size += _unknownFields.CalculateSize();
@@ -1239,6 +1303,9 @@ namespace scyna.proto {
       }
       if (other.ID != 0UL) {
         ID = other.ID;
+      }
+      if (other.Module.Length != 0) {
+        Module = other.Module;
       }
       _unknownFields = pb::UnknownFieldSet.MergeFrom(_unknownFields, other._unknownFields);
     }
@@ -1258,6 +1325,10 @@ namespace scyna.proto {
             ID = input.ReadUInt64();
             break;
           }
+          case 18: {
+            Module = input.ReadString();
+            break;
+          }
         }
       }
     #endif
@@ -1274,6 +1345,10 @@ namespace scyna.proto {
             break;
           case 8: {
             ID = input.ReadUInt64();
+            break;
+          }
+          case 18: {
+            Module = input.ReadString();
             break;
           }
         }
@@ -3172,6 +3247,214 @@ namespace scyna.proto {
 
   }
 
+  public sealed partial class SettingRemovedSignal : pb::IMessage<SettingRemovedSignal>
+  #if !GOOGLE_PROTOBUF_REFSTRUCT_COMPATIBILITY_MODE
+      , pb::IBufferMessage
+  #endif
+  {
+    private static readonly pb::MessageParser<SettingRemovedSignal> _parser = new pb::MessageParser<SettingRemovedSignal>(() => new SettingRemovedSignal());
+    private pb::UnknownFieldSet _unknownFields;
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public static pb::MessageParser<SettingRemovedSignal> Parser { get { return _parser; } }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public static pbr::MessageDescriptor Descriptor {
+      get { return global::scyna.proto.EngineReflection.Descriptor.MessageTypes[13]; }
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    pbr::MessageDescriptor pb::IMessage.Descriptor {
+      get { return Descriptor; }
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public SettingRemovedSignal() {
+      OnConstruction();
+    }
+
+    partial void OnConstruction();
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public SettingRemovedSignal(SettingRemovedSignal other) : this() {
+      module_ = other.module_;
+      key_ = other.key_;
+      _unknownFields = pb::UnknownFieldSet.Clone(other._unknownFields);
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public SettingRemovedSignal Clone() {
+      return new SettingRemovedSignal(this);
+    }
+
+    /// <summary>Field number for the "Module" field.</summary>
+    public const int ModuleFieldNumber = 1;
+    private string module_ = "";
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public string Module {
+      get { return module_; }
+      set {
+        module_ = pb::ProtoPreconditions.CheckNotNull(value, "value");
+      }
+    }
+
+    /// <summary>Field number for the "Key" field.</summary>
+    public const int KeyFieldNumber = 2;
+    private string key_ = "";
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public string Key {
+      get { return key_; }
+      set {
+        key_ = pb::ProtoPreconditions.CheckNotNull(value, "value");
+      }
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public override bool Equals(object other) {
+      return Equals(other as SettingRemovedSignal);
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public bool Equals(SettingRemovedSignal other) {
+      if (ReferenceEquals(other, null)) {
+        return false;
+      }
+      if (ReferenceEquals(other, this)) {
+        return true;
+      }
+      if (Module != other.Module) return false;
+      if (Key != other.Key) return false;
+      return Equals(_unknownFields, other._unknownFields);
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public override int GetHashCode() {
+      int hash = 1;
+      if (Module.Length != 0) hash ^= Module.GetHashCode();
+      if (Key.Length != 0) hash ^= Key.GetHashCode();
+      if (_unknownFields != null) {
+        hash ^= _unknownFields.GetHashCode();
+      }
+      return hash;
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public override string ToString() {
+      return pb::JsonFormatter.ToDiagnosticString(this);
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public void WriteTo(pb::CodedOutputStream output) {
+    #if !GOOGLE_PROTOBUF_REFSTRUCT_COMPATIBILITY_MODE
+      output.WriteRawMessage(this);
+    #else
+      if (Module.Length != 0) {
+        output.WriteRawTag(10);
+        output.WriteString(Module);
+      }
+      if (Key.Length != 0) {
+        output.WriteRawTag(18);
+        output.WriteString(Key);
+      }
+      if (_unknownFields != null) {
+        _unknownFields.WriteTo(output);
+      }
+    #endif
+    }
+
+    #if !GOOGLE_PROTOBUF_REFSTRUCT_COMPATIBILITY_MODE
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    void pb::IBufferMessage.InternalWriteTo(ref pb::WriteContext output) {
+      if (Module.Length != 0) {
+        output.WriteRawTag(10);
+        output.WriteString(Module);
+      }
+      if (Key.Length != 0) {
+        output.WriteRawTag(18);
+        output.WriteString(Key);
+      }
+      if (_unknownFields != null) {
+        _unknownFields.WriteTo(ref output);
+      }
+    }
+    #endif
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public int CalculateSize() {
+      int size = 0;
+      if (Module.Length != 0) {
+        size += 1 + pb::CodedOutputStream.ComputeStringSize(Module);
+      }
+      if (Key.Length != 0) {
+        size += 1 + pb::CodedOutputStream.ComputeStringSize(Key);
+      }
+      if (_unknownFields != null) {
+        size += _unknownFields.CalculateSize();
+      }
+      return size;
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public void MergeFrom(SettingRemovedSignal other) {
+      if (other == null) {
+        return;
+      }
+      if (other.Module.Length != 0) {
+        Module = other.Module;
+      }
+      if (other.Key.Length != 0) {
+        Key = other.Key;
+      }
+      _unknownFields = pb::UnknownFieldSet.MergeFrom(_unknownFields, other._unknownFields);
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public void MergeFrom(pb::CodedInputStream input) {
+    #if !GOOGLE_PROTOBUF_REFSTRUCT_COMPATIBILITY_MODE
+      input.ReadRawMessage(this);
+    #else
+      uint tag;
+      while ((tag = input.ReadTag()) != 0) {
+        switch(tag) {
+          default:
+            _unknownFields = pb::UnknownFieldSet.MergeFieldFrom(_unknownFields, input);
+            break;
+          case 10: {
+            Module = input.ReadString();
+            break;
+          }
+          case 18: {
+            Key = input.ReadString();
+            break;
+          }
+        }
+      }
+    #endif
+    }
+
+    #if !GOOGLE_PROTOBUF_REFSTRUCT_COMPATIBILITY_MODE
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    void pb::IBufferMessage.InternalMergeFrom(ref pb::ParseContext input) {
+      uint tag;
+      while ((tag = input.ReadTag()) != 0) {
+        switch(tag) {
+          default:
+            _unknownFields = pb::UnknownFieldSet.MergeFieldFrom(_unknownFields, ref input);
+            break;
+          case 10: {
+            Module = input.ReadString();
+            break;
+          }
+          case 18: {
+            Key = input.ReadString();
+            break;
+          }
+        }
+      }
+    }
+    #endif
+
+  }
+
   public sealed partial class RemoveSettingRequest : pb::IMessage<RemoveSettingRequest>
   #if !GOOGLE_PROTOBUF_REFSTRUCT_COMPATIBILITY_MODE
       , pb::IBufferMessage
@@ -3184,7 +3467,7 @@ namespace scyna.proto {
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     public static pbr::MessageDescriptor Descriptor {
-      get { return global::scyna.proto.EngineReflection.Descriptor.MessageTypes[13]; }
+      get { return global::scyna.proto.EngineReflection.Descriptor.MessageTypes[14]; }
     }
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
@@ -3395,7 +3678,7 @@ namespace scyna.proto {
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     public static pbr::MessageDescriptor Descriptor {
-      get { return global::scyna.proto.EngineReflection.Descriptor.MessageTypes[14]; }
+      get { return global::scyna.proto.EngineReflection.Descriptor.MessageTypes[15]; }
     }
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
@@ -3894,7 +4177,7 @@ namespace scyna.proto {
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     public static pbr::MessageDescriptor Descriptor {
-      get { return global::scyna.proto.EngineReflection.Descriptor.MessageTypes[15]; }
+      get { return global::scyna.proto.EngineReflection.Descriptor.MessageTypes[16]; }
     }
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
@@ -4163,7 +4446,7 @@ namespace scyna.proto {
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     public static pbr::MessageDescriptor Descriptor {
-      get { return global::scyna.proto.EngineReflection.Descriptor.MessageTypes[16]; }
+      get { return global::scyna.proto.EngineReflection.Descriptor.MessageTypes[17]; }
     }
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
@@ -4371,7 +4654,7 @@ namespace scyna.proto {
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     public static pbr::MessageDescriptor Descriptor {
-      get { return global::scyna.proto.EngineReflection.Descriptor.MessageTypes[17]; }
+      get { return global::scyna.proto.EngineReflection.Descriptor.MessageTypes[18]; }
     }
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
@@ -4579,7 +4862,7 @@ namespace scyna.proto {
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     public static pbr::MessageDescriptor Descriptor {
-      get { return global::scyna.proto.EngineReflection.Descriptor.MessageTypes[18]; }
+      get { return global::scyna.proto.EngineReflection.Descriptor.MessageTypes[19]; }
     }
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
@@ -4823,7 +5106,7 @@ namespace scyna.proto {
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     public static pbr::MessageDescriptor Descriptor {
-      get { return global::scyna.proto.EngineReflection.Descriptor.MessageTypes[19]; }
+      get { return global::scyna.proto.EngineReflection.Descriptor.MessageTypes[20]; }
     }
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
