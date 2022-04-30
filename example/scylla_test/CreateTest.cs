@@ -33,6 +33,22 @@ class CreateTest
     }
 
     [Test]
+    public void TestCreateSuccess()
+    {
+        scyna.ServiceTest.New(Path.CREATE_USER_URL)
+            .WithRequest(new proto.CreateUserRequest
+            {
+                User = new proto.User
+                {
+                    Name = "Nguyen Van A",
+                    Email = "a@gmail.com",
+                    Password = "123456"
+
+                }
+            }).ExpectSuccess().Run<proto.CreateUserResponse>();
+    }
+
+    [Test]
     public void TestCreateThenGet()
     {
         var r = scyna.ServiceTest.New(Path.CREATE_USER_URL)
