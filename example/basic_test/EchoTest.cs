@@ -40,12 +40,11 @@ class EchoTest
     [Test]
     public void TestCallService()
     {
-        var response = new proto.EchoResponse();
-        scyna.ServiceTest.New(Path.ECHO_USER_URL)
+        var r = scyna.ServiceTest.New(Path.ECHO_USER_URL)
             .WithRequest(new proto.EchoRequest { Text = "Hello" })
             .ExpectSuccess()
-            .RunAndReturnResponse(response);
+            .Run<proto.EchoResponse>();
 
-        Assert.AreEqual(response.Text, "Hello");
+        Assert.AreEqual("Hello", r.Text);
     }
 }

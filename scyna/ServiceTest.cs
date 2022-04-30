@@ -46,7 +46,6 @@ public class ServiceTest
     {
         var res = Service.SendRequest(url, request);
         Assert.IsNotNull(res);
-        if (res == null) return;
         Assert.AreEqual(status, res.Code);
         if (response != null)
         {
@@ -56,12 +55,11 @@ public class ServiceTest
         }
     }
 
-    public void RunAndReturnResponse(IMessage response)
+    public T Run<T>() where T : IMessage<T>, new()
     {
         var res = Service.SendRequest(url, request);
         Assert.IsNotNull(res);
-        if (res == null) return;
-        Assert.AreEqual(status, res.Code);
-        response.MergeFrom(res.Body);
+        MessageParser<T> parser = new MessageParser<T>(() => new T());
+        return parser.ParseFrom(res.Body);
     }
 }
