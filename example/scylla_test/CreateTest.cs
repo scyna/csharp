@@ -35,7 +35,7 @@ class CreateTest
     [Test]
     public void TestCreateThenGet()
     {
-        scyna.ServiceTest.New(Path.CREATE_USER_URL)
+        var r = scyna.ServiceTest.New(Path.CREATE_USER_URL)
             .WithRequest(new proto.CreateUserRequest
             {
                 User = new proto.User
@@ -45,13 +45,22 @@ class CreateTest
                     Password = "123456"
 
                 }
-            }).ExpectSuccess().Run();
+            }).Run<proto.CreateUserResponse>();
 
-        var r = scyna.ServiceTest.New(Path.GET_USER_URL)
+        scyna.ServiceTest.New(Path.GET_USER_URL)
             .WithRequest(new proto.GetUserRequest { Email = "a@gmail.com" })
-            .Run<proto.GetUserResponse>();
+            .ExpectResponse(new proto.GetUserResponse
+            {
+                User = new proto.User
+                {
+                    Id = r.Id,
+                    Name = "Nguyen Van A",
+                    Email = "a@gmail.com",
+                    Password = "123456"
 
-        Assert.AreEqual("Nguyen Van A", r.User.Name);
+                }
+            })
+            .Run<proto.GetUserResponse>();
     }
 
     [Test]
