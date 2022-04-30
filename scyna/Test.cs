@@ -1,7 +1,6 @@
+namespace scyna;
 using NUnit.Framework;
 using Google.Protobuf;
-
-namespace scyna;
 
 public class Test
 {

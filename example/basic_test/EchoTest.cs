@@ -10,7 +10,7 @@ class EchoTest
     public void Setup()
     {
         Engine.Init("http://127.0.0.1:8081", "scyna.test", "123456");
-        Service.Register("/example/basic/echo", new EchoService());
+        Service.Register(Path.ECHO_USER_URL, new EchoService());
     }
 
     [OneTimeTearDown]
@@ -22,24 +22,30 @@ class EchoTest
     [Test]
     public void TestEchoSuccess()
     {
-        scyna.Test.TestService(
-            "/example/basic/echo",
-            new proto.EchoRequest { Text = "Hello" },
-            new proto.EchoResponse { Text = "Hello" },
-            200
-        );
+        scyna.ServiceTest.New(Path.ECHO_USER_URL)
+            .WithRequest(new proto.EchoRequest { Text = "Hello" })
+            .ExpectResponse(new proto.EchoResponse { Text = "Hello" })
+            .Run();
     }
 
     [Test]
     public void TestEchoCode()
     {
-        scyna.Test.TestService("/example/basic/echo", new proto.EchoRequest { Text = "Hello" }, 200);
+        scyna.ServiceTest.New(Path.ECHO_USER_URL)
+            .WithRequest(new proto.EchoRequest { Text = "Hello" })
+            .ExpectSuccess()
+            .Run();
     }
 
     [Test]
     public void TestCallService()
     {
-        var r = scyna.Test.CallService<proto.EchoResponse>("/example/basic/echo", new proto.EchoRequest { Text = "echo" });
-        Assert.AreEqual(r.Text, "echo");
+        var response = new proto.EchoResponse();
+        scyna.ServiceTest.New(Path.ECHO_USER_URL)
+            .WithRequest(new proto.EchoRequest { Text = "Hello" })
+            .ExpectSuccess()
+            .RunAndReturnResponse(response);
+
+        Assert.AreEqual(response.Text, "Hello");
     }
 }
