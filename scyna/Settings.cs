@@ -1,7 +1,7 @@
 namespace scyna;
 using Google.Protobuf;
 
-public interface ISetting
+public interface ISettings
 {
     bool Write(string key, string value);
     bool Write<T>(string key, T value) where T : IMessage<T>, new();
@@ -12,7 +12,7 @@ public interface ISetting
     void remove(string key);
 }
 
-public class Setting : ISetting
+public class Settings : ISettings
 {
     Dictionary<string, string> data = new Dictionary<string, string>();
     JsonFormatter formater = new JsonFormatter(new JsonFormatter.Settings(false));
@@ -110,7 +110,7 @@ public class Setting : ISetting
         {
             if (data.Module == Engine.Instance.Module)
             {
-                Engine.Instance.Setting.update(data.Key, data.Value);
+                Engine.Instance.Settings.update(data.Key, data.Value);
             }
         }
     }
@@ -121,7 +121,7 @@ public class Setting : ISetting
         {
             if (data.Module == Engine.Instance.Module)
             {
-                Engine.Instance.Setting.remove(data.Key);
+                Engine.Instance.Settings.remove(data.Key);
             }
         }
     }
