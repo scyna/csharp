@@ -104,7 +104,7 @@ public class Settings : ISettings
         }
     }
 
-    public class UpdatedSignal : Signal.StatefulHandler<proto.SettingUpdatedSignal>
+    public class UpdatedSignal : Signal.Handler<proto.SettingUpdatedSignal>
     {
         public override void Execute()
         {
@@ -115,7 +115,7 @@ public class Settings : ISettings
         }
     }
 
-    public class RemovedSignal : Signal.StatefulHandler<proto.SettingRemovedSignal>
+    public class RemovedSignal : Signal.Handler<proto.SettingRemovedSignal>
     {
         public override void Execute()
         {

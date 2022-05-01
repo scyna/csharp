@@ -1,7 +1,7 @@
 namespace ex.User;
 using FluentValidation;
 
-public class CreateUser : scyna.Service.StatefulHandler<proto.CreateUserRequest>
+public class CreateUser : scyna.Service.Handler<proto.CreateUserRequest>
 {
     CreateUserValidator validator = new CreateUserValidator();
     public override void Execute()

@@ -2,7 +2,7 @@ namespace ex.User;
 using scyna;
 using FluentValidation;
 
-public class GetUser : Service.StatefulHandler<proto.GetUserRequest>
+public class GetUser : Service.Handler<proto.GetUserRequest>
 {
     public override void Execute()
     {
