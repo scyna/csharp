@@ -62,8 +62,8 @@ public class Engine
         Console.WriteLine("Connected to ScyllaDB");
 
         /*setting*/
-        Signal.Register(Path.SETTING_UPDATE_CHANNEL + module, new Settings.UpdatedSignal());
-        Signal.Register(Path.SETTING_REMOVE_CHANNEL + module, new Settings.RemovedSignal());
+        //Signal.Register(Path.SETTING_UPDATE_CHANNEL + module, new Settings.UpdatedSignal());
+        //Signal.Register(Path.SETTING_REMOVE_CHANNEL + module, new Settings.RemovedSignal());
 
         Console.WriteLine("Engine Created, SessionID:" + sid);
     }
