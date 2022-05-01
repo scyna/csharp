@@ -61,10 +61,6 @@ public class Engine
         db = DB.Init(hosts, config.DBUsername, config.DBPassword);
         Console.WriteLine("Connected to ScyllaDB");
 
-        /*setting*/
-        //Signal.Register(Path.SETTING_UPDATE_CHANNEL + module, new Settings.UpdatedSignal());
-        //Signal.Register(Path.SETTING_REMOVE_CHANNEL + module, new Settings.RemovedSignal());
-
         Console.WriteLine("Engine Created, SessionID:" + sid);
     }
     static public async void Init(string managerURL, string module, string secret)
@@ -81,6 +77,10 @@ public class Engine
         var responseBody = await task.GetAwaiter().GetResult().Content.ReadAsByteArrayAsync();
         var response = proto.CreateSessionResponse.Parser.ParseFrom(responseBody);
         instance = new Engine(module, response.SessionID, response.Config);
+
+        /*setting*/
+        Command.Register(Path.SETTING_UPDATE_CHANNEL + module, new Settings.UpdatedSignal());
+        Command.Register(Path.SETTING_REMOVE_CHANNEL + module, new Settings.RemovedSignal());
     }
 
     static public void Start()

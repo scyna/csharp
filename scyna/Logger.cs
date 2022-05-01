@@ -38,7 +38,7 @@ public class Logger
                 Text = messgage,
                 Session = session,
             };
-            Signal.SendCommand(Path.LOG_WRITE_CHANNEL, signal);
+            Command.Send(Path.LOG_WRITE_CHANNEL, signal);
         }
     }
 
