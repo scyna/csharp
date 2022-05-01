@@ -6,14 +6,7 @@ namespace scyna;
 public abstract class Service
 {
     private static JsonFormatter formater = new JsonFormatter(new JsonFormatter.Settings(true));
-    public static void Register<T>(string url, Service.StatefulHandler<T> handler) where T : IMessage<T>, new()
-    {
-        Console.WriteLine("Register Service:" + url);
-        var nc = Engine.Instance.Connection;
-        nc.SubscribeAsync(Utils.SubscribeURL(url), "API", (sender, args) => { handler.Run(args.Message); });
-    }
-
-    public static void Register(string url, Service.StatelessHandler handler)
+    public static void Register<T>(string url, Service.Handler<T> handler) where T : IMessage<T>, new()
     {
         Console.WriteLine("Register Service:" + url);
         var nc = Engine.Instance.Connection;
@@ -80,29 +73,7 @@ public abstract class Service
         }
     }
 
-    public abstract class StatelessHandler : BaseHandler
-    {
-        public abstract void Execute();
-        public void Run(NATS.Client.Msg message)
-        {
-            try
-            {
-                var request = proto.Request.Parser.ParseFrom(message.Data);
-                LOG.Reset(request.CallID);
-                reply = message.Reply;
-                JSON = request.JSON;
-                source = request.Data;
-                Execute();
-            }
-            catch (Exception e)
-            {
-                Console.WriteLine(e.ToString());
-                flush(400, scyna.Error.BAD_REQUEST);
-            }
-        }
-    }
-
-    public abstract class StatefulHandler<T> : BaseHandler where T : IMessage<T>, new()
+    public abstract class Handler<T> : BaseHandler where T : IMessage<T>, new()
     {
         private MessageParser<T> parser = new MessageParser<T>(() => new T());
         protected T request;

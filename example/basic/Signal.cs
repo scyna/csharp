@@ -1,7 +1,7 @@
 namespace ex.Basic;
 using scyna;
 
-public class TestSignal : Signal.StatefulHandler<proto.TestSignal>
+public class TestSignal : Signal.Handler<proto.TestSignal>
 {
     public override void Execute()
     {
@@ -9,7 +9,7 @@ public class TestSignal : Signal.StatefulHandler<proto.TestSignal>
     }
 }
 
-class EmptySignal : Signal.StatelessHandler
+class EmptySignal : SignalLite.Handler
 {
     public override void Execute()
     {

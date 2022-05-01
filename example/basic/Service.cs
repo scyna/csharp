@@ -1,7 +1,7 @@
 namespace ex.Basic;
 using scyna;
 
-public class HelloService : Service.StatelessHandler
+public class HelloService : ServiceLite.Handler
 {
     public override void Execute()
     {
@@ -11,7 +11,7 @@ public class HelloService : Service.StatelessHandler
     }
 }
 
-public class EchoService : Service.StatefulHandler<proto.EchoRequest>
+public class EchoService : Service.Handler<proto.EchoRequest>
 {
     public override void Execute()
     {
@@ -20,7 +20,7 @@ public class EchoService : Service.StatefulHandler<proto.EchoRequest>
     }
 }
 
-public class AddService : Service.StatefulHandler<proto.AddRequest>
+public class AddService : Service.Handler<proto.AddRequest>
 {
     public override void Execute()
     {

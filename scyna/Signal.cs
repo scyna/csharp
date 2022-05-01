@@ -5,19 +5,13 @@ namespace scyna;
 
 public class Signal
 {
-    public static void Emit(string channel)
-    {
-        var msg = new proto.EventOrSignal { CallID = Engine.ID.Next() };
-        var nc = Engine.Instance.Connection;
-        nc.Publish(channel, msg.ToByteArray());
-    }
     public static void Emit(string channel, pb::IMessage message)
     {
         var msg = new proto.EventOrSignal { CallID = Engine.ID.Next(), Body = message.ToByteString() };
         var nc = Engine.Instance.Connection;
         nc.Publish(channel, msg.ToByteArray());
     }
-    public static void Register<T>(string channel, StatefulHandler<T> handler) where T : IMessage<T>, new()
+    public static void Register<T>(string channel, Handler<T> handler) where T : IMessage<T>, new()
     {
         Console.WriteLine("Register Signal:" + channel);
         var nc = Engine.Instance.Connection;
@@ -34,23 +28,7 @@ public class Signal
         });
     }
 
-    public static void Register(string channel, StatelessHandler handler)
-    {
-        Console.WriteLine("Register Signal:" + channel);
-        var nc = Engine.Instance.Connection;
-        nc.SubscribeAsync(channel, Engine.Instance.Module, (sender, args) =>
-        {
-            try
-            {
-                var msg = proto.EventOrSignal.Parser.ParseFrom(args.Message.Data);
-                handler.ResetLog(msg.CallID);
-                handler.Execute();
-            }
-            catch (Exception) { }
-        });
-    }
-
-    public abstract class StatefulHandler<T> where T : IMessage<T>, new()
+    public abstract class Handler<T> where T : IMessage<T>, new()
     {
         protected Logger LOG = new Logger(0, false);
         private MessageParser<T> parser = new MessageParser<T>(() => new T());
@@ -72,14 +50,7 @@ public class Signal
         }
     }
 
-    public abstract class StatelessHandler
-    {
-        protected Logger LOG = new Logger(0, false);
-        public void ResetLog(ulong id) { this.LOG.Reset(id); }
-        public abstract void Execute();
-    }
-
-    public static void Register<T>(string channel, Handler<T> handler) where T : IMessage<T>, new()
+    public static void RegisterCommand<T>(string channel, Command<T> handler) where T : IMessage<T>, new()
     {
         Console.WriteLine("Register Signal:" + channel);
         var nc = Engine.Instance.Connection;
@@ -88,12 +59,12 @@ public class Signal
             handler.Run(args.Message.Data);
         });
     }
-    public static void Fire(string channel, pb::IMessage message)
+    public static void SendCommand(string channel, pb::IMessage message)
     {
         var nc = Engine.Instance.Connection;
         nc.Publish(channel, message.ToByteArray());
     }
-    public abstract class Handler<T> where T : IMessage<T>, new()
+    public abstract class Command<T> where T : IMessage<T>, new()
     {
         private MessageParser<T> parser = new MessageParser<T>(() => new T());
         protected T data;
