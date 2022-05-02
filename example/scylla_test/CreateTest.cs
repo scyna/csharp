@@ -27,9 +27,7 @@ class CreateTest
     [SetUp]
     public void CleanUp()
     {
-        var session = Engine.DB.Session;
-        var query = session.Prepare("TRUNCATE ex.user").Bind();
-        session.Execute(query);
+        Engine.DB.Session.Execute("TRUNCATE ex.user");
     }
 
     [Test]
