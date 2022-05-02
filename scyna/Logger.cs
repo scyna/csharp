@@ -1,6 +1,5 @@
-using scyna.proto;
-
 namespace scyna;
+using System.Runtime.CompilerServices;
 
 public class Logger
 {
@@ -26,7 +25,6 @@ public class Logger
 
     private void add(uint level, string messgage)
     {
-        messgage = format(messgage);
         Console.WriteLine(messgage);
         if (id > 0)
         {
@@ -42,36 +40,33 @@ public class Logger
         }
     }
 
-    public void Info(string message)
+    public void Info(string message, [CallerMemberName] string method = "", [CallerFilePath] string file = "", [CallerLineNumber] int line = 0)
     {
-        add(INFO, message);
+        add(INFO, format(message, file, line, method));
     }
 
-    public void Warning(string message)
+    public void Warning(string message, [CallerMemberName] string method = "", [CallerFilePath] string file = "", [CallerLineNumber] int line = 0)
     {
-        add(WARNING, message);
+        add(WARNING, format(message, file, line, method));
     }
 
-    public void Error(string message)
+    public void Error(string message, [CallerMemberName] string method = "", [CallerFilePath] string file = "", [CallerLineNumber] int line = 0)
     {
-        add(ERROR, message);
+        add(ERROR, format(message, file, line, method));
     }
 
-    public void Debug(string message)
+    public void Debug(string message, [CallerMemberName] string method = "", [CallerFilePath] string file = "", [CallerLineNumber] int line = 0)
     {
-        add(DEBUG, message);
+        add(DEBUG, format(message, file, line, method));
     }
 
-    public void Fatal(string message)
+    public void Fatal(string message, [CallerMemberName] string method = "", [CallerFilePath] string file = "", [CallerLineNumber] int line = 0)
     {
-        add(FATAL, message);
+        add(FATAL, format(message, file, line, method));
     }
 
-    private string format(string log)
+    private string format(string log, string file, int line, string method)
     {
-        // StackTraceElement[] elements = Thread.currentThread().getStackTrace();
-        // String newLog = "[" + elements[4].getFileName() + ":" + elements[4].getLineNumber() + " - "
-        //         + elements[4].getMethodName() + "] " + log;
-        return log;
+        return String.Format("[{0}:{1}-{2}] {3}", file, line, method, log);
     }
 }
