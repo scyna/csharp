@@ -79,8 +79,8 @@ public class Engine
         instance = new Engine(module, response.SessionID, response.Config);
 
         /*setting*/
-        Signal.Register(Path.SETTING_UPDATE_CHANNEL + module, new Settings.UpdatedSignal());
-        Signal.Register(Path.SETTING_REMOVE_CHANNEL + module, new Settings.RemovedSignal());
+        SignalLite.Register(Path.SETTING_UPDATE_CHANNEL + module, new Settings.UpdatedSignal());
+        SignalLite.Register(Path.SETTING_REMOVE_CHANNEL + module, new Settings.RemovedSignal());
     }
 
     static public void Start()
