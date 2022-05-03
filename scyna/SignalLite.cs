@@ -5,34 +5,36 @@ namespace scyna;
 
 public class SignalLite
 {
-    public static void Emit(string channel)
+    public static void Register<T>(string channel, Handler<T> handler) where T : IMessage<T>, new()
     {
-        var msg = new proto.EventOrSignal { CallID = Engine.ID.Next() };
-        var nc = Engine.Instance.Connection;
-        nc.Publish(channel, msg.ToByteArray());
-    }
-    public static void Register(string channel, Handler handler)
-    {
-        Console.WriteLine("Register Signal:" + channel);
+        Console.WriteLine("Register Command:" + channel);
         var nc = Engine.Instance.Connection;
         nc.SubscribeAsync(channel, Engine.Instance.Module, (sender, args) =>
         {
-            handler.Run(args.Message);
+            handler.Run(args.Message.Data);
         });
     }
-    public abstract class Handler
+    public static void Emit(string channel, pb::IMessage message)
     {
-        protected Logger LOG = new Logger(0, false);
-        public void Run(NATS.Client.Msg msg)
+        var nc = Engine.Instance.Connection;
+        nc.Publish(channel, message.ToByteArray());
+    }
+    public abstract class Handler<T> where T : IMessage<T>, new()
+    {
+        private MessageParser<T> parser = new MessageParser<T>(() => new T());
+        protected T data;
+        public abstract void Execute();
+        public void Run(byte[] data)
         {
             try
             {
-                var m = proto.EventOrSignal.Parser.ParseFrom(msg.Data);
-                LOG.Reset(m.CallID);
-                this.Execute();
+                this.data = parser.ParseFrom(data);
+                Execute();
             }
-            catch (Exception) { }
+            catch (Exception e)
+            {
+                Console.WriteLine(e.ToString());
+            }
         }
-        public abstract void Execute();
     }
 }

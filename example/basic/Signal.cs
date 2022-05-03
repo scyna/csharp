@@ -9,10 +9,3 @@ public class TestSignal : Signal.Handler<proto.TestSignal>
     }
 }
 
-class EmptySignal : SignalLite.Handler
-{
-    public override void Execute()
-    {
-        Console.WriteLine("Receive EmptySignal");
-    }
-}

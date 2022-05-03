@@ -3,11 +3,11 @@ using System.Text;
 
 namespace scyna;
 
-public abstract class ServiceLite
+public abstract class Command
 {
     public static void Register(string url, Handler handler)
     {
-        Console.WriteLine("Register Service:" + url);
+        Console.WriteLine("Register Command:" + url);
         var nc = Engine.Instance.Connection;
         nc.SubscribeAsync(Utils.SubscribeURL(url), "API", (sender, args) => { handler.Run(args.Message); });
     }
