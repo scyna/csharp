@@ -43,7 +43,7 @@ class CreateTest
                     Password = "123456"
 
                 }
-            }).ExpectSuccess().Run<proto.CreateUserResponse>();
+            }).ExpectSuccess().Run();
     }
 
     [Test]
@@ -74,7 +74,7 @@ class CreateTest
 
                 }
             })
-            .Run<proto.GetUserResponse>();
+            .Run();
     }
 
     [Test]
