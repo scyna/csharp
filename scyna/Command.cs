@@ -12,12 +12,12 @@ public abstract class Command
         nc.SubscribeAsync(Utils.SubscribeURL(url), "API", (sender, args) => { handler.Run(args.Message); });
     }
 
-    public static proto.Response? SendRequest(string url)
+    public static proto.Response? Send(string url)
     {
         return Service.SendRequest(url, null);
     }
 
-    public static T? SendRequest<T>(string url) where T : IMessage<T>, new()
+    public static T? Send<T>(string url) where T : IMessage<T>, new()
     {
         return Service.SendRequest<T>(url, null);
     }
