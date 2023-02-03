@@ -24,9 +24,9 @@ namespace scyna.proto {
     static ErrorReflection() {
       byte[] descriptorData = global::System.Convert.FromBase64String(
           string.Concat(
-            "CgtlcnJvci5wcm90bxIFc2N5bmEiJgoFRXJyb3ISDAoEQ29kZRgBIAEoBRIP",
-            "CgdNZXNzYWdlGAIgASgJQisKDmlvLnNjeW5hLnByb3RvSAJQAVoHLjtzY3lu",
-            "YaoCC3NjeW5hLnByb3RvYgZwcm90bzM="));
+            "CgtlcnJvci5wcm90bxIFc2N5bmEiJgoFRXJyb3ISDAoEY29kZRgBIAEoBRIP",
+            "CgdtZXNzYWdlGAIgASgJQjIKDmlvLnNjeW5hLnByb3RvSAJQAVoOLi87c2N5",
+            "bmFfcHJvdG+qAgtzY3luYS5wcm90b2IGcHJvdG8z"));
       descriptor = pbr::FileDescriptor.FromGeneratedCode(descriptorData,
           new pbr::FileDescriptor[] { },
           new pbr::GeneratedClrTypeInfo(null, null, new pbr::GeneratedClrTypeInfo[] {
@@ -76,7 +76,7 @@ namespace scyna.proto {
       return new Error(this);
     }
 
-    /// <summary>Field number for the "Code" field.</summary>
+    /// <summary>Field number for the "code" field.</summary>
     public const int CodeFieldNumber = 1;
     private int code_;
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
@@ -87,7 +87,7 @@ namespace scyna.proto {
       }
     }
 
-    /// <summary>Field number for the "Message" field.</summary>
+    /// <summary>Field number for the "message" field.</summary>
     public const int MessageFieldNumber = 2;
     private string message_ = "";
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]

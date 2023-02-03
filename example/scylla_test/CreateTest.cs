@@ -12,8 +12,8 @@ class CreateTest
     public void Setup()
     {
         Engine.Init("http://127.0.0.1:8081", "scyna.test", "123456");
-        Service.Register(Path.CREATE_USER_URL, new CreateUser());
-        Service.Register(Path.GET_USER_URL, new GetUser());
+        Endpoint.Register(Path.CREATE_USER_URL, new CreateUser());
+        Endpoint.Register(Path.GET_USER_URL, new GetUser());
         ex.User.User.ScyllaInit();
     }
 
@@ -33,7 +33,7 @@ class CreateTest
     [Test]
     public void TestCreateSuccess()
     {
-        scyna.ServiceTest.New(Path.CREATE_USER_URL)
+        scyna.EndpointTest.New(Path.CREATE_USER_URL)
             .WithRequest(new proto.CreateUserRequest
             {
                 User = new proto.User
@@ -49,7 +49,7 @@ class CreateTest
     [Test]
     public void TestCreateThenGet()
     {
-        var r = scyna.ServiceTest.New(Path.CREATE_USER_URL)
+        var r = scyna.EndpointTest.New(Path.CREATE_USER_URL)
             .WithRequest(new proto.CreateUserRequest
             {
                 User = new proto.User
@@ -61,7 +61,7 @@ class CreateTest
                 }
             }).Run<proto.CreateUserResponse>();
 
-        scyna.ServiceTest.New(Path.GET_USER_URL)
+        scyna.EndpointTest.New(Path.GET_USER_URL)
             .WithRequest(new proto.GetUserRequest { Email = "a@gmail.com" })
             .ExpectResponse(new proto.GetUserResponse
             {
@@ -80,7 +80,7 @@ class CreateTest
     [Test]
     public void TestCreateNoEmail()
     {
-        scyna.ServiceTest.New(Path.CREATE_USER_URL)
+        scyna.EndpointTest.New(Path.CREATE_USER_URL)
             .WithRequest(new proto.CreateUserRequest
             {
                 User = new proto.User
@@ -95,7 +95,7 @@ class CreateTest
     [Test]
     public void TestCreateExisted()
     {
-        scyna.ServiceTest.New(Path.CREATE_USER_URL)
+        scyna.EndpointTest.New(Path.CREATE_USER_URL)
             .WithRequest(new proto.CreateUserRequest
             {
                 User = new proto.User
@@ -107,7 +107,7 @@ class CreateTest
                 }
             }).ExpectSuccess().Run();
 
-        scyna.ServiceTest.New(Path.CREATE_USER_URL)
+        scyna.EndpointTest.New(Path.CREATE_USER_URL)
             .WithRequest(new proto.CreateUserRequest
             {
                 User = new proto.User
@@ -123,7 +123,7 @@ class CreateTest
     [Test]
     public void TestCreateBadPassword()
     {
-        scyna.ServiceTest.New(Path.CREATE_USER_URL)
+        scyna.EndpointTest.New(Path.CREATE_USER_URL)
             .WithRequest(new proto.CreateUserRequest
             {
                 User = new proto.User
@@ -137,7 +137,7 @@ class CreateTest
     }
     public void TestCreateBadEmail()
     {
-        scyna.ServiceTest.New(Path.CREATE_USER_URL)
+        scyna.EndpointTest.New(Path.CREATE_USER_URL)
             .WithRequest(new proto.CreateUserRequest
             {
                 User = new proto.User

@@ -33,33 +33,40 @@ namespace scyna.proto {
             "GAEgASgEEiQKBkNvbmZpZxgFIAEoCzIULnNjeW5hLkNvbmZpZ3VyYXRpb24i",
             "PAoQRW5kU2Vzc2lvblNpZ25hbBIKCgJJRBgBIAEoBBIMCgRDb2RlGAIgASgJ",
             "Eg4KBk1vZHVsZRgDIAEoCSIxChNVcGRhdGVTZXNzaW9uU2lnbmFsEgoKAklE",
-            "GAEgASgEEg4KBk1vZHVsZRgCIAEoCSI7Cg1HZXRJRFJlc3BvbnNlEg4KBnBy",
-            "ZWZpeBgBIAEoDRINCgVzdGFydBgCIAEoBBILCgNlbmQYAyABKAQiGwoMR2V0",
-            "U05SZXF1ZXN0EgsKA2tleRgBIAEoCSI7Cg1HZXRTTlJlc3BvbnNlEg4KBnBy",
-            "ZWZpeBgBIAEoDRINCgVzdGFydBgCIAEoBBILCgNlbmQYAyABKAQiZQoOV3Jp",
-            "dGVMb2dTaWduYWwSDAoEdGltZRgBIAEoBBINCgVsZXZlbBgCIAEoDRIMCgR0",
-            "ZXh0GAMgASgJEgoKAmlkGAQgASgEEgsKA3NlcRgFIAEoBBIPCgdzZXNzaW9u",
-            "GAYgASgIIkEKE1dyaXRlU2V0dGluZ1JlcXVlc3QSDgoGTW9kdWxlGAEgASgJ",
-            "EgsKA0tleRgCIAEoCRINCgVWYWx1ZRgDIAEoCSIxChJSZWFkU2V0dGluZ1Jl",
-            "cXVlc3QSDgoGTW9kdWxlGAEgASgJEgsKA0tleRgCIAEoCSIkChNSZWFkU2V0",
-            "dGluZ1Jlc3BvbnNlEg0KBVZhbHVlGAEgASgJIkIKFFNldHRpbmdVcGRhdGVk",
-            "U2lnbmFsEg4KBk1vZHVsZRgBIAEoCRILCgNLZXkYAiABKAkSDQoFVmFsdWUY",
-            "AyABKAkiMwoUU2V0dGluZ1JlbW92ZWRTaWduYWwSDgoGTW9kdWxlGAEgASgJ",
-            "EgsKA0tleRgCIAEoCSIzChRSZW1vdmVTZXR0aW5nUmVxdWVzdBIOCgZNb2R1",
-            "bGUYASABKAkSCwoDS2V5GAIgASgJIrQBCg9Xcml0ZUNhbGxTaWduYWwSCgoC",
-            "aWQYASABKAQSDgoGc291cmNlGAIgASgJEhEKCWNhbGxlcl9pZBgDIAEoCRIS",
-            "CgpzZXNzaW9uX2lkGAQgASgEEhAKCGR1cmF0aW9uGAUgASgNEg8KB3JlcXVl",
-            "c3QYBiABKAwSEAoIcmVzcG9uc2UYByABKAwSDgoGc3RhdHVzGAggASgNEgwK",
-            "BHRpbWUYCSABKAQSCwoDZGF5GAogASgNIlcKEUNyZWF0ZUF1dGhSZXF1ZXN0",
-            "EhQKDE9yZ2FuaXphdGlvbhgBIAEoCRIOCgZTZWNyZXQYAiABKAkSDgoGVXNl",
-            "cklEGAMgASgJEgwKBEFwcHMYBCADKAkiNAoSQ3JlYXRlQXV0aFJlc3BvbnNl",
-            "Eg0KBVRva2VuGAEgASgJEg8KB0V4cGlyZWQYAiABKAQiLAoOR2V0QXV0aFJl",
-            "cXVlc3QSDQoFVG9rZW4YASABKAkSCwoDQXBwGAIgASgJIkEKD0dldEF1dGhS",
-            "ZXNwb25zZRINCgVUb2tlbhgBIAEoCRIPCgdFeHBpcmVkGAIgASgEEg4KBlVz",
-            "ZXJJRBgDIAEoCSJUCg1Mb2dvdXRSZXF1ZXN0EhQKDE9yZ2FuaXphdGlvbhgB",
-            "IAEoCRIOCgZTZWNyZXQYAiABKAkSDgoGVXNlcklEGAMgASgJEg0KBVRva2Vu",
-            "GAQgASgJQisKDmlvLnNjeW5hLnByb3RvSAJQAVoHLjtzY3luYaoCC3NjeW5h",
-            "LnByb3RvYgZwcm90bzM="));
+            "GAEgASgEEg4KBk1vZHVsZRgCIAEoCSIOCgxHZXRJRFJlcXVlc3QiOwoNR2V0",
+            "SURSZXNwb25zZRIOCgZwcmVmaXgYASABKA0SDQoFc3RhcnQYAiABKAQSCwoD",
+            "ZW5kGAMgASgEIhsKDEdldFNOUmVxdWVzdBILCgNrZXkYASABKAkiOwoNR2V0",
+            "U05SZXNwb25zZRIOCgZwcmVmaXgYASABKA0SDQoFc3RhcnQYAiABKAQSCwoD",
+            "ZW5kGAMgASgEImcKEExvZ0NyZWF0ZWRTaWduYWwSDAoEVGltZRgBIAEoBBIN",
+            "CgVMZXZlbBgCIAEoDRIMCgRUZXh0GAMgASgJEgoKAklEGAQgASgEEgsKA1NF",
+            "URgFIAEoBBIPCgdTZXNzaW9uGAYgASgIIqEBChJUcmFjZUNyZWF0ZWRTaWdu",
+            "YWwSCgoCSUQYASABKAQSEAoIUGFyZW50SUQYAiABKAQSDAoEVHlwZRgDIAEo",
+            "DRIMCgRUaW1lGAQgASgEEhAKCER1cmF0aW9uGAUgASgEEgwKBFBhdGgYBiAB",
+            "KAkSDgoGU291cmNlGAcgASgJEhEKCVNlc3Npb25JRBgIIAEoBBIOCgZTdGF0",
+            "dXMYCSABKAUiPwoQVGFnQ3JlYXRlZFNpZ25hbBIPCgdUcmFjZUlEGAEgASgE",
+            "EgsKA0tleRgCIAEoCRINCgVWYWx1ZRgDIAEoCSI3ChJFbmRwb2ludERvbmVT",
+            "aWduYWwSDwoHVHJhY2VJRBgBIAEoBBIQCghSZXNwb25zZRgCIAEoCSJBChNX",
+            "cml0ZVNldHRpbmdSZXF1ZXN0Eg4KBk1vZHVsZRgBIAEoCRILCgNLZXkYAiAB",
+            "KAkSDQoFVmFsdWUYAyABKAkiMQoSUmVhZFNldHRpbmdSZXF1ZXN0Eg4KBk1v",
+            "ZHVsZRgBIAEoCRILCgNLZXkYAiABKAkiJAoTUmVhZFNldHRpbmdSZXNwb25z",
+            "ZRINCgVWYWx1ZRgBIAEoCSJCChRTZXR0aW5nVXBkYXRlZFNpZ25hbBIOCgZN",
+            "b2R1bGUYASABKAkSCwoDS2V5GAIgASgJEg0KBVZhbHVlGAMgASgJIjMKFFNl",
+            "dHRpbmdSZW1vdmVkU2lnbmFsEg4KBk1vZHVsZRgBIAEoCRILCgNLZXkYAiAB",
+            "KAkiMwoUUmVtb3ZlU2V0dGluZ1JlcXVlc3QSDgoGTW9kdWxlGAEgASgJEgsK",
+            "A0tleRgCIAEoCSK0AQoPV3JpdGVDYWxsU2lnbmFsEgoKAmlkGAEgASgEEg4K",
+            "BnNvdXJjZRgCIAEoCRIRCgljYWxsZXJfaWQYAyABKAkSEgoKc2Vzc2lvbl9p",
+            "ZBgEIAEoBBIQCghkdXJhdGlvbhgFIAEoDRIPCgdyZXF1ZXN0GAYgASgMEhAK",
+            "CHJlc3BvbnNlGAcgASgMEg4KBnN0YXR1cxgIIAEoDRIMCgR0aW1lGAkgASgE",
+            "EgsKA2RheRgKIAEoDSJXChFDcmVhdGVBdXRoUmVxdWVzdBIUCgxPcmdhbml6",
+            "YXRpb24YASABKAkSDgoGU2VjcmV0GAIgASgJEg4KBlVzZXJJRBgDIAEoCRIM",
+            "CgRBcHBzGAQgAygJIjQKEkNyZWF0ZUF1dGhSZXNwb25zZRINCgVUb2tlbhgB",
+            "IAEoCRIPCgdFeHBpcmVkGAIgASgEIiwKDkdldEF1dGhSZXF1ZXN0Eg0KBVRv",
+            "a2VuGAEgASgJEgsKA0FwcBgCIAEoCSJBCg9HZXRBdXRoUmVzcG9uc2USDQoF",
+            "VG9rZW4YASABKAkSDwoHRXhwaXJlZBgCIAEoBBIOCgZVc2VySUQYAyABKAki",
+            "VAoNTG9nb3V0UmVxdWVzdBIUCgxPcmdhbml6YXRpb24YASABKAkSDgoGU2Vj",
+            "cmV0GAIgASgJEg4KBlVzZXJJRBgDIAEoCRINCgVUb2tlbhgEIAEoCUIyCg5p",
+            "by5zY3luYS5wcm90b0gCUAFaDi4vO3NjeW5hX3Byb3RvqgILc2N5bmEucHJv",
+            "dG9iBnByb3RvMw=="));
       descriptor = pbr::FileDescriptor.FromGeneratedCode(descriptorData,
           new pbr::FileDescriptor[] { },
           new pbr::GeneratedClrTypeInfo(null, null, new pbr::GeneratedClrTypeInfo[] {
@@ -68,10 +75,14 @@ namespace scyna.proto {
             new pbr::GeneratedClrTypeInfo(typeof(global::scyna.proto.CreateSessionResponse), global::scyna.proto.CreateSessionResponse.Parser, new[]{ "SessionID", "Config" }, null, null, null, null),
             new pbr::GeneratedClrTypeInfo(typeof(global::scyna.proto.EndSessionSignal), global::scyna.proto.EndSessionSignal.Parser, new[]{ "ID", "Code", "Module" }, null, null, null, null),
             new pbr::GeneratedClrTypeInfo(typeof(global::scyna.proto.UpdateSessionSignal), global::scyna.proto.UpdateSessionSignal.Parser, new[]{ "ID", "Module" }, null, null, null, null),
+            new pbr::GeneratedClrTypeInfo(typeof(global::scyna.proto.GetIDRequest), global::scyna.proto.GetIDRequest.Parser, null, null, null, null, null),
             new pbr::GeneratedClrTypeInfo(typeof(global::scyna.proto.GetIDResponse), global::scyna.proto.GetIDResponse.Parser, new[]{ "Prefix", "Start", "End" }, null, null, null, null),
             new pbr::GeneratedClrTypeInfo(typeof(global::scyna.proto.GetSNRequest), global::scyna.proto.GetSNRequest.Parser, new[]{ "Key" }, null, null, null, null),
             new pbr::GeneratedClrTypeInfo(typeof(global::scyna.proto.GetSNResponse), global::scyna.proto.GetSNResponse.Parser, new[]{ "Prefix", "Start", "End" }, null, null, null, null),
-            new pbr::GeneratedClrTypeInfo(typeof(global::scyna.proto.WriteLogSignal), global::scyna.proto.WriteLogSignal.Parser, new[]{ "Time", "Level", "Text", "Id", "Seq", "Session" }, null, null, null, null),
+            new pbr::GeneratedClrTypeInfo(typeof(global::scyna.proto.LogCreatedSignal), global::scyna.proto.LogCreatedSignal.Parser, new[]{ "Time", "Level", "Text", "ID", "SEQ", "Session" }, null, null, null, null),
+            new pbr::GeneratedClrTypeInfo(typeof(global::scyna.proto.TraceCreatedSignal), global::scyna.proto.TraceCreatedSignal.Parser, new[]{ "ID", "ParentID", "Type", "Time", "Duration", "Path", "Source", "SessionID", "Status" }, null, null, null, null),
+            new pbr::GeneratedClrTypeInfo(typeof(global::scyna.proto.TagCreatedSignal), global::scyna.proto.TagCreatedSignal.Parser, new[]{ "TraceID", "Key", "Value" }, null, null, null, null),
+            new pbr::GeneratedClrTypeInfo(typeof(global::scyna.proto.EndpointDoneSignal), global::scyna.proto.EndpointDoneSignal.Parser, new[]{ "TraceID", "Response" }, null, null, null, null),
             new pbr::GeneratedClrTypeInfo(typeof(global::scyna.proto.WriteSettingRequest), global::scyna.proto.WriteSettingRequest.Parser, new[]{ "Module", "Key", "Value" }, null, null, null, null),
             new pbr::GeneratedClrTypeInfo(typeof(global::scyna.proto.ReadSettingRequest), global::scyna.proto.ReadSettingRequest.Parser, new[]{ "Module", "Key" }, null, null, null, null),
             new pbr::GeneratedClrTypeInfo(typeof(global::scyna.proto.ReadSettingResponse), global::scyna.proto.ReadSettingResponse.Parser, new[]{ "Value" }, null, null, null, null),
@@ -1361,6 +1372,142 @@ namespace scyna.proto {
   /// <summary>
   ///GENERATOR
   /// </summary>
+  public sealed partial class GetIDRequest : pb::IMessage<GetIDRequest>
+  #if !GOOGLE_PROTOBUF_REFSTRUCT_COMPATIBILITY_MODE
+      , pb::IBufferMessage
+  #endif
+  {
+    private static readonly pb::MessageParser<GetIDRequest> _parser = new pb::MessageParser<GetIDRequest>(() => new GetIDRequest());
+    private pb::UnknownFieldSet _unknownFields;
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public static pb::MessageParser<GetIDRequest> Parser { get { return _parser; } }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public static pbr::MessageDescriptor Descriptor {
+      get { return global::scyna.proto.EngineReflection.Descriptor.MessageTypes[5]; }
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    pbr::MessageDescriptor pb::IMessage.Descriptor {
+      get { return Descriptor; }
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public GetIDRequest() {
+      OnConstruction();
+    }
+
+    partial void OnConstruction();
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public GetIDRequest(GetIDRequest other) : this() {
+      _unknownFields = pb::UnknownFieldSet.Clone(other._unknownFields);
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public GetIDRequest Clone() {
+      return new GetIDRequest(this);
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public override bool Equals(object other) {
+      return Equals(other as GetIDRequest);
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public bool Equals(GetIDRequest other) {
+      if (ReferenceEquals(other, null)) {
+        return false;
+      }
+      if (ReferenceEquals(other, this)) {
+        return true;
+      }
+      return Equals(_unknownFields, other._unknownFields);
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public override int GetHashCode() {
+      int hash = 1;
+      if (_unknownFields != null) {
+        hash ^= _unknownFields.GetHashCode();
+      }
+      return hash;
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public override string ToString() {
+      return pb::JsonFormatter.ToDiagnosticString(this);
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public void WriteTo(pb::CodedOutputStream output) {
+    #if !GOOGLE_PROTOBUF_REFSTRUCT_COMPATIBILITY_MODE
+      output.WriteRawMessage(this);
+    #else
+      if (_unknownFields != null) {
+        _unknownFields.WriteTo(output);
+      }
+    #endif
+    }
+
+    #if !GOOGLE_PROTOBUF_REFSTRUCT_COMPATIBILITY_MODE
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    void pb::IBufferMessage.InternalWriteTo(ref pb::WriteContext output) {
+      if (_unknownFields != null) {
+        _unknownFields.WriteTo(ref output);
+      }
+    }
+    #endif
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public int CalculateSize() {
+      int size = 0;
+      if (_unknownFields != null) {
+        size += _unknownFields.CalculateSize();
+      }
+      return size;
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public void MergeFrom(GetIDRequest other) {
+      if (other == null) {
+        return;
+      }
+      _unknownFields = pb::UnknownFieldSet.MergeFrom(_unknownFields, other._unknownFields);
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public void MergeFrom(pb::CodedInputStream input) {
+    #if !GOOGLE_PROTOBUF_REFSTRUCT_COMPATIBILITY_MODE
+      input.ReadRawMessage(this);
+    #else
+      uint tag;
+      while ((tag = input.ReadTag()) != 0) {
+        switch(tag) {
+          default:
+            _unknownFields = pb::UnknownFieldSet.MergeFieldFrom(_unknownFields, input);
+            break;
+        }
+      }
+    #endif
+    }
+
+    #if !GOOGLE_PROTOBUF_REFSTRUCT_COMPATIBILITY_MODE
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    void pb::IBufferMessage.InternalMergeFrom(ref pb::ParseContext input) {
+      uint tag;
+      while ((tag = input.ReadTag()) != 0) {
+        switch(tag) {
+          default:
+            _unknownFields = pb::UnknownFieldSet.MergeFieldFrom(_unknownFields, ref input);
+            break;
+        }
+      }
+    }
+    #endif
+
+  }
+
   public sealed partial class GetIDResponse : pb::IMessage<GetIDResponse>
   #if !GOOGLE_PROTOBUF_REFSTRUCT_COMPATIBILITY_MODE
       , pb::IBufferMessage
@@ -1373,7 +1520,7 @@ namespace scyna.proto {
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     public static pbr::MessageDescriptor Descriptor {
-      get { return global::scyna.proto.EngineReflection.Descriptor.MessageTypes[5]; }
+      get { return global::scyna.proto.EngineReflection.Descriptor.MessageTypes[6]; }
     }
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
@@ -1617,7 +1764,7 @@ namespace scyna.proto {
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     public static pbr::MessageDescriptor Descriptor {
-      get { return global::scyna.proto.EngineReflection.Descriptor.MessageTypes[6]; }
+      get { return global::scyna.proto.EngineReflection.Descriptor.MessageTypes[7]; }
     }
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
@@ -1789,7 +1936,7 @@ namespace scyna.proto {
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     public static pbr::MessageDescriptor Descriptor {
-      get { return global::scyna.proto.EngineReflection.Descriptor.MessageTypes[7]; }
+      get { return global::scyna.proto.EngineReflection.Descriptor.MessageTypes[8]; }
     }
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
@@ -2024,19 +2171,19 @@ namespace scyna.proto {
   /// <summary>
   ///LOG
   /// </summary>
-  public sealed partial class WriteLogSignal : pb::IMessage<WriteLogSignal>
+  public sealed partial class LogCreatedSignal : pb::IMessage<LogCreatedSignal>
   #if !GOOGLE_PROTOBUF_REFSTRUCT_COMPATIBILITY_MODE
       , pb::IBufferMessage
   #endif
   {
-    private static readonly pb::MessageParser<WriteLogSignal> _parser = new pb::MessageParser<WriteLogSignal>(() => new WriteLogSignal());
+    private static readonly pb::MessageParser<LogCreatedSignal> _parser = new pb::MessageParser<LogCreatedSignal>(() => new LogCreatedSignal());
     private pb::UnknownFieldSet _unknownFields;
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
-    public static pb::MessageParser<WriteLogSignal> Parser { get { return _parser; } }
+    public static pb::MessageParser<LogCreatedSignal> Parser { get { return _parser; } }
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     public static pbr::MessageDescriptor Descriptor {
-      get { return global::scyna.proto.EngineReflection.Descriptor.MessageTypes[8]; }
+      get { return global::scyna.proto.EngineReflection.Descriptor.MessageTypes[9]; }
     }
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
@@ -2045,29 +2192,29 @@ namespace scyna.proto {
     }
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
-    public WriteLogSignal() {
+    public LogCreatedSignal() {
       OnConstruction();
     }
 
     partial void OnConstruction();
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
-    public WriteLogSignal(WriteLogSignal other) : this() {
+    public LogCreatedSignal(LogCreatedSignal other) : this() {
       time_ = other.time_;
       level_ = other.level_;
       text_ = other.text_;
-      id_ = other.id_;
-      seq_ = other.seq_;
+      iD_ = other.iD_;
+      sEQ_ = other.sEQ_;
       session_ = other.session_;
       _unknownFields = pb::UnknownFieldSet.Clone(other._unknownFields);
     }
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
-    public WriteLogSignal Clone() {
-      return new WriteLogSignal(this);
+    public LogCreatedSignal Clone() {
+      return new LogCreatedSignal(this);
     }
 
-    /// <summary>Field number for the "time" field.</summary>
+    /// <summary>Field number for the "Time" field.</summary>
     public const int TimeFieldNumber = 1;
     private ulong time_;
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
@@ -2078,7 +2225,7 @@ namespace scyna.proto {
       }
     }
 
-    /// <summary>Field number for the "level" field.</summary>
+    /// <summary>Field number for the "Level" field.</summary>
     public const int LevelFieldNumber = 2;
     private uint level_;
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
@@ -2089,7 +2236,7 @@ namespace scyna.proto {
       }
     }
 
-    /// <summary>Field number for the "text" field.</summary>
+    /// <summary>Field number for the "Text" field.</summary>
     public const int TextFieldNumber = 3;
     private string text_ = "";
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
@@ -2100,29 +2247,29 @@ namespace scyna.proto {
       }
     }
 
-    /// <summary>Field number for the "id" field.</summary>
-    public const int IdFieldNumber = 4;
-    private ulong id_;
+    /// <summary>Field number for the "ID" field.</summary>
+    public const int IDFieldNumber = 4;
+    private ulong iD_;
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
-    public ulong Id {
-      get { return id_; }
+    public ulong ID {
+      get { return iD_; }
       set {
-        id_ = value;
+        iD_ = value;
       }
     }
 
-    /// <summary>Field number for the "seq" field.</summary>
-    public const int SeqFieldNumber = 5;
-    private ulong seq_;
+    /// <summary>Field number for the "SEQ" field.</summary>
+    public const int SEQFieldNumber = 5;
+    private ulong sEQ_;
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
-    public ulong Seq {
-      get { return seq_; }
+    public ulong SEQ {
+      get { return sEQ_; }
       set {
-        seq_ = value;
+        sEQ_ = value;
       }
     }
 
-    /// <summary>Field number for the "session" field.</summary>
+    /// <summary>Field number for the "Session" field.</summary>
     public const int SessionFieldNumber = 6;
     private bool session_;
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
@@ -2135,11 +2282,11 @@ namespace scyna.proto {
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     public override bool Equals(object other) {
-      return Equals(other as WriteLogSignal);
+      return Equals(other as LogCreatedSignal);
     }
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
-    public bool Equals(WriteLogSignal other) {
+    public bool Equals(LogCreatedSignal other) {
       if (ReferenceEquals(other, null)) {
         return false;
       }
@@ -2149,8 +2296,8 @@ namespace scyna.proto {
       if (Time != other.Time) return false;
       if (Level != other.Level) return false;
       if (Text != other.Text) return false;
-      if (Id != other.Id) return false;
-      if (Seq != other.Seq) return false;
+      if (ID != other.ID) return false;
+      if (SEQ != other.SEQ) return false;
       if (Session != other.Session) return false;
       return Equals(_unknownFields, other._unknownFields);
     }
@@ -2161,8 +2308,8 @@ namespace scyna.proto {
       if (Time != 0UL) hash ^= Time.GetHashCode();
       if (Level != 0) hash ^= Level.GetHashCode();
       if (Text.Length != 0) hash ^= Text.GetHashCode();
-      if (Id != 0UL) hash ^= Id.GetHashCode();
-      if (Seq != 0UL) hash ^= Seq.GetHashCode();
+      if (ID != 0UL) hash ^= ID.GetHashCode();
+      if (SEQ != 0UL) hash ^= SEQ.GetHashCode();
       if (Session != false) hash ^= Session.GetHashCode();
       if (_unknownFields != null) {
         hash ^= _unknownFields.GetHashCode();
@@ -2192,13 +2339,13 @@ namespace scyna.proto {
         output.WriteRawTag(26);
         output.WriteString(Text);
       }
-      if (Id != 0UL) {
+      if (ID != 0UL) {
         output.WriteRawTag(32);
-        output.WriteUInt64(Id);
+        output.WriteUInt64(ID);
       }
-      if (Seq != 0UL) {
+      if (SEQ != 0UL) {
         output.WriteRawTag(40);
-        output.WriteUInt64(Seq);
+        output.WriteUInt64(SEQ);
       }
       if (Session != false) {
         output.WriteRawTag(48);
@@ -2225,13 +2372,13 @@ namespace scyna.proto {
         output.WriteRawTag(26);
         output.WriteString(Text);
       }
-      if (Id != 0UL) {
+      if (ID != 0UL) {
         output.WriteRawTag(32);
-        output.WriteUInt64(Id);
+        output.WriteUInt64(ID);
       }
-      if (Seq != 0UL) {
+      if (SEQ != 0UL) {
         output.WriteRawTag(40);
-        output.WriteUInt64(Seq);
+        output.WriteUInt64(SEQ);
       }
       if (Session != false) {
         output.WriteRawTag(48);
@@ -2255,11 +2402,11 @@ namespace scyna.proto {
       if (Text.Length != 0) {
         size += 1 + pb::CodedOutputStream.ComputeStringSize(Text);
       }
-      if (Id != 0UL) {
-        size += 1 + pb::CodedOutputStream.ComputeUInt64Size(Id);
+      if (ID != 0UL) {
+        size += 1 + pb::CodedOutputStream.ComputeUInt64Size(ID);
       }
-      if (Seq != 0UL) {
-        size += 1 + pb::CodedOutputStream.ComputeUInt64Size(Seq);
+      if (SEQ != 0UL) {
+        size += 1 + pb::CodedOutputStream.ComputeUInt64Size(SEQ);
       }
       if (Session != false) {
         size += 1 + 1;
@@ -2271,7 +2418,7 @@ namespace scyna.proto {
     }
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
-    public void MergeFrom(WriteLogSignal other) {
+    public void MergeFrom(LogCreatedSignal other) {
       if (other == null) {
         return;
       }
@@ -2284,11 +2431,11 @@ namespace scyna.proto {
       if (other.Text.Length != 0) {
         Text = other.Text;
       }
-      if (other.Id != 0UL) {
-        Id = other.Id;
+      if (other.ID != 0UL) {
+        ID = other.ID;
       }
-      if (other.Seq != 0UL) {
-        Seq = other.Seq;
+      if (other.SEQ != 0UL) {
+        SEQ = other.SEQ;
       }
       if (other.Session != false) {
         Session = other.Session;
@@ -2320,11 +2467,11 @@ namespace scyna.proto {
             break;
           }
           case 32: {
-            Id = input.ReadUInt64();
+            ID = input.ReadUInt64();
             break;
           }
           case 40: {
-            Seq = input.ReadUInt64();
+            SEQ = input.ReadUInt64();
             break;
           }
           case 48: {
@@ -2358,15 +2505,927 @@ namespace scyna.proto {
             break;
           }
           case 32: {
-            Id = input.ReadUInt64();
+            ID = input.ReadUInt64();
             break;
           }
           case 40: {
-            Seq = input.ReadUInt64();
+            SEQ = input.ReadUInt64();
             break;
           }
           case 48: {
             Session = input.ReadBool();
+            break;
+          }
+        }
+      }
+    }
+    #endif
+
+  }
+
+  public sealed partial class TraceCreatedSignal : pb::IMessage<TraceCreatedSignal>
+  #if !GOOGLE_PROTOBUF_REFSTRUCT_COMPATIBILITY_MODE
+      , pb::IBufferMessage
+  #endif
+  {
+    private static readonly pb::MessageParser<TraceCreatedSignal> _parser = new pb::MessageParser<TraceCreatedSignal>(() => new TraceCreatedSignal());
+    private pb::UnknownFieldSet _unknownFields;
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public static pb::MessageParser<TraceCreatedSignal> Parser { get { return _parser; } }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public static pbr::MessageDescriptor Descriptor {
+      get { return global::scyna.proto.EngineReflection.Descriptor.MessageTypes[10]; }
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    pbr::MessageDescriptor pb::IMessage.Descriptor {
+      get { return Descriptor; }
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public TraceCreatedSignal() {
+      OnConstruction();
+    }
+
+    partial void OnConstruction();
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public TraceCreatedSignal(TraceCreatedSignal other) : this() {
+      iD_ = other.iD_;
+      parentID_ = other.parentID_;
+      type_ = other.type_;
+      time_ = other.time_;
+      duration_ = other.duration_;
+      path_ = other.path_;
+      source_ = other.source_;
+      sessionID_ = other.sessionID_;
+      status_ = other.status_;
+      _unknownFields = pb::UnknownFieldSet.Clone(other._unknownFields);
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public TraceCreatedSignal Clone() {
+      return new TraceCreatedSignal(this);
+    }
+
+    /// <summary>Field number for the "ID" field.</summary>
+    public const int IDFieldNumber = 1;
+    private ulong iD_;
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public ulong ID {
+      get { return iD_; }
+      set {
+        iD_ = value;
+      }
+    }
+
+    /// <summary>Field number for the "ParentID" field.</summary>
+    public const int ParentIDFieldNumber = 2;
+    private ulong parentID_;
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public ulong ParentID {
+      get { return parentID_; }
+      set {
+        parentID_ = value;
+      }
+    }
+
+    /// <summary>Field number for the "Type" field.</summary>
+    public const int TypeFieldNumber = 3;
+    private uint type_;
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public uint Type {
+      get { return type_; }
+      set {
+        type_ = value;
+      }
+    }
+
+    /// <summary>Field number for the "Time" field.</summary>
+    public const int TimeFieldNumber = 4;
+    private ulong time_;
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public ulong Time {
+      get { return time_; }
+      set {
+        time_ = value;
+      }
+    }
+
+    /// <summary>Field number for the "Duration" field.</summary>
+    public const int DurationFieldNumber = 5;
+    private ulong duration_;
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public ulong Duration {
+      get { return duration_; }
+      set {
+        duration_ = value;
+      }
+    }
+
+    /// <summary>Field number for the "Path" field.</summary>
+    public const int PathFieldNumber = 6;
+    private string path_ = "";
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public string Path {
+      get { return path_; }
+      set {
+        path_ = pb::ProtoPreconditions.CheckNotNull(value, "value");
+      }
+    }
+
+    /// <summary>Field number for the "Source" field.</summary>
+    public const int SourceFieldNumber = 7;
+    private string source_ = "";
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public string Source {
+      get { return source_; }
+      set {
+        source_ = pb::ProtoPreconditions.CheckNotNull(value, "value");
+      }
+    }
+
+    /// <summary>Field number for the "SessionID" field.</summary>
+    public const int SessionIDFieldNumber = 8;
+    private ulong sessionID_;
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public ulong SessionID {
+      get { return sessionID_; }
+      set {
+        sessionID_ = value;
+      }
+    }
+
+    /// <summary>Field number for the "Status" field.</summary>
+    public const int StatusFieldNumber = 9;
+    private int status_;
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public int Status {
+      get { return status_; }
+      set {
+        status_ = value;
+      }
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public override bool Equals(object other) {
+      return Equals(other as TraceCreatedSignal);
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public bool Equals(TraceCreatedSignal other) {
+      if (ReferenceEquals(other, null)) {
+        return false;
+      }
+      if (ReferenceEquals(other, this)) {
+        return true;
+      }
+      if (ID != other.ID) return false;
+      if (ParentID != other.ParentID) return false;
+      if (Type != other.Type) return false;
+      if (Time != other.Time) return false;
+      if (Duration != other.Duration) return false;
+      if (Path != other.Path) return false;
+      if (Source != other.Source) return false;
+      if (SessionID != other.SessionID) return false;
+      if (Status != other.Status) return false;
+      return Equals(_unknownFields, other._unknownFields);
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public override int GetHashCode() {
+      int hash = 1;
+      if (ID != 0UL) hash ^= ID.GetHashCode();
+      if (ParentID != 0UL) hash ^= ParentID.GetHashCode();
+      if (Type != 0) hash ^= Type.GetHashCode();
+      if (Time != 0UL) hash ^= Time.GetHashCode();
+      if (Duration != 0UL) hash ^= Duration.GetHashCode();
+      if (Path.Length != 0) hash ^= Path.GetHashCode();
+      if (Source.Length != 0) hash ^= Source.GetHashCode();
+      if (SessionID != 0UL) hash ^= SessionID.GetHashCode();
+      if (Status != 0) hash ^= Status.GetHashCode();
+      if (_unknownFields != null) {
+        hash ^= _unknownFields.GetHashCode();
+      }
+      return hash;
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public override string ToString() {
+      return pb::JsonFormatter.ToDiagnosticString(this);
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public void WriteTo(pb::CodedOutputStream output) {
+    #if !GOOGLE_PROTOBUF_REFSTRUCT_COMPATIBILITY_MODE
+      output.WriteRawMessage(this);
+    #else
+      if (ID != 0UL) {
+        output.WriteRawTag(8);
+        output.WriteUInt64(ID);
+      }
+      if (ParentID != 0UL) {
+        output.WriteRawTag(16);
+        output.WriteUInt64(ParentID);
+      }
+      if (Type != 0) {
+        output.WriteRawTag(24);
+        output.WriteUInt32(Type);
+      }
+      if (Time != 0UL) {
+        output.WriteRawTag(32);
+        output.WriteUInt64(Time);
+      }
+      if (Duration != 0UL) {
+        output.WriteRawTag(40);
+        output.WriteUInt64(Duration);
+      }
+      if (Path.Length != 0) {
+        output.WriteRawTag(50);
+        output.WriteString(Path);
+      }
+      if (Source.Length != 0) {
+        output.WriteRawTag(58);
+        output.WriteString(Source);
+      }
+      if (SessionID != 0UL) {
+        output.WriteRawTag(64);
+        output.WriteUInt64(SessionID);
+      }
+      if (Status != 0) {
+        output.WriteRawTag(72);
+        output.WriteInt32(Status);
+      }
+      if (_unknownFields != null) {
+        _unknownFields.WriteTo(output);
+      }
+    #endif
+    }
+
+    #if !GOOGLE_PROTOBUF_REFSTRUCT_COMPATIBILITY_MODE
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    void pb::IBufferMessage.InternalWriteTo(ref pb::WriteContext output) {
+      if (ID != 0UL) {
+        output.WriteRawTag(8);
+        output.WriteUInt64(ID);
+      }
+      if (ParentID != 0UL) {
+        output.WriteRawTag(16);
+        output.WriteUInt64(ParentID);
+      }
+      if (Type != 0) {
+        output.WriteRawTag(24);
+        output.WriteUInt32(Type);
+      }
+      if (Time != 0UL) {
+        output.WriteRawTag(32);
+        output.WriteUInt64(Time);
+      }
+      if (Duration != 0UL) {
+        output.WriteRawTag(40);
+        output.WriteUInt64(Duration);
+      }
+      if (Path.Length != 0) {
+        output.WriteRawTag(50);
+        output.WriteString(Path);
+      }
+      if (Source.Length != 0) {
+        output.WriteRawTag(58);
+        output.WriteString(Source);
+      }
+      if (SessionID != 0UL) {
+        output.WriteRawTag(64);
+        output.WriteUInt64(SessionID);
+      }
+      if (Status != 0) {
+        output.WriteRawTag(72);
+        output.WriteInt32(Status);
+      }
+      if (_unknownFields != null) {
+        _unknownFields.WriteTo(ref output);
+      }
+    }
+    #endif
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public int CalculateSize() {
+      int size = 0;
+      if (ID != 0UL) {
+        size += 1 + pb::CodedOutputStream.ComputeUInt64Size(ID);
+      }
+      if (ParentID != 0UL) {
+        size += 1 + pb::CodedOutputStream.ComputeUInt64Size(ParentID);
+      }
+      if (Type != 0) {
+        size += 1 + pb::CodedOutputStream.ComputeUInt32Size(Type);
+      }
+      if (Time != 0UL) {
+        size += 1 + pb::CodedOutputStream.ComputeUInt64Size(Time);
+      }
+      if (Duration != 0UL) {
+        size += 1 + pb::CodedOutputStream.ComputeUInt64Size(Duration);
+      }
+      if (Path.Length != 0) {
+        size += 1 + pb::CodedOutputStream.ComputeStringSize(Path);
+      }
+      if (Source.Length != 0) {
+        size += 1 + pb::CodedOutputStream.ComputeStringSize(Source);
+      }
+      if (SessionID != 0UL) {
+        size += 1 + pb::CodedOutputStream.ComputeUInt64Size(SessionID);
+      }
+      if (Status != 0) {
+        size += 1 + pb::CodedOutputStream.ComputeInt32Size(Status);
+      }
+      if (_unknownFields != null) {
+        size += _unknownFields.CalculateSize();
+      }
+      return size;
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public void MergeFrom(TraceCreatedSignal other) {
+      if (other == null) {
+        return;
+      }
+      if (other.ID != 0UL) {
+        ID = other.ID;
+      }
+      if (other.ParentID != 0UL) {
+        ParentID = other.ParentID;
+      }
+      if (other.Type != 0) {
+        Type = other.Type;
+      }
+      if (other.Time != 0UL) {
+        Time = other.Time;
+      }
+      if (other.Duration != 0UL) {
+        Duration = other.Duration;
+      }
+      if (other.Path.Length != 0) {
+        Path = other.Path;
+      }
+      if (other.Source.Length != 0) {
+        Source = other.Source;
+      }
+      if (other.SessionID != 0UL) {
+        SessionID = other.SessionID;
+      }
+      if (other.Status != 0) {
+        Status = other.Status;
+      }
+      _unknownFields = pb::UnknownFieldSet.MergeFrom(_unknownFields, other._unknownFields);
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public void MergeFrom(pb::CodedInputStream input) {
+    #if !GOOGLE_PROTOBUF_REFSTRUCT_COMPATIBILITY_MODE
+      input.ReadRawMessage(this);
+    #else
+      uint tag;
+      while ((tag = input.ReadTag()) != 0) {
+        switch(tag) {
+          default:
+            _unknownFields = pb::UnknownFieldSet.MergeFieldFrom(_unknownFields, input);
+            break;
+          case 8: {
+            ID = input.ReadUInt64();
+            break;
+          }
+          case 16: {
+            ParentID = input.ReadUInt64();
+            break;
+          }
+          case 24: {
+            Type = input.ReadUInt32();
+            break;
+          }
+          case 32: {
+            Time = input.ReadUInt64();
+            break;
+          }
+          case 40: {
+            Duration = input.ReadUInt64();
+            break;
+          }
+          case 50: {
+            Path = input.ReadString();
+            break;
+          }
+          case 58: {
+            Source = input.ReadString();
+            break;
+          }
+          case 64: {
+            SessionID = input.ReadUInt64();
+            break;
+          }
+          case 72: {
+            Status = input.ReadInt32();
+            break;
+          }
+        }
+      }
+    #endif
+    }
+
+    #if !GOOGLE_PROTOBUF_REFSTRUCT_COMPATIBILITY_MODE
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    void pb::IBufferMessage.InternalMergeFrom(ref pb::ParseContext input) {
+      uint tag;
+      while ((tag = input.ReadTag()) != 0) {
+        switch(tag) {
+          default:
+            _unknownFields = pb::UnknownFieldSet.MergeFieldFrom(_unknownFields, ref input);
+            break;
+          case 8: {
+            ID = input.ReadUInt64();
+            break;
+          }
+          case 16: {
+            ParentID = input.ReadUInt64();
+            break;
+          }
+          case 24: {
+            Type = input.ReadUInt32();
+            break;
+          }
+          case 32: {
+            Time = input.ReadUInt64();
+            break;
+          }
+          case 40: {
+            Duration = input.ReadUInt64();
+            break;
+          }
+          case 50: {
+            Path = input.ReadString();
+            break;
+          }
+          case 58: {
+            Source = input.ReadString();
+            break;
+          }
+          case 64: {
+            SessionID = input.ReadUInt64();
+            break;
+          }
+          case 72: {
+            Status = input.ReadInt32();
+            break;
+          }
+        }
+      }
+    }
+    #endif
+
+  }
+
+  public sealed partial class TagCreatedSignal : pb::IMessage<TagCreatedSignal>
+  #if !GOOGLE_PROTOBUF_REFSTRUCT_COMPATIBILITY_MODE
+      , pb::IBufferMessage
+  #endif
+  {
+    private static readonly pb::MessageParser<TagCreatedSignal> _parser = new pb::MessageParser<TagCreatedSignal>(() => new TagCreatedSignal());
+    private pb::UnknownFieldSet _unknownFields;
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public static pb::MessageParser<TagCreatedSignal> Parser { get { return _parser; } }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public static pbr::MessageDescriptor Descriptor {
+      get { return global::scyna.proto.EngineReflection.Descriptor.MessageTypes[11]; }
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    pbr::MessageDescriptor pb::IMessage.Descriptor {
+      get { return Descriptor; }
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public TagCreatedSignal() {
+      OnConstruction();
+    }
+
+    partial void OnConstruction();
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public TagCreatedSignal(TagCreatedSignal other) : this() {
+      traceID_ = other.traceID_;
+      key_ = other.key_;
+      value_ = other.value_;
+      _unknownFields = pb::UnknownFieldSet.Clone(other._unknownFields);
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public TagCreatedSignal Clone() {
+      return new TagCreatedSignal(this);
+    }
+
+    /// <summary>Field number for the "TraceID" field.</summary>
+    public const int TraceIDFieldNumber = 1;
+    private ulong traceID_;
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public ulong TraceID {
+      get { return traceID_; }
+      set {
+        traceID_ = value;
+      }
+    }
+
+    /// <summary>Field number for the "Key" field.</summary>
+    public const int KeyFieldNumber = 2;
+    private string key_ = "";
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public string Key {
+      get { return key_; }
+      set {
+        key_ = pb::ProtoPreconditions.CheckNotNull(value, "value");
+      }
+    }
+
+    /// <summary>Field number for the "Value" field.</summary>
+    public const int ValueFieldNumber = 3;
+    private string value_ = "";
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public string Value {
+      get { return value_; }
+      set {
+        value_ = pb::ProtoPreconditions.CheckNotNull(value, "value");
+      }
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public override bool Equals(object other) {
+      return Equals(other as TagCreatedSignal);
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public bool Equals(TagCreatedSignal other) {
+      if (ReferenceEquals(other, null)) {
+        return false;
+      }
+      if (ReferenceEquals(other, this)) {
+        return true;
+      }
+      if (TraceID != other.TraceID) return false;
+      if (Key != other.Key) return false;
+      if (Value != other.Value) return false;
+      return Equals(_unknownFields, other._unknownFields);
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public override int GetHashCode() {
+      int hash = 1;
+      if (TraceID != 0UL) hash ^= TraceID.GetHashCode();
+      if (Key.Length != 0) hash ^= Key.GetHashCode();
+      if (Value.Length != 0) hash ^= Value.GetHashCode();
+      if (_unknownFields != null) {
+        hash ^= _unknownFields.GetHashCode();
+      }
+      return hash;
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public override string ToString() {
+      return pb::JsonFormatter.ToDiagnosticString(this);
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public void WriteTo(pb::CodedOutputStream output) {
+    #if !GOOGLE_PROTOBUF_REFSTRUCT_COMPATIBILITY_MODE
+      output.WriteRawMessage(this);
+    #else
+      if (TraceID != 0UL) {
+        output.WriteRawTag(8);
+        output.WriteUInt64(TraceID);
+      }
+      if (Key.Length != 0) {
+        output.WriteRawTag(18);
+        output.WriteString(Key);
+      }
+      if (Value.Length != 0) {
+        output.WriteRawTag(26);
+        output.WriteString(Value);
+      }
+      if (_unknownFields != null) {
+        _unknownFields.WriteTo(output);
+      }
+    #endif
+    }
+
+    #if !GOOGLE_PROTOBUF_REFSTRUCT_COMPATIBILITY_MODE
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    void pb::IBufferMessage.InternalWriteTo(ref pb::WriteContext output) {
+      if (TraceID != 0UL) {
+        output.WriteRawTag(8);
+        output.WriteUInt64(TraceID);
+      }
+      if (Key.Length != 0) {
+        output.WriteRawTag(18);
+        output.WriteString(Key);
+      }
+      if (Value.Length != 0) {
+        output.WriteRawTag(26);
+        output.WriteString(Value);
+      }
+      if (_unknownFields != null) {
+        _unknownFields.WriteTo(ref output);
+      }
+    }
+    #endif
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public int CalculateSize() {
+      int size = 0;
+      if (TraceID != 0UL) {
+        size += 1 + pb::CodedOutputStream.ComputeUInt64Size(TraceID);
+      }
+      if (Key.Length != 0) {
+        size += 1 + pb::CodedOutputStream.ComputeStringSize(Key);
+      }
+      if (Value.Length != 0) {
+        size += 1 + pb::CodedOutputStream.ComputeStringSize(Value);
+      }
+      if (_unknownFields != null) {
+        size += _unknownFields.CalculateSize();
+      }
+      return size;
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public void MergeFrom(TagCreatedSignal other) {
+      if (other == null) {
+        return;
+      }
+      if (other.TraceID != 0UL) {
+        TraceID = other.TraceID;
+      }
+      if (other.Key.Length != 0) {
+        Key = other.Key;
+      }
+      if (other.Value.Length != 0) {
+        Value = other.Value;
+      }
+      _unknownFields = pb::UnknownFieldSet.MergeFrom(_unknownFields, other._unknownFields);
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public void MergeFrom(pb::CodedInputStream input) {
+    #if !GOOGLE_PROTOBUF_REFSTRUCT_COMPATIBILITY_MODE
+      input.ReadRawMessage(this);
+    #else
+      uint tag;
+      while ((tag = input.ReadTag()) != 0) {
+        switch(tag) {
+          default:
+            _unknownFields = pb::UnknownFieldSet.MergeFieldFrom(_unknownFields, input);
+            break;
+          case 8: {
+            TraceID = input.ReadUInt64();
+            break;
+          }
+          case 18: {
+            Key = input.ReadString();
+            break;
+          }
+          case 26: {
+            Value = input.ReadString();
+            break;
+          }
+        }
+      }
+    #endif
+    }
+
+    #if !GOOGLE_PROTOBUF_REFSTRUCT_COMPATIBILITY_MODE
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    void pb::IBufferMessage.InternalMergeFrom(ref pb::ParseContext input) {
+      uint tag;
+      while ((tag = input.ReadTag()) != 0) {
+        switch(tag) {
+          default:
+            _unknownFields = pb::UnknownFieldSet.MergeFieldFrom(_unknownFields, ref input);
+            break;
+          case 8: {
+            TraceID = input.ReadUInt64();
+            break;
+          }
+          case 18: {
+            Key = input.ReadString();
+            break;
+          }
+          case 26: {
+            Value = input.ReadString();
+            break;
+          }
+        }
+      }
+    }
+    #endif
+
+  }
+
+  public sealed partial class EndpointDoneSignal : pb::IMessage<EndpointDoneSignal>
+  #if !GOOGLE_PROTOBUF_REFSTRUCT_COMPATIBILITY_MODE
+      , pb::IBufferMessage
+  #endif
+  {
+    private static readonly pb::MessageParser<EndpointDoneSignal> _parser = new pb::MessageParser<EndpointDoneSignal>(() => new EndpointDoneSignal());
+    private pb::UnknownFieldSet _unknownFields;
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public static pb::MessageParser<EndpointDoneSignal> Parser { get { return _parser; } }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public static pbr::MessageDescriptor Descriptor {
+      get { return global::scyna.proto.EngineReflection.Descriptor.MessageTypes[12]; }
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    pbr::MessageDescriptor pb::IMessage.Descriptor {
+      get { return Descriptor; }
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public EndpointDoneSignal() {
+      OnConstruction();
+    }
+
+    partial void OnConstruction();
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public EndpointDoneSignal(EndpointDoneSignal other) : this() {
+      traceID_ = other.traceID_;
+      response_ = other.response_;
+      _unknownFields = pb::UnknownFieldSet.Clone(other._unknownFields);
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public EndpointDoneSignal Clone() {
+      return new EndpointDoneSignal(this);
+    }
+
+    /// <summary>Field number for the "TraceID" field.</summary>
+    public const int TraceIDFieldNumber = 1;
+    private ulong traceID_;
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public ulong TraceID {
+      get { return traceID_; }
+      set {
+        traceID_ = value;
+      }
+    }
+
+    /// <summary>Field number for the "Response" field.</summary>
+    public const int ResponseFieldNumber = 2;
+    private string response_ = "";
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public string Response {
+      get { return response_; }
+      set {
+        response_ = pb::ProtoPreconditions.CheckNotNull(value, "value");
+      }
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public override bool Equals(object other) {
+      return Equals(other as EndpointDoneSignal);
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public bool Equals(EndpointDoneSignal other) {
+      if (ReferenceEquals(other, null)) {
+        return false;
+      }
+      if (ReferenceEquals(other, this)) {
+        return true;
+      }
+      if (TraceID != other.TraceID) return false;
+      if (Response != other.Response) return false;
+      return Equals(_unknownFields, other._unknownFields);
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public override int GetHashCode() {
+      int hash = 1;
+      if (TraceID != 0UL) hash ^= TraceID.GetHashCode();
+      if (Response.Length != 0) hash ^= Response.GetHashCode();
+      if (_unknownFields != null) {
+        hash ^= _unknownFields.GetHashCode();
+      }
+      return hash;
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public override string ToString() {
+      return pb::JsonFormatter.ToDiagnosticString(this);
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public void WriteTo(pb::CodedOutputStream output) {
+    #if !GOOGLE_PROTOBUF_REFSTRUCT_COMPATIBILITY_MODE
+      output.WriteRawMessage(this);
+    #else
+      if (TraceID != 0UL) {
+        output.WriteRawTag(8);
+        output.WriteUInt64(TraceID);
+      }
+      if (Response.Length != 0) {
+        output.WriteRawTag(18);
+        output.WriteString(Response);
+      }
+      if (_unknownFields != null) {
+        _unknownFields.WriteTo(output);
+      }
+    #endif
+    }
+
+    #if !GOOGLE_PROTOBUF_REFSTRUCT_COMPATIBILITY_MODE
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    void pb::IBufferMessage.InternalWriteTo(ref pb::WriteContext output) {
+      if (TraceID != 0UL) {
+        output.WriteRawTag(8);
+        output.WriteUInt64(TraceID);
+      }
+      if (Response.Length != 0) {
+        output.WriteRawTag(18);
+        output.WriteString(Response);
+      }
+      if (_unknownFields != null) {
+        _unknownFields.WriteTo(ref output);
+      }
+    }
+    #endif
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public int CalculateSize() {
+      int size = 0;
+      if (TraceID != 0UL) {
+        size += 1 + pb::CodedOutputStream.ComputeUInt64Size(TraceID);
+      }
+      if (Response.Length != 0) {
+        size += 1 + pb::CodedOutputStream.ComputeStringSize(Response);
+      }
+      if (_unknownFields != null) {
+        size += _unknownFields.CalculateSize();
+      }
+      return size;
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public void MergeFrom(EndpointDoneSignal other) {
+      if (other == null) {
+        return;
+      }
+      if (other.TraceID != 0UL) {
+        TraceID = other.TraceID;
+      }
+      if (other.Response.Length != 0) {
+        Response = other.Response;
+      }
+      _unknownFields = pb::UnknownFieldSet.MergeFrom(_unknownFields, other._unknownFields);
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public void MergeFrom(pb::CodedInputStream input) {
+    #if !GOOGLE_PROTOBUF_REFSTRUCT_COMPATIBILITY_MODE
+      input.ReadRawMessage(this);
+    #else
+      uint tag;
+      while ((tag = input.ReadTag()) != 0) {
+        switch(tag) {
+          default:
+            _unknownFields = pb::UnknownFieldSet.MergeFieldFrom(_unknownFields, input);
+            break;
+          case 8: {
+            TraceID = input.ReadUInt64();
+            break;
+          }
+          case 18: {
+            Response = input.ReadString();
+            break;
+          }
+        }
+      }
+    #endif
+    }
+
+    #if !GOOGLE_PROTOBUF_REFSTRUCT_COMPATIBILITY_MODE
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    void pb::IBufferMessage.InternalMergeFrom(ref pb::ParseContext input) {
+      uint tag;
+      while ((tag = input.ReadTag()) != 0) {
+        switch(tag) {
+          default:
+            _unknownFields = pb::UnknownFieldSet.MergeFieldFrom(_unknownFields, ref input);
+            break;
+          case 8: {
+            TraceID = input.ReadUInt64();
+            break;
+          }
+          case 18: {
+            Response = input.ReadString();
             break;
           }
         }
@@ -2391,7 +3450,7 @@ namespace scyna.proto {
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     public static pbr::MessageDescriptor Descriptor {
-      get { return global::scyna.proto.EngineReflection.Descriptor.MessageTypes[9]; }
+      get { return global::scyna.proto.EngineReflection.Descriptor.MessageTypes[13]; }
     }
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
@@ -2635,7 +3694,7 @@ namespace scyna.proto {
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     public static pbr::MessageDescriptor Descriptor {
-      get { return global::scyna.proto.EngineReflection.Descriptor.MessageTypes[10]; }
+      get { return global::scyna.proto.EngineReflection.Descriptor.MessageTypes[14]; }
     }
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
@@ -2843,7 +3902,7 @@ namespace scyna.proto {
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     public static pbr::MessageDescriptor Descriptor {
-      get { return global::scyna.proto.EngineReflection.Descriptor.MessageTypes[11]; }
+      get { return global::scyna.proto.EngineReflection.Descriptor.MessageTypes[15]; }
     }
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
@@ -3015,7 +4074,7 @@ namespace scyna.proto {
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     public static pbr::MessageDescriptor Descriptor {
-      get { return global::scyna.proto.EngineReflection.Descriptor.MessageTypes[12]; }
+      get { return global::scyna.proto.EngineReflection.Descriptor.MessageTypes[16]; }
     }
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
@@ -3259,7 +4318,7 @@ namespace scyna.proto {
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     public static pbr::MessageDescriptor Descriptor {
-      get { return global::scyna.proto.EngineReflection.Descriptor.MessageTypes[13]; }
+      get { return global::scyna.proto.EngineReflection.Descriptor.MessageTypes[17]; }
     }
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
@@ -3467,7 +4526,7 @@ namespace scyna.proto {
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     public static pbr::MessageDescriptor Descriptor {
-      get { return global::scyna.proto.EngineReflection.Descriptor.MessageTypes[14]; }
+      get { return global::scyna.proto.EngineReflection.Descriptor.MessageTypes[18]; }
     }
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
@@ -3678,7 +4737,7 @@ namespace scyna.proto {
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     public static pbr::MessageDescriptor Descriptor {
-      get { return global::scyna.proto.EngineReflection.Descriptor.MessageTypes[15]; }
+      get { return global::scyna.proto.EngineReflection.Descriptor.MessageTypes[19]; }
     }
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
@@ -4177,7 +5236,7 @@ namespace scyna.proto {
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     public static pbr::MessageDescriptor Descriptor {
-      get { return global::scyna.proto.EngineReflection.Descriptor.MessageTypes[16]; }
+      get { return global::scyna.proto.EngineReflection.Descriptor.MessageTypes[20]; }
     }
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
@@ -4446,7 +5505,7 @@ namespace scyna.proto {
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     public static pbr::MessageDescriptor Descriptor {
-      get { return global::scyna.proto.EngineReflection.Descriptor.MessageTypes[17]; }
+      get { return global::scyna.proto.EngineReflection.Descriptor.MessageTypes[21]; }
     }
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
@@ -4654,7 +5713,7 @@ namespace scyna.proto {
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     public static pbr::MessageDescriptor Descriptor {
-      get { return global::scyna.proto.EngineReflection.Descriptor.MessageTypes[18]; }
+      get { return global::scyna.proto.EngineReflection.Descriptor.MessageTypes[22]; }
     }
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
@@ -4862,7 +5921,7 @@ namespace scyna.proto {
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     public static pbr::MessageDescriptor Descriptor {
-      get { return global::scyna.proto.EngineReflection.Descriptor.MessageTypes[19]; }
+      get { return global::scyna.proto.EngineReflection.Descriptor.MessageTypes[23]; }
     }
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
@@ -5106,7 +6165,7 @@ namespace scyna.proto {
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     public static pbr::MessageDescriptor Descriptor {
-      get { return global::scyna.proto.EngineReflection.Descriptor.MessageTypes[20]; }
+      get { return global::scyna.proto.EngineReflection.Descriptor.MessageTypes[24]; }
     }
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]

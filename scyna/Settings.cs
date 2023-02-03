@@ -19,7 +19,7 @@ public class Settings : ISettings
 
     public bool Write(string key, string value)
     {
-        var response = Service.SendRequest(Path.SETTING_WRITE_URL, new proto.WriteSettingRequest
+        var response = Endpoint.SendRequest(Path.SETTING_WRITE_URL, new proto.WriteSettingRequest
         {
             Module = Engine.Instance.Module,
             Key = key,
@@ -47,7 +47,7 @@ public class Settings : ISettings
             if (ret != null) return ret;
         }
 
-        var response = Service.SendRequest<proto.ReadSettingResponse>(Path.SETTING_READ_URL, new proto.ReadSettingRequest
+        var response = Endpoint.SendRequest<proto.ReadSettingResponse>(Path.SETTING_READ_URL, new proto.ReadSettingRequest
         {
             Module = Engine.Instance.Module,
             Key = key
@@ -74,7 +74,7 @@ public class Settings : ISettings
 
     public bool Remove(string key)
     {
-        var response = Service.SendRequest(Path.SETTING_REMOVE_URL, new proto.RemoveSettingRequest
+        var response = Endpoint.SendRequest(Path.SETTING_REMOVE_URL, new proto.RemoveSettingRequest
         {
             Module = Engine.Instance.Module,
             Key = key,
@@ -108,7 +108,7 @@ public class Settings : ISettings
     {
         public override void Execute()
         {
-            if (data.Module == Engine.Instance.Module)
+            if (data != null && data.Module == Engine.Instance.Module)
             {
                 Engine.Instance.Settings.update(data.Key, data.Value);
             }
@@ -119,7 +119,7 @@ public class Settings : ISettings
     {
         public override void Execute()
         {
-            if (data.Module == Engine.Instance.Module)
+            if (data != null && data.Module == Engine.Instance.Module)
             {
                 Engine.Instance.Settings.remove(data.Key);
             }

@@ -28,9 +28,9 @@ public class Logger
         Console.WriteLine(messgage);
         if (id > 0)
         {
-            var signal = new proto.WriteLogSignal
+            var signal = new proto.LogCreatedSignal
             {
-                Id = id,
+                ID = id,
                 Time = (ulong)DateTimeOffset.Now.ToUnixTimeMilliseconds(),
                 Level = level,
                 Text = messgage,

@@ -10,7 +10,7 @@ class EchoTest
     public void Setup()
     {
         Engine.Init("http://127.0.0.1:8081", "scyna.test", "123456");
-        Service.Register(Path.ECHO_USER_URL, new EchoService());
+        Endpoint.Register(Path.ECHO_USER_URL, new EchoService());
     }
 
     [OneTimeTearDown]
@@ -22,7 +22,7 @@ class EchoTest
     [Test]
     public void TestEchoSuccess()
     {
-        scyna.ServiceTest.New(Path.ECHO_USER_URL)
+        scyna.EndpointTest.New(Path.ECHO_USER_URL)
             .WithRequest(new proto.EchoRequest { Text = "Hello" })
             .ExpectResponse(new proto.EchoResponse { Text = "Hello" })
             .Run();
@@ -31,7 +31,7 @@ class EchoTest
     [Test]
     public void TestEchoCode()
     {
-        scyna.ServiceTest.New(Path.ECHO_USER_URL)
+        scyna.EndpointTest.New(Path.ECHO_USER_URL)
             .WithRequest(new proto.EchoRequest { Text = "Hello" })
             .ExpectSuccess()
             .Run();
@@ -40,7 +40,7 @@ class EchoTest
     [Test]
     public void TestCallService()
     {
-        var r = scyna.ServiceTest.New(Path.ECHO_USER_URL)
+        var r = scyna.EndpointTest.New(Path.ECHO_USER_URL)
             .WithRequest(new proto.EchoRequest { Text = "Hello" })
             .Run<proto.EchoResponse>();
 

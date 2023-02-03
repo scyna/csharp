@@ -3,10 +3,10 @@ using System.Text;
 
 namespace scyna;
 
-public abstract class Service
+public abstract class Endpoint
 {
     private static JsonFormatter formater = new JsonFormatter(new JsonFormatter.Settings(true));
-    public static void Register<T>(string url, Service.Handler<T> handler) where T : IMessage<T>, new()
+    public static void Register<T>(string url, Endpoint.Handler<T> handler) where T : IMessage<T>, new()
     {
         Console.WriteLine("Register Service:" + url);
         var nc = Engine.Instance.Connection;
@@ -15,8 +15,8 @@ public abstract class Service
 
     public static proto.Response? SendRequest(string url, IMessage? request)
     {
-        var callID = Engine.ID.Next();
-        var req = new proto.Request { CallID = callID, JSON = false };
+        var traceID = Engine.ID.Next();
+        var req = new proto.Request { TraceID = traceID, JSON = false };
         if (request != null) req.Body = request.ToByteString();
         try
         {
@@ -28,8 +28,8 @@ public abstract class Service
 
     public static T? SendRequest<T>(string url, IMessage? request) where T : IMessage<T>, new()
     {
-        var callID = Engine.ID.Next();
-        var req = new proto.Request { CallID = callID, JSON = false };
+        var traceID = Engine.ID.Next();
+        var req = new proto.Request { TraceID = traceID, JSON = false };
         if (request != null) req.Body = request.ToByteString();
         try
         {
@@ -76,14 +76,14 @@ public abstract class Service
     public abstract class Handler<T> : BaseHandler where T : IMessage<T>, new()
     {
         private MessageParser<T> parser = new MessageParser<T>(() => new T());
-        protected T request;
+        protected T? request;
         public abstract void Execute();
         public void Run(NATS.Client.Msg message)
         {
             try
             {
                 var request = proto.Request.Parser.ParseFrom(message.Data);
-                LOG.Reset(request.CallID);
+                LOG.Reset(request.TraceID);
                 reply = message.Reply;
                 JSON = request.JSON;
                 source = request.Data;

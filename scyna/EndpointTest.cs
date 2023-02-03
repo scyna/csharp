@@ -2,40 +2,40 @@ namespace scyna;
 using Google.Protobuf;
 using NUnit.Framework;
 
-public class ServiceTest
+public class EndpointTest
 {
     private string url;
     private IMessage? request;
     private IMessage? response;
     private int status;
 
-    private ServiceTest(string url) { this.url = url; }
+    private EndpointTest(string url) { this.url = url; }
 
-    public static ServiceTest New(string url)
+    public static EndpointTest New(string url)
     {
-        return new ServiceTest(url);
+        return new EndpointTest(url);
     }
 
-    public ServiceTest WithRequest(IMessage request)
+    public EndpointTest WithRequest(IMessage request)
     {
         this.request = request;
         return this;
     }
 
-    public ServiceTest ExpectSuccess()
+    public EndpointTest ExpectSuccess()
     {
         this.status = 200;
         return this;
     }
 
-    public ServiceTest ExpectError(proto.Error error)
+    public EndpointTest ExpectError(proto.Error error)
     {
         this.status = 400;
         this.response = error;
         return this;
     }
 
-    public ServiceTest ExpectResponse(IMessage response)
+    public EndpointTest ExpectResponse(IMessage response)
     {
         this.status = 200;
         this.response = response;
@@ -44,7 +44,7 @@ public class ServiceTest
 
     public void Run()
     {
-        var res = Service.SendRequest(url, request);
+        var res = Endpoint.SendRequest(url, request);
         Assert.IsNotNull(res);
         Assert.AreEqual(status, res.Code);
         if (response != null)
@@ -57,7 +57,7 @@ public class ServiceTest
 
     public T Run<T>() where T : IMessage<T>, new()
     {
-        var res = Service.SendRequest(url, request);
+        var res = Endpoint.SendRequest(url, request);
         Assert.IsNotNull(res);
         Assert.AreEqual(200, res.Code);
         MessageParser<T> parser = new MessageParser<T>(() => new T());

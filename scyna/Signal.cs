@@ -22,7 +22,7 @@ public class Signal
     public abstract class Handler<T> where T : IMessage<T>, new()
     {
         private MessageParser<T> parser = new MessageParser<T>(() => new T());
-        protected T data;
+        protected T? data;
         public abstract void Execute();
         public void Run(byte[] data)
         {

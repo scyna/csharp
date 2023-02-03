@@ -1,11 +1,11 @@
 syntax = "proto3";
 
 package scyna;
-option java_package = "io.scyna.proto";
-option java_multiple_files = true;
-option csharp_namespace = "scyna.proto";
-option optimize_for = CODE_SIZE;
-option go_package = ".;scyna";
+option  java_package = "io.scyna.proto";
+option  java_multiple_files = true;
+option  csharp_namespace = "scyna.proto";
+option  optimize_for = CODE_SIZE;
+option  go_package = "./;scyna_proto";
 
 message Configuration {
   string NatsUrl = 1;
@@ -40,6 +40,9 @@ message UpdateSessionSignal {
 }
 
 /*GENERATOR*/
+message GetIDRequest {
+}
+
 message GetIDResponse {
   uint32 prefix = 1;
   uint64 start = 2;
@@ -57,13 +60,36 @@ message GetSNResponse {
 }
 
 /*LOG*/
-message WriteLogSignal {
-  uint64 time = 1;
-  uint32 level = 2;
-  string text = 3;
-  uint64 id = 4;
-  uint64 seq = 5;
-  bool   session = 6;
+message LogCreatedSignal {
+  uint64 Time = 1;
+  uint32 Level = 2;
+  string Text = 3;
+  uint64 ID = 4;
+  uint64 SEQ = 5;
+  bool   Session = 6;
+}
+
+message TraceCreatedSignal {
+  uint64 ID = 1;
+  uint64 ParentID = 2;
+  uint32 Type = 3;
+  uint64 Time = 4;
+  uint64 Duration = 5;
+  string Path = 6;
+  string Source = 7;
+  uint64 SessionID = 8;
+  int32  Status = 9;
+}
+
+message TagCreatedSignal {
+  uint64 TraceID = 1;
+  string Key = 2;
+  string Value = 3;
+}
+
+message EndpointDoneSignal {
+  uint64 TraceID = 1;
+  string Response = 2;
 }
 
 /*SETTING*/
@@ -114,9 +140,9 @@ message WriteCallSignal {
 
 /*Authentication*/
 message CreateAuthRequest {
-  string Organization = 1;
-  string Secret = 2;
-  string UserID = 3;
+  string          Organization = 1;
+  string          Secret = 2;
+  string          UserID = 3;
   repeated string Apps = 4;
 }
 
