@@ -48,11 +48,9 @@ public abstract class Endpoint
         protected bool JSON;
         protected string? source;
         protected string? reply;
-        protected void Error(proto.Error error)
-        {
-            flush(400, error);
-        }
-        protected void Done(IMessage m)
+        protected bool flushed;
+
+        protected void Response(IMessage m)
         {
             flush(200, m);
         }
@@ -70,6 +68,7 @@ public abstract class Endpoint
             {
                 Console.WriteLine(e.ToString());
             }
+            flushed = true;
         }
     }
 
@@ -77,6 +76,7 @@ public abstract class Endpoint
     {
         private MessageParser<T> parser = new MessageParser<T>(() => new T());
         protected T? request;
+
         public abstract void Execute();
         public void Run(NATS.Client.Msg message)
         {
@@ -87,23 +87,25 @@ public abstract class Endpoint
                 reply = message.Reply;
                 JSON = request.JSON;
                 source = request.Data;
+                flushed = false;
 
-                if (request.Body == null) throw new Exception();
-                if (JSON)
-                {
-                    this.request = parser.ParseJson(request.Body.ToString(Encoding.ASCII));
-                    Execute();
-                }
-                else
-                {
-                    this.request = parser.ParseFrom(request.Body);
-                    Execute();
-                }
+                if (request.Body == null) throw scyna.Error.BAD_REQUEST;
+
+                if (JSON) this.request = parser.ParseJson(request.Body.ToString(Encoding.ASCII));
+                else this.request = parser.ParseFrom(request.Body);
+
+                this.Execute();
+                if (!flushed) flush(200, scyna.Error.OK.ToProto());
+            }
+            catch (scyna.Error e)
+            {
+                Console.WriteLine(e.ToString());
+                flush(400, e.ToProto());
             }
             catch (Exception e)
             {
                 Console.WriteLine(e.ToString());
-                flush(400, scyna.Error.BAD_REQUEST);
+                flush(400, scyna.Error.BAD_REQUEST.ToProto());
             }
         }
     }
