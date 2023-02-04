@@ -75,9 +75,10 @@ public abstract class Endpoint
     public abstract class Handler<T> : BaseHandler where T : IMessage<T>, new()
     {
         private MessageParser<T> parser = new MessageParser<T>(() => new T());
-        protected T? request;
+        protected T request = new T();
 
         public abstract void Execute();
+
         public void Run(NATS.Client.Msg message)
         {
             try
@@ -95,6 +96,7 @@ public abstract class Endpoint
                 else this.request = parser.ParseFrom(request.Body);
 
                 this.Execute();
+
                 if (!flushed) flush(200, scyna.Error.OK.ToProto());
             }
             catch (scyna.Error e)

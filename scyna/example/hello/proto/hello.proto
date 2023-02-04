@@ -1,0 +1,25 @@
+syntax = "proto3";
+option java_multiple_files = true;
+option java_package = "io.scyna.ex.hello.proto";
+option csharp_namespace = "ex.hello.proto";
+
+message EchoRequest 
+{
+  string text = 1;
+}
+
+message EchoResponse 
+{
+  string text = 1;
+}
+
+message AddRequest
+{
+  int32 a = 1;
+  int32 b = 2;
+}
+
+message AddResponse
+{
+  int32 sum = 1;
+}

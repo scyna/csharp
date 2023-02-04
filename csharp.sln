@@ -7,14 +7,6 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "scyna", "scyna\scyna.csproj
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "example", "example", "{97D355EE-EFD3-4556-A13A-41660D03FBA5}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "basic", "example\basic\basic.csproj", "{11C92477-68A4-47C2-B5F4-C2DBCF22DD0C}"
-EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "basic_test", "example\basic_test\basic_test.csproj", "{AB28728F-5D78-47A5-B6DE-1793F79C41A6}"
-EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "scylla", "example\scylla\scylla.csproj", "{39280B59-6314-4A80-9B02-AD626230B012}"
-EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "user_test", "example\scylla_test\scylla_test.csproj", "{59EB6A9D-6A26-4E9F-ADFA-49D88D718FDE}"
-EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
