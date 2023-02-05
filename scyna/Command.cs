@@ -6,7 +6,7 @@ using Google.Protobuf;
 public class Command
 {
     const string TABLE_NAME = "event_store";
-    static ulong version = 0;
+    static long version = 0;
     static string? keyspace;
 
     private BatchStatement batch = new BatchStatement();
@@ -29,10 +29,10 @@ public class Command
 
         try
         {
-            ulong id = Command.version + 1;
+            long id = Command.version + 1;
             var data = Event.ToByteArray();
-            var query = session.Prepare(string.Format("INSERT INTO {0}.{1}(event_id, entity_id, channel, data) VALUE(?,?,?,?)", keyspace, TABLE_NAME));
-            batch.Add(query.Bind(id, Entity, Channel, data));
+            var query = session.Prepare(string.Format("INSERT INTO {0}.{1}(event_id, entity_id, channel, data) VALUES(?,?,?,?)", keyspace, TABLE_NAME));
+            batch.Add(query.Bind(id, (long)Entity, Channel, data));
             session.Execute(batch);
             Command.version = id;
 
@@ -43,7 +43,7 @@ public class Command
                     TraceID = context.ID,
                     Body = ByteString.CopyFrom(data),
                     Entity = Entity,
-                    Version = id,
+                    Version = (ulong)id,
                 };
                 Engine.Stream.Publish(Engine.Module + "." + Channel, ev.ToByteArray());
             }
@@ -62,11 +62,12 @@ public class Command
             var statement = select.Bind();
             var rs = session.Execute(statement);
             var row = rs.First();
-            Command.version = row.GetValue<ulong>(0);
+            Command.version = row.GetValue<long>(0);
             Console.WriteLine("Version = " + version);
         }
-        catch
+        catch (Exception e)
         {
+            Console.WriteLine(e);
             Console.WriteLine("Error in loading EventStore configuration");
             System.Environment.Exit(1);
         }

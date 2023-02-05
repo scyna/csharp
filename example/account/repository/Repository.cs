@@ -20,20 +20,20 @@ public class Repository : IRepository
     {
         if (account.Email == null || account.Name == null) throw scyna.Error.BAD_DATA;
         var insert = Engine.DB.Session.Prepare(string.Format("INSERT INTO {0}.{1}(id,email,name) VALUES(?,?,?)", KEYSPACE, TABLE_NAME));
-        command.Batch.Add(insert.Bind(account.ID, account.Email.ToString(), account.Name.ToString()));
+        command.Batch.Add(insert.Bind((long)account.ID, account.Email.ToString(), account.Name.ToString()));
     }
 
     public Account GetAccountByEmail(EmailAddress email)
     {
         var query = Engine.DB.Session.Prepare(string.Format("SELECT id,email,name FROM {0}.{1} WHERE email=? LIMIT 1", KEYSPACE, TABLE_NAME));
-        var statement = query.Bind(email);
+        var statement = query.Bind(email.ToString());
         return queryAccount(statement);
     }
 
     public Account GetAccountByID(ulong ID)
     {
         var query = Engine.DB.Session.Prepare(string.Format("SELECT id,email,name FROM {0}.{1} WHERE id=? LIMIT 1", KEYSPACE, TABLE_NAME));
-        var statement = query.Bind(ID);
+        var statement = query.Bind((long)ID);
         return queryAccount(statement);
     }
 
@@ -42,11 +42,10 @@ public class Repository : IRepository
         try
         {
             var rs = Engine.DB.Session.Execute(statement);
+            if (rs.Count() != 1) throw Error.ACCOUNT_NOT_FOUND;
             var row = rs.First();
-            if (row == null) throw Error.ACCOUNT_NOT_FOUND;
-
             var account = new Account(context);
-            account.ID = row.GetValue<ulong>("id");
+            account.ID = (ulong)row.GetValue<long>("id");
             account.Email = EmailAddress.Parse(row.GetValue<string>("email"));
             account.Name = Name.Create(row.GetValue<string>("name"));
             return account;
