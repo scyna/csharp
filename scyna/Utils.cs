@@ -1,14 +1,17 @@
 namespace scyna;
 
+using System;
+using System.Text.RegularExpressions;
+
 public class Utils
 {
-    // private const string PATH_REGEX = ":[A-z,0-9,$,-,_,.,+,!,*,',(,),\\,]{1,}";
-    // private static Regex rx = new Regex(":[A-z,0-9,$,-,_,.,+,!,*,',(,),\\,]{1,}", RegexOptions.Compiled);
+    private const string PATH_REGEX = ":[A-z,0-9,$,-,_,.,+,!,*,',(,),\\,]{1,}";
+    private static Regex rx = new Regex(":[A-z,0-9,$,-,_,.,+,!,*,',(,),\\,]{1,}", RegexOptions.Compiled);
 
     public static string SubscribeURL(string urlPath)
     {
-        // var subURL = rx.Replace(urlPath, "*");
-        // subURL = subURL.Replace("/", ".");
+        //var subURL = rx.Replace(urlPath, "*");
+        //subURL = subURL.Replace("/", ".");
         var subURL = urlPath.Replace("/", ".");
         return "API" + subURL;
     }

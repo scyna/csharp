@@ -1,8 +1,10 @@
 namespace ex.account;
 
+using System.Text.RegularExpressions;
+
 public class EmailAddress
 {
-    private const string emailPattern = "^(.+)@(\\S+)$"; // FIXME: do not use this pattern in production
+    private static Regex emailPattern = new Regex("^(.+)@(\\S+)$", RegexOptions.Compiled);  // FIXME: do not use this pattern in production
     string value;
 
     private EmailAddress(string email) { this.value = email; }
@@ -10,12 +12,7 @@ public class EmailAddress
     public static EmailAddress Parse(string email)
     {
         if (email == null || email.Length == 0) throw Error.BAD_EMAIL;
-
-        // if (!Pattern.compile(emailPattern).matcher(email).matches())
-        // {
-        //     throw Error.BAD_EMAIL;
-        // }
-
+        if (!emailPattern.IsMatch(email)) throw Error.BAD_EMAIL;
         return new EmailAddress(email);
     }
 

@@ -33,6 +33,7 @@ public class Trace
         var ret = new Trace(channel);
         ret.type = EVENT;
         ret.sessionID = Engine.SessionID;
+        ret.source = Engine.Instance.Module;
         return ret;
     }
 
