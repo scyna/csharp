@@ -2,13 +2,14 @@ namespace scyna;
 
 public class Trace
 {
-    public const int SERVICE = 1;
+    public const int ENDPOINT = 1;
     public const int EVENT = 2;
-    public const int SIGNAL = 3;
+    public const int SYNC = 4;
+    public const int TASK = 5;
 
     private ulong parentID;
     private ulong id;
-    private int type;
+    private uint type;
     private string path;
     private string? source;
     private ulong sessionID;
@@ -27,15 +28,7 @@ public class Trace
         this.path = path;
     }
 
-    public static Trace newSignalTrace(String channel)
-    {
-        var ret = new Trace(channel);
-        ret.type = SIGNAL;
-        ret.sessionID = Engine.SessionID;
-        return ret;
-    }
-
-    public static Trace newEventTrace(String channel)
+    public static Trace NewEventTrace(String channel)
     {
         var ret = new Trace(channel);
         ret.type = EVENT;
@@ -43,10 +36,10 @@ public class Trace
         return ret;
     }
 
-    public static Trace newServiceTrace(String url, ulong trace)
+    public static Trace NewEndpointTrace(String url, ulong trace)
     {
         var ret = new Trace(url);
-        ret.type = SERVICE;
+        ret.type = ENDPOINT;
         ret.id = Engine.ID.Next();
         ret.parentID = trace;
         ret.t1 = 0;//System.nanoTime();
@@ -77,17 +70,18 @@ public class Trace
 
     public void record()
     {
-        // var signal = TraceCreatedSignal.newBuilder()
-        //         .setDuration(System.nanoTime() - t1)
-        //         .setTime(time)
-        //         .setID(id)
-        //         .setParentID(parentID)
-        //         .setType(type)
-        //         .setPath(path)
-        //         .setSource(source)
-        //         .setSessionID(sessionID)
-        //         .setStatus(status).build();
-        // SignalLite.emit(Path.TRACE_CREATED_CHANNEL, signal);
+        var signal = new proto.TraceCreatedSignal
+        {
+            Duration = 0, //FIXME
+            Time = 0, //FIXME
+            ID = id,
+            ParentID = parentID,
+            Type = type,
+            Path = path,
+            Source = source,
+            SessionID = sessionID,
+            Status = status,
+        };
+        Signal.Emit(Path.TRACE_CREATED_CHANNEL, signal);
     }
-
 }
