@@ -14,6 +14,6 @@ public class Account
     public ulong ID;
     public Name? Name;
     public EmailAddress? Email;
-    public Password? password;
+    public Password? Password;
 
 }

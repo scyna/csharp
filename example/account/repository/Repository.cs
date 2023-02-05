@@ -18,7 +18,9 @@ public class Repository : IRepository
 
     public void createAccount(Command command, Account account)
     {
-
+        if (account.Email == null || account.Name == null) throw scyna.Error.BAD_DATA;
+        var insert = Engine.DB.Session.Prepare(string.Format("INSERT INTO {0}.{1}(id,email,name) VALUES(?,?,?)", KEYSPACE, TABLE_NAME));
+        command.Batch.Add(insert.Bind(account.ID, account.Email.ToString(), account.Name.ToString()));
     }
 
     public Account GetAccountByEmail(EmailAddress email)
