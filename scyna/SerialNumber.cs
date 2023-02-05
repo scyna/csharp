@@ -7,10 +7,7 @@ public class SerialNumber
     private ulong last = 0;
     private ulong next = 0;
 
-    public SerialNumber(string key)
-    {
-        this.key = key;
-    }
+    public SerialNumber(string key) { this.key = key; }
 
     public string Next()
     {

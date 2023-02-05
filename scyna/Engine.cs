@@ -11,11 +11,12 @@ public class Engine
     private Session session;
     private Logger logger;
     private IConnection connection;
-    private ISettings settings;
+    private Settings settings;
     private Generator id;
     private DB db;
 
     private IJetStream stream;
+
     public static Engine Instance
     {
         get
@@ -24,15 +25,16 @@ public class Engine
             return instance;
         }
     }
+
     public string Module { get { return module; } }
     public IConnection Connection { get { return connection; } }
-    public ISettings Settings { get { return settings; } }
+    public Settings Settings { get { return settings; } }
     public IJetStream Stream { get { return stream; } }
-
     public static DB DB { get { return Instance.db; } }
     public static Logger LOG { get { return Instance.logger; } }
     public static Generator ID { get { return Instance.id; } }
     public static ulong SessionID { get { return Instance.session.ID; } }
+
     private Engine(string module, ulong sid, scyna.proto.Configuration config)
     {
         this.module = module;
@@ -63,6 +65,7 @@ public class Engine
 
         Console.WriteLine("Engine Created, SessionID:" + sid);
     }
+
     static public async void Init(string managerURL, string module, string secret)
     {
         var client = new HttpClient();

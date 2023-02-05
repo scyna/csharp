@@ -1,18 +1,7 @@
 namespace scyna;
 using Google.Protobuf;
 
-public interface ISettings
-{
-    bool Write(string key, string value);
-    bool Write<T>(string key, T value) where T : IMessage<T>, new();
-    string? Read(string key);
-    T? Read<T>(string key) where T : IMessage<T>, new();
-    bool Remove(string key);
-    void update(string key, string value);
-    void remove(string key);
-}
-
-public class Settings : ISettings
+public class Settings
 {
     Dictionary<string, string> data = new Dictionary<string, string>();
     JsonFormatter formater = new JsonFormatter(new JsonFormatter.Settings(false));
