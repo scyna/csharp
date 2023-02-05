@@ -1,0 +1,66 @@
+syntax = "proto3";
+package io.scyna.customer.proto;
+option java_multiple_files = true;
+option java_package = "io.scyna.ex.account.proto";
+option csharp_namespace = "ex.account.proto";
+
+/*CREATE*/
+message CreateAccountRequest {
+  string email = 1;
+  string name = 2;
+  string password = 3;
+}
+
+message CreateAccountResponse {
+  uint64 id = 1;
+}
+
+message AccountCreated{
+  uint64 id = 1;
+  string email = 2;
+  string name = 3;
+}
+
+/*GET*/
+message GetAccountByEmailRequest {
+  string email = 1;
+}
+
+message GetAccountByIDRequest {
+  uint64 id = 1;
+}
+
+message GetAccountResponse {
+  uint64 id = 1;
+  string email = 2;
+  string name = 3;
+}
+
+
+message ChangePasswordRequest {
+  uint64 id = 1;
+  string current = 2;
+  string future = 3;
+}
+
+message PasswordChanged{
+  uint64 id = 1;
+  string current = 2;
+  string future = 3;
+}
+
+message AuthenticateRequest{
+  string email = 1;
+  string password = 2;
+}
+
+message AuthenticateResponse{
+  string host = 1;
+  uint32 port = 2;
+  /*something*/
+}
+
+message SendEmailTask{
+  string email = 1;
+  string content = 2;
+}
