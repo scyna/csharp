@@ -16,7 +16,7 @@ public class SerialNumber
             if (next < last) next++;
             else
             {
-                var response = Endpoint.SendRequest<proto.GetSNResponse>(
+                var response = Request.Send<proto.GetSNResponse>(
                     Path.GEN_GET_SN_URL,
                     new proto.GetSNRequest { Key = key }
                 );

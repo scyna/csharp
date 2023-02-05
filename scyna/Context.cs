@@ -1,6 +1,8 @@
 namespace scyna;
 
-public class Context
+public class Context : Logger
 {
+    public Context(ulong id) : base(id, false) { }
+
 
 }

@@ -13,38 +13,9 @@ public abstract class Endpoint
         nc.SubscribeAsync(Utils.SubscribeURL(url), "API", (sender, args) => { handler.Run(args.Message); });
     }
 
-    public static proto.Response? SendRequest(string url, IMessage? request)
-    {
-        var traceID = Engine.ID.Next();
-        var req = new proto.Request { TraceID = traceID, JSON = false };
-        if (request != null) req.Body = request.ToByteString();
-        try
-        {
-            var msg = Engine.Instance.Connection.Request(Utils.PublishURL(url), req.ToByteArray(), 10000);
-            return proto.Response.Parser.ParseFrom(msg.Data);
-        }
-        catch (Exception) { return null; }
-    }
-
-    public static T? SendRequest<T>(string url, IMessage? request) where T : IMessage<T>, new()
-    {
-        var traceID = Engine.ID.Next();
-        var req = new proto.Request { TraceID = traceID, JSON = false };
-        if (request != null) req.Body = request.ToByteString();
-        try
-        {
-            var msg = Engine.Instance.Connection.Request(Utils.PublishURL(url), req.ToByteArray(), 10000);
-            var response = proto.Response.Parser.ParseFrom(msg.Data);
-            if (response.Code != 200) return default(T);
-            MessageParser<T> parser = new MessageParser<T>(() => new T());
-            return parser.ParseFrom(response.Body);
-        }
-        catch (Exception) { return default(T); }
-    }
-
     public abstract class BaseHandler
     {
-        protected Logger LOG = new Logger(0, false);
+        protected Context context = new Context(0);
         protected bool JSON;
         protected string? source;
         protected string? reply;
@@ -84,7 +55,7 @@ public abstract class Endpoint
             try
             {
                 var request = proto.Request.Parser.ParseFrom(message.Data);
-                LOG.Reset(request.TraceID);
+                context.Reset(request.TraceID);
                 reply = message.Reply;
                 JSON = request.JSON;
                 source = request.Data;
@@ -112,3 +83,4 @@ public abstract class Endpoint
         }
     }
 }
+

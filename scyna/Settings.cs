@@ -8,7 +8,7 @@ public class Settings
 
     public bool Write(string key, string value)
     {
-        var response = Endpoint.SendRequest(Path.SETTING_WRITE_URL, new proto.WriteSettingRequest
+        var response = Request.Send(Path.SETTING_WRITE_URL, new proto.WriteSettingRequest
         {
             Module = Engine.Instance.Module,
             Key = key,
@@ -36,7 +36,7 @@ public class Settings
             if (ret != null) return ret;
         }
 
-        var response = Endpoint.SendRequest<proto.ReadSettingResponse>(Path.SETTING_READ_URL, new proto.ReadSettingRequest
+        var response = Request.Send<proto.ReadSettingResponse>(Path.SETTING_READ_URL, new proto.ReadSettingRequest
         {
             Module = Engine.Instance.Module,
             Key = key
@@ -63,7 +63,7 @@ public class Settings
 
     public bool Remove(string key)
     {
-        var response = Endpoint.SendRequest(Path.SETTING_REMOVE_URL, new proto.RemoveSettingRequest
+        var response = Request.Send(Path.SETTING_REMOVE_URL, new proto.RemoveSettingRequest
         {
             Module = Engine.Instance.Module,
             Key = key,

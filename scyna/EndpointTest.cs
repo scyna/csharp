@@ -44,7 +44,7 @@ public class EndpointTest
 
     public void Run()
     {
-        var res = Endpoint.SendRequest(url, request);
+        var res = Request.Send(url, request);
         Assert.IsNotNull(res);
         Assert.AreEqual(status, res.Code);
         if (response != null)
@@ -57,7 +57,7 @@ public class EndpointTest
 
     public T Run<T>() where T : IMessage<T>, new()
     {
-        var res = Endpoint.SendRequest(url, request);
+        var res = Request.Send(url, request);
         Assert.IsNotNull(res);
         Assert.AreEqual(200, res.Code);
         MessageParser<T> parser = new MessageParser<T>(() => new T());

@@ -6,7 +6,7 @@ public class CreateAccountService : Endpoint.Handler<proto.CreateAccountRequest>
 {
     public override void Execute()
     {
-        LOG.Info("Receive CreateAccountRequest");
+        context.Info("Receive CreateAccountRequest");
         /*TODO*/
     }
 }

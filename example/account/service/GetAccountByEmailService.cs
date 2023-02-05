@@ -6,7 +6,7 @@ public class GetAccountByEmailService : Endpoint.Handler<proto.GetAccountByEmail
 {
     public override void Execute()
     {
-        LOG.Info("Receive GetAccountByEmailRequest");
+        context.Info("Receive GetAccountByEmailRequest");
         /*TODO*/
     }
 }
