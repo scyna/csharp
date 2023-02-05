@@ -42,7 +42,6 @@ public class Repository : IRepository
         try
         {
             var rs = Engine.DB.Session.Execute(statement);
-            if (rs.Count() != 1) throw Error.ACCOUNT_NOT_FOUND;
             var row = rs.First();
             var account = new Account(context);
             account.ID = (ulong)row.GetValue<long>("id");
@@ -50,10 +49,12 @@ public class Repository : IRepository
             account.Name = Name.Create(row.GetValue<string>("name"));
             return account;
         }
-        catch (scyna.Error) { throw; }
-        catch (Exception e)
+        catch (InvalidOperationException)
         {
-            Console.WriteLine(e);
+            throw Error.ACCOUNT_NOT_FOUND;
+        }
+        catch
+        {
             throw scyna.Error.SERVER_ERROR;
         }
     }

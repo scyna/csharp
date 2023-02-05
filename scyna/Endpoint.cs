@@ -72,7 +72,6 @@ public abstract class Endpoint
             }
             catch (scyna.Error e)
             {
-                Console.WriteLine(e.ToString());
                 flush(400, e.ToProto());
             }
             catch (Exception e)
