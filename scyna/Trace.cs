@@ -33,7 +33,7 @@ public class Trace
         var ret = new Trace(channel);
         ret.type = EVENT;
         ret.sessionID = Engine.SessionID;
-        ret.source = Engine.Instance.Module;
+        ret.source = Engine.Module;
         return ret;
     }
 
@@ -45,7 +45,7 @@ public class Trace
         ret.parentID = trace;
         ret.t1 = 0;//System.nanoTime();
         ret.time = 0;//Utils.currentMicroSeconds();
-        ret.source = Engine.Instance.Module;
+        ret.source = Engine.Module;
         return ret;
     }
 

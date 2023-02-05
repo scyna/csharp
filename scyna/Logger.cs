@@ -17,6 +17,8 @@ public class Logger
         this.session = session;
     }
 
+    public ulong ID { get { return id; } }
+
     public void Reset(ulong id) { this.id = id; }
 
     private void add(uint level, string messgage)

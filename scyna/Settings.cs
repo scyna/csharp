@@ -10,7 +10,7 @@ public class Settings
     {
         var response = Request.Send(Path.SETTING_WRITE_URL, new proto.WriteSettingRequest
         {
-            Module = Engine.Instance.Module,
+            Module = Engine.Module,
             Key = key,
             Value = value
         });
@@ -38,7 +38,7 @@ public class Settings
 
         var response = Request.Send<proto.ReadSettingResponse>(Path.SETTING_READ_URL, new proto.ReadSettingRequest
         {
-            Module = Engine.Instance.Module,
+            Module = Engine.Module,
             Key = key
         });
 
@@ -65,7 +65,7 @@ public class Settings
     {
         var response = Request.Send(Path.SETTING_REMOVE_URL, new proto.RemoveSettingRequest
         {
-            Module = Engine.Instance.Module,
+            Module = Engine.Module,
             Key = key,
         });
 
@@ -97,7 +97,7 @@ public class Settings
     {
         public override void Execute()
         {
-            if (data != null && data.Module == Engine.Instance.Module)
+            if (data != null && data.Module == Engine.Module)
             {
                 Engine.Instance.Settings.update(data.Key, data.Value);
             }
@@ -108,7 +108,7 @@ public class Settings
     {
         public override void Execute()
         {
-            if (data != null && data.Module == Engine.Instance.Module)
+            if (data != null && data.Module == Engine.Module)
             {
                 Engine.Instance.Settings.remove(data.Key);
             }

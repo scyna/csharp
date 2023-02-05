@@ -14,7 +14,6 @@ public class Engine
     private Settings settings;
     private Generator id;
     private DB db;
-
     private IJetStream stream;
 
     public static Engine Instance
@@ -26,10 +25,10 @@ public class Engine
         }
     }
 
-    public string Module { get { return module; } }
-    public IConnection Connection { get { return connection; } }
+    public static string Module { get { return Instance.module; } }
+    public static IConnection Connection { get { return Instance.connection; } }
     public Settings Settings { get { return settings; } }
-    public IJetStream Stream { get { return stream; } }
+    public static IJetStream Stream { get { return Instance.stream; } }
     public static DB DB { get { return Instance.db; } }
     public static Logger LOG { get { return Instance.logger; } }
     public static Generator ID { get { return Instance.id; } }

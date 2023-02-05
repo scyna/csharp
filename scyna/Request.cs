@@ -12,7 +12,7 @@ class Request
         if (request != null) req.Body = request.ToByteString();
         try
         {
-            var msg = Engine.Instance.Connection.Request(Utils.PublishURL(url), req.ToByteArray(), 10000);
+            var msg = Engine.Connection.Request(Utils.PublishURL(url), req.ToByteArray(), 10000);
             return proto.Response.Parser.ParseFrom(msg.Data);
         }
         catch (Exception) { return null; }
@@ -25,7 +25,7 @@ class Request
         if (request != null) req.Body = request.ToByteString();
         try
         {
-            var msg = Engine.Instance.Connection.Request(Utils.PublishURL(url), req.ToByteArray(), 10000);
+            var msg = Engine.Connection.Request(Utils.PublishURL(url), req.ToByteArray(), 10000);
             var response = proto.Response.Parser.ParseFrom(msg.Data);
             if (response.Code != 200) return default(T);
             MessageParser<T> parser = new MessageParser<T>(() => new T());

@@ -9,7 +9,7 @@ public abstract class Endpoint
     public static void Register<T>(string url, Endpoint.Handler<T> handler) where T : IMessage<T>, new()
     {
         Console.WriteLine("Register Service:" + url);
-        var nc = Engine.Instance.Connection;
+        var nc = Engine.Connection;
         nc.SubscribeAsync(Utils.SubscribeURL(url), "API", (sender, args) => { handler.Run(args.Message); });
     }
 
@@ -33,7 +33,7 @@ public abstract class Endpoint
                 if (JSON) body = ByteString.CopyFrom(formater.Format(m), Encoding.ASCII);
                 else body = m.ToByteString();
                 var response = new proto.Response { Code = status, SessionID = Engine.SessionID, Body = body };
-                Engine.Instance.Connection.Publish(reply, response.ToByteArray());
+                Engine.Connection.Publish(reply, response.ToByteArray());
             }
             catch (InvalidProtocolBufferException e)
             {

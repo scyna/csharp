@@ -8,8 +8,7 @@ public class Signal
     public static void Register<T>(string channel, Handler<T> handler) where T : IMessage<T>, new()
     {
         Console.WriteLine("Register Signal:" + channel);
-        var nc = Engine.Instance.Connection;
-        nc.SubscribeAsync(channel, Engine.Instance.Module, (sender, args) =>
+        Engine.Connection.SubscribeAsync(channel, Engine.Module, (sender, args) =>
         {
             handler.Run(args.Message.Data);
         });
@@ -17,7 +16,7 @@ public class Signal
 
     public static void Emit(string channel, pb::IMessage message)
     {
-        Engine.Instance.Connection.Publish(channel, message.ToByteArray());
+        Engine.Connection.Publish(channel, message.ToByteArray());
     }
 
     public abstract class Handler<T> where T : IMessage<T>, new()

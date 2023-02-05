@@ -11,9 +11,9 @@ public class Account
         this.context = context;
     }
 
-    public long ID;
-    public Name? name;
-    public EmailAddress? email;
+    public ulong ID;
+    public Name? Name;
+    public EmailAddress? Email;
     public Password? password;
 
 }
