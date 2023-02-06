@@ -10,7 +10,7 @@ public class Event
 {
     static Dictionary<string, Stream> streams = new Dictionary<string, Stream>();
 
-    interface IMessageHandler
+    public interface IMessageHandler
     {
         void MessageReceived(NATS.Client.Msg message);
     }
@@ -28,6 +28,13 @@ public class Event
         var subject = sender + "." + channel;
         var trace = Trace.NewEventTrace(subject);
         handler.Init(trace);
+        stream.executors[subject] = handler;
+    }
+
+    public static void AddToStream(String sender, String channel, IMessageHandler handler)
+    {
+        var stream = Stream.CreateOrGet(sender);
+        var subject = sender + "." + channel;
         stream.executors[subject] = handler;
     }
 

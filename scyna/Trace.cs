@@ -34,6 +34,16 @@ public class Trace
         return ret;
     }
 
+    public static Trace NewTaskTrace(String channel)
+    {
+        var ret = new Trace(channel);
+        ret.type = TASK;
+        ret.sessionID = Engine.SessionID;
+        ret.source = Engine.Module;
+        return ret;
+    }
+
+
     public static Trace NewEndpointTrace(String url, ulong trace)
     {
         var ret = new Trace(url);
