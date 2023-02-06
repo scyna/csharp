@@ -75,6 +75,7 @@ public class EndpointTest
 
     public void Run()
     {
+        createStream();
         var res = Request.Send(url, request);
         Assert.IsNotNull(res);
         Assert.AreEqual(status, res.Code);
@@ -83,7 +84,11 @@ public class EndpointTest
             var parser = response.Descriptor.Parser;
             var r = parser.ParseFrom(res.Body);
             Assert.IsTrue(response.Equals(r));
+            if (exactResponseMatch) Assert.True(response.Equals(r));
+            else Assert.True(partialMatchMessage(response, r));
         }
+        receiveEvent();
+        deleteStream();
     }
 
     public T Run<T>() where T : IMessage<T>, new()
@@ -137,31 +142,29 @@ public class EndpointTest
     {
         if (event_ == null) return;
 
-        //     try
-        //     {
-        //         var sub = Engine.Stream.PullSubscribe(streamName + "." + channel);
-        //         var msg = sub.nextMessage(Duration.ofSeconds(1));
+        try
+        {
+            var options = PullSubscribeOptions.Builder().WithStream(streamName).Build();
+            var sub = Engine.Stream.PullSubscribe(streamName + "." + channel, options);
+            var messages = sub.Fetch(1, 1000); //1000ms
+            if (messages == null)
+            {
+                Console.WriteLine("Timeout");
+                Assert.True(false);
+                return;
+            }
+            Assert.Equals(messages.Count, 1);
+            var m = messages[0];
+            var ev = scyna.proto.Event.Parser.ParseFrom(m.Data);
+            var parser = event_.Descriptor.Parser;
+            var received = parser.ParseFrom(ev.Body);
+            if (exactEventMatch) Assert.True(event_.Equals(received));
+            else Assert.True(partialMatchMessage(event_, received));
 
-        //         if (msg == null)
-        //             System.out.println("Timeout");
 
-        //         assertNotNull(msg);
+        }
+        catch { Assert.True(false); }
 
-        //         var ev = io.scyna.proto.Event.parseFrom(msg.getData());
-        //         var parser = event.getParserForType();
-        //         var received = parser.parseFrom(ev.getBody());
-
-        //         if (exactEventMatch) {
-        //             assertEquals(event, received);
-        // } else {
-        //             assertTrue("Event not match", partialMatchMessage(event, received));
-        // }
-
-        // sub.unsubscribe();
-        //     } catch (Exception e) {
-        //         e.printStackTrace();
-        //         assertTrue("Error in receiving event", false);
-        //     }
     }
 
     private bool partialMatchMessage(IMessage x, IMessage y)
