@@ -62,4 +62,33 @@ public class Context : Logger
             throw scyna.Error.BAD_DATA;
         }
     }
+
+    public void SaveTag(String key, String value)
+    {
+        if (this.ID == 0) return;
+        Signal.Emit(Path.TRACE_CREATED_CHANNEL, new TagCreatedSignal
+        {
+            TraceID = this.ID,
+            Key = key,
+            Value = value,
+        });
+    }
+
+    public void PublishEvent(String channel, IMessage data)
+    {
+        try
+        {
+            var ev = new scyna.proto.Event
+            {
+                TraceID = this.ID,
+                Body = data.ToByteString()
+            };
+
+            var subject = Engine.Module + "." + channel;
+
+            Engine.Stream.Publish(subject, ev.ToByteArray());
+        }
+        catch (IOException) { throw scyna.Error.SERVER_ERROR; }
+        catch { throw scyna.Error.STREAM_ERROR; }
+    }
 }
