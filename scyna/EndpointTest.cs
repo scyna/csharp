@@ -1,7 +1,8 @@
 namespace scyna;
 using Google.Protobuf;
-using Google.Protobuf.Reflection;
 using NUnit.Framework;
+using NATS.Client;
+using NATS.Client.JetStream;
 
 public class EndpointTest
 {
@@ -98,25 +99,69 @@ public class EndpointTest
     {
         if (channel.Length == 0) return;
         streamName = Engine.Module;
-        // try
-        // {
-        //     StreamConfiguration config = StreamConfiguration.builder()
-        //             .name(streamName)
-        //             .subjects(streamName + ".>")
-        //             .build();
+        try
+        {
+            var config = StreamConfiguration.Builder()
+                    .WithName(streamName)
+                    .WithSubjects(streamName + ".>")
+                    .Build();
 
-        //     var jsm = Engine.connection().jetStreamManagement();
-        //     if (jsm.getStreamNames().contains(streamName))
+
+            var jsm = Engine.Connection.CreateJetStreamManagementContext();
+            if (jsm.GetStreamNames().Contains(streamName)) jsm.DeleteStream(streamName);
+            jsm.AddStream(config);
+        }
+        catch (Exception e)
+        {
+            Console.WriteLine(e);
+            Assert.True(false);
+        }
+    }
+
+    private void deleteStream()
+    {
+        if (channel.Length == 0) return;
+
+        try
+        {
+            Engine.Connection.CreateJetStreamManagementContext().DeleteStream(streamName);
+        }
+        catch (Exception e)
+        {
+            Console.WriteLine(e);
+            Assert.True(false);
+        }
+    }
+
+    private void receiveEvent()
+    {
+        if (event_ == null) return;
+
+        //     try
         //     {
-        //         jsm.deleteStream(streamName);
+        //         var sub = Engine.Stream.PullSubscribe(streamName + "." + channel);
+        //         var msg = sub.nextMessage(Duration.ofSeconds(1));
+
+        //         if (msg == null)
+        //             System.out.println("Timeout");
+
+        //         assertNotNull(msg);
+
+        //         var ev = io.scyna.proto.Event.parseFrom(msg.getData());
+        //         var parser = event.getParserForType();
+        //         var received = parser.parseFrom(ev.getBody());
+
+        //         if (exactEventMatch) {
+        //             assertEquals(event, received);
+        // } else {
+        //             assertTrue("Event not match", partialMatchMessage(event, received));
+        // }
+
+        // sub.unsubscribe();
+        //     } catch (Exception e) {
+        //         e.printStackTrace();
+        //         assertTrue("Error in receiving event", false);
         //     }
-        //     jsm.addStream(config);
-        // }
-        // catch (Exception e)
-        // {
-        //     e.printStackTrace();
-        //     assertTrue("Error in creating stream", false);
-        // }
     }
 
     private bool partialMatchMessage(IMessage x, IMessage y)
@@ -139,4 +184,6 @@ public class EndpointTest
         }
         return equal;
     }
+
+
 }
