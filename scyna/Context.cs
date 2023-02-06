@@ -31,7 +31,6 @@ public class Context : Logger
 
     public long ScheduleTask(String channel, long start, long interval, IMessage data, long loop)
     {
-
         var task = new scyna.proto.Task
         {
             TraceID = this.ID,
