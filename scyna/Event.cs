@@ -49,10 +49,8 @@ public class Event
 
         public static Stream CreateOrGet(String sender)
         {
-            var stream = streams[sender];
-            if (stream != null) return stream;
-
-            stream = new Stream(sender, Engine.Module);
+            if (streams.ContainsKey(sender)) return streams[sender];
+            var stream = new Stream(sender, Engine.Module);
             streams[sender] = stream;
             return stream;
         }
