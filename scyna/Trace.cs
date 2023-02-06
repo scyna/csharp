@@ -64,7 +64,7 @@ public class Trace
         time = 0;//Utils.currentMicroSeconds();
     }
 
-    public void update(ulong session, int status)
+    public void Update(ulong session, int status)
     {
         this.sessionID = session;
         this.status = status;
