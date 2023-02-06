@@ -18,10 +18,7 @@ public class Trace
     private ulong t1;
     public ulong time;
 
-    public ulong ID()
-    {
-        return id;
-    }
+    public ulong ID() { return id; }
 
     private Trace(string path)
     {
@@ -49,7 +46,7 @@ public class Trace
         return ret;
     }
 
-    public void reset(ulong parent)
+    public void Reset(ulong parent)
     {
         this.parentID = parent;
         this.id = Engine.ID.Next();
@@ -69,7 +66,7 @@ public class Trace
         time = 0;//Utils.currentMicroSeconds();
     }
 
-    public void record()
+    public void Record()
     {
         var signal = new proto.TraceCreatedSignal
         {
