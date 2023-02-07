@@ -27,25 +27,26 @@ namespace ex.account.proto {
             "Cg1hY2NvdW50LnByb3RvEhdpby5zY3luYS5jdXN0b21lci5wcm90byJFChRD",
             "cmVhdGVBY2NvdW50UmVxdWVzdBINCgVlbWFpbBgBIAEoCRIMCgRuYW1lGAIg",
             "ASgJEhAKCHBhc3N3b3JkGAMgASgJIiMKFUNyZWF0ZUFjY291bnRSZXNwb25z",
-            "ZRIKCgJpZBgBIAEoBCI5Cg5BY2NvdW50Q3JlYXRlZBIKCgJpZBgBIAEoBBIN",
-            "CgVlbWFpbBgCIAEoCRIMCgRuYW1lGAMgASgJIikKGEdldEFjY291bnRCeUVt",
-            "YWlsUmVxdWVzdBINCgVlbWFpbBgBIAEoCSIjChVHZXRBY2NvdW50QnlJRFJl",
-            "cXVlc3QSCgoCaWQYASABKAQiPQoSR2V0QWNjb3VudFJlc3BvbnNlEgoKAmlk",
-            "GAEgASgEEg0KBWVtYWlsGAIgASgJEgwKBG5hbWUYAyABKAkiRAoVQ2hhbmdl",
-            "UGFzc3dvcmRSZXF1ZXN0EgoKAmlkGAEgASgEEg8KB2N1cnJlbnQYAiABKAkS",
-            "DgoGZnV0dXJlGAMgASgJIj4KD1Bhc3N3b3JkQ2hhbmdlZBIKCgJpZBgBIAEo",
-            "BBIPCgdjdXJyZW50GAIgASgJEg4KBmZ1dHVyZRgDIAEoCSI2ChNBdXRoZW50",
-            "aWNhdGVSZXF1ZXN0Eg0KBWVtYWlsGAEgASgJEhAKCHBhc3N3b3JkGAIgASgJ",
-            "IjIKFEF1dGhlbnRpY2F0ZVJlc3BvbnNlEgwKBGhvc3QYASABKAkSDAoEcG9y",
-            "dBgCIAEoDSIvCg1TZW5kRW1haWxUYXNrEg0KBWVtYWlsGAEgASgJEg8KB2Nv",
-            "bnRlbnQYAiABKAlCMAoZaW8uc2N5bmEuZXguYWNjb3VudC5wcm90b1ABqgIQ",
-            "ZXguYWNjb3VudC5wcm90b2IGcHJvdG8z"));
+            "ZRIKCgJpZBgBIAEoBCJiCg5BY2NvdW50Q3JlYXRlZBIPCgJpZBgBIAEoBEgA",
+            "iAEBEhIKBWVtYWlsGAIgASgJSAGIAQESEQoEbmFtZRgDIAEoCUgCiAEBQgUK",
+            "A19pZEIICgZfZW1haWxCBwoFX25hbWUiKQoYR2V0QWNjb3VudEJ5RW1haWxS",
+            "ZXF1ZXN0Eg0KBWVtYWlsGAEgASgJIiMKFUdldEFjY291bnRCeUlEUmVxdWVz",
+            "dBIKCgJpZBgBIAEoBCI9ChJHZXRBY2NvdW50UmVzcG9uc2USCgoCaWQYASAB",
+            "KAQSDQoFZW1haWwYAiABKAkSDAoEbmFtZRgDIAEoCSJEChVDaGFuZ2VQYXNz",
+            "d29yZFJlcXVlc3QSCgoCaWQYASABKAQSDwoHY3VycmVudBgCIAEoCRIOCgZm",
+            "dXR1cmUYAyABKAkiPgoPUGFzc3dvcmRDaGFuZ2VkEgoKAmlkGAEgASgEEg8K",
+            "B2N1cnJlbnQYAiABKAkSDgoGZnV0dXJlGAMgASgJIjYKE0F1dGhlbnRpY2F0",
+            "ZVJlcXVlc3QSDQoFZW1haWwYASABKAkSEAoIcGFzc3dvcmQYAiABKAkiMgoU",
+            "QXV0aGVudGljYXRlUmVzcG9uc2USDAoEaG9zdBgBIAEoCRIMCgRwb3J0GAIg",
+            "ASgNIi8KDVNlbmRFbWFpbFRhc2sSDQoFZW1haWwYASABKAkSDwoHY29udGVu",
+            "dBgCIAEoCUIwChlpby5zY3luYS5leC5hY2NvdW50LnByb3RvUAGqAhBleC5h",
+            "Y2NvdW50LnByb3RvYgZwcm90bzM="));
       descriptor = pbr::FileDescriptor.FromGeneratedCode(descriptorData,
           new pbr::FileDescriptor[] { },
           new pbr::GeneratedClrTypeInfo(null, null, new pbr::GeneratedClrTypeInfo[] {
             new pbr::GeneratedClrTypeInfo(typeof(global::ex.account.proto.CreateAccountRequest), global::ex.account.proto.CreateAccountRequest.Parser, new[]{ "Email", "Name", "Password" }, null, null, null, null),
             new pbr::GeneratedClrTypeInfo(typeof(global::ex.account.proto.CreateAccountResponse), global::ex.account.proto.CreateAccountResponse.Parser, new[]{ "Id" }, null, null, null, null),
-            new pbr::GeneratedClrTypeInfo(typeof(global::ex.account.proto.AccountCreated), global::ex.account.proto.AccountCreated.Parser, new[]{ "Id", "Email", "Name" }, null, null, null, null),
+            new pbr::GeneratedClrTypeInfo(typeof(global::ex.account.proto.AccountCreated), global::ex.account.proto.AccountCreated.Parser, new[]{ "Id", "Email", "Name" }, new[]{ "Id", "Email", "Name" }, null, null, null),
             new pbr::GeneratedClrTypeInfo(typeof(global::ex.account.proto.GetAccountByEmailRequest), global::ex.account.proto.GetAccountByEmailRequest.Parser, new[]{ "Email" }, null, null, null, null),
             new pbr::GeneratedClrTypeInfo(typeof(global::ex.account.proto.GetAccountByIDRequest), global::ex.account.proto.GetAccountByIDRequest.Parser, new[]{ "Id" }, null, null, null, null),
             new pbr::GeneratedClrTypeInfo(typeof(global::ex.account.proto.GetAccountResponse), global::ex.account.proto.GetAccountResponse.Parser, new[]{ "Id", "Email", "Name" }, null, null, null, null),
@@ -486,6 +487,7 @@ namespace ex.account.proto {
   {
     private static readonly pb::MessageParser<AccountCreated> _parser = new pb::MessageParser<AccountCreated>(() => new AccountCreated());
     private pb::UnknownFieldSet _unknownFields;
+    private int _hasBits0;
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     public static pb::MessageParser<AccountCreated> Parser { get { return _parser; } }
 
@@ -508,6 +510,7 @@ namespace ex.account.proto {
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     public AccountCreated(AccountCreated other) : this() {
+      _hasBits0 = other._hasBits0;
       id_ = other.id_;
       email_ = other.email_;
       name_ = other.name_;
@@ -524,32 +527,63 @@ namespace ex.account.proto {
     private ulong id_;
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     public ulong Id {
-      get { return id_; }
+      get { if ((_hasBits0 & 1) != 0) { return id_; } else { return 0UL; } }
       set {
+        _hasBits0 |= 1;
         id_ = value;
       }
+    }
+    /// <summary>Gets whether the "id" field is set</summary>
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public bool HasId {
+      get { return (_hasBits0 & 1) != 0; }
+    }
+    /// <summary>Clears the value of the "id" field</summary>
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public void ClearId() {
+      _hasBits0 &= ~1;
     }
 
     /// <summary>Field number for the "email" field.</summary>
     public const int EmailFieldNumber = 2;
-    private string email_ = "";
+    private string email_;
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     public string Email {
-      get { return email_; }
+      get { return email_ ?? ""; }
       set {
         email_ = pb::ProtoPreconditions.CheckNotNull(value, "value");
       }
     }
+    /// <summary>Gets whether the "email" field is set</summary>
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public bool HasEmail {
+      get { return email_ != null; }
+    }
+    /// <summary>Clears the value of the "email" field</summary>
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public void ClearEmail() {
+      email_ = null;
+    }
 
     /// <summary>Field number for the "name" field.</summary>
     public const int NameFieldNumber = 3;
-    private string name_ = "";
+    private string name_;
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     public string Name {
-      get { return name_; }
+      get { return name_ ?? ""; }
       set {
         name_ = pb::ProtoPreconditions.CheckNotNull(value, "value");
       }
+    }
+    /// <summary>Gets whether the "name" field is set</summary>
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public bool HasName {
+      get { return name_ != null; }
+    }
+    /// <summary>Clears the value of the "name" field</summary>
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public void ClearName() {
+      name_ = null;
     }
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
@@ -574,9 +608,9 @@ namespace ex.account.proto {
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     public override int GetHashCode() {
       int hash = 1;
-      if (Id != 0UL) hash ^= Id.GetHashCode();
-      if (Email.Length != 0) hash ^= Email.GetHashCode();
-      if (Name.Length != 0) hash ^= Name.GetHashCode();
+      if (HasId) hash ^= Id.GetHashCode();
+      if (HasEmail) hash ^= Email.GetHashCode();
+      if (HasName) hash ^= Name.GetHashCode();
       if (_unknownFields != null) {
         hash ^= _unknownFields.GetHashCode();
       }
@@ -593,15 +627,15 @@ namespace ex.account.proto {
     #if !GOOGLE_PROTOBUF_REFSTRUCT_COMPATIBILITY_MODE
       output.WriteRawMessage(this);
     #else
-      if (Id != 0UL) {
+      if (HasId) {
         output.WriteRawTag(8);
         output.WriteUInt64(Id);
       }
-      if (Email.Length != 0) {
+      if (HasEmail) {
         output.WriteRawTag(18);
         output.WriteString(Email);
       }
-      if (Name.Length != 0) {
+      if (HasName) {
         output.WriteRawTag(26);
         output.WriteString(Name);
       }
@@ -614,15 +648,15 @@ namespace ex.account.proto {
     #if !GOOGLE_PROTOBUF_REFSTRUCT_COMPATIBILITY_MODE
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     void pb::IBufferMessage.InternalWriteTo(ref pb::WriteContext output) {
-      if (Id != 0UL) {
+      if (HasId) {
         output.WriteRawTag(8);
         output.WriteUInt64(Id);
       }
-      if (Email.Length != 0) {
+      if (HasEmail) {
         output.WriteRawTag(18);
         output.WriteString(Email);
       }
-      if (Name.Length != 0) {
+      if (HasName) {
         output.WriteRawTag(26);
         output.WriteString(Name);
       }
@@ -635,13 +669,13 @@ namespace ex.account.proto {
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     public int CalculateSize() {
       int size = 0;
-      if (Id != 0UL) {
+      if (HasId) {
         size += 1 + pb::CodedOutputStream.ComputeUInt64Size(Id);
       }
-      if (Email.Length != 0) {
+      if (HasEmail) {
         size += 1 + pb::CodedOutputStream.ComputeStringSize(Email);
       }
-      if (Name.Length != 0) {
+      if (HasName) {
         size += 1 + pb::CodedOutputStream.ComputeStringSize(Name);
       }
       if (_unknownFields != null) {
@@ -655,13 +689,13 @@ namespace ex.account.proto {
       if (other == null) {
         return;
       }
-      if (other.Id != 0UL) {
+      if (other.HasId) {
         Id = other.Id;
       }
-      if (other.Email.Length != 0) {
+      if (other.HasEmail) {
         Email = other.Email;
       }
-      if (other.Name.Length != 0) {
+      if (other.HasName) {
         Name = other.Name;
       }
       _unknownFields = pb::UnknownFieldSet.MergeFrom(_unknownFields, other._unknownFields);

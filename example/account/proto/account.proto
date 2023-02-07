@@ -16,9 +16,9 @@ message CreateAccountResponse {
 }
 
 message AccountCreated{
-  uint64 id = 1;
-  string email = 2;
-  string name = 3;
+  optional uint64 id = 1;
+  optional string email = 2;
+  optional string name = 3;
 }
 
 /*GET*/

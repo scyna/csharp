@@ -1,5 +1,6 @@
 namespace scyna;
 using Google.Protobuf;
+using Google.Protobuf.Reflection;
 using NUnit.Framework;
 using NATS.Client;
 using NATS.Client.JetStream;
@@ -144,26 +145,26 @@ public class EndpointTest
 
         try
         {
-            var options = PullSubscribeOptions.Builder().WithStream(streamName).Build();
-            var sub = Engine.Stream.PullSubscribe(streamName + "." + channel, options);
-            var messages = sub.Fetch(1, 1000); //1000ms
-            if (messages == null)
+            var options = PushSubscribeOptions.Builder().WithStream(streamName).Build();
+            var sub = Engine.Stream.PushSubscribeSync(streamName + "." + channel, options);
+            var message = sub.NextMessage(1000); //1000ms
+            if (message == null)
             {
                 Console.WriteLine("Timeout");
                 Assert.True(false);
                 return;
             }
-            Assert.Equals(messages.Count, 1);
-            var m = messages[0];
-            var ev = scyna.proto.Event.Parser.ParseFrom(m.Data);
+            var ev = scyna.proto.Event.Parser.ParseFrom(message.Data);
             var parser = event_.Descriptor.Parser;
             var received = parser.ParseFrom(ev.Body);
             if (exactEventMatch) Assert.True(event_.Equals(received));
             else Assert.True(partialMatchMessage(event_, received));
-
-
         }
-        catch { Assert.True(false); }
+        catch (Exception e)
+        {
+            Console.WriteLine(e);
+            Assert.True(false);
+        }
 
     }
 
@@ -173,11 +174,11 @@ public class EndpointTest
 
         var equal = true;
 
-        var fields = y.Descriptor.Fields.InFieldNumberOrder();
+        var fields = y.Descriptor.Fields.InDeclarationOrder();
 
         foreach (var fd in fields)
         {
-            if (fd.Accessor.HasValue(x))
+            if (fd.Accessor.HasValue(y))
             {
                 var vx = fd.Accessor.GetValue(x);
                 var vy = fd.Accessor.GetValue(y);
