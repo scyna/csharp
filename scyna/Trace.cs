@@ -50,8 +50,8 @@ public class Trace
         ret.type = ENDPOINT;
         ret.id = Engine.ID.Next();
         ret.parentID = trace;
-        ret.t1 = 0;//System.nanoTime();
-        ret.time = 0;//Utils.currentMicroSeconds();
+        ret.t1 = (ulong)Utils.GetNanoseconds();
+        ret.time = (ulong)DateTimeOffset.Now.ToUnixTimeMilliseconds();
         ret.source = Engine.Module;
         return ret;
     }
@@ -60,8 +60,8 @@ public class Trace
     {
         this.parentID = parent;
         this.id = Engine.ID.Next();
-        t1 = 0;//System.nanoTime();
-        time = 0;//Utils.currentMicroSeconds();
+        t1 = (ulong)Utils.GetNanoseconds();
+        time = (ulong)DateTimeOffset.Now.ToUnixTimeMilliseconds();
     }
 
     public void Update(ulong session, int status)
@@ -70,18 +70,18 @@ public class Trace
         this.status = status;
     }
 
-    public void start()
-    {
-        t1 = 0;//System.nanoTime();
-        time = 0;//Utils.currentMicroSeconds();
-    }
+    // public void start()
+    // {
+    //     t1 = (ulong)Utils.GetMicroseconds();
+    //     time = (ulong)DateTimeOffset.Now.ToUnixTimeMilliseconds();
+    // }
 
     public void Record()
     {
         var signal = new proto.TraceCreatedSignal
         {
-            Duration = 0, //FIXME
-            Time = 0, //FIXME
+            Duration = (ulong)Utils.GetNanoseconds() - t1,
+            Time = time,
             ID = id,
             ParentID = parentID,
             Type = type,

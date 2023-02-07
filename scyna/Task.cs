@@ -1,9 +1,7 @@
 namespace scyna;
 
 using NATS.Client;
-using NATS.Client.JetStream;
 using System;
-using System.Threading;
 using Google.Protobuf;
 
 public class Task
