@@ -17,7 +17,7 @@ public class EndpointTest
     private bool exactResponseMatch = true;
 
     private EndpointTest(string url) { this.url = url; }
-    public static EndpointTest New(string url) { return new EndpointTest(url); }
+    public static EndpointTest Create(string url) { return new EndpointTest(url); }
 
     public EndpointTest WithRequest(IMessage request)
     {
@@ -50,10 +50,10 @@ public class EndpointTest
         return this;
     }
 
-    public EndpointTest ExpectError(proto.Error error)
+    public EndpointTest ExpectError(scyna.Error error)
     {
         this.status = 400;
-        this.response = error;
+        this.response = error.ToProto();
         return this;
     }
 

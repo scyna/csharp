@@ -23,7 +23,7 @@ class EchoTest
     [Test]
     public void TestEchoSuccess()
     {
-        scyna.EndpointTest.New(Path.ECHO_URL)
+        scyna.EndpointTest.Create(Path.ECHO_URL)
             .WithRequest(new proto.EchoRequest { Text = "Hello" })
             .ExpectResponse(new proto.EchoResponse { Text = "Hello" })
             .Run();
