@@ -3,7 +3,13 @@
   <PropertyGroup>
     <TargetFramework>net6.0</TargetFramework>
     <ImplicitUsings>enable</ImplicitUsings>
-    <Nullable>enable</Nullable>
+
+    <PackageId>Scyna.Net</PackageId>
+    <Version>1.0.2</Version>
+    <Authors>Scyna Team</Authors>
+    <Company>scyna.io</Company>
+    <PackageDescription>Unibersal platform for Domain Driven Design and Event-Driven Architecture</PackageDescription>
+    <RepositoryUrl>https://github.com/scyna/csharp</RepositoryUrl>
   </PropertyGroup>
 
   <ItemGroup>
