@@ -2,7 +2,7 @@ namespace scyna;
 
 using Google.Protobuf;
 
-class DomainEvent
+public class DomainEvent
 {
     static DomainEvent domainEvent = new DomainEvent();
     Queue<EventData> events = new Queue<EventData>();

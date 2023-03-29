@@ -93,6 +93,6 @@ public class Context : Logger
 
     public void RaiseEvent(IMessage data)
     {
-        /*TODO*/
+        DomainEvent.AddEvent(this.ID, data);
     }
 }

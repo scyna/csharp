@@ -15,7 +15,7 @@ public class Event
         void MessageReceived(NATS.Client.Msg message);
     }
 
-    public static void StartListening()
+    public static void Start()
     {
         foreach (var stream in streams.Values) { stream.Start(); }
     }
