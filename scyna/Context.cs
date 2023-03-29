@@ -90,4 +90,9 @@ public class Context : Logger
         catch (IOException) { throw scyna.Error.SERVER_ERROR; }
         catch { throw scyna.Error.STREAM_ERROR; }
     }
+
+    public void RaiseEvent(IMessage data)
+    {
+        /*TODO*/
+    }
 }

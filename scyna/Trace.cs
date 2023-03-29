@@ -6,6 +6,7 @@ public class Trace
     public const int EVENT = 2;
     public const int SYNC = 4;
     public const int TASK = 5;
+    public const int DOMAIN_EVENT = 6;
 
     private ulong parentID;
     private ulong id;
@@ -33,6 +34,16 @@ public class Trace
         ret.source = Engine.Module;
         return ret;
     }
+
+    public static Trace NewDomainEventTrace()
+    {
+        var ret = new Trace("");
+        ret.type = DOMAIN_EVENT;
+        ret.sessionID = Engine.SessionID;
+        ret.source = Engine.Module;
+        return ret;
+    }
+
 
     public static Trace NewTaskTrace(String channel)
     {

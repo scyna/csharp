@@ -8,7 +8,7 @@
     <Version>1.0.2</Version>
     <Authors>Scyna Team</Authors>
     <Company>scyna.io</Company>
-    <PackageDescription>Unibersal platform for Domain Driven Design and Event-Driven Architecture</PackageDescription>
+    <PackageDescription>Universal Microservice Platform</PackageDescription>
     <RepositoryUrl>https://github.com/scyna/csharp</RepositoryUrl>
   </PropertyGroup>
 

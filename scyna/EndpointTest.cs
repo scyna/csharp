@@ -73,7 +73,6 @@ public class EndpointTest
         return this;
     }
 
-
     public void Run()
     {
         createStream();
