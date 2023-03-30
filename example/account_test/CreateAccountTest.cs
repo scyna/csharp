@@ -40,6 +40,12 @@ class CreateAccountTest
                 .ExpectSuccess()
                 .Run();
 
+        EventTest.ForHandler(new AccountCreatedHandler()).Run(new proto.AccountCreated
+        {
+            Email = "a1@gmail.com",
+            Name = "Nguyen Van A",
+        });
+
         // EndpointTest.Create(Path.CREATE_ACCOUNT_URL)
         //         .WithRequest(new proto.CreateAccountRequest
         //         {

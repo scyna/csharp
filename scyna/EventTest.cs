@@ -5,7 +5,7 @@ using NUnit.Framework;
 using NATS.Client;
 using NATS.Client.JetStream;
 
-public abstract class BaseEventTest
+public abstract class EventTest
 {
     private IMessage? event_;
     private IMessage? eventClone;
@@ -15,21 +15,21 @@ public abstract class BaseEventTest
 
     public abstract void Run(IMessage message);
 
-    public BaseEventTest ExpectEvent(string channel, IMessage event_)
+    public EventTest ExpectEvent(string channel, IMessage event_)
     {
         this.channel = channel;
         this.event_ = event_;
         return this;
     }
 
-    public BaseEventTest ExpectEvent(IMessage event_)
+    public EventTest ExpectEvent(IMessage event_)
     {
         this.channel = "";
         this.event_ = event_;
         return this;
     }
 
-    public BaseEventTest MatchEvent<E>(string channel, E event_) where E : IMessage<E>, new()
+    public EventTest MatchEvent<E>(string channel, E event_) where E : IMessage<E>, new()
     {
         this.channel = channel;
         this.eventClone = event_.Clone();
@@ -38,7 +38,7 @@ public abstract class BaseEventTest
         return this;
     }
 
-    public BaseEventTest MatchEvent<E>(E event_) where E : IMessage<E>, new()
+    public EventTest MatchEvent<E>(E event_) where E : IMessage<E>, new()
     {
         this.channel = "";
         this.eventClone = event_.Clone();
@@ -150,37 +150,43 @@ public abstract class BaseEventTest
         }
         return equal;
     }
-}
 
-public class DomainEventTest<T> : BaseEventTest where T : IMessage<T>, new()
-{
-    private DomainEvent.Handler<T> handler;
-    private DomainEventTest(DomainEvent.Handler<T> handler) { this.handler = handler; }
-    public static DomainEventTest<T> New(DomainEvent.Handler<T> handler) { return new DomainEventTest<T>(handler); }
-
-    public override void Run(IMessage message)
+    public static DomainEventTest<T> ForHandler<T>(DomainEvent.Handler<T> handler) where T : IMessage<T>, new()
     {
-        createStream();
-        var eventData = new DomainEvent.EventData(Engine.ID.Next(), message);
-        handler.EventReceived(eventData);
-        receiveEvent();
-        deleteStream();
+        return new DomainEventTest<T>(handler);
     }
-}
 
-public class EventTest<T> : BaseEventTest where T : IMessage<T>, new()
-{
-    private Event.Handler<T> handler;
-    private EventTest(Event.Handler<T> handler) { this.handler = handler; }
-    public static EventTest<T> New(Event.Handler<T> handler) { return new EventTest<T>(handler); }
-
-    public override void Run(IMessage message)
+    public static IntegrationEventTest<T> ForHandler<T>(Event.Handler<T> handler) where T : IMessage<T>, new()
     {
-        createStream();
-        var trace = Trace.NewEventTrace("");
-        handler.Init(trace);
-        handler.MessageReceived(message.ToByteArray());
-        receiveEvent();
-        deleteStream();
+        return new IntegrationEventTest<T>(handler);
+    }
+
+    public class DomainEventTest<T> : EventTest where T : IMessage<T>, new()
+    {
+        private DomainEvent.Handler<T> handler;
+        public DomainEventTest(DomainEvent.Handler<T> handler) { this.handler = handler; }
+        public override void Run(IMessage message)
+        {
+            createStream();
+            var eventData = new DomainEvent.EventData(Engine.ID.Next(), message);
+            handler.EventReceived(eventData);
+            receiveEvent();
+            deleteStream();
+        }
+    }
+
+    public class IntegrationEventTest<T> : EventTest where T : IMessage<T>, new()
+    {
+        private Event.Handler<T> handler;
+        public IntegrationEventTest(Event.Handler<T> handler) { this.handler = handler; }
+        public override void Run(IMessage message)
+        {
+            createStream();
+            var trace = Trace.NewEventTrace("");
+            handler.Init(trace);
+            handler.MessageReceived(message.ToByteArray());
+            receiveEvent();
+            deleteStream();
+        }
     }
 }
