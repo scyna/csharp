@@ -26,11 +26,11 @@ public class Task
         public abstract void Execute();
         public void Init(Trace trace) { this.trace = trace; }
 
-        public void MessageReceived(Msg message)
+        public void MessageReceived(byte[] message)
         {
             try
             {
-                var task = scyna.proto.Task.Parser.ParseFrom(message.Data);
+                var task = scyna.proto.Task.Parser.ParseFrom(message);
                 this.context.Reset(task.TraceID);
                 this.trace.Reset(task.TraceID);
                 this.data = parser.ParseFrom(task.Data);

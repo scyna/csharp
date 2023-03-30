@@ -12,7 +12,7 @@ public class Event
 
     public interface IMessageHandler
     {
-        void MessageReceived(NATS.Client.Msg message);
+        void MessageReceived(byte[] message);
     }
 
     public static void Start()
@@ -76,7 +76,7 @@ public class Event
                 foreach (NATS.Client.Msg m in messages)
                 {
                     var executor = executors[m.Subject];
-                    if (executor != null) executor.MessageReceived(m);
+                    if (executor != null) executor.MessageReceived(m.Data);
                     m.Ack();
                 }
             }
@@ -95,11 +95,11 @@ public class Event
         public abstract void Execute();
         public void Init(Trace trace) { this.trace = trace; }
 
-        public void MessageReceived(Msg message)
+        public void MessageReceived(byte[] message)
         {
             try
             {
-                var ev = scyna.proto.Event.Parser.ParseFrom(message.Data);
+                var ev = scyna.proto.Event.Parser.ParseFrom(message);
                 this.context.Reset(ev.TraceID);
                 this.trace.Reset(ev.TraceID);
                 this.entity = ev.Entity;
