@@ -11,7 +11,9 @@ public class EndpointTest
     private string url;
     private IMessage? request;
     private IMessage? response;
+    private IMessage? responseClone;
     private IMessage? event_;
+    private IMessage? eventClone;
     private string channel = "";
     private string streamName = "";
     private bool exactEventMatch = true;
@@ -38,8 +40,9 @@ public class EndpointTest
         return this;
     }
 
-    public EndpointTest MatchEvent(IMessage event_)
+    public EndpointTest MatchEvent<T>(T event_) where T : IMessage<T>, new()
     {
+        this.eventClone = event_.Clone();
         this.exactEventMatch = false;
         this.event_ = event_;
         return this;
@@ -65,8 +68,9 @@ public class EndpointTest
         return this;
     }
 
-    public EndpointTest MatchResponse(IMessage response)
+    public EndpointTest MatchResponse<T>(T response) where T : IMessage<T>, new()
     {
+        this.responseClone = response.Clone();
         this.exactResponseMatch = false;
         this.status = 200;
         this.response = response;
@@ -79,13 +83,13 @@ public class EndpointTest
         var res = Request.Send(url, request);
         Assert.IsNotNull(res);
         Assert.AreEqual(status, res.Code);
-        if (response != null)
+        if (response != null && responseClone != null)
         {
             var parser = response.Descriptor.Parser;
             var r = parser.ParseFrom(res.Body);
             Assert.IsTrue(response.Equals(r));
             if (exactResponseMatch) Assert.True(response.Equals(r));
-            else Assert.True(partialMatchMessage(response, r));
+            else Assert.True(partialMatchMessage(response, r, responseClone));
         }
         receiveEvent();
         deleteStream();
@@ -140,7 +144,7 @@ public class EndpointTest
 
     private void receiveEvent()
     {
-        if (event_ == null) return;
+        if (event_ == null || eventClone == null) return;
 
         try
         {
@@ -157,17 +161,16 @@ public class EndpointTest
             var parser = event_.Descriptor.Parser;
             var received = parser.ParseFrom(ev.Body);
             if (exactEventMatch) Assert.True(event_.Equals(received));
-            else Assert.True(partialMatchMessage(event_, received));
+            else Assert.True(partialMatchMessage(event_, received, eventClone));
         }
         catch (Exception e)
         {
             Console.WriteLine(e);
             Assert.True(false);
         }
-
     }
 
-    private bool partialMatchMessage(IMessage x, IMessage y)
+    private bool partialMatchMessage(IMessage x, IMessage y, IMessage xClone)
     {
         if (x.Descriptor != y.Descriptor) return false;
 
@@ -177,9 +180,12 @@ public class EndpointTest
 
         foreach (var fd in fields)
         {
-            if (fd.Accessor.HasValue(y))
+            fd.Accessor.Clear(xClone);
+            var vx = fd.Accessor.GetValue(x);
+            var vxClone = fd.Accessor.GetValue(xClone);
+
+            if (!vx.Equals(vxClone))
             {
-                var vx = fd.Accessor.GetValue(x);
                 var vy = fd.Accessor.GetValue(y);
                 equal = vx.Equals(vy);//FIXME:
             }
@@ -187,6 +193,4 @@ public class EndpointTest
         }
         return equal;
     }
-
-
 }
