@@ -5,7 +5,7 @@
     <ImplicitUsings>enable</ImplicitUsings>
     <Nullable>enable</Nullable>
     <PackageId>Scyna.Net</PackageId>
-    <Version>1.0.2</Version>
+    <Version>1.0.3</Version>
     <Authors>Scyna Team</Authors>
     <Company>scyna.io</Company>
     <PackageDescription>Universal Microservice Platform</PackageDescription>
