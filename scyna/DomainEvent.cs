@@ -8,10 +8,7 @@ public class DomainEvent
     Queue<EventData> events = new Queue<EventData>();
     Dictionary<Type, List<IHandler>> handlers = new Dictionary<Type, List<IHandler>>();
 
-    private DomainEvent()
-    {
-
-    }
+    private DomainEvent() { }
 
     public interface IHandler
     {

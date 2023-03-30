@@ -5,37 +5,31 @@ using NUnit.Framework;
 using NATS.Client;
 using NATS.Client.JetStream;
 
-public class EventTest<T> where T : IMessage<T>, new()
+public abstract class BaseEventTest
 {
     private IMessage? event_;
     private IMessage? eventClone;
     private string channel = "";
     private string streamName = "";
     private bool exactEventMatch = true;
-    private Event.Handler<T> handler;
 
-    private EventTest(Event.Handler<T> handler)
-    {
-        this.handler = handler;
-    }
+    public abstract void Run(IMessage message);
 
-    public static EventTest<T> New(Event.Handler<T> handler) { return new EventTest<T>(handler); }
-
-    public EventTest<T> ExpectEvent(string channel, IMessage event_)
+    public BaseEventTest ExpectEvent(string channel, IMessage event_)
     {
         this.channel = channel;
         this.event_ = event_;
         return this;
     }
 
-    public EventTest<T> ExpectEvent(IMessage event_)
+    public BaseEventTest ExpectEvent(IMessage event_)
     {
         this.channel = "";
         this.event_ = event_;
         return this;
     }
 
-    public EventTest<T> MatchEvent<E>(string channel, T event_) where E : IMessage<E>, new()
+    public BaseEventTest MatchEvent<E>(string channel, E event_) where E : IMessage<E>, new()
     {
         this.channel = channel;
         this.eventClone = event_.Clone();
@@ -44,7 +38,7 @@ public class EventTest<T> where T : IMessage<T>, new()
         return this;
     }
 
-    public EventTest<T> MatchEvent<E>(T event_) where E : IMessage<E>, new()
+    public BaseEventTest MatchEvent<E>(E event_) where E : IMessage<E>, new()
     {
         this.channel = "";
         this.eventClone = event_.Clone();
@@ -53,15 +47,7 @@ public class EventTest<T> where T : IMessage<T>, new()
         return this;
     }
 
-    public void Run(IMessage message)
-    {
-        createStream();
-        handler.MessageReceived(message.ToByteArray());
-        receiveEvent();
-        deleteStream();
-    }
-
-    private void createStream()
+    protected void createStream()
     {
         if (channel.Length == 0) return;
         streamName = Engine.Module;
@@ -84,7 +70,7 @@ public class EventTest<T> where T : IMessage<T>, new()
         }
     }
 
-    private void deleteStream()
+    protected void deleteStream()
     {
         if (channel.Length == 0) return;
 
@@ -99,7 +85,7 @@ public class EventTest<T> where T : IMessage<T>, new()
         }
     }
 
-    private void receiveEvent()
+    protected void receiveEvent()
     {
         if (event_ == null || eventClone == null) return;
 
@@ -141,7 +127,7 @@ public class EventTest<T> where T : IMessage<T>, new()
         }
     }
 
-    private bool partialMatchMessage(IMessage x, IMessage y, IMessage xClone)
+    protected bool partialMatchMessage(IMessage x, IMessage y, IMessage xClone)
     {
         if (x.Descriptor != y.Descriptor) return false;
 
@@ -163,5 +149,38 @@ public class EventTest<T> where T : IMessage<T>, new()
             if (!equal) return false;
         }
         return equal;
+    }
+}
+
+public class DomainEventTest<T> : BaseEventTest where T : IMessage<T>, new()
+{
+    private DomainEvent.Handler<T> handler;
+    private DomainEventTest(DomainEvent.Handler<T> handler) { this.handler = handler; }
+    public static DomainEventTest<T> New(DomainEvent.Handler<T> handler) { return new DomainEventTest<T>(handler); }
+
+    public override void Run(IMessage message)
+    {
+        createStream();
+        var eventData = new DomainEvent.EventData(Engine.ID.Next(), message);
+        handler.EventReceived(eventData);
+        receiveEvent();
+        deleteStream();
+    }
+}
+
+public class EventTest<T> : BaseEventTest where T : IMessage<T>, new()
+{
+    private Event.Handler<T> handler;
+    private EventTest(Event.Handler<T> handler) { this.handler = handler; }
+    public static EventTest<T> New(Event.Handler<T> handler) { return new EventTest<T>(handler); }
+
+    public override void Run(IMessage message)
+    {
+        createStream();
+        var trace = Trace.NewEventTrace("");
+        handler.Init(trace);
+        handler.MessageReceived(message.ToByteArray());
+        receiveEvent();
+        deleteStream();
     }
 }
