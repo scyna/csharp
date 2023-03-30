@@ -34,23 +34,35 @@ public class EndpointTest
         return this;
     }
 
-    public EndpointTest ExpectEvent(IMessage event_)
+    public EndpointTest ExpectEvent(string channel, IMessage event_)
     {
+        this.channel = channel;
         this.event_ = event_;
         return this;
     }
 
-    public EndpointTest MatchEvent<T>(T event_) where T : IMessage<T>, new()
+    public EndpointTest ExpectEvent(IMessage event_)
     {
+        this.channel = "";
+        this.event_ = event_;
+        return this;
+    }
+
+    public EndpointTest MatchEvent<T>(string channel, T event_) where T : IMessage<T>, new()
+    {
+        this.channel = channel;
         this.eventClone = event_.Clone();
         this.exactEventMatch = false;
         this.event_ = event_;
         return this;
     }
 
-    public EndpointTest PublishEventTo(String channel)
+    public EndpointTest MatchEvent<T>(T event_) where T : IMessage<T>, new()
     {
-        this.channel = channel;
+        this.channel = "";
+        this.eventClone = event_.Clone();
+        this.exactEventMatch = false;
+        this.event_ = event_;
         return this;
     }
 
@@ -146,27 +158,41 @@ public class EndpointTest
     {
         if (event_ == null || eventClone == null) return;
 
-        try
+        if (channel.Length == 0)
         {
-            var options = PushSubscribeOptions.Builder().WithStream(streamName).Build();
-            var sub = Engine.Stream.PushSubscribeSync(streamName + "." + channel, options);
-            var message = sub.NextMessage(1000); //1000ms
-            if (message == null)
+            var received = DomainEvent.NextEvent();
+            if (received == null)
             {
-                Console.WriteLine("Timeout");
                 Assert.True(false);
                 return;
             }
-            var ev = scyna.proto.Event.Parser.ParseFrom(message.Data);
-            var parser = event_.Descriptor.Parser;
-            var received = parser.ParseFrom(ev.Body);
             if (exactEventMatch) Assert.True(event_.Equals(received));
             else Assert.True(partialMatchMessage(event_, received, eventClone));
         }
-        catch (Exception e)
+        else
         {
-            Console.WriteLine(e);
-            Assert.True(false);
+            try
+            {
+                var options = PushSubscribeOptions.Builder().WithStream(streamName).Build();
+                var sub = Engine.Stream.PushSubscribeSync(streamName + "." + channel, options);
+                var message = sub.NextMessage(1000); //1000ms
+                if (message == null)
+                {
+                    Console.WriteLine("Timeout");
+                    Assert.True(false);
+                    return;
+                }
+                var ev = scyna.proto.Event.Parser.ParseFrom(message.Data);
+                var parser = event_.Descriptor.Parser;
+                var received = parser.ParseFrom(ev.Body);
+                if (exactEventMatch) Assert.True(event_.Equals(received));
+                else Assert.True(partialMatchMessage(event_, received, eventClone));
+            }
+            catch (Exception e)
+            {
+                Console.WriteLine(e);
+                Assert.True(false);
+            }
         }
     }
 

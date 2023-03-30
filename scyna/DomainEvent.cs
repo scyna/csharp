@@ -84,4 +84,12 @@ public class DomainEvent
         var thread = new Thread(new ThreadStart(domainEvent.run));
         thread.Start();
     }
+
+    public static IMessage? NextEvent()
+    {
+        SpinWait.SpinUntil(() => { return domainEvent.events.Count > 0; }, 1000);
+        var item = domainEvent.events.Dequeue();
+        if (item == null) return null;
+        return item.Data;
+    }
 }

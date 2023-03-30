@@ -18,20 +18,28 @@ public class CreateAccountService : Endpoint.Handler<proto.CreateAccountRequest>
 
         AccountService.AssureAccountNotExists(repository, account.Email);
 
-        var command = new Command
-        {
-            Entity = account.ID,
-            Channel = Path.ACCOUNT_CREATED_CHANNEL,
-            Event = new proto.AccountCreated
-            {
-                Id = account.ID,
-                Email = account.Email.ToString(),
-                Name = account.Name.ToString(),
-            },
-        };
+        // var command = new Command
+        // {
+        //     Entity = account.ID,
+        //     Channel = Path.ACCOUNT_CREATED_CHANNEL,
+        //     Event = new proto.AccountCreated
+        //     {
+        //         Id = account.ID,
+        //         Email = account.Email.ToString(),
+        //         Name = account.Name.ToString(),
+        //     },
+        // };
 
-        repository.createAccount(command, account);
-        command.Commit(context);
+        // repository.createAccount(command, account);
+        // command.Commit(context);
+
+        context.RaiseEvent(new proto.AccountCreated
+        {
+            Id = account.ID,
+            Email = account.Email.ToString(),
+            Name = account.Name.ToString(),
+        });
+
         Response(new proto.CreateAccountResponse { Id = account.ID });
     }
 }
