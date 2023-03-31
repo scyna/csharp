@@ -8,7 +8,7 @@ public class Password
 
     public static Password Create(string password)
     {
-        if (password == null || password.Length == 0) throw Error.BAD_PASSWORD;
+        if (password == null || password.Length == 0 || password.Length > 20) throw Error.BAD_PASSWORD;
         /* TODO: some other rules here */
         return new Password(password);
     }

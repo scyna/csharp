@@ -1,7 +1,7 @@
 namespace scyna;
 using Google.Protobuf;
 using Google.Protobuf.Reflection;
-using NUnit.Framework;
+using Xunit;
 using NATS.Client;
 using NATS.Client.JetStream;
 
@@ -48,7 +48,7 @@ public class EndpointTest
         return this;
     }
 
-    public EndpointTest MatchEvent<T>(string channel, T event_) where T : IMessage<T>, new()
+    public EndpointTest EventShouldMatch<T>(string channel, T event_) where T : IMessage<T>, new()
     {
         this.channel = channel;
         this.eventClone = event_.Clone();
@@ -93,13 +93,13 @@ public class EndpointTest
     {
         createStream();
         var res = Request.Send(url, request);
-        Assert.IsNotNull(res);
-        Assert.AreEqual(status, res.Code);
+        Assert.NotNull(res);
+        Assert.Equal(status, res.Code);
         if (response != null && responseClone != null)
         {
             var parser = response.Descriptor.Parser;
             var r = parser.ParseFrom(res.Body);
-            Assert.IsTrue(response.Equals(r));
+            Assert.True(response.Equals(r));
             if (exactResponseMatch) Assert.True(response.Equals(r));
             else Assert.True(partialMatchMessage(response, r, responseClone));
         }
@@ -110,8 +110,8 @@ public class EndpointTest
     public T Run<T>() where T : IMessage<T>, new()
     {
         var res = Request.Send(url, request);
-        Assert.IsNotNull(res);
-        Assert.AreEqual(200, res.Code);
+        Assert.NotNull(res);
+        Assert.Equal(200, res.Code);
         MessageParser<T> parser = new MessageParser<T>(() => new T());
         return parser.ParseFrom(res.Body);
     }

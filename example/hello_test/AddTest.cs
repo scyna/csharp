@@ -4,7 +4,6 @@ using NUnit.Framework;
 using scyna;
 using ex.hello;
 
-[TestFixture]
 class AddTest
 {
     [OneTimeSetUp]

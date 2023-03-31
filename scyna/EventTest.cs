@@ -1,7 +1,7 @@
 namespace scyna;
 using Google.Protobuf;
 using Google.Protobuf.Reflection;
-using NUnit.Framework;
+using Xunit;
 using NATS.Client;
 using NATS.Client.JetStream;
 
@@ -151,12 +151,12 @@ public abstract class EventTest
         return equal;
     }
 
-    public static DomainEventTest<T> ForHandler<T>(DomainEvent.Handler<T> handler) where T : IMessage<T>, new()
+    public static DomainEventTest<T> Create<T>(DomainEvent.Handler<T> handler) where T : IMessage<T>, new()
     {
         return new DomainEventTest<T>(handler);
     }
 
-    public static IntegrationEventTest<T> ForHandler<T>(Event.Handler<T> handler) where T : IMessage<T>, new()
+    public static IntegrationEventTest<T> Create<T>(Event.Handler<T> handler) where T : IMessage<T>, new()
     {
         return new IntegrationEventTest<T>(handler);
     }

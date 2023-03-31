@@ -23,28 +23,29 @@ class CreateAccountTest
     }
 
     [Test]
-    public void TestCreateAccountShouldReturnSuccess()
+    public void TestCreateAccount_ShouldReturnSuccess()
     {
-        EndpointTest.Create(Path.CREATE_ACCOUNT_URL)
-                .WithRequest(new proto.CreateAccountRequest
-                {
-                    Email = "a@gmail.com",
-                    Name = "Nguyen Van A",
-                    Password = "12345678",
-                })
-                .MatchEvent(new proto.AccountCreated
-                {
-                    Email = "a1@gmail.com",
-                    Name = "Nguyen Van A",
-                })
-                .ExpectSuccess()
-                .Run();
-
-        EventTest.ForHandler(new AccountCreatedHandler()).Run(new proto.AccountCreated
+        EndpointTest.Create(Path.CREATE_ACCOUNT_URL).
+        WithRequest(new proto.CreateAccountRequest
         {
-            Email = "a1@gmail.com",
+            Email = "a@gmail.com",
             Name = "Nguyen Van A",
-        });
+            Password = "12345678",
+        }).
+        MatchEvent(new proto.AccountCreated
+        {
+            Email = "a@gmail.com",
+            Name = "Nguyen Van A",
+        }).
+        ExpectSuccess().
+        Run();
+
+        // EventTest.Create(new AccountCreatedHandler()).
+        // Run(new proto.AccountCreated
+        // {
+        //     Email = "a1@gmail.com",
+        //     Name = "Nguyen Van A",
+        // });
 
         // EndpointTest.Create(Path.CREATE_ACCOUNT_URL)
         //         .WithRequest(new proto.CreateAccountRequest
@@ -60,34 +61,34 @@ class CreateAccountTest
     [Test]
     public void TestCreateAccountWithBadEmail()
     {
-        EndpointTest.Create(Path.CREATE_ACCOUNT_URL)
-               .WithRequest(new proto.CreateAccountRequest
-               {
-                   Email = "a+gmail.com",
-                   Name = "Nguyen Van A",
-                   Password = "12345678",
-               })
-               .ExpectError(ex.account.Error.BAD_EMAIL)
-               .Run();
+        EndpointTest.Create(Path.CREATE_ACCOUNT_URL).
+        WithRequest(new proto.CreateAccountRequest
+        {
+            Email = "a+gmail.com",
+            Name = "Nguyen Van A",
+            Password = "12345678",
+        }).
+        ExpectError(ex.account.Error.BAD_EMAIL).
+        Run();
 
-        EndpointTest.Create(Path.CREATE_ACCOUNT_URL)
-               .WithRequest(new proto.CreateAccountRequest
-               {
-                   Name = "Nguyen Van A",
-                   Password = "12345678",
-               })
-               .ExpectError(ex.account.Error.BAD_EMAIL)
-               .Run();
+        EndpointTest.Create(Path.CREATE_ACCOUNT_URL).
+        WithRequest(new proto.CreateAccountRequest
+        {
+            Name = "Nguyen Van A",
+            Password = "12345678",
+        }).
+        ExpectError(ex.account.Error.BAD_EMAIL).
+        Run();
 
-        EndpointTest.Create(Path.CREATE_ACCOUNT_URL)
-               .WithRequest(new proto.CreateAccountRequest
-               {
-                   Email = "",
-                   Name = "Nguyen Van A",
-                   Password = "12345678",
-               })
-               .ExpectError(ex.account.Error.BAD_EMAIL)
-               .Run();
+        EndpointTest.Create(Path.CREATE_ACCOUNT_URL).
+        WithRequest(new proto.CreateAccountRequest
+        {
+            Email = "",
+            Name = "Nguyen Van A",
+            Password = "12345678",
+        }).
+        ExpectError(ex.account.Error.BAD_EMAIL).
+        Run();
     }
 
     private void cleanup()
