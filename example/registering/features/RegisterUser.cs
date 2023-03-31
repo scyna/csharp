@@ -7,9 +7,32 @@ public class RegisterUser : Endpoint.Handler<proto.RegisterUserRequest>
 {
     public override void Execute()
     {
-        context.Info("Receive RegisterUserRequest");
         var validator = new RequestValidator();
-        if (!validator.Validate(request).IsValid) throw scyna.Error.REQUEST_INVALID;
+        if (!validator.Validate(request).IsValid)
+        {
+            throw scyna.Error.REQUEST_INVALID;
+        }
+
+        var repository = new Repository(this.context);
+
+        try
+        {
+            repository.GetUserByEmail(request.Email);
+        }
+        catch
+        {
+
+        }
+
+        var user = new Account
+        {
+            ID = Engine.ID.Next(),
+            Email = request.Email,
+            Name = request.Name,
+            Password = request.Password
+        };
+
+        repository.RegisterUser(user);
 
         context.RaiseEvent(new proto.UserRegistered
         {
@@ -17,19 +40,26 @@ public class RegisterUser : Endpoint.Handler<proto.RegisterUserRequest>
             Email = request.Email,
             Name = request.Name
         });
+
+        Response(new proto.RegisterUserResponse { ID = user.ID });
     }
 
-    public class RequestValidator : AbstractValidator<proto.RegisterUserRequest>
+    class RequestValidator : AbstractValidator<proto.RegisterUserRequest>
     {
         public RequestValidator()
         {
             RuleFor(x => x.Email).NotEmpty().EmailAddress();
-            RuleFor(x => x.Name).NotEmpty().Length(1, 40);
+            RuleFor(x => x.Name).NotEmpty().MaximumLength(40);
             RuleFor(x => x.Password).NotEmpty().Length(6, 20);
         }
     }
 
-    public class Repository
+    class Repository : ex.registering.Repository
     {
+        public Repository(Context context) : base(context) { }
+        public void RegisterUser(Account account)
+        {
+            /*TODO*/
+        }
     }
 }

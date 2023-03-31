@@ -10,16 +10,16 @@ message RegisterUserRequest
   string Password = 3;
 }
 
+message RegisterUserResponse
+{
+  uint64 ID = 1;
+}
+
 message UserRegistered
 {
   uint64 ID = 1;
   string Email = 2;
   string Name = 3;
-}
-
-message RegisterUserResponse
-{
-  uint64 ID = 1;
 }
 
 message VerifyUserRequest
