@@ -1,47 +1,29 @@
 namespace ex.hello.Test;
 
-using NUnit.Framework;
 using scyna;
 using ex.hello;
+using Xunit;
 
-class AddTest
+public class AddTest : TestsBase
 {
-    [OneTimeSetUp]
-    public void Setup()
+    [Theory]
+    [InlineData(3, 5, 8)]
+    [InlineData(9, 91, 100)]
+    public void TestAdd_ShouldSuccess(int a, int b, int sum)
     {
-        Engine.Init("http://127.0.0.1:8081", "scyna_test", "123456");
-        Endpoint.Register(Path.ADD_URL, new AddService());
-    }
-
-    [OneTimeTearDown]
-    public void TearDown()
-    {
-        Engine.Release();
-    }
-
-    [Test]
-    public void TestAddSuccess()
-    {
-        scyna.EndpointTest.Create(Path.ADD_URL)
-            .WithRequest(new proto.AddRequest { A = 3, B = 5 })
-            .ExpectResponse(new proto.AddResponse { Sum = 8 })
-            .Run();
-
-        scyna.EndpointTest.Create(Path.ADD_URL)
-            .WithRequest(new proto.AddRequest { A = 9, B = 91 })
-            .ExpectResponse(new proto.AddResponse { Sum = 100 })
+        scyna.EndpointTest.Create(ex.hello.Path.ADD_URL)
+            .WithRequest(new ex.hello.proto.AddRequest { A = a, B = b })
+            .ExpectResponse(new proto.AddResponse { Sum = sum })
             .Run();
     }
 
-    [Test]
-    public void TestAddTooBig()
+    [Theory]
+    [InlineData(90, 75)]
+    [InlineData(9, 92)]
+    public void TestAdd_ShouldReturnTooBig(int a, int b)
     {
         scyna.EndpointTest.Create(Path.ADD_URL)
-            .WithRequest(new proto.AddRequest { A = 90, B = 75 })
-            .ExpectError(Error.REQUEST_INVALID)
-            .Run();
-        scyna.EndpointTest.Create(Path.ADD_URL)
-            .WithRequest(new proto.AddRequest { A = 92, B = 9 })
+            .WithRequest(new proto.AddRequest { A = a, B = b })
             .ExpectError(Error.REQUEST_INVALID)
             .Run();
     }

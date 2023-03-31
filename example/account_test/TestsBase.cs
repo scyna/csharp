@@ -1,9 +1,9 @@
+namespace ex.account.test;
+
 using Xunit;
 using System;
 using scyna;
 using ex.account;
-
-namespace TestxUnit;
 
 public abstract class TestsBase : IDisposable
 {

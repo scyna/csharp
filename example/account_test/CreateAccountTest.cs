@@ -1,99 +1,60 @@
-namespace ex.account.Test;
+namespace ex.account.test;
 
-using NUnit.Framework;
+using Xunit;
+using System;
 using scyna;
 using ex.account;
 
-[TestFixture]
-class CreateAccountTest
+public class CreateAccountTest : TestsBase
 {
-    [OneTimeSetUp]
-    public void Setup()
-    {
-        Engine.Init("http://127.0.0.1:8081", "scyna_test", "123456");
-        Endpoint.Register(Path.CREATE_ACCOUNT_URL, new CreateAccountService());
-        Command.InitSingleWriter("ex_account");
-    }
-
-    [OneTimeTearDown]
-    public void TearDown()
-    {
-        cleanup();
-        Engine.Release();
-    }
-
-    [Test]
-    public void TestCreateAccount_ShouldReturnSuccess()
+    [Fact]
+    public void TestCreateAccount_ShouldSucess()
     {
         EndpointTest.Create(Path.CREATE_ACCOUNT_URL).
-        WithRequest(new proto.CreateAccountRequest
-        {
-            Email = "a@gmail.com",
-            Name = "Nguyen Van A",
-            Password = "12345678",
-        }).
-        MatchEvent(new proto.AccountCreated
-        {
-            Email = "a@gmail.com",
-            Name = "Nguyen Van A",
-        }).
-        ExpectSuccess().
-        Run();
-
-        // EventTest.Create(new AccountCreatedHandler()).
-        // Run(new proto.AccountCreated
-        // {
-        //     Email = "a1@gmail.com",
-        //     Name = "Nguyen Van A",
-        // });
-
-        // EndpointTest.Create(Path.CREATE_ACCOUNT_URL)
-        //         .WithRequest(new proto.CreateAccountRequest
-        //         {
-        //             Email = "a@gmail.com",
-        //             Name = "Nguyen Van A",
-        //             Password = "12345678",
-        //         })
-        //         .ExpectError(ex.account.Error.ACCOUNT_EXISTS)
-        //         .Run();
+            WithRequest(new ex.account.proto.CreateAccountRequest
+            {
+                Email = "a@gmail.com",
+                Name = "Nguyen Van A",
+                Password = "12345678",
+            }).
+            MatchEvent(new ex.account.proto.AccountCreated
+            {
+                Email = "a@gmail.com",
+                Name = "Nguyen Van A",
+            }).
+            ExpectSuccess().
+            Run();
     }
 
-    [Test]
-    public void TestCreateAccountWithBadEmail()
+    [Theory]
+    [InlineData("a+gmail.com")]
+    [InlineData("")]
+    public void TestCreateAccount_ShouldReturnBadEmail(string email)
     {
         EndpointTest.Create(Path.CREATE_ACCOUNT_URL).
-        WithRequest(new proto.CreateAccountRequest
-        {
-            Email = "a+gmail.com",
-            Name = "Nguyen Van A",
-            Password = "12345678",
-        }).
-        ExpectError(ex.account.Error.BAD_EMAIL).
-        Run();
-
-        EndpointTest.Create(Path.CREATE_ACCOUNT_URL).
-        WithRequest(new proto.CreateAccountRequest
-        {
-            Name = "Nguyen Van A",
-            Password = "12345678",
-        }).
-        ExpectError(ex.account.Error.BAD_EMAIL).
-        Run();
-
-        EndpointTest.Create(Path.CREATE_ACCOUNT_URL).
-        WithRequest(new proto.CreateAccountRequest
-        {
-            Email = "",
-            Name = "Nguyen Van A",
-            Password = "12345678",
-        }).
-        ExpectError(ex.account.Error.BAD_EMAIL).
-        Run();
+            WithRequest(new ex.account.proto.CreateAccountRequest
+            {
+                Email = email,
+                Name = "Nguyen Van A",
+                Password = "12345678",
+            }).
+            ExpectError(ex.account.Error.BAD_EMAIL).
+            Run();
     }
 
-    private void cleanup()
+    [Theory]
+    [InlineData("")]
+    [InlineData("verylongpasswordwillnotbeaccepted")]
+    public void TestCreateAccount_ShouldReturnBadPassword(string password)
     {
-        var statement = Engine.DB.Session.Prepare("TRUNCATE ex_account.account").Bind();
-        Engine.DB.Session.Execute(statement);
+        EndpointTest.Create(Path.CREATE_ACCOUNT_URL).
+            WithRequest(new ex.account.proto.CreateAccountRequest
+            {
+                Email = "a@gmail.com",
+                Name = "Nguyen Van A",
+                Password = password,
+            }).
+            ExpectError(ex.account.Error.BAD_PASSWORD).
+            Run();
     }
 }

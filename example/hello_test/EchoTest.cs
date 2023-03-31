@@ -1,26 +1,12 @@
 namespace ex.hello.Test;
 
-using NUnit.Framework;
+using Xunit;
 using scyna;
 using ex.hello;
 
-[TestFixture]
-class EchoTest
+public class EchoTest : TestsBase
 {
-    [OneTimeSetUp]
-    public void Setup()
-    {
-        Engine.Init("http://127.0.0.1:8081", "scyna_test", "123456");
-        Endpoint.Register(Path.ECHO_URL, new EchoService());
-    }
-
-    [OneTimeTearDown]
-    public void TearDown()
-    {
-        Engine.Release();
-    }
-
-    [Test]
+    [Fact]
     public void TestEchoSuccess()
     {
         scyna.EndpointTest.Create(Path.ECHO_URL)
