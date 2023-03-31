@@ -5,18 +5,18 @@
     <ImplicitUsings>enable</ImplicitUsings>
     <Nullable>enable</Nullable>
     <PackageId>Scyna.Net</PackageId>
-    <Version>1.0.5</Version>
+    <Version>1.0.6</Version>
     <Authors>Scyna Team</Authors>
     <Company>scyna.io</Company>
     <PackageDescription>Universal Microservice Platform</PackageDescription>
     <RepositoryUrl>https://github.com/scyna/csharp</RepositoryUrl>
+    <IsPackable>true</IsPackable>
   </PropertyGroup>
 
   <ItemGroup>
     <PackageReference Include="Google.Protobuf" Version="3.22.1" />
     <PackageReference Include="NATS.Client" Version="0.14.5" />
     <PackageReference Include="Scylla.Net" Version="0.0.1-alpha1" /> 
-    <!-- <PackageReference Include="NUnit" Version="3.13.3" /> -->
     <PackageReference Include="xunit" Version="2.4.1"/>
   </ItemGroup>
 
