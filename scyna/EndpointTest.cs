@@ -48,7 +48,7 @@ public class EndpointTest
         return this;
     }
 
-    public EndpointTest EventShouldMatch<T>(string channel, T event_) where T : IMessage<T>, new()
+    public EndpointTest MatchEvent<T>(string channel, T event_) where T : IMessage<T>, new()
     {
         this.channel = channel;
         this.eventClone = event_.Clone();
