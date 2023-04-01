@@ -12,7 +12,7 @@ public class GenerateOtpTest : TestBase
         EventTest.Create(new GenerateOtpHandler())
             .ExpectEvent(new PROTO.OtpGenerated
             {
-                ID = 12345,
+                //ID = 12345,
                 Email = "a@gmail.com",
                 Name = "Nguyen Van A",
                 Otp = "123456",

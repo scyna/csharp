@@ -18,6 +18,7 @@ public abstract class EventTest
     public EventTest ExpectEvent(string channel, IMessage event_)
     {
         this.channel = channel;
+        this.eventClone = event_;
         this.event_ = event_;
         return this;
     }
@@ -25,6 +26,7 @@ public abstract class EventTest
     public EventTest ExpectEvent(IMessage event_)
     {
         this.channel = "";
+        this.eventClone = event_;
         this.event_ = event_;
         return this;
     }
