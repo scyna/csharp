@@ -5,6 +5,14 @@ using FluentValidation;
 
 public class RegisterUserHandler : Endpoint.Handler<PROTO.RegisterUserRequest>
 {
+    record Registration
+    {
+        public ulong ID;
+        public string? Name;
+        public string? Email;
+        public string? Password;
+    }
+
     public override void Execute()
     {
         var validator = new RequestValidator();
@@ -13,13 +21,13 @@ public class RegisterUserHandler : Endpoint.Handler<PROTO.RegisterUserRequest>
             throw scyna.Error.REQUEST_INVALID;
         }
 
-        var repository = new Repository(this.context);
+        var repository = new Repository();
         repository.EmailShouldNotBeRegistered(request.Email);
 
         var registration = new Registration
         {
             ID = Engine.ID.Next(),
-            Email = request.Email,
+            Email = request.Email.ToLower(),
             Name = request.Name,
             Password = request.Password
         };
@@ -45,24 +53,35 @@ public class RegisterUserHandler : Endpoint.Handler<PROTO.RegisterUserRequest>
         }
     }
 
-    class Repository : RepositoryBase
+    class Repository
     {
-        public Repository(Context context) : base(context) { }
-        public void CreateRegistration(Registration account)
+        public void CreateRegistration(Registration registration)
         {
-            /*TODO*/
+            var query = Engine.DB.Session.Prepare("INSERT INTO registering.registration(id,email,name,password) VALUES(?,?,?,?)");
+            var statement = query.Bind(registration.ID, registration.Email, registration.Name, registration.Password);
+            try
+            {
+                Engine.DB.Session.Execute(statement);
+            }
+            catch
+            {
+                throw scyna.Error.SERVER_ERROR;
+            }
         }
 
         public void EmailShouldNotBeRegistered(string email)
         {
+            var query = Engine.DB.Session.Prepare("SELECT email FROM registering.registered WHERE email=? LIMIT 1");
+            var statement = query.Bind(email);
             try
             {
-                GetUserByEmail(email);
-                throw Error.USER_EXISTS;
+                Engine.DB.Session.Execute(statement).First();
+                throw Error.EMAIL_REGISTERED;
             }
-            catch (scyna.Error err)
+            catch (InvalidOperationException) { return; }
+            catch
             {
-                if (err == scyna.Error.SERVER_ERROR) throw;
+                throw scyna.Error.SERVER_ERROR;
             }
         }
     }

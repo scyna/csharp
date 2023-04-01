@@ -11,20 +11,20 @@ public class RegisterUserTest : TestBase
     [InlineData("b@gmail.com", "Nguyen Van B")]
     public void TestRegisterUser_ShouldSucess(string email, string name)
     {
-        EndpointTest.Create(Path.REGISTER_USER_URL).
-        WithRequest(new Registering.PROTO.RegisterUserRequest
-        {
-            Email = email,
-            Name = name,
-            Password = "12345678"
-        }).
-        MatchEvent(new Registering.PROTO.RegistrationCreated
-        {
-            Email = email,
-            Name = name
-        }).
-        ExpectSuccess().
-        Run();
+        EndpointTest.Create(Path.REGISTER_USER_URL)
+            .WithRequest(new PROTO.RegisterUserRequest
+            {
+                Email = email,
+                Name = name,
+                Password = "12345678"
+            })
+            .MatchEvent(new PROTO.RegistrationCreated
+            {
+                Email = email,
+                Name = name
+            })
+            .ExpectSuccess()
+            .Run();
     }
 
     [Theory]
@@ -35,39 +35,39 @@ public class RegisterUserTest : TestBase
     [InlineData("a@gmail.com", "Nguyen Van A", "VeryLongPasswordShouldReturnInvalid")]
     public void TestRegisterUser_ShouldReturnRequestInvalid(string email, string name, string password)
     {
-        EndpointTest.Create(Path.REGISTER_USER_URL).
-            WithRequest(new Registering.PROTO.RegisterUserRequest
+        EndpointTest.Create(Path.REGISTER_USER_URL)
+            .WithRequest(new PROTO.RegisterUserRequest
             {
                 Email = email,
                 Name = name,
                 Password = password
-            }).
-            ExpectError(scyna.Error.REQUEST_INVALID).
-            Run();
+            })
+            .ExpectError(scyna.Error.REQUEST_INVALID)
+            .Run();
     }
 
 
     [Fact]
     public void TestRegisterUser_ShouldReturnUserExists()
     {
-        EndpointTest.Create(Path.REGISTER_USER_URL).
-            WithRequest(new Registering.PROTO.RegisterUserRequest
+        EndpointTest.Create(Path.REGISTER_USER_URL)
+            .WithRequest(new PROTO.RegisterUserRequest
             {
                 Email = "a@gmail.com",
                 Name = "Nguyen Van A",
                 Password = "12345678"
-            }).
-            ExpectSuccess().
-            Run();
+            })
+            .ExpectSuccess()
+            .Run();
 
-        EndpointTest.Create(Path.REGISTER_USER_URL).
-            WithRequest(new Registering.PROTO.RegisterUserRequest
+        EndpointTest.Create(Path.REGISTER_USER_URL)
+            .WithRequest(new PROTO.RegisterUserRequest
             {
                 Email = "a@gmail.com",
                 Name = "Nguyen Van A",
                 Password = "12345678"
-            }).
-            ExpectError(Registering.Error.USER_EXISTS).
-            Run();
+            })
+            .ExpectError(Registering.Error.EMAIL_REGISTERED)
+            .Run();
     }
 }
