@@ -1,9 +1,9 @@
-namespace ex.registering;
+namespace Registering;
 
 using scyna;
 using FluentValidation;
 
-public class RegisterUser : Endpoint.Handler<proto.RegisterUserRequest>
+public class RegisterUserHandler : Endpoint.Handler<PROTO.RegisterUserRequest>
 {
     public override void Execute()
     {
@@ -14,17 +14,9 @@ public class RegisterUser : Endpoint.Handler<proto.RegisterUserRequest>
         }
 
         var repository = new Repository(this.context);
+        repository.EmailShouldNotBeRegistered(request.Email);
 
-        try
-        {
-            repository.GetUserByEmail(request.Email);
-        }
-        catch
-        {
-
-        }
-
-        var user = new Account
+        var registration = new Registration
         {
             ID = Engine.ID.Next(),
             Email = request.Email,
@@ -32,19 +24,18 @@ public class RegisterUser : Endpoint.Handler<proto.RegisterUserRequest>
             Password = request.Password
         };
 
-        repository.RegisterUser(user);
-
-        context.RaiseEvent(new proto.UserRegistered
+        repository.CreateRegistration(registration);
+        context.RaiseEvent(new PROTO.RegistrationCreated
         {
-            ID = Engine.ID.Next(),
-            Email = request.Email,
-            Name = request.Name
+            ID = registration.ID,
+            Email = registration.Email,
+            Name = registration.Name
         });
 
-        Response(new proto.RegisterUserResponse { ID = user.ID });
+        Response(new PROTO.RegisterUserResponse { ID = registration.ID });
     }
 
-    class RequestValidator : AbstractValidator<proto.RegisterUserRequest>
+    class RequestValidator : AbstractValidator<PROTO.RegisterUserRequest>
     {
         public RequestValidator()
         {
@@ -54,12 +45,25 @@ public class RegisterUser : Endpoint.Handler<proto.RegisterUserRequest>
         }
     }
 
-    class Repository : ex.registering.Repository
+    class Repository : RepositoryBase
     {
         public Repository(Context context) : base(context) { }
-        public void RegisterUser(Account account)
+        public void CreateRegistration(Registration account)
         {
             /*TODO*/
+        }
+
+        public void EmailShouldNotBeRegistered(string email)
+        {
+            try
+            {
+                GetUserByEmail(email);
+                throw Error.USER_EXISTS;
+            }
+            catch (scyna.Error err)
+            {
+                if (err == scyna.Error.SERVER_ERROR) throw;
+            }
         }
     }
 }

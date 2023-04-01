@@ -1,8 +1,8 @@
-namespace ex.registering;
+namespace Registering;
 
 using scyna;
 
-public class Account
+public class Registration
 {
     public ulong ID;
     public string? Name;

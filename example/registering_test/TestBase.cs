@@ -1,16 +1,16 @@
-namespace test.registering;
+namespace Registering.Test;
 
 using Xunit;
 using System;
 using scyna;
-using ex.registering;
+using Registering;
 
 public abstract class TestBase : IDisposable
 {
     protected TestBase()
     {
         Engine.Init("http://127.0.0.1:8081", "scyna_test", "123456");
-        Endpoint.Register(Path.REGISTER_USER_URL, new RegisterUser());
+        Endpoint.Register(Path.REGISTER_USER_URL, new RegisterUserHandler());
     }
 
     public void Dispose()

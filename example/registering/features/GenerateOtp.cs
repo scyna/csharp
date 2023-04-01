@@ -1,1 +1,1 @@
-namespace ex.registering;
+namespace Registering;

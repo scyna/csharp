@@ -1,30 +1,29 @@
-namespace ex.registering;
+namespace Registering;
 
 using scyna;
 using Scylla.Net;
 
-public class Repository
+public class RepositoryBase
 {
+    protected Context context;
     protected const string TABLE_NAME = "user";
     protected const string KEYSPACE = "ex_registering";
-    private Context context;
+    protected RepositoryBase(Context context) { this.context = context; }
 
-    protected Repository(Context context) { this.context = context; }
-
-    public Account GetUserByEmail(string email)
+    public Registration GetUserByEmail(string email)
     {
         var query = Engine.DB.Session.Prepare(string.Format("SELECT id,email,name FROM {0}.{1} WHERE email=? LIMIT 1", KEYSPACE, TABLE_NAME));
         var statement = query.Bind(email.ToString());
         return queryUser(statement);
     }
 
-    private Account queryUser(BoundStatement statement)
+    private Registration queryUser(BoundStatement statement)
     {
         try
         {
             var rs = Engine.DB.Session.Execute(statement);
             var row = rs.First();
-            var account = new Account
+            var account = new Registration
             {
                 ID = (ulong)row.GetValue<long>("id"),
                 Email = row.GetValue<string>("email"),
