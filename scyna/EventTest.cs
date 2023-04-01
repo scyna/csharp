@@ -89,7 +89,7 @@ public abstract class EventTest
 
     protected void receiveEvent()
     {
-        if (event_ == null || eventClone == null) return;
+        if (event_ == null) return;
 
         if (channel.Length == 0)
         {
@@ -119,7 +119,11 @@ public abstract class EventTest
                 var parser = event_.Descriptor.Parser;
                 var received = parser.ParseFrom(ev.Body);
                 if (exactEventMatch) Assert.True(event_.Equals(received));
-                else Assert.True(partialMatchMessage(event_, received, eventClone));
+                else
+                {
+                    if (eventClone == null) Assert.True(false);
+                    else Assert.True(partialMatchMessage(event_, received, eventClone));
+                }
             }
             catch (Exception e)
             {

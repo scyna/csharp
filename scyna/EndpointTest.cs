@@ -37,6 +37,7 @@ public class EndpointTest
     public EndpointTest ExpectEvent(string channel, IMessage event_)
     {
         this.channel = channel;
+        this.eventClone = event_;
         this.event_ = event_;
         return this;
     }
@@ -44,6 +45,7 @@ public class EndpointTest
     public EndpointTest ExpectEvent(IMessage event_)
     {
         this.channel = "";
+        this.eventClone = event_;
         this.event_ = event_;
         return this;
     }
@@ -76,6 +78,7 @@ public class EndpointTest
     public EndpointTest ExpectResponse(IMessage response)
     {
         this.status = 200;
+        this.responseClone = response;
         this.response = response;
         return this;
     }
@@ -156,7 +159,7 @@ public class EndpointTest
 
     private void receiveEvent()
     {
-        if (event_ == null || eventClone == null) return;
+        if (event_ == null) return;
 
         if (channel.Length == 0)
         {
@@ -186,7 +189,11 @@ public class EndpointTest
                 var parser = event_.Descriptor.Parser;
                 var received = parser.ParseFrom(ev.Body);
                 if (exactEventMatch) Assert.True(event_.Equals(received));
-                else Assert.True(partialMatchMessage(event_, received, eventClone));
+                else
+                {
+                    if (eventClone == null) Assert.True(false);
+                    else Assert.True(partialMatchMessage(event_, received, eventClone));
+                }
             }
             catch (Exception e)
             {
