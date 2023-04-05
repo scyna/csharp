@@ -1,8 +1,6 @@
 namespace scyna;
 using Google.Protobuf;
-using Google.Protobuf.Reflection;
 using Xunit;
-using NATS.Client;
 using NATS.Client.JetStream;
 
 public abstract class EventTest
