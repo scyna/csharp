@@ -9,17 +9,16 @@ public abstract class EventTest
 {
     private IMessage? event_;
     private IMessage? eventClone;
+    private IMessage? input;
     private string channel = "";
     private string streamName = "";
     private bool exactEventMatch = true;
 
-    public abstract void Run(IMessage message);
+    public abstract void Run();
 
-    public EventTest ExpectEvent(string channel, IMessage event_)
+    public EventTest WithData(IMessage data)
     {
-        this.channel = channel;
-        this.eventClone = event_;
-        this.event_ = event_;
+        this.input = data;
         return this;
     }
 
@@ -31,21 +30,18 @@ public abstract class EventTest
         return this;
     }
 
-    public EventTest MatchEvent<E>(string channel, E event_) where E : IMessage<E>, new()
+    public EventTest ExpectEventLike<E>(E event_) where E : IMessage<E>, new()
     {
-        this.channel = channel;
+        this.channel = "";
         this.eventClone = event_.Clone();
         this.exactEventMatch = false;
         this.event_ = event_;
         return this;
     }
 
-    public EventTest MatchEvent<E>(E event_) where E : IMessage<E>, new()
+    public EventTest FromChannel(string channel)
     {
-        this.channel = "";
-        this.eventClone = event_.Clone();
-        this.exactEventMatch = false;
-        this.event_ = event_;
+        this.channel = channel;
         return this;
     }
 
@@ -171,10 +167,15 @@ public abstract class EventTest
     {
         private DomainEvent.Handler<T> handler;
         public DomainEventTest(DomainEvent.Handler<T> handler) { this.handler = handler; }
-        public override void Run(IMessage message)
+        public override void Run()
         {
+            if (this.input == null)
+            {
+                Assert.True(false);
+                return;
+            }
             createStream();
-            var eventData = new DomainEvent.EventData(Engine.ID.Next(), message);
+            var eventData = new DomainEvent.EventData(Engine.ID.Next(), input);
             handler.EventReceived(eventData);
             receiveEvent();
             deleteStream();
@@ -185,12 +186,18 @@ public abstract class EventTest
     {
         private Event.Handler<T> handler;
         public IntegrationEventTest(Event.Handler<T> handler) { this.handler = handler; }
-        public override void Run(IMessage message)
+        public override void Run()
         {
+            if (this.input == null)
+            {
+                Assert.True(false);
+                return;
+            }
+
             createStream();
             var trace = Trace.NewEventTrace("");
             handler.Init(trace);
-            handler.MessageReceived(message.ToByteArray());
+            handler.MessageReceived(input.ToByteArray());
             receiveEvent();
             deleteStream();
         }

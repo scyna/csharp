@@ -17,7 +17,7 @@ public class CreateAccountTest : TestsBase
                 Name = "Nguyen Van A",
                 Password = "12345678",
             }).
-            MatchEvent(new ex.account.proto.AccountCreated
+            ExpectEventLike(new ex.account.proto.AccountCreated
             {
                 Email = "a@gmail.com",
                 Name = "Nguyen Van A",

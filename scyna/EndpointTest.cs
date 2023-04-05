@@ -1,8 +1,6 @@
 namespace scyna;
 using Google.Protobuf;
-using Google.Protobuf.Reflection;
 using Xunit;
-using NATS.Client;
 using NATS.Client.JetStream;
 
 public class EndpointTest
@@ -34,32 +32,20 @@ public class EndpointTest
         return this;
     }
 
-    public EndpointTest ExpectEvent(string channel, IMessage event_)
+    public EndpointTest FromChannel(string channel)
     {
         this.channel = channel;
-        this.eventClone = event_;
-        this.event_ = event_;
         return this;
     }
 
     public EndpointTest ExpectEvent(IMessage event_)
     {
-        this.channel = "";
         this.eventClone = event_;
         this.event_ = event_;
         return this;
     }
 
-    public EndpointTest MatchEvent<T>(string channel, T event_) where T : IMessage<T>, new()
-    {
-        this.channel = channel;
-        this.eventClone = event_.Clone();
-        this.exactEventMatch = false;
-        this.event_ = event_;
-        return this;
-    }
-
-    public EndpointTest MatchEvent<T>(T event_) where T : IMessage<T>, new()
+    public EndpointTest ExpectEventLike<T>(T event_) where T : IMessage<T>, new()
     {
         this.channel = "";
         this.eventClone = event_.Clone();
@@ -83,7 +69,7 @@ public class EndpointTest
         return this;
     }
 
-    public EndpointTest MatchResponse<T>(T response) where T : IMessage<T>, new()
+    public EndpointTest ExpectResponseLike<T>(T response) where T : IMessage<T>, new()
     {
         this.responseClone = response.Clone();
         this.exactResponseMatch = false;
@@ -126,9 +112,9 @@ public class EndpointTest
         try
         {
             var config = StreamConfiguration.Builder()
-                    .WithName(streamName)
-                    .WithSubjects(streamName + ".>")
-                    .Build();
+                .WithName(streamName)
+                .WithSubjects(streamName + ".>")
+                .Build();
 
 
             var jsm = Engine.Connection.CreateJetStreamManagementContext();

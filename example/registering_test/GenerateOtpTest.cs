@@ -10,18 +10,18 @@ public class GenerateOtpTest : TestBase
     public void TestGenerateOtp_ShouldSucess()
     {
         EventTest.Create(new GenerateOtpHandler())
-            .ExpectEvent(new PROTO.OtpGenerated
-            {
-                //ID = 12345,
-                Email = "a@gmail.com",
-                Name = "Nguyen Van A",
-                Otp = "123456",
-            })
-            .Run(new PROTO.RegistrationCreated
+            .WithData(new PROTO.RegistrationCreated
             {
                 ID = 12345,
                 Email = "a@gmail.com",
                 Name = "Nguyen Van A",
-            });
+            })
+            .ExpectEvent(new PROTO.OtpGenerated
+            {
+                Email = "a@gmail.com",
+                Name = "Nguyen Van A",
+                Otp = "123456",
+            })
+            .Run();
     }
 }
