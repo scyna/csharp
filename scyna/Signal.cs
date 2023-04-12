@@ -5,7 +5,7 @@ namespace scyna;
 
 public class Signal
 {
-    public static void Register<T>(string channel, Handler<T> handler) where T : IMessage<T>, new()
+    public static void RegisterByModule<T>(string channel, Handler<T> handler) where T : IMessage<T>, new()
     {
         Console.WriteLine("Register Signal:" + channel);
         Engine.Connection.SubscribeAsync(channel, Engine.Module, (sender, args) =>
@@ -13,6 +13,16 @@ public class Signal
             handler.Run(args.Message.Data);
         });
     }
+
+    public static void RegisterBySession<T>(string channel, Handler<T> handler) where T : IMessage<T>, new()
+    {
+        Console.WriteLine("Register Signal:" + channel);
+        Engine.Connection.SubscribeAsync(channel, (sender, args) =>
+        {
+            handler.Run(args.Message.Data);
+        });
+    }
+
 
     public static void Emit(string channel, pb::IMessage message)
     {
