@@ -83,7 +83,7 @@ public abstract class EventTest
 
     protected void receiveEvent()
     {
-        if (event_ == null) return;
+        if (event_ == null || eventClone == null) return;
 
         if (channel.Length == 0)
         {
