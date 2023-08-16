@@ -5,11 +5,13 @@ using System.Text;
 
 class Request
 {
-    public static proto.Response? Send(string url, IMessage? request)
+    public static proto.Response? Send(string url, IMessage? request, IMessage? metadata)
     {
         var traceID = Engine.ID.Next();
         var req = new proto.Request { TraceID = traceID, JSON = false };
         if (request != null) req.Body = request.ToByteString();
+        if (metadata != null) req.Data = metadata.ToByteString();
+
         try
         {
             var msg = Engine.Connection.Request(Utils.PublishURL(url), req.ToByteArray(), 10000);

@@ -13,7 +13,7 @@ public class Settings
             Module = Engine.Module,
             Key = key,
             Value = value
-        });
+        }, null);
 
         if (response != null && response.Code == 200)
         {
@@ -32,8 +32,14 @@ public class Settings
         /*from cache*/
         lock (this)
         {
-            var ret = data[key];
-            if (ret != null) return ret;
+            try
+            {
+                var ret = data[key];
+                if (ret != null) return ret;
+            }
+            catch (Exception)
+            {
+            }
         }
 
         var response = Request.Send<proto.ReadSettingResponse>(Path.SETTING_READ_URL, new proto.ReadSettingRequest
@@ -67,7 +73,7 @@ public class Settings
         {
             Module = Engine.Module,
             Key = key,
-        });
+        }, null);
 
         if (response != null && response.Code == 200)
         {
@@ -99,7 +105,7 @@ public class Settings
         {
             if (data != null && data.Module == Engine.Module)
             {
-                Engine.Instance.Settings.update(data.Key, data.Value);
+                Engine.Settings.update(data.Key, data.Value);
             }
         }
     }
@@ -110,7 +116,7 @@ public class Settings
         {
             if (data != null && data.Module == Engine.Module)
             {
-                Engine.Instance.Settings.remove(data.Key);
+                Engine.Settings.remove(data.Key);
             }
         }
     }

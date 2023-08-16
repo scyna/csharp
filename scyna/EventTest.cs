@@ -11,8 +11,10 @@ public abstract class EventTest
     private string channel = "";
     private string streamName = "";
     private bool exactEventMatch = true;
+    private ByteString? eventData;
+    private bool expectSuccess = true;
 
-    public abstract void Run();
+    public abstract EventTest Run();
 
     public EventTest WithData(IMessage data)
     {
@@ -22,19 +24,68 @@ public abstract class EventTest
 
     public EventTest ExpectEvent(IMessage event_)
     {
-        this.channel = "";
         this.eventClone = event_;
         this.event_ = event_;
         return this;
     }
 
+    public EventTest ExpectSucess()
+    {
+        expectSuccess = true;
+        return this;
+    }
+
+    public EventTest ExpectError()
+    {
+        expectSuccess = false;
+        return this;
+    }
+
+
+
     public EventTest ExpectEventLike<E>(E event_) where E : IMessage<E>, new()
     {
-        this.channel = "";
         this.eventClone = event_.Clone();
         this.exactEventMatch = false;
         this.event_ = event_;
         return this;
+    }
+
+    public void DecodeEvent<T>(out T event_) where T : IMessage<T>, new()
+    {
+        if (eventData is null)
+        {
+            if (channel.Length == 0)
+            {
+                var received = DomainEvent.NextEvent();
+                if (received != null) eventData = received.ToByteString();
+            }
+            else
+            {
+                try
+                {
+                    var options = PushSubscribeOptions.Builder().WithStream(streamName).Build();
+                    var sub = Engine.Stream.PushSubscribeSync($"{streamName}.{channel}", options);
+                    var message = sub.NextMessage(1000); //1000ms
+                    if (message != null)
+                    {
+                        var ev = scyna.proto.Event.Parser.ParseFrom(message.Data);
+                        var tmp = new T();
+                        var parser = tmp.Descriptor.Parser;
+                        var received = parser.ParseFrom(ev.Body);
+                        eventData = ev.Body;
+                    }
+                }
+                catch (Exception e) { Console.WriteLine(e); }
+            }
+        }
+
+        if (eventData is null) event_ = new T();
+        else
+        {
+            MessageParser<T> parser = new MessageParser<T>(() => new T());
+            event_ = parser.ParseFrom(eventData);
+        }
     }
 
     public EventTest FromChannel(string channel)
@@ -51,7 +102,7 @@ public abstract class EventTest
         {
             var config = StreamConfiguration.Builder()
                     .WithName(streamName)
-                    .WithSubjects(streamName + ".>")
+                    .WithSubjects($"{streamName}.>")
                     .Build();
 
 
@@ -93,6 +144,7 @@ public abstract class EventTest
                 Assert.True(false);
                 return;
             }
+            eventData = received.ToByteString();
             if (exactEventMatch) Assert.True(event_.Equals(received));
             else Assert.True(partialMatchMessage(event_, received, eventClone));
         }
@@ -101,7 +153,7 @@ public abstract class EventTest
             try
             {
                 var options = PushSubscribeOptions.Builder().WithStream(streamName).Build();
-                var sub = Engine.Stream.PushSubscribeSync(streamName + "." + channel, options);
+                var sub = Engine.Stream.PushSubscribeSync($"{streamName}.{channel}", options);
                 var message = sub.NextMessage(1000); //1000ms
                 if (message == null)
                 {
@@ -112,6 +164,7 @@ public abstract class EventTest
                 var ev = scyna.proto.Event.Parser.ParseFrom(message.Data);
                 var parser = event_.Descriptor.Parser;
                 var received = parser.ParseFrom(ev.Body);
+                eventData = ev.Body;
                 if (exactEventMatch) Assert.True(event_.Equals(received));
                 else
                 {
@@ -161,22 +214,37 @@ public abstract class EventTest
         return new IntegrationEventTest<T>(handler);
     }
 
+    public static TaskTest<T> Create<T>(Task.Handler<T> handler) where T : IMessage<T>, new()
+    {
+        return new TaskTest<T>(handler);
+    }
+
     public class DomainEventTest<T> : EventTest where T : IMessage<T>, new()
     {
         private DomainEvent.Handler<T> handler;
         public DomainEventTest(DomainEvent.Handler<T> handler) { this.handler = handler; }
-        public override void Run()
+        public override EventTest Run()
         {
-            if (this.input == null)
+            DomainEvent.Clear();
+            try
             {
-                Assert.True(false);
-                return;
+                if (this.input == null) Assert.True(false);
+
+                createStream();
+                var eventData = new DomainEvent.EventData((ulong)Engine.ID.Next(), input);
+                handler.TestEventReceived(eventData);
+                receiveEvent();
+                deleteStream();
+                if (expectSuccess) return this;
+                expectSuccess = true;
+                Assert.False(expectSuccess);
             }
-            createStream();
-            var eventData = new DomainEvent.EventData(Engine.ID.Next(), input);
-            handler.EventReceived(eventData);
-            receiveEvent();
-            deleteStream();
+            catch
+            {
+                Console.WriteLine($"Expect Success {expectSuccess}");
+                Assert.False(expectSuccess);
+            }
+            return this;
         }
     }
 
@@ -184,20 +252,57 @@ public abstract class EventTest
     {
         private Event.Handler<T> handler;
         public IntegrationEventTest(Event.Handler<T> handler) { this.handler = handler; }
-        public override void Run()
+        public override EventTest Run()
         {
             if (this.input == null)
             {
                 Assert.True(false);
-                return;
+                return this;
             }
+
+            DomainEvent.Clear();
 
             createStream();
             var trace = Trace.NewEventTrace("");
             handler.Init(trace);
-            handler.MessageReceived(input.ToByteArray());
+
+            scyna.proto.Event event_ = new proto.Event
+            {
+                Body = input.ToByteString(),
+                TraceID = 0,
+            };
+
+            handler.MessageReceived(event_.ToByteArray());
             receiveEvent();
             deleteStream();
+            return this;
+        }
+    }
+
+    public class TaskTest<T> : EventTest where T : IMessage<T>, new()
+    {
+        private Task.Handler<T> handler;
+        public TaskTest(Task.Handler<T> handler) { this.handler = handler; }
+        public override EventTest Run()
+        {
+            if (this.input == null)
+            {
+                Assert.True(false);
+                return this;
+            }
+
+            createStream();
+
+            var task = new scyna.proto.Task
+            {
+                TraceID = (ulong)Engine.ID.Next(),
+                Data = input.ToByteString(),
+            };
+
+            handler.MessageReceived(task.ToByteArray());
+            receiveEvent();
+            deleteStream();
+            return this;
         }
     }
 }

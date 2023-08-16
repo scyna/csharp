@@ -16,6 +16,9 @@ public class Event
 
     public static void Start()
     {
+        Console.WriteLine("Event loop started");
+        var tmp = streams.Values;
+        Console.WriteLine($"{tmp.Count}");
         foreach (var stream in streams.Values) { stream.Start(); }
     }
 
@@ -24,7 +27,7 @@ public class Event
         Console.WriteLine("Register Event:" + channel);
 
         var stream = Stream.CreateOrGet(sender);
-        var subject = sender + "." + channel;
+        var subject = $"{sender}.{channel}";
         var trace = Trace.NewEventTrace(subject);
         handler.Init(trace);
         stream.executors[subject] = handler;
@@ -33,8 +36,7 @@ public class Event
     public static void AddToStream(String sender, String channel, IMessageHandler handler)
     {
         var stream = Stream.CreateOrGet(sender);
-        var subject = sender + "." + channel;
-        stream.executors[subject] = handler;
+        stream.executors[$"{sender}.{channel}"] = handler;
     }
 
     class Stream
@@ -50,7 +52,7 @@ public class Event
             this.receiver = receiver;
             executors = new Dictionary<string, IMessageHandler>();
             var options = PullSubscribeOptions.Builder().WithDurable(receiver).WithStream(sender).Build();
-            subscription = Engine.Stream.PullSubscribe(sender + ".>", options);
+            subscription = Engine.Stream.PullSubscribe($"{sender}.>", options);
         }
 
         public static Stream CreateOrGet(String sender)
@@ -63,6 +65,7 @@ public class Event
 
         public void Start()
         {
+            Console.WriteLine($"Stream started {sender}");
             var thread = new Thread(new ThreadStart(this.run));
             thread.Start();
         }
@@ -74,8 +77,15 @@ public class Event
                 var messages = subscription.Fetch(1, 1000); //1000ms
                 foreach (NATS.Client.Msg m in messages)
                 {
-                    var executor = executors[m.Subject];
-                    if (executor != null) executor.MessageReceived(m.Data);
+                    try
+                    {
+                        var executor = executors[m.Subject];
+                        if (executor != null) executor.MessageReceived(m.Data);
+                    }
+                    catch (Exception e)
+                    {
+                        Console.WriteLine(e);
+                    }
                     m.Ack();
                 }
             }
@@ -94,6 +104,11 @@ public class Event
         public abstract void Execute();
         public void Init(Trace trace) { this.trace = trace; }
 
+        protected virtual void OnError(Exception e)
+        {
+            context.Error(e.ToString());
+        }
+
         public void MessageReceived(byte[] message)
         {
             try
@@ -107,9 +122,9 @@ public class Event
                 this.Execute();
                 trace.Record();
             }
-            catch (InvalidProtocolBufferException e)
+            catch (Exception e)
             {
-                Console.WriteLine(e);
+                OnError(e);
             }
         }
     }

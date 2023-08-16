@@ -1,6 +1,5 @@
 namespace scyna;
 
-using NATS.Client;
 using System;
 using Google.Protobuf;
 
@@ -26,6 +25,11 @@ public class Task
         public abstract void Execute();
         public void Init(Trace trace) { this.trace = trace; }
 
+        protected virtual void OnError(Exception e)
+        {
+            context.Error(e.ToString());
+        }
+
         public void MessageReceived(byte[] message)
         {
             try
@@ -37,10 +41,7 @@ public class Task
                 this.Execute();
                 trace.Record();
             }
-            catch (InvalidProtocolBufferException e)
-            {
-                Console.WriteLine(e);
-            }
+            catch (Exception e) { OnError(e); }
         }
     }
 }

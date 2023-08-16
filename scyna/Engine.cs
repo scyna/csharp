@@ -15,6 +15,7 @@ public class Engine
     private Generator id;
     private DB db;
     private IJetStream stream;
+    private DomainEvent domainEvent;
 
     public static Engine Instance
     {
@@ -27,9 +28,10 @@ public class Engine
 
     public static string Module { get { return Instance.module; } }
     public static IConnection Connection { get { return Instance.connection; } }
-    public Settings Settings { get { return settings; } }
+    public static Settings Settings { get { return Instance.settings; } }
     public static IJetStream Stream { get { return Instance.stream; } }
     public static DB DB { get { return Instance.db; } }
+    public static DomainEvent DomainEvent { get { return Instance.domainEvent; } }
     public static Logger LOG { get { return Instance.logger; } }
     public static Generator ID { get { return Instance.id; } }
     public static ulong SessionID { get { return Instance.session.ID; } }
@@ -62,7 +64,29 @@ public class Engine
         db = DB.Init(hosts, config.DBUsername, config.DBPassword);
         Console.WriteLine("Connected to ScyllaDB");
 
+        domainEvent = new DomainEvent();
+
         Console.WriteLine("Engine Created, SessionID:" + sid);
+    }
+
+    static public async void TestInit(string managerURL, string module, string secret)
+    {
+        var client = new HttpClient();
+        var request = new proto.CreateSessionRequest { Module = module, Secret = secret, };
+        var task = client.PostAsync(managerURL + Path.SESSION_CREATE_URL, new ByteArrayContent(request.ToByteArray()));
+        if (!task.Wait(5000))
+        {
+            Console.WriteLine("Timeout");
+            throw new Exception();
+        }
+
+        var responseBody = await task.GetAwaiter().GetResult().Content.ReadAsByteArrayAsync();
+        var response = proto.CreateSessionResponse.Parser.ParseFrom(responseBody);
+        instance = new Engine(module, response.SessionID, response.Config);
+
+        /*setting*/
+        Signal.RegisterBySession(Path.SETTING_UPDATE_CHANNEL + module, new Settings.UpdatedSignal());
+        Signal.RegisterBySession(Path.SETTING_REMOVE_CHANNEL + module, new Settings.RemovedSignal());
     }
 
     static public async void Init(string managerURL, string module, string secret)
@@ -83,20 +107,20 @@ public class Engine
         /*setting*/
         Signal.RegisterBySession(Path.SETTING_UPDATE_CHANNEL + module, new Settings.UpdatedSignal());
         Signal.RegisterBySession(Path.SETTING_REMOVE_CHANNEL + module, new Settings.RemovedSignal());
+
     }
 
     static public void Start()
     {
         Console.WriteLine("Engine is running");
-        bool running = true;
+        Event.Start();
+        DomainEvent.Start();
         Console.CancelKeyPress += (_, ea) =>
         {
             ea.Cancel = true;
             Instance.Close();
-            running = false;
+            Environment.Exit(0);
         };
-
-        while (running) { Thread.Sleep(1000); }
     }
 
     static public void Release()

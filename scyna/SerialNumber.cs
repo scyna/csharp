@@ -2,6 +2,32 @@ namespace scyna;
 
 public class SerialNumber
 {
+    public class Value
+    {
+        private uint prefix;
+        private ulong value;
+        internal Value(uint prefix, ulong value)
+        {
+            this.prefix = prefix;
+            this.value = value;
+        }
+
+        public string GetTwelveDigitsString()
+        {
+            return String.Format("{0:00000}{1:0000000}", prefix, value);
+        }
+
+        public string GetTenDigitsString()
+        {
+            return String.Format("{0:00000}{1:00000}", prefix, value);
+        }
+
+        public ulong GetNumber()
+        {
+            return Utils.CalculateID(prefix, value);
+        }
+    }
+
     private string key;
     private uint prefix = 0;
     private ulong last = 0;
@@ -9,7 +35,7 @@ public class SerialNumber
 
     public SerialNumber(string key) { this.key = key; }
 
-    public string Next()
+    public Value Next()
     {
         lock (this)
         {
@@ -27,7 +53,7 @@ public class SerialNumber
                     last = response.End;
                 }
             }
-            return String.Format("%d%07d", prefix, next);
+            return new Value(prefix, next);
         }
     }
 }
