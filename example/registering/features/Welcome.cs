@@ -13,5 +13,11 @@ public class WelcomeHandler : DomainEvent.Handler<PROTO.RegistrationCompleted>
             Email = data.Email,
             Content = content
         });
+
+        context.RaiseEvent(new PROTO.WelcomeSent
+        {
+            Email = data.Email,
+            Content = content
+        });
     }
 }
