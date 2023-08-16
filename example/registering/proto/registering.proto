@@ -18,7 +18,7 @@ message VerifyRegistrationRequest
 
 message ResendOtpRequest
 {
-  uint64 Email = 1;
+  string Email = 1;
 }
 
 message RegistrationCreated
@@ -39,4 +39,11 @@ message OtpGenerated
 {
   string Email = 1;
   string Otp = 2;
+}
+
+message OtpSent
+{
+  string Email = 1;
+  string Otp = 2;
+  string Content = 3;
 }

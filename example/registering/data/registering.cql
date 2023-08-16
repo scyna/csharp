@@ -10,7 +10,7 @@ CREATE TABLE registering.registration
     password     text,
     otp          text,
     expired      timestamp,
-    sms_count    int
+    sms_count    counter
 );
 CREATE INDEX ON registering.registration(id);
 
