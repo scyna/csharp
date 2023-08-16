@@ -6,14 +6,14 @@ public class SendOtpHandler : DomainEvent.Handler<PROTO.OtpGenerated>
 {
     public override void Execute()
     {
-        Engine.DB.AssureExist($@"SELECT email FROM {Table.REGISTRATION} WHERE email = ?", data.Email);
+        Engine.DB.AssureExist($@"SELECT * FROM {Table.REGISTRATION} WHERE email = ?", data.Email);
 
         var content = $@"Your OTP is {data.Otp}. It will expire in 5 minutes.";
 
-        /*TODO: send sms*/
+        /*TODO: send email*/
 
         Engine.DB.ExecuteUpdate($@"UPDATE {Table.REGISTRATION}
-            SET sms_count = sms_count + 1 WHERE email = ?", data.Email);
+            SET email_count = email_count + 1 WHERE email = ?", data.Email);
 
         context.RaiseEvent(new PROTO.OtpSent
         {
