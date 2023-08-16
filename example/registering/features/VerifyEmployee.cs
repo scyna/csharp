@@ -17,7 +17,7 @@ public class VerifyRegistrationHandler : Endpoint.Handler<PROTO.VerifyRegistrati
             .Add($@"DELETE FROM {Table.REGISTRATION} WHERE email = ?", request.Email)
             .Add($@"INSERT INTO {Table.REGISTERED} (email) VALUES (?)", request.Email));
 
-        context.RaiseEvent(new PROTO.RegistrationCompleted
+        context.PublishEvent(Channel.REGISTRATION_COMPLETED, new PROTO.RegistrationCompleted
         {
             Email = request.Email,
             Name = auth.GetValue<string>("name"),

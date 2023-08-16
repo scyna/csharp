@@ -7,12 +7,12 @@ public class CreateRegistrationHandler : Endpoint.Handler<PROTO.CreateRegistrati
 {
     public override void Execute()
     {
-        request.Email = request.Email.ToLower();
         var validator = new RequestValidator();
         if (!validator.Validate(request).IsValid) throw scyna.Error.REQUEST_INVALID;
 
         Engine.DB.AssureNotExist($@"SELECT * FROM {Table.REGISTRATION} WHERE email = ?", request.Email);
         Engine.DB.AssureNotExist($@"SELECT * FROM {Table.REGISTERED} WHERE email = ?", request.Email);
+
         Engine.DB.ExecuteUpdate($@"INSERT INTO {Table.REGISTRATION} (email, name, password)
             VALUES (?, ?, ?)", request.Email, request.Name, request.Password);
 
