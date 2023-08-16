@@ -9,7 +9,7 @@ using pb = global::Google.Protobuf;
 using pbc = global::Google.Protobuf.Collections;
 using pbr = global::Google.Protobuf.Reflection;
 using scg = global::System.Collections.Generic;
-namespace Registering.PROTO {
+namespace ex.Registering.PROTO {
 
   /// <summary>Holder for reflection information generated from public.proto</summary>
   public static partial class PublicReflection {
@@ -29,15 +29,15 @@ namespace Registering.PROTO {
             "Z2lzdGVyVXNlclJlc3BvbnNlEgoKAklEGAEgASgEIjwKGVZlcmlmeVJlZ2lz",
             "dHJhdGlvblJlcXVlc3QSEgoKRW1wbG95ZWVJRBgBIAEoBBILCgNPVFAYAiAB",
             "KAkiMgocUmVzZW5kUmVnaXN0cmF0aW9uT3RwUmVxdWVzdBISCgpFbXBsb3ll",
-            "ZUlEGAEgASgEQikKEXJlZ2lzdGVyaW5nLnByb3RvUAGqAhFSZWdpc3Rlcmlu",
-            "Zy5QUk9UT2IGcHJvdG8z"));
+            "ZUlEGAEgASgEQiwKEXJlZ2lzdGVyaW5nLnByb3RvUAGqAhRleC5SZWdpc3Rl",
+            "cmluZy5QUk9UT2IGcHJvdG8z"));
       descriptor = pbr::FileDescriptor.FromGeneratedCode(descriptorData,
           new pbr::FileDescriptor[] { },
           new pbr::GeneratedClrTypeInfo(null, null, new pbr::GeneratedClrTypeInfo[] {
-            new pbr::GeneratedClrTypeInfo(typeof(global::Registering.PROTO.RegisterUserRequest), global::Registering.PROTO.RegisterUserRequest.Parser, new[]{ "Email", "Name", "Password" }, null, null, null, null),
-            new pbr::GeneratedClrTypeInfo(typeof(global::Registering.PROTO.RegisterUserResponse), global::Registering.PROTO.RegisterUserResponse.Parser, new[]{ "ID" }, null, null, null, null),
-            new pbr::GeneratedClrTypeInfo(typeof(global::Registering.PROTO.VerifyRegistrationRequest), global::Registering.PROTO.VerifyRegistrationRequest.Parser, new[]{ "EmployeeID", "OTP" }, null, null, null, null),
-            new pbr::GeneratedClrTypeInfo(typeof(global::Registering.PROTO.ResendRegistrationOtpRequest), global::Registering.PROTO.ResendRegistrationOtpRequest.Parser, new[]{ "EmployeeID" }, null, null, null, null)
+            new pbr::GeneratedClrTypeInfo(typeof(global::ex.Registering.PROTO.RegisterUserRequest), global::ex.Registering.PROTO.RegisterUserRequest.Parser, new[]{ "Email", "Name", "Password" }, null, null, null, null),
+            new pbr::GeneratedClrTypeInfo(typeof(global::ex.Registering.PROTO.RegisterUserResponse), global::ex.Registering.PROTO.RegisterUserResponse.Parser, new[]{ "ID" }, null, null, null, null),
+            new pbr::GeneratedClrTypeInfo(typeof(global::ex.Registering.PROTO.VerifyRegistrationRequest), global::ex.Registering.PROTO.VerifyRegistrationRequest.Parser, new[]{ "EmployeeID", "OTP" }, null, null, null, null),
+            new pbr::GeneratedClrTypeInfo(typeof(global::ex.Registering.PROTO.ResendRegistrationOtpRequest), global::ex.Registering.PROTO.ResendRegistrationOtpRequest.Parser, new[]{ "EmployeeID" }, null, null, null, null)
           }));
     }
     #endregion
@@ -56,7 +56,7 @@ namespace Registering.PROTO {
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     public static pbr::MessageDescriptor Descriptor {
-      get { return global::Registering.PROTO.PublicReflection.Descriptor.MessageTypes[0]; }
+      get { return global::ex.Registering.PROTO.PublicReflection.Descriptor.MessageTypes[0]; }
     }
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
@@ -300,7 +300,7 @@ namespace Registering.PROTO {
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     public static pbr::MessageDescriptor Descriptor {
-      get { return global::Registering.PROTO.PublicReflection.Descriptor.MessageTypes[1]; }
+      get { return global::ex.Registering.PROTO.PublicReflection.Descriptor.MessageTypes[1]; }
     }
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
@@ -472,7 +472,7 @@ namespace Registering.PROTO {
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     public static pbr::MessageDescriptor Descriptor {
-      get { return global::Registering.PROTO.PublicReflection.Descriptor.MessageTypes[2]; }
+      get { return global::ex.Registering.PROTO.PublicReflection.Descriptor.MessageTypes[2]; }
     }
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
@@ -680,7 +680,7 @@ namespace Registering.PROTO {
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     public static pbr::MessageDescriptor Descriptor {
-      get { return global::Registering.PROTO.PublicReflection.Descriptor.MessageTypes[3]; }
+      get { return global::ex.Registering.PROTO.PublicReflection.Descriptor.MessageTypes[3]; }
     }
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]

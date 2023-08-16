@@ -1,2 +1,2 @@
-protoc -I=. --csharp_out=. public.proto
-protoc -I=. --csharp_out=. private.proto
+protoc -I=. --csharp_out=./generated public.proto
+protoc -I=. --csharp_out=./generated private.proto

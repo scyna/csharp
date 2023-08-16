@@ -2,7 +2,7 @@ using Xunit;
 using scyna;
 using ex.Registering;
 
-namespace Registering.Test;
+namespace ex.Registering.Test;
 
 public class GenerateOtpTest : TestBase
 {
