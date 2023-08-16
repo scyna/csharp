@@ -7,6 +7,11 @@ public class WelcomeHandler : DomainEvent.Handler<PROTO.RegistrationCompleted>
     public override void Execute()
     {
         var content = $@"Hello {data.Name}, your registration is completed.";
-        /*TODO: send email*/
+
+        context.SendRequest(Path.SEND_EMAIL, new adapter.PROTO.SendEmailRequest
+        {
+            Email = data.Email,
+            Content = content
+        });
     }
 }

@@ -10,7 +10,11 @@ public class SendOtpHandler : DomainEvent.Handler<PROTO.OtpGenerated>
 
         var content = $@"Your OTP is {data.Otp}. It will expire in 5 minutes.";
 
-        /*TODO: send email*/
+        context.SendRequest(Path.SEND_EMAIL, new adapter.PROTO.SendEmailRequest
+        {
+            Email = data.Email,
+            Content = content
+        });
 
         Engine.DB.ExecuteUpdate($@"UPDATE {Table.REGISTRATION}
             SET email_count = email_count + 1 WHERE email = ?", data.Email);
