@@ -3,16 +3,11 @@ option java_multiple_files = true;
 option java_package = "registering.proto";
 option csharp_namespace = "ex.Registering.PROTO";
 
-message RegisterUserRequest
+message CreateRegistrationRequest
 {
   string Email = 1;
   string Name = 2;
   string Password = 3;
-}
-
-message RegisterUserResponse
-{
-  uint64 ID = 1;
 }
 
 message VerifyRegistrationRequest
@@ -21,7 +16,20 @@ message VerifyRegistrationRequest
   string OTP = 2;
 }
 
-message ResendRegistrationOtpRequest
+message ResendOtpRequest
 {
-  uint64 EmployeeID = 1;
+  uint64 Email = 1;
+}
+
+message RegistrationCreated
+{
+  string Email = 1;
+  string Name = 2;
+  string Password = 3;
+}
+
+message OtpGenerated
+{
+  string Email = 1;
+  string Otp = 2;
 }

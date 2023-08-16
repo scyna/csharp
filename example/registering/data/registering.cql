@@ -10,10 +10,10 @@ CREATE TABLE registering.registration
     password     text,
     otp          text,
 );
-CREATE INDEX ON registering.registration(id);
+CREATE INDEX ON registering.registering(id);
 
 DROP TABLE IF EXISTS registering.registered;
-CREATE TABLE re_registering.registered
+CREATE TABLE registering.registered
 (
     email        text PRIMARY KEY
 );
