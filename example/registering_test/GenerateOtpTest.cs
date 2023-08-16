@@ -1,6 +1,6 @@
 using Xunit;
 using scyna;
-using Registering;
+using ex.Registering;
 
 namespace Registering.Test;
 

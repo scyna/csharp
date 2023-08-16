@@ -1,9 +1,8 @@
-namespace Registering.Test;
+namespace ex.Registering.Test;
 
-using Xunit;
 using System;
 using scyna;
-using Registering;
+using ex.Registering;
 
 public abstract class TestBase : IDisposable
 {

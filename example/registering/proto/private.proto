@@ -1,7 +1,7 @@
 syntax = "proto3";
 option java_multiple_files = true;
 option java_package = "registering.proto";
-option csharp_namespace = "Registering.PROTO";
+option csharp_namespace = "ex.Registering.PROTO";
 
 message RegistrationCreated
 {

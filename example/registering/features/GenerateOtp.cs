@@ -1,5 +1,4 @@
-namespace Registering;
-
+namespace ex.Registering;
 
 using scyna;
 using FluentValidation;
