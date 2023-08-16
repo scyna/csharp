@@ -1,4 +1,4 @@
-namespace ex.Registering;
+namespace ex.registering;
 
 public class Path
 {

@@ -9,8 +9,9 @@ CREATE TABLE registering.registration
     name         text,
     password     text,
     otp          text,
+    expired      timestamp
 );
-CREATE INDEX ON registering.registering(id);
+CREATE INDEX ON registering.registration(id);
 
 DROP TABLE IF EXISTS registering.registered;
 CREATE TABLE registering.registered

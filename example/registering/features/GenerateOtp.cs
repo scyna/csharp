@@ -1,18 +1,18 @@
-namespace ex.Registering;
+namespace ex.registering;
 
 using scyna;
-using FluentValidation;
 
 public class GenerateOtpHandler : DomainEvent.Handler<PROTO.RegistrationCreated>
 {
     public override void Execute()
     {
-        // context.RaiseEvent(new PROTO.OtpGenerated
-        // {
-        //     ID = data.ID,
-        //     Email = data.Email,
-        //     Name = data.Name,
-        //     Otp = "123456"
-        // });
+        var otp = new Random().Next(100000, 999999).ToString();
+        Engine.DB.ExecuteUpdate($@"UPDATE {Table.REGISTRATION}
+            SET otp=? WHERE email=?", otp, data.Email);
+        context.RaiseEvent(new PROTO.OtpGenerated
+        {
+            Email = data.Email,
+            Otp = otp,
+        });
     }
 }

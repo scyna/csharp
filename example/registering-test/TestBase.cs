@@ -1,8 +1,8 @@
-namespace ex.Registering.Test;
+namespace ex.registering.Test;
 
 using System;
 using scyna;
-using ex.Registering;
+using ex.registering;
 
 public abstract class TestBase : IDisposable
 {
