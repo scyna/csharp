@@ -53,3 +53,9 @@ message WelcomeSent
   string Email = 1;
   string Content = 3;
 }
+
+message RegistrationDeleted
+{
+  string Email = 1;
+  string Name = 2;
+}
