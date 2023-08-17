@@ -13,9 +13,9 @@ class Registration
 
         if (testing) return;
 
-        DomainEvent.Register(new GenerateOtpHandler());
         DomainEvent.Register(new SendOtpHandler());
         DomainEvent.Register(new WelcomeHandler());
+        DomainEvent.Register(new WaitSixMinutesHandler());
     }
 
     public static void TestingSetup()

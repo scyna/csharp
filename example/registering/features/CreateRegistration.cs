@@ -11,7 +11,7 @@ public class CreateRegistrationHandler : Endpoint.Handler<PROTO.CreateRegistrati
         if (!validator.Validate(request).IsValid) throw scyna.Error.REQUEST_INVALID;
 
         Engine.DB.AssureNotExist($@"SELECT * FROM {Table.REGISTRATION} WHERE email = ?", request.Email);
-        Engine.DB.AssureNotExist($@"SELECT * FROM {Table.REGISTERED} WHERE email = ?", request.Email);
+        Engine.DB.AssureNotExist($@"SELECT * FROM {Table.COMPLETED} WHERE email = ?", request.Email);
 
         var otp = Utils.GenerateSixDigitsOtp();
         var expired = DateTimeOffset.Now.AddMinutes(5);

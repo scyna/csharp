@@ -15,7 +15,7 @@ public class VerifyRegistrationHandler : Endpoint.Handler<PROTO.VerifyRegistrati
 
         Engine.DB.ExecuteUpdate(new BatchStatement()
             .Add($@"DELETE FROM {Table.REGISTRATION} WHERE email = ?", request.Email)
-            .Add($@"INSERT INTO {Table.REGISTERED} (email) VALUES (?)", request.Email));
+            .Add($@"INSERT INTO {Table.COMPLETED} (email) VALUES (?)", request.Email));
 
         context.PublishEvent(Channel.REGISTRATION_COMPLETED, new PROTO.RegistrationCompleted
         {
