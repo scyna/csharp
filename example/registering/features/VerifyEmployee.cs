@@ -7,10 +7,10 @@ public class VerifyRegistrationHandler : Endpoint.Handler<PROTO.VerifyRegistrati
 {
     public override void Execute()
     {
-        var auth = Engine.DB.QueryOne($@"SELECT name,password,otp,expired FROM {Table.REGISTRATION}
+        var row = Engine.DB.QueryOne($@"SELECT name,password,otp,expired FROM {Table.REGISTRATION}
             WHERE email = ?", request.Email);
 
-        var expired = auth.GetValue<DateTimeOffset>("expired");
+        var expired = row.GetValue<DateTimeOffset>("expired");
         if (expired > DateTimeOffset.Now) throw Error.OTP_EXPIRED;
 
         Engine.DB.ExecuteUpdate(new BatchStatement()
@@ -20,8 +20,8 @@ public class VerifyRegistrationHandler : Endpoint.Handler<PROTO.VerifyRegistrati
         context.PublishEvent(Channel.REGISTRATION_COMPLETED, new PROTO.RegistrationCompleted
         {
             Email = request.Email,
-            Name = auth.GetValue<string>("name"),
-            Password = auth.GetValue<string>("password"),
+            Name = row.GetValue<string>("name"),
+            Password = row.GetValue<string>("password"),
         });
     }
 }
