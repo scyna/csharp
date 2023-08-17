@@ -7,7 +7,6 @@ public class Path
     public static string RESEND_OTP = $"/{REGISTRING}/resend-otp";
     public static string VERIFY_REGISTRATION = $"/{REGISTRING}/verify";
 
-
     public static string ADAPTER = "adapter";
     public static string SEND_EMAIL = $"/{ADAPTER}/send-email";
 }
