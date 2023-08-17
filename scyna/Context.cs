@@ -67,6 +67,11 @@ public class Context : Logger
         }
     }
 
+    public long ScheduleOne(String channel, DateTimeOffset time, IMessage data)
+    {
+        return ScheduleTask(channel, time.Second - DateTimeOffset.Now.Second, 60, data, 1);
+    }
+
     public long ScheduleOne(String channel, long duration, IMessage data)
     {
         return ScheduleTask(channel, duration, 60, data, 1);

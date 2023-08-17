@@ -2,7 +2,15 @@ namespace ex.registering;
 
 using scyna;
 
-public class DeleteRegistrationAfterSixMinutesHandler : DomainEvent.Handler<PROTO.RegistrationCreated>
+public class WaitSixMinutesHandler : DomainEvent.Handler<PROTO.RegistrationCreated>
+{
+    public override void Execute()
+    {
+        context.ScheduleOne(Channel.DELETE_REGISTRATION, DateTimeOffset.Now.AddMinutes(6), data);
+    }
+}
+
+public class DeleteRegistrationHandler : Task.Handler<PROTO.RegistrationCreated>
 {
     public override void Execute()
     {
