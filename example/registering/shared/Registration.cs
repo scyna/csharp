@@ -2,7 +2,7 @@ using scyna;
 
 namespace ex.registering;
 
-class Registration
+public class Registration
 {
     private static bool testing = false;
     public static void Setup()
