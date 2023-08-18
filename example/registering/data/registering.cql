@@ -18,5 +18,5 @@ DROP TABLE IF EXISTS registering.completed;
 CREATE TABLE registering.completed
 (
     email        text PRIMARY KEY,
-    alive        boolean
+    state        text /*ACTIVE, BLOCKED, DELETED*/
 );
