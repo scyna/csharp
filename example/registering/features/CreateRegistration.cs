@@ -13,23 +13,14 @@ public class CreateRegistrationHandler : Endpoint.Handler<PROTO.CreateRegistrati
         Engine.DB.AssureNotExist($@"SELECT * FROM {Table.REGISTRATION} WHERE email = ?", request.Email);
         Engine.DB.AssureNotExist($@"SELECT * FROM {Table.COMPLETED} WHERE email = ?", request.Email);
 
-        var otp = Utils.GenerateSixDigitsOtp();
-        var expired = DateTimeOffset.Now.AddMinutes(5);
-
-        Engine.DB.ExecuteUpdate($@"INSERT INTO {Table.REGISTRATION} (email,name,password,otp,expired)
-            VALUES (?, ?, ?, ?, ?)", request.Email, request.Name, request.Password, otp, expired);
+        Engine.DB.ExecuteUpdate($@"INSERT INTO {Table.REGISTRATION} (email,name,password)
+            VALUES (?, ?, ?)", request.Email, request.Name, request.Password);
 
         context.RaiseEvent(new PROTO.RegistrationCreated
         {
             Email = request.Email,
             Name = request.Name,
             Password = request.Password,
-        });
-
-        context.RaiseEvent(new PROTO.OtpGenerated
-        {
-            Email = request.Email,
-            Otp = otp,
         });
     }
 
