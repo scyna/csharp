@@ -12,7 +12,7 @@ public class Registration
         Endpoint.Register(Path.RESEND_OTP, new ResendOtpHandler());
 
         if (testing) return;
-
+        DomainEvent.Register(new GenerateOtpHandler());
         DomainEvent.Register(new SendOtpHandler());
         DomainEvent.Register(new WelcomeHandler());
         DomainEvent.Register(new WaitSixMinutesHandler());

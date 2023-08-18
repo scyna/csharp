@@ -17,7 +17,6 @@ CREATE INDEX ON registering.registration(id);
 DROP TABLE IF EXISTS registering.completed;
 CREATE TABLE registering.completed
 (
-    email        text PRIMARY KEY
+    email        text PRIMARY KEY,
+    alive        boolean
 );
-
-
