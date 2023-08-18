@@ -1,5 +1,3 @@
-using System.ComponentModel;
-
 namespace ex.registering;
 
 public class Table
