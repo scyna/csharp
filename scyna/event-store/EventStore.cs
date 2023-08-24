@@ -164,8 +164,7 @@ public class EventStore<D> where D : IMessage<D>, new()
     {
         if (!TryToLock(id, version))
         {
-            /*TODO: check if lock time is too long*/
-            return false;
+            if (!LockLongLockingRow(id, version)) return false;
         }
 
         if (!SyncRow(id, version)) return false;
@@ -181,6 +180,29 @@ public class EventStore<D> where D : IMessage<D>, new()
             return true;
         }
         catch { return false; }
+    }
+
+    bool LockLongLockingRow(object id, long version)
+    {
+        try
+        {
+            var row = Engine.DB.QueryOne($@"SELECT locked FROM {TableName}
+                WHERE id=? AND version=?", id, version);
+            var locked = row.GetValue<DateTimeOffset>("locked");
+
+            if (locked.AddSeconds(5) < DateTimeOffset.Now) /*FIXME: move 10 to somewhere*/
+            {
+                Engine.DB.QueryOne($@"UPDATE {TableName} SET locked=? 
+                    WHERE id=? AND version=? IF state=1", DateTimeOffset.Now, id, version);
+                return true;
+            }
+            return false;
+        }
+        catch (Exception e)
+        {
+            Engine.LOG.Error("LockLongLockingRow:" + e.Message);
+            return false;
+        }
     }
 
     bool SyncRow(object id, long version)
