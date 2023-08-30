@@ -116,8 +116,6 @@ public class Event
                 var ev = scyna.proto.Event.Parser.ParseFrom(message);
                 this.context.Reset(ev.TraceID);
                 this.trace.Reset(ev.TraceID);
-                this.entity = ev.Entity;
-                this.version = ev.Version;
                 this.data = parser.ParseFrom(ev.Body);
                 this.Execute();
                 trace.Record();

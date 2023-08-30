@@ -9,12 +9,10 @@ public class Logger
     public const uint DEBUG = 4;
     public const uint FATAL = 5;
     private ulong id;
-    private bool session;
 
-    public Logger(ulong id, bool session)
+    public Logger(ulong id)
     {
         this.id = id;
-        this.session = session;
     }
 
     public ulong ID { get { return id; } }
@@ -32,7 +30,6 @@ public class Logger
                 Time = (ulong)DateTimeOffset.Now.ToUnixTimeMilliseconds(),
                 Level = level,
                 Text = messgage,
-                Session = session,
             };
             Signal.Emit(Path.LOG_CREATED_CHANNEL, signal);
         }

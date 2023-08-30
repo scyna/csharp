@@ -12,9 +12,7 @@ public class Trace
     private ulong id;
     private uint type;
     private string path;
-    private string? source;
     private ulong sessionID;
-    private int status;
 
     private ulong t1;
     public ulong time;
@@ -28,42 +26,46 @@ public class Trace
 
     public static Trace NewEventTrace(String channel)
     {
-        var ret = new Trace(channel);
-        ret.type = EVENT;
-        ret.sessionID = Engine.SessionID;
-        ret.source = Engine.Module;
+        var ret = new Trace(channel)
+        {
+            type = EVENT,
+            sessionID = Engine.SessionID,
+        };
         return ret;
     }
 
-    public static Trace NewDomainEventTrace()
+    public static Trace NewDomainEventTrace(String name)
     {
-        var ret = new Trace("");
-        ret.type = DOMAIN_EVENT;
-        ret.sessionID = Engine.SessionID;
-        ret.source = Engine.Module;
+        var ret = new Trace(name)
+        {
+            type = DOMAIN_EVENT,
+            sessionID = Engine.SessionID,
+        };
         return ret;
     }
 
 
     public static Trace NewTaskTrace(String channel)
     {
-        var ret = new Trace(channel);
-        ret.type = TASK;
-        ret.sessionID = Engine.SessionID;
-        ret.source = Engine.Module;
+        var ret = new Trace(channel)
+        {
+            type = TASK,
+            sessionID = Engine.SessionID,
+        };
         return ret;
     }
 
 
     public static Trace NewEndpointTrace(String url, ulong trace)
     {
-        var ret = new Trace(url);
-        ret.type = ENDPOINT;
-        ret.id = Engine.ID.Next();
-        ret.parentID = trace;
-        ret.t1 = (ulong)Utils.GetNanoseconds();
-        ret.time = (ulong)DateTimeOffset.Now.ToUnixTimeMilliseconds();
-        ret.source = Engine.Module;
+        var ret = new Trace(url)
+        {
+            type = ENDPOINT,
+            id = Engine.ID.Next(),
+            parentID = trace,
+            t1 = (ulong)Utils.GetNanoseconds(),
+            time = (ulong)DateTimeOffset.Now.ToUnixTimeMilliseconds(),
+        };
         return ret;
     }
 
@@ -75,11 +77,11 @@ public class Trace
         time = (ulong)DateTimeOffset.Now.ToUnixTimeMilliseconds();
     }
 
-    public void Update(ulong session, int status)
-    {
-        this.sessionID = session;
-        this.status = status;
-    }
+    // public void Update(ulong session, int status)
+    // {
+    //     this.sessionID = session;
+    //     this.status = status;
+    // }
 
     // public void start()
     // {
@@ -97,9 +99,7 @@ public class Trace
             ParentID = parentID,
             Type = type,
             Path = path,
-            Source = source,
             SessionID = sessionID,
-            Status = status,
         };
         Signal.Emit(Path.TRACE_CREATED_CHANNEL, signal);
     }

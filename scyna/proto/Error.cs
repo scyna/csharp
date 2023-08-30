@@ -24,20 +24,24 @@ namespace scyna.proto {
     static ErrorReflection() {
       byte[] descriptorData = global::System.Convert.FromBase64String(
           string.Concat(
-            "CgtlcnJvci5wcm90bxIFc2N5bmEiJgoFRXJyb3ISDAoEY29kZRgBIAEoBRIP",
-            "CgdtZXNzYWdlGAIgASgJQjIKDmlvLnNjeW5hLnByb3RvSAJQAVoOLi87c2N5",
-            "bmFfcHJvdG+qAgtzY3luYS5wcm90b2IGcHJvdG8z"));
+            "CgtlcnJvci5wcm90bxIFc2N5bmEiJgoFRXJyb3ISDAoEQ29kZRgBIAEoBRIP",
+            "CgdNZXNzYWdlGAIgASgJQi8KC3NjeW5hLnByb3RvSAJQAVoOLi87c2N5bmFf",
+            "cHJvdG+qAgtzY3luYS5wcm90b2IGcHJvdG8z"));
       descriptor = pbr::FileDescriptor.FromGeneratedCode(descriptorData,
           new pbr::FileDescriptor[] { },
-          new pbr::GeneratedClrTypeInfo(null, new pbr::GeneratedClrTypeInfo[] {
-            new pbr::GeneratedClrTypeInfo(typeof(global::scyna.proto.Error), global::scyna.proto.Error.Parser, new[]{ "Code", "Message" }, null, null, null)
+          new pbr::GeneratedClrTypeInfo(null, null, new pbr::GeneratedClrTypeInfo[] {
+            new pbr::GeneratedClrTypeInfo(typeof(global::scyna.proto.Error), global::scyna.proto.Error.Parser, new[]{ "Code", "Message" }, null, null, null, null)
           }));
     }
     #endregion
 
   }
   #region Messages
-  public sealed partial class Error : pb::IMessage<Error> {
+  public sealed partial class Error : pb::IMessage<Error>
+  #if !GOOGLE_PROTOBUF_REFSTRUCT_COMPATIBILITY_MODE
+      , pb::IBufferMessage
+  #endif
+  {
     private static readonly pb::MessageParser<Error> _parser = new pb::MessageParser<Error>(() => new Error());
     private pb::UnknownFieldSet _unknownFields;
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
@@ -72,7 +76,7 @@ namespace scyna.proto {
       return new Error(this);
     }
 
-    /// <summary>Field number for the "code" field.</summary>
+    /// <summary>Field number for the "Code" field.</summary>
     public const int CodeFieldNumber = 1;
     private int code_;
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
@@ -83,7 +87,7 @@ namespace scyna.proto {
       }
     }
 
-    /// <summary>Field number for the "message" field.</summary>
+    /// <summary>Field number for the "Message" field.</summary>
     public const int MessageFieldNumber = 2;
     private string message_ = "";
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
@@ -130,6 +134,9 @@ namespace scyna.proto {
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     public void WriteTo(pb::CodedOutputStream output) {
+    #if !GOOGLE_PROTOBUF_REFSTRUCT_COMPATIBILITY_MODE
+      output.WriteRawMessage(this);
+    #else
       if (Code != 0) {
         output.WriteRawTag(8);
         output.WriteInt32(Code);
@@ -141,7 +148,25 @@ namespace scyna.proto {
       if (_unknownFields != null) {
         _unknownFields.WriteTo(output);
       }
+    #endif
     }
+
+    #if !GOOGLE_PROTOBUF_REFSTRUCT_COMPATIBILITY_MODE
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    void pb::IBufferMessage.InternalWriteTo(ref pb::WriteContext output) {
+      if (Code != 0) {
+        output.WriteRawTag(8);
+        output.WriteInt32(Code);
+      }
+      if (Message.Length != 0) {
+        output.WriteRawTag(18);
+        output.WriteString(Message);
+      }
+      if (_unknownFields != null) {
+        _unknownFields.WriteTo(ref output);
+      }
+    }
+    #endif
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     public int CalculateSize() {
@@ -174,6 +199,9 @@ namespace scyna.proto {
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     public void MergeFrom(pb::CodedInputStream input) {
+    #if !GOOGLE_PROTOBUF_REFSTRUCT_COMPATIBILITY_MODE
+      input.ReadRawMessage(this);
+    #else
       uint tag;
       while ((tag = input.ReadTag()) != 0) {
         switch(tag) {
@@ -190,7 +218,30 @@ namespace scyna.proto {
           }
         }
       }
+    #endif
     }
+
+    #if !GOOGLE_PROTOBUF_REFSTRUCT_COMPATIBILITY_MODE
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    void pb::IBufferMessage.InternalMergeFrom(ref pb::ParseContext input) {
+      uint tag;
+      while ((tag = input.ReadTag()) != 0) {
+        switch(tag) {
+          default:
+            _unknownFields = pb::UnknownFieldSet.MergeFieldFrom(_unknownFields, ref input);
+            break;
+          case 8: {
+            Code = input.ReadInt32();
+            break;
+          }
+          case 18: {
+            Message = input.ReadString();
+            break;
+          }
+        }
+      }
+    }
+    #endif
 
   }
 

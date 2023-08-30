@@ -41,7 +41,7 @@ public class Engine
         this.module = module;
         session = new Session(sid);
         id = new Generator();
-        logger = new Logger(sid, true);
+        logger = new Logger(sid);
         settings = new Settings();
 
         /* NATS */

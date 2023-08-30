@@ -26,7 +26,7 @@ public class DomainEvent
     {
         protected T data = new();
         protected Context context = new(0);
-        protected Trace trace = Trace.NewDomainEventTrace();
+        protected Trace trace = Trace.NewDomainEventTrace(typeof(T).Name);
 
         protected virtual void OnError(Exception e)
         {

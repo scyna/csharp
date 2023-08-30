@@ -5,7 +5,7 @@ using scyna.proto;
 
 public class Context : Logger
 {
-    public Context(ulong id) : base(id, false) { }
+    public Context(ulong id) : base(id) { }
 
     public void SendRequest(String url, IMessage request)
     {
@@ -20,7 +20,6 @@ public class Context : Logger
         {
             var msg = Engine.Connection.Request(Utils.PublishURL(url), req.ToByteArray(), 10000);
             var ret = proto.Response.Parser.ParseFrom(msg.Data);
-            trace.Update(ret.SessionID, ret.Code);
             trace.Record();
             if (ret.Code != 200)
             {
@@ -49,7 +48,6 @@ public class Context : Logger
         {
             var msg = Engine.Connection.Request(Utils.PublishURL(url), req.ToByteArray(), 10000);
             var ret = proto.Response.Parser.ParseFrom(msg.Data);
-            trace.Update(ret.SessionID, ret.Code);
             trace.Record();
             if (ret.Code != 200)
             {
@@ -96,17 +94,6 @@ public class Context : Logger
         });
 
         return (long)r.Id;
-    }
-
-    public void Tag(String key, String value)
-    {
-        if (this.ID == 0) return;
-        Signal.Emit(Path.TRACE_CREATED_CHANNEL, new TagCreatedSignal
-        {
-            TraceID = this.ID,
-            Key = key,
-            Value = value,
-        });
     }
 
     public void PublishEvent(String channel, IMessage data)

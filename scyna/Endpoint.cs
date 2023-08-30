@@ -103,7 +103,7 @@ public abstract class Endpoint
                 ByteString body;
                 if (JSON) body = ByteString.CopyFrom(formater.Format(m), Encoding.UTF8);
                 else body = m.ToByteString();
-                var response = new proto.Response { Code = status, SessionID = Engine.SessionID, Body = body };
+                var response = new proto.Response { Code = status, Body = body };
                 Engine.Connection.Publish(reply, response.ToByteArray());
             }
             catch (InvalidProtocolBufferException e)
@@ -111,10 +111,10 @@ public abstract class Endpoint
                 Console.WriteLine(e.ToString());
             }
             flushed = true;
-            this.Finish(m);
+            this.Finish(status, m);
         }
 
-        private void Finish(IMessage response)
+        private void Finish(int code, IMessage response)
         {
             if (context.ID == 0)
             {
@@ -124,7 +124,9 @@ public abstract class Endpoint
             {
                 TraceID = context.ID,
                 Response = formater.Format(response),
-                Request = requestBody
+                Request = requestBody,
+                SessionID = Engine.SessionID,
+                Status = code,
             });
         }
     }

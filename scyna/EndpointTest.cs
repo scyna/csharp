@@ -6,7 +6,7 @@ using NATS.Client.JetStream;
 public class EndpointTest
 {
     private int status;
-    private string url;
+    private readonly string url;
     private IMessage? request;
     private IMessage? metadata;
     private IMessage? response;
@@ -90,7 +90,7 @@ public class EndpointTest
 
     public EndpointTest DecodeResponse<T>(out T response) where T : IMessage<T>, new()
     {
-        MessageParser<T> parser = new MessageParser<T>(() => new T());
+        MessageParser<T> parser = new(() => new T());
         response = parser.ParseFrom(responseData);
         return this;
     }
@@ -128,7 +128,7 @@ public class EndpointTest
         if (eventData is null) event_ = new T();
         else
         {
-            MessageParser<T> parser = new MessageParser<T>(() => new T());
+            MessageParser<T> parser = new(() => new T());
             event_ = parser.ParseFrom(eventData);
         }
 
