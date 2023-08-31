@@ -53,21 +53,21 @@ public abstract class Endpoint
 
                 this.Execute();
 
-                if (!flushed) Flush(200, scyna.Error.OK.ToProto());
+                if (!flushed) FlushError(200, scyna.Error.OK.ToProto());
             }
             catch (scyna.Error e)
             {
                 if (e == Error.COMMAND_NOT_COMPLETED)
                 {
                     for (int i = 0; i < 5; i++) { if (Retry()) return; }
-                    Flush(400, scyna.Error.SERVER_ERROR.ToProto());
+                    FlushError(400, scyna.Error.SERVER_ERROR.ToProto());
                 }
-                else Flush(400, e.ToProto());
+                else FlushError(400, e.ToProto());
             }
             catch (Exception e)
             {
                 Console.WriteLine(e.ToString());
-                Flush(400, scyna.Error.BAD_REQUEST.ToProto());
+                FlushError(400, scyna.Error.BAD_REQUEST.ToProto());
             }
         }
 
@@ -76,30 +76,44 @@ public abstract class Endpoint
             try
             {
                 this.Execute();
-                if (!flushed) Flush(200, scyna.Error.OK.ToProto());
+                if (!flushed) FlushError(200, scyna.Error.OK.ToProto());
             }
             catch (scyna.Error e)
             {
                 if (e == Error.COMMAND_NOT_COMPLETED) return false;
-                Flush(400, e.ToProto());
+                FlushError(400, e.ToProto());
             }
             catch (Exception e)
             {
                 Console.WriteLine(e.ToString());
-                Flush(400, scyna.Error.BAD_REQUEST.ToProto());
+                FlushError(400, scyna.Error.BAD_REQUEST.ToProto());
             }
             return true;
         }
 
         protected void Response(IMessage m)
         {
-            Flush(200, m);
+            try
+            {
+                ByteString body;
+                if (JSON) body = ByteString.CopyFrom(formater.Format(m), Encoding.UTF8);
+                else body = m.ToByteString();
+                var response = new proto.Response { Code = 200, Body = body };
+                Engine.Connection.Publish(reply, response.ToByteArray());
+            }
+            catch (InvalidProtocolBufferException e)
+            {
+                Console.WriteLine(e.ToString());
+            }
+            flushed = true;
+            this.Finish(200, m);
         }
 
-        protected void Flush(int status, IMessage m)
+        protected void FlushError(int status, proto.Error m)
         {
             try
             {
+                m.Trace = (long)context.ID;
                 ByteString body;
                 if (JSON) body = ByteString.CopyFrom(formater.Format(m), Encoding.UTF8);
                 else body = m.ToByteString();
