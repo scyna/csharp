@@ -7,15 +7,15 @@ namespace scyna;
 public class Engine
 {
     private static Engine? instance;
-    private string module;
-    private Session session;
-    private Logger logger;
-    private IConnection connection;
-    private Settings settings;
-    private Generator id;
-    private DB db;
-    private IJetStream stream;
-    private DomainEvent domainEvent;
+    private readonly string module;
+    private readonly Session session;
+    private readonly Logger logger;
+    private readonly IConnection connection;
+    private readonly Settings settings;
+    private readonly Generator id;
+    private readonly DB db;
+    private readonly IJetStream stream;
+    private readonly DomainEvent domainEvent;
 
     public static Engine Instance
     {

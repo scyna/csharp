@@ -11,7 +11,7 @@ public class Trace
     private ulong parentID;
     private ulong id;
     private uint type;
-    private string path;
+    private readonly string path;
     private ulong sessionID;
 
     private ulong t1;

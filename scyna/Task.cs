@@ -17,9 +17,9 @@ public class Task
 
     public abstract class Handler<T> : Event.IMessageHandler where T : IMessage<T>, new()
     {
-        private MessageParser<T> parser = new MessageParser<T>(() => new T());
-        protected T data = new T();
-        protected Context context = new Context(0);
+        private readonly MessageParser<T> parser = new(() => new T());
+        protected T data = new();
+        protected Context context = new(0);
         protected Trace trace = Trace.NewTaskTrace("");
 
         public abstract void Execute();

@@ -7,6 +7,18 @@ public class Context : Logger
 {
     public Context(ulong id) : base(id) { }
 
+    public void Command(String url, IMessage request, scyna.Error error)
+    {
+        try { SendRequest(url, request); }
+        catch { throw error; }
+    }
+
+    public T Query<T>(String url, IMessage request, scyna.Error error) where T : IMessage<T>, new()
+    {
+        try { return SendRequest<T>(url, request); }
+        catch { throw error; }
+    }
+
     public void SendRequest(String url, IMessage request)
     {
         Trace trace = Trace.NewEndpointTrace(url, this.ID);
@@ -112,7 +124,7 @@ public class Context : Logger
         catch { throw scyna.Error.STREAM_ERROR; }
     }
 
-    public void RaiseEvent(IMessage data)
+    public void RaiseDomainEvent(IMessage data)
     {
         DomainEvent.AddEvent(this.ID, data);
     }

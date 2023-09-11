@@ -3,8 +3,7 @@ using Google.Protobuf;
 
 public class Settings
 {
-    Dictionary<string, string> data = new Dictionary<string, string>();
-    JsonFormatter formater = new JsonFormatter(new JsonFormatter.Settings(false));
+    readonly Dictionary<string, string> data = new();
 
     public bool Write(string key, string value)
     {
@@ -17,14 +16,14 @@ public class Settings
 
         if (response != null && response.Code == 200)
         {
-            update(key, value);
+            Update(key, value);
             return true;
         }
         return false;
     }
     public bool Write<T>(string key, T value) where T : IMessage<T>, new()
     {
-        var s = formater.Format(value);
+        var s = JsonFormatter.Default.Format(value);
         return Write(key, s);
     }
     public string? Read(string key)
@@ -50,7 +49,7 @@ public class Settings
 
         if (response != null)
         {
-            update(key, response.Value);
+            Update(key, response.Value);
             return response.Value;
         }
         return null;
@@ -61,10 +60,10 @@ public class Settings
         var s = Read(key);
         if (s != null)
         {
-            MessageParser<T> parser = new MessageParser<T>(() => new T());
+            MessageParser<T> parser = new(() => new T());
             return parser.ParseJson(s);
         }
-        return default(T);
+        return default;
     }
 
     public bool Remove(string key)
@@ -83,7 +82,7 @@ public class Settings
         return false;
     }
 
-    public void update(string key, string value)
+    private void Update(string key, string value)
     {
         lock (this)
         {
@@ -91,7 +90,7 @@ public class Settings
         }
     }
 
-    public void remove(string key)
+    private void remove(string key)
     {
         lock (this)
         {
@@ -105,7 +104,7 @@ public class Settings
         {
             if (data != null && data.Module == Engine.Module)
             {
-                Engine.Settings.update(data.Key, data.Value);
+                Engine.Settings.Update(data.Key, data.Value);
             }
         }
     }

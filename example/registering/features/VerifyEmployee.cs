@@ -13,7 +13,7 @@ public class VerifyRegistrationHandler : Endpoint.Handler<PROTO.VerifyRegistrati
         var expired = row.GetValue<DateTimeOffset>("expired");
         if (expired > DateTimeOffset.Now) throw Error.OTP_EXPIRED;
 
-        Engine.DB.ExecuteUpdate(new BatchStatement()
+        Engine.DB.Execute(new BatchStatement()
             .Add($@"DELETE FROM {Table.REGISTRATION} WHERE email = ?", request.Email)
             .Add($@"INSERT INTO {Table.COMPLETED} (email, state) VALUES (?,?)", request.Email, EmailState.ACTIVE));
 

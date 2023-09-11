@@ -13,10 +13,10 @@ public class CreateRegistrationHandler : Endpoint.Handler<PROTO.CreateRegistrati
         Engine.DB.AssureNotExist($@"SELECT * FROM {Table.REGISTRATION} WHERE email = ?", request.Email);
         Engine.DB.AssureNotExist($@"SELECT * FROM {Table.COMPLETED} WHERE email = ?", request.Email);
 
-        Engine.DB.ExecuteUpdate($@"INSERT INTO {Table.REGISTRATION} (email,name,password)
+        Engine.DB.Execute($@"INSERT INTO {Table.REGISTRATION} (email,name,password)
             VALUES (?, ?, ?)", request.Email, request.Name, request.Password);
 
-        context.RaiseEvent(new PROTO.RegistrationCreated
+        context.RaiseDomainEvent(new PROTO.RegistrationCreated
         {
             Email = request.Email,
             Name = request.Name,

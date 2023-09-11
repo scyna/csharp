@@ -9,10 +9,10 @@ public class GenerateOtpHandler : DomainEvent.Handler<PROTO.RegistrationCreated>
         var otp = Utils.GenerateSixDigitsOtp();
         var expired = DateTimeOffset.Now.AddMinutes(5);
 
-        Engine.DB.ExecuteUpdate($@"UPDATE {Table.REGISTRATION}
+        Engine.DB.Execute($@"UPDATE {Table.REGISTRATION}
             SET otp=?, expired=? WHERE email=?", otp, expired, data.Email);
 
-        context.RaiseEvent(new PROTO.OtpGenerated
+        context.RaiseDomainEvent(new PROTO.OtpGenerated
         {
             Email = data.Email,
             Otp = otp

@@ -12,10 +12,10 @@ public class ResendOtpHandler : Endpoint.Handler<PROTO.ResendOtpRequest>
         var otp = Utils.GenerateSixDigitsOtp();
         var expired = DateTimeOffset.Now.AddMinutes(5);
 
-        Engine.DB.ExecuteUpdate($@"UPDATE {Table.REGISTRATION}
+        Engine.DB.Execute($@"UPDATE {Table.REGISTRATION}
             SET otp=?, expired=? WHERE email=?", otp, expired, request.Email);
 
-        context.RaiseEvent(new PROTO.OtpGenerated
+        context.RaiseDomainEvent(new PROTO.OtpGenerated
         {
             Email = request.Email,
             Otp = otp

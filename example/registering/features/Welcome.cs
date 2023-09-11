@@ -14,7 +14,7 @@ public class WelcomeHandler : DomainEvent.Handler<PROTO.RegistrationCompleted>
             Content = content
         });
 
-        context.RaiseEvent(new PROTO.WelcomeSent
+        context.RaiseDomainEvent(new PROTO.WelcomeSent
         {
             Email = data.Email,
             Content = content

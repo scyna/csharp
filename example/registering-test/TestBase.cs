@@ -20,7 +20,7 @@ public abstract class TestBase : IDisposable
 
     private void Cleanup()
     {
-        Engine.DB.ExecuteUpdate($"TRUNCATE {Table.REGISTRATION}");
-        Engine.DB.ExecuteUpdate($"TRUNCATE {Table.COMPLETED}");
+        Engine.DB.Execute($"TRUNCATE {Table.REGISTRATION}");
+        Engine.DB.Execute($"TRUNCATE {Table.COMPLETED}");
     }
 }

@@ -30,18 +30,40 @@ public class DB
         cluster.Shutdown();
     }
 
-
-    public void ExecuteUpdate(string query, params object[] values)
+    public void Execute(string query, params object[] values)
     {
         var statement = new SimpleStatement(query, values);
-        ExecuteUpdate(statement);
+        try
+        {
+            session.Execute(statement);
+        }
+        catch (Exception e)
+        {
+            Console.WriteLine(e);
+            throw scyna.Error.SERVER_ERROR;
+        }
     }
 
-    public void ExecuteUpdate(IStatement update)
+    public void Execute(Statement statement, params object[] values)
     {
         try
         {
-            Engine.DB.Session.Execute(update);
+            session.Execute(statement);
+        }
+        catch (Exception e)
+        {
+            Console.WriteLine(e);
+            throw scyna.Error.SERVER_ERROR;
+        }
+    }
+
+    public void Apply(string query, params object[] values)
+    {
+        var statement = new SimpleStatement(query, values);
+        try
+        {
+            if (!session.Execute(statement)
+                .First().GetValue<bool>("[applied]")) throw scyna.Error.SERVER_ERROR;
         }
         catch (Exception e)
         {
@@ -61,7 +83,7 @@ public class DB
     {
         try
         {
-            var rs = Engine.DB.Session.Execute(query);
+            var rs = session.Execute(query);
             var row = rs.First() ?? throw notfoundError;
             return row;
         }
@@ -81,7 +103,7 @@ public class DB
         try
         {
             var statement = new SimpleStatement(query, values);
-            var rs = Engine.DB.Session.Execute(statement);
+            var rs = session.Execute(statement);
             return rs;
         }
         catch (Exception e)
@@ -94,15 +116,27 @@ public class DB
     public void AssureNotExist(String query, params object[] values)
     {
         query = AppendLimitOne(query);
-        var statement = new SimpleStatement(query, values);
-        AssureNotExist(statement, Error.OBJECT_EXISTS);
+        var args = values;
+        var error = Error.OBJECT_EXISTS;
+
+        if (values.Length > 0)
+        {
+            var last = values.Last();
+            if (last is scyna.Error error1)
+            {
+                args = values.SkipLast(1).ToArray();
+                error = error1;
+            }
+        }
+        var statement = new SimpleStatement(query, args);
+        AssureNotExist(statement, error);
     }
 
-    public void AssureNotExist(IStatement query, scyna.Error existError)
+    private void AssureNotExist(IStatement query, scyna.Error existError)
     {
         try
         {
-            var rs = Engine.DB.Session.Execute(query);
+            var rs = session.Execute(query);
             if (rs.Any()) throw existError;
         }
         catch (scyna.Error e)
@@ -120,15 +154,29 @@ public class DB
     public void AssureExist(String query, params object[] values)
     {
         query = AppendLimitOne(query);
-        var statement = new SimpleStatement(query, values);
-        AssureExist(statement, Error.OBJECT_NOT_FOUND);
+
+        var args = values;
+        var error = Error.OBJECT_NOT_FOUND;
+
+        if (values.Length > 0)
+        {
+            var last = values.Last();
+            if (last is scyna.Error error1)
+            {
+                args = values.SkipLast(1).ToArray();
+                error = error1;
+            }
+        }
+
+        var statement = new SimpleStatement(query, args);
+        AssureExist(statement, error);
     }
 
-    public void AssureExist(IStatement query, scyna.Error notExistError)
+    private void AssureExist(IStatement query, scyna.Error notExistError)
     {
         try
         {
-            var rs = Engine.DB.Session.Execute(query);
+            var rs = session.Execute(query);
             if (!rs.Any()) throw notExistError;
         }
         catch (scyna.Error e)
@@ -142,9 +190,10 @@ public class DB
             throw scyna.Error.SERVER_ERROR;
         }
     }
-    string AppendLimitOne(string query)
+
+    static string AppendLimitOne(string query)
     {
-        if (query.IndexOf("LIMIT") == -1 && query.IndexOf("limit") == -1) return query + " LIMIT 1";
+        if (!query.Contains("LIMIT", StringComparison.CurrentCultureIgnoreCase)) return query + " LIMIT 1";
         return query;
     }
 }

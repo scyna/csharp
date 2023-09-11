@@ -7,7 +7,7 @@ using Google.Protobuf;
 
 public class Event
 {
-    static Dictionary<string, Stream> streams = new Dictionary<string, Stream>();
+    static readonly Dictionary<string, Stream> streams = new();
 
     public interface IMessageHandler
     {
@@ -41,15 +41,13 @@ public class Event
 
     class Stream
     {
-        string sender;
-        string receiver;
-        IJetStreamPullSubscription subscription;
+        readonly string sender;
+        readonly IJetStreamPullSubscription subscription;
         public Dictionary<string, IMessageHandler> executors;
 
         Stream(String sender, String receiver)
         {
             this.sender = sender;
-            this.receiver = receiver;
             executors = new Dictionary<string, IMessageHandler>();
             var options = PullSubscribeOptions.Builder().WithDurable(receiver).WithStream(sender).Build();
             subscription = Engine.Stream.PullSubscribe($"{sender}.>", options);
@@ -66,11 +64,11 @@ public class Event
         public void Start()
         {
             Console.WriteLine($"Stream started {sender}");
-            var thread = new Thread(new ThreadStart(this.run));
+            var thread = new Thread(new ThreadStart(this.Run));
             thread.Start();
         }
 
-        private void run()
+        private void Run()
         {
             while (true)
             {
@@ -80,7 +78,7 @@ public class Event
                     try
                     {
                         var executor = executors[m.Subject];
-                        if (executor != null) executor.MessageReceived(m.Data);
+                        executor?.MessageReceived(m.Data);
                     }
                     catch (Exception e)
                     {
@@ -94,9 +92,9 @@ public class Event
 
     public abstract class Handler<T> : IMessageHandler where T : IMessage<T>, new()
     {
-        private MessageParser<T> parser = new MessageParser<T>(() => new T());
-        protected T data = new T();
-        protected Context context = new Context(0);
+        private readonly MessageParser<T> parser = new(() => new T());
+        protected T data = new();
+        protected Context context = new(0);
         protected Trace trace = Trace.NewEventTrace("");
         protected ulong entity;
         protected ulong version;

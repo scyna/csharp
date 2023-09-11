@@ -11,10 +11,10 @@ public class AddTest : TestsBase
     [InlineData(9, 91, 100)]
     public void TestAdd_ShouldSuccess(int a, int b, int sum)
     {
-        scyna.EndpointTest.Create(ex.hello.Path.ADD_URL)
+        scyna.Testing.Endpoint(ex.hello.Path.ADD_URL)
             .WithRequest(new ex.hello.proto.AddRequest { A = a, B = b })
             .ExpectResponse(new proto.AddResponse { Sum = sum })
-            .Run();
+            .ShouldBeFine();
     }
 
     [Theory]
@@ -22,9 +22,8 @@ public class AddTest : TestsBase
     [InlineData(9, 92)]
     public void TestAdd_ShouldReturnTooBig(int a, int b)
     {
-        scyna.EndpointTest.Create(Path.ADD_URL)
+        scyna.Testing.Endpoint(Path.ADD_URL)
             .WithRequest(new proto.AddRequest { A = a, B = b })
-            .ExpectError(Error.REQUEST_INVALID)
-            .Run();
+            .ShouldFailWith(Error.REQUEST_INVALID);
     }
 }

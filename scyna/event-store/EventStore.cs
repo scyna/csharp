@@ -119,9 +119,11 @@ public class EventStore<D> where D : IMessage<D>, new()
         try
         {
             model.Version++;
-            Engine.DB.Session.Execute(writeModelQuery.Bind(
-                model.ID, event_.GetType().Name, model.Data.ToByteArray(),
-                event_.ToByteArray(), DateTimeOffset.Now, model.Version));
+            if (!Engine.DB.Session.Execute(writeModelQuery.Bind(
+                model.ID, event_.GetType().Name,
+                model.Data.ToByteArray(), event_.ToByteArray(),
+                DateTimeOffset.Now, model.Version))
+                .First().GetValue<bool>("[applied]")) throw scyna.Error.COMMAND_NOT_COMPLETED;
         }
         catch (Exception e)
         {
@@ -176,8 +178,8 @@ public class EventStore<D> where D : IMessage<D>, new()
     {
         try
         {
-            Engine.DB.Session.Execute(tryToLockQuery.Bind(DateTimeOffset.Now, id, version));
-            return true;
+            return Engine.DB.Session.Execute(tryToLockQuery.Bind(DateTimeOffset.Now, id, version))
+                .First().GetValue<bool>("[applied]");
         }
         catch { return false; }
     }

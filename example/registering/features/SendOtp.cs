@@ -16,10 +16,10 @@ public class SendOtpHandler : DomainEvent.Handler<PROTO.OtpGenerated>
             Content = content
         });
 
-        Engine.DB.ExecuteUpdate($@"UPDATE {Table.REGISTRATION}
+        Engine.DB.Execute($@"UPDATE {Table.REGISTRATION}
             SET email_count = email_count + 1 WHERE email = ?", data.Email);
 
-        context.RaiseEvent(new PROTO.OtpSent
+        context.RaiseDomainEvent(new PROTO.OtpSent
         {
             Email = data.Email,
             Otp = data.Otp,

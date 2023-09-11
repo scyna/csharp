@@ -23,7 +23,6 @@ public class Signal
         });
     }
 
-
     public static void Emit(string channel, pb::IMessage message)
     {
         Engine.Connection.Publish(channel, message.ToByteArray());
@@ -31,7 +30,7 @@ public class Signal
 
     public abstract class Handler<T> where T : IMessage<T>, new()
     {
-        private MessageParser<T> parser = new MessageParser<T>(() => new T());
+        private readonly MessageParser<T> parser = new(() => new T());
         protected T? data;
         public abstract void Execute();
         public void Run(byte[] data)

@@ -19,7 +19,7 @@ public class Logger
 
     public void Reset(ulong id) { this.id = id; }
 
-    private void add(uint level, string messgage)
+    private void Add(uint level, string messgage)
     {
         Console.WriteLine(messgage);
         if (id > 0)
@@ -37,30 +37,30 @@ public class Logger
 
     public void Info(string message, [CallerMemberName] string method = "", [CallerFilePath] string file = "", [CallerLineNumber] int line = 0)
     {
-        add(INFO, format(message, file, line, method));
+        Add(INFO, Format(message, file, line, method));
     }
 
     public void Warning(string message, [CallerMemberName] string method = "", [CallerFilePath] string file = "", [CallerLineNumber] int line = 0)
     {
-        add(WARNING, format(message, file, line, method));
+        Add(WARNING, Format(message, file, line, method));
     }
 
     public void Error(string message, [CallerMemberName] string method = "", [CallerFilePath] string file = "", [CallerLineNumber] int line = 0)
     {
-        add(ERROR, format(message, file, line, method));
+        Add(ERROR, Format(message, file, line, method));
     }
 
     public void Debug(string message, [CallerMemberName] string method = "", [CallerFilePath] string file = "", [CallerLineNumber] int line = 0)
     {
-        add(DEBUG, format(message, file, line, method));
+        Add(DEBUG, Format(message, file, line, method));
     }
 
     public void Fatal(string message, [CallerMemberName] string method = "", [CallerFilePath] string file = "", [CallerLineNumber] int line = 0)
     {
-        add(FATAL, format(message, file, line, method));
+        Add(FATAL, Format(message, file, line, method));
     }
 
-    private string format(string log, string file, int line, string method)
+    private static string Format(string log, string file, int line, string method)
     {
         return String.Format("[{0}:{1}-{2}] {3}", file, line, method, log);
     }

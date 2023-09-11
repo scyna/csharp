@@ -11,12 +11,12 @@ public class Generator
         lock (this)
         {
             if (value < end) value++;
-            else if (!getID()) Environment.Exit(1);
+            else if (!GetID()) Environment.Exit(1);
             return Utils.CalculateID(prefix, value);
         }
     }
 
-    private bool getID()
+    private bool GetID()
     {
         var signal = new proto.Request { TraceID = 0, JSON = false, };
         var msg = Engine.Connection.Request(Utils.PublishURL(Path.GEN_GET_ID_URL), signal.ToByteArray(), 5000);
