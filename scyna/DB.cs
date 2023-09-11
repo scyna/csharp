@@ -33,15 +33,7 @@ public class DB
     public void Execute(string query, params object[] values)
     {
         var statement = new SimpleStatement(query, values);
-        try
-        {
-            session.Execute(statement);
-        }
-        catch (Exception e)
-        {
-            Console.WriteLine(e);
-            throw scyna.Error.SERVER_ERROR;
-        }
+        Execute(statement);
     }
 
     public void Execute(Statement statement, params object[] values)
