@@ -10,7 +10,7 @@ public class AddService : Endpoint<AddRequest>
     {
         context.Info("Receive AddRequest");
         var sum = request.A + request.B;
-        if (sum > 100) throw scyna.Error.REQUEST_INVALID;
+        if (sum > 100) throw Error.REQUEST_INVALID;
         Reply(new AddResponse { Sum = sum });
     }
 }
