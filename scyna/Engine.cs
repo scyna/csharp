@@ -88,6 +88,10 @@ public class Engine
         Signal.RegisterBySession(Path.SETTING_UPDATE_CHANNEL + module, new Settings.UpdatedSignal());
         Signal.RegisterBySession(Path.SETTING_REMOVE_CHANNEL + module, new Settings.RemovedSignal());
 
+        /*registration*/
+        RegisterEndpoints();
+
+
     }
 
     static public void Start()
@@ -113,5 +117,30 @@ public class Engine
         connection.Close();
         db.Close();
         Console.WriteLine("Engine stopped");
+    }
+
+    static void RegisterEndpoints()
+    {
+        var type = typeof(IEndpoint);
+
+        var types = AppDomain.CurrentDomain.GetAssemblies()
+            .SelectMany(s => s.GetTypes())
+            .Where(p => type.IsAssignableFrom(p) && p.IsClass && !p.IsAbstract);
+
+        foreach (var t in types)
+        {
+            EndpointAttribute attr = (EndpointAttribute)Attribute.GetCustomAttribute(t, typeof(EndpointAttribute));
+            if (attr != null)
+            {
+                Console.WriteLine("Register endpoint: " + t.Name);
+                var instance = (IEndpoint)Activator.CreateInstance(t);
+                if (instance is null) throw new Exception("Can not create endpoint instance");
+                Connection.SubscribeAsync(Utils.SubscribeURL(attr.Url), "API", (sender, args) => { instance.Run(args.Message); });
+            }
+            else
+            {
+                Console.WriteLine($"Class {t.Name} has no Endpoint attribute");
+            }
+        }
     }
 }

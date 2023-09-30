@@ -2,9 +2,9 @@ namespace ex.registering;
 
 using scyna;
 
-public class ResendOtpHandler : Endpoint.Handler<PROTO.ResendOtpRequest>
+public class ResendOtpHandler : Endpoint<PROTO.ResendOtpRequest>
 {
-    public override void Execute()
+    public override void Handle()
     {
         var row = Engine.DB.QueryOne($@"SELECT email_count FROM {Table.REGISTRATION} WHERE email = ?", request.Email);
         if (row.GetValue<int>("email_count") >= 5) throw Error.SMS_LIMIT_EXCEEDED;

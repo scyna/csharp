@@ -3,9 +3,9 @@ namespace ex.registering;
 using Cassandra;
 using scyna;
 
-public class VerifyRegistrationHandler : Endpoint.Handler<PROTO.VerifyRegistrationRequest>
+public class VerifyRegistrationHandler : Endpoint<PROTO.VerifyRegistrationRequest>
 {
-    public override void Execute()
+    public override void Handle()
     {
         var row = Engine.DB.QueryOne($@"SELECT name,password,otp,expired FROM {Table.REGISTRATION}
             WHERE email = ?", request.Email);

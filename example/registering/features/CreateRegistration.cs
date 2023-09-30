@@ -3,9 +3,10 @@ namespace ex.registering;
 using scyna;
 using FluentValidation;
 
-public class CreateRegistrationHandler : Endpoint.Handler<PROTO.CreateRegistrationRequest>
+[Endpoint("/ex/registering/create-registration")]
+public class CreateRegistrationHandler : Endpoint<PROTO.CreateRegistrationRequest>
 {
-    public override void Execute()
+    public override void Handle()
     {
         var validator = new RequestValidator();
         if (!validator.Validate(request).IsValid) throw scyna.Error.REQUEST_INVALID;

@@ -2,16 +2,14 @@ namespace ex.hello;
 
 using scyna;
 
-public class AddService : Endpoint.Handler<proto.AddRequest>
+[Endpoint("/ex/hello/add")]
+public class AddService : Endpoint<proto.AddRequest>
 {
-    public override void Execute()
+    public override void Handle()
     {
         context.Info("Receive AddRequest");
-
         var sum = request.A + request.B;
         if (sum > 100) throw scyna.Error.REQUEST_INVALID;
-
-        Response(new proto.AddResponse { Sum = sum });
-
+        Reply(new proto.AddResponse { Sum = sum });
     }
 }
