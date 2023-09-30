@@ -2,7 +2,7 @@ namespace ex.registering;
 
 using scyna;
 
-public class SendOtpHandler : DomainEvent.Handler<PROTO.OtpGenerated>
+public class SendOtpHandler : DomainEvent<PROTO.OtpGenerated>
 {
     public override void Execute()
     {

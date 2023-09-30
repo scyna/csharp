@@ -31,7 +31,7 @@ public class TaskTest<T> : BaseTest<TaskTest<T>>
 
     private TaskTest<T> Run()
     {
-        DomainEvent.Clear();
+        DomainEventQueue.Clear();
         try
         {
             if (input is null) throw new Exception("Input is null");

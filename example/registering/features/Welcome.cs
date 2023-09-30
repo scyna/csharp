@@ -2,7 +2,7 @@ namespace ex.registering;
 
 using scyna;
 
-public class WelcomeHandler : DomainEvent.Handler<PROTO.RegistrationCompleted>
+public class WelcomeHandler : DomainEvent<PROTO.RegistrationCompleted>
 {
     public override void Execute()
     {

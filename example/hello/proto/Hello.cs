@@ -9,7 +9,7 @@ using pb = global::Google.Protobuf;
 using pbc = global::Google.Protobuf.Collections;
 using pbr = global::Google.Protobuf.Reflection;
 using scg = global::System.Collections.Generic;
-namespace ex.hello.proto {
+namespace ex.hello.dto {
 
   /// <summary>Holder for reflection information generated from hello.proto</summary>
   public static partial class HelloReflection {
@@ -27,15 +27,14 @@ namespace ex.hello.proto {
             "CgtoZWxsby5wcm90byIbCgtFY2hvUmVxdWVzdBIMCgR0ZXh0GAEgASgJIhwK",
             "DEVjaG9SZXNwb25zZRIMCgR0ZXh0GAEgASgJIiIKCkFkZFJlcXVlc3QSCQoB",
             "YRgBIAEoBRIJCgFiGAIgASgFIhoKC0FkZFJlc3BvbnNlEgsKA3N1bRgBIAEo",
-            "BUIsChdpby5zY3luYS5leC5oZWxsby5wcm90b1ABqgIOZXguaGVsbG8ucHJv",
-            "dG9iBnByb3RvMw=="));
+            "BUIfCgxleC5oZWxsby5kdG9QAaoCDGV4LmhlbGxvLmR0b2IGcHJvdG8z"));
       descriptor = pbr::FileDescriptor.FromGeneratedCode(descriptorData,
           new pbr::FileDescriptor[] { },
           new pbr::GeneratedClrTypeInfo(null, null, new pbr::GeneratedClrTypeInfo[] {
-            new pbr::GeneratedClrTypeInfo(typeof(global::ex.hello.proto.EchoRequest), global::ex.hello.proto.EchoRequest.Parser, new[]{ "Text" }, null, null, null, null),
-            new pbr::GeneratedClrTypeInfo(typeof(global::ex.hello.proto.EchoResponse), global::ex.hello.proto.EchoResponse.Parser, new[]{ "Text" }, null, null, null, null),
-            new pbr::GeneratedClrTypeInfo(typeof(global::ex.hello.proto.AddRequest), global::ex.hello.proto.AddRequest.Parser, new[]{ "A", "B" }, null, null, null, null),
-            new pbr::GeneratedClrTypeInfo(typeof(global::ex.hello.proto.AddResponse), global::ex.hello.proto.AddResponse.Parser, new[]{ "Sum" }, null, null, null, null)
+            new pbr::GeneratedClrTypeInfo(typeof(global::ex.hello.dto.EchoRequest), global::ex.hello.dto.EchoRequest.Parser, new[]{ "Text" }, null, null, null, null),
+            new pbr::GeneratedClrTypeInfo(typeof(global::ex.hello.dto.EchoResponse), global::ex.hello.dto.EchoResponse.Parser, new[]{ "Text" }, null, null, null, null),
+            new pbr::GeneratedClrTypeInfo(typeof(global::ex.hello.dto.AddRequest), global::ex.hello.dto.AddRequest.Parser, new[]{ "A", "B" }, null, null, null, null),
+            new pbr::GeneratedClrTypeInfo(typeof(global::ex.hello.dto.AddResponse), global::ex.hello.dto.AddResponse.Parser, new[]{ "Sum" }, null, null, null, null)
           }));
     }
     #endregion
@@ -54,7 +53,7 @@ namespace ex.hello.proto {
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     public static pbr::MessageDescriptor Descriptor {
-      get { return global::ex.hello.proto.HelloReflection.Descriptor.MessageTypes[0]; }
+      get { return global::ex.hello.dto.HelloReflection.Descriptor.MessageTypes[0]; }
     }
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
@@ -226,7 +225,7 @@ namespace ex.hello.proto {
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     public static pbr::MessageDescriptor Descriptor {
-      get { return global::ex.hello.proto.HelloReflection.Descriptor.MessageTypes[1]; }
+      get { return global::ex.hello.dto.HelloReflection.Descriptor.MessageTypes[1]; }
     }
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
@@ -398,7 +397,7 @@ namespace ex.hello.proto {
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     public static pbr::MessageDescriptor Descriptor {
-      get { return global::ex.hello.proto.HelloReflection.Descriptor.MessageTypes[2]; }
+      get { return global::ex.hello.dto.HelloReflection.Descriptor.MessageTypes[2]; }
     }
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
@@ -606,7 +605,7 @@ namespace ex.hello.proto {
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     public static pbr::MessageDescriptor Descriptor {
-      get { return global::ex.hello.proto.HelloReflection.Descriptor.MessageTypes[3]; }
+      get { return global::ex.hello.dto.HelloReflection.Descriptor.MessageTypes[3]; }
     }
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]

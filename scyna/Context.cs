@@ -126,6 +126,6 @@ public class Context : Logger
 
     public void RaiseDomainEvent(IMessage data)
     {
-        DomainEvent.AddEvent(this.ID, data);
+        DomainEventQueue.AddEvent(this.ID, data);
     }
 }

@@ -15,7 +15,8 @@ public class Engine
     private readonly Generator id;
     private readonly DB db;
     private readonly IJetStream stream;
-    private readonly DomainEvent domainEvent;
+    private readonly DomainEventQueue domainEventQueue;
+    private bool TestMode = false;
 
     public static Engine Instance
     {
@@ -31,7 +32,7 @@ public class Engine
     public static Settings Settings { get { return Instance.settings; } }
     public static IJetStream Stream { get { return Instance.stream; } }
     public static DB DB { get { return Instance.db; } }
-    public static DomainEvent DomainEvent { get { return Instance.domainEvent; } }
+    public static DomainEventQueue DomainEventQueue { get { return Instance.domainEventQueue; } }
     public static Logger LOG { get { return Instance.logger; } }
     public static Generator ID { get { return Instance.id; } }
     public static ulong SessionID { get { return Instance.session.ID; } }
@@ -64,9 +65,15 @@ public class Engine
         db = DB.Init(hosts, config.DBUsername, config.DBPassword);
         Console.WriteLine("Connected to ScyllaDB");
 
-        domainEvent = new DomainEvent();
+        domainEventQueue = new DomainEventQueue();
 
         Console.WriteLine("Engine Created, SessionID:" + sid);
+    }
+
+    static public async void TestInit(string managerURL, string module, string secret)
+    {
+        Instance.TestMode = true;
+        Init(managerURL, module, secret);
     }
 
     static public async void Init(string managerURL, string module, string secret)
@@ -90,15 +97,14 @@ public class Engine
 
         /*registration*/
         RegisterEndpoints();
-
-
+        RegisterDomainEvents();
     }
 
     static public void Start()
     {
         Console.WriteLine("Engine is running");
         Event.Start();
-        DomainEvent.Start();
+        Engine.DomainEventQueue.Start();
         Console.CancelKeyPress += (_, ea) =>
         {
             ea.Cancel = true;
@@ -133,13 +139,40 @@ public class Engine
             if (attr != null)
             {
                 Console.WriteLine("Register endpoint: " + t.Name);
-                var instance = (IEndpoint)Activator.CreateInstance(t);
-                if (instance is null) throw new Exception("Can not create endpoint instance");
+                var instance = (IEndpoint)Activator.CreateInstance(t) ?? throw new Exception("Can not create endpoint instance");
                 Connection.SubscribeAsync(Utils.SubscribeURL(attr.Url), "API", (sender, args) => { instance.Run(args.Message); });
             }
             else
             {
                 Console.WriteLine($"Class {t.Name} has no Endpoint attribute");
+            }
+        }
+    }
+
+    static void RegisterDomainEvents()
+    {
+        if (Engine.Instance.TestMode) return;
+
+        var type = typeof(IDomainEvent);
+
+        var types = AppDomain.CurrentDomain.GetAssemblies()
+            .SelectMany(s => s.GetTypes())
+            .Where(p => type.IsAssignableFrom(p) && p.IsClass && !p.IsAbstract);
+
+        foreach (var t in types)
+        {
+            Console.WriteLine("Register DomainEvent: " + t.Name);
+            var instance = (IDomainEvent)Activator.CreateInstance(t) ?? throw new Exception("Can not create domain event instance");
+            try
+            {
+                var list = DomainEventQueue.events[t];
+                list.Add(instance);
+            }
+            catch (KeyNotFoundException)
+            {
+                var list = new List<IDomainEvent>();
+                DomainEventQueue.events[t] = list;
+                list.Add(instance);
             }
         }
     }

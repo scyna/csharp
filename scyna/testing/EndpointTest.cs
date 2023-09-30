@@ -65,7 +65,7 @@ public class EndpointTest : BaseTest<EndpointTest>
 
     public EndpointTest Run()
     {
-        DomainEvent.Clear();
+        DomainEventQueue.Clear();
         CreateStream();
         var res = Request.Send(url, request, metadata) ?? throw new Exception("Response is null, please check if the endpoint is registered");
         Assert.Equal(status, res.Code);

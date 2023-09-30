@@ -1,7 +1,7 @@
 syntax = "proto3";
 option java_multiple_files = true;
-option java_package = "io.scyna.ex.hello.proto";
-option csharp_namespace = "ex.hello.proto";
+option java_package = "ex.hello.dto";
+option csharp_namespace = "ex.hello.dto";
 
 message EchoRequest 
 {

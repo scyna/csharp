@@ -5,11 +5,11 @@ using Xunit;
 public class DomainEventTest<T> : BaseTest<DomainEventTest<T>>
     where T : IMessage<T>, new()
 {
-    private readonly DomainEvent.Handler<T> handler;
+    private readonly DomainEvent<T> handler;
     private IMessage? input;
     private scyna.Error? error;
 
-    internal DomainEventTest(DomainEvent.Handler<T> handler) { this.handler = handler; }
+    internal DomainEventTest(DomainEvent<T> handler) { this.handler = handler; }
 
     public DomainEventTest<T> WithData(IMessage data)
     {
@@ -25,13 +25,13 @@ public class DomainEventTest<T> : BaseTest<DomainEventTest<T>>
 
     public DomainEventTest<T> Run()
     {
-        DomainEvent.Clear();
+        DomainEventQueue.Clear();
         try
         {
             if (input is null) throw new Exception("Input is null");
 
             CreateStream();
-            var eventData = new DomainEvent.EventData((ulong)Engine.ID.Next(), input);
+            var eventData = new DomainEventData((ulong)Engine.ID.Next(), input);
             handler.TestEventReceived(eventData);
             ReceiveDomainEvent();
             ReceiveEvent();

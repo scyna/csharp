@@ -3,6 +3,7 @@ namespace ex.hello.Test;
 using Xunit;
 using scyna;
 using ex.hello;
+using ex.hello.dto;
 
 [Collection("Sequential")]
 public class EchoTest : TestsBase
@@ -10,9 +11,9 @@ public class EchoTest : TestsBase
     [Fact]
     public void TestEchoSuccess()
     {
-        Testing.Endpoint(Path.ECHO_URL)
-            .WithRequest(new proto.EchoRequest { Text = "Hello" })
-            .ExpectResponse(new proto.EchoResponse { Text = "Hello" })
+        Testing.Endpoint<EchoService>()
+            .WithRequest(new EchoRequest { Text = "Hello" })
+            .ExpectResponse(new EchoResponse { Text = "Hello" })
             .Run();
     }
 }

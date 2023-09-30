@@ -1,13 +1,14 @@
 namespace ex.hello;
 
+using ex.hello.dto;
 using scyna;
 
 [Endpoint("/ex/hello/echo")]
-public class EchoService : Endpoint<proto.EchoRequest>
+public class EchoService : Endpoint<EchoRequest>
 {
     public override void Handle()
     {
         context.Info("Receive EchoRequest");
-        Reply(new proto.EchoResponse { Text = request.Text });
+        Reply(new EchoResponse { Text = request.Text });
     }
 }

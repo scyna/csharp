@@ -2,7 +2,7 @@ namespace ex.registering;
 
 using scyna;
 
-public class WaitSixMinutesHandler : DomainEvent.Handler<PROTO.RegistrationCreated>
+public class WaitSixMinutes : DomainEvent<PROTO.RegistrationCreated>
 {
     public override void Execute()
     {

@@ -31,7 +31,7 @@ public class EventTest<T> : BaseTest<EventTest<T>>
 
     private EventTest<T> Run()
     {
-        DomainEvent.Clear();
+        DomainEventQueue.Clear();
         try
         {
             if (input is null) throw new Exception("Input is null");

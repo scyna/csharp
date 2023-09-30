@@ -31,7 +31,7 @@ public class BaseTest<M> where M : BaseTest<M>
 
     public M GotDomainEvent<T>(out T event_) where T : IMessage<T>, new()
     {
-        var received = DomainEvent.NextEvent();
+        var received = DomainEventQueue.NextEvent();
 
         if (received is not null)
         {
@@ -86,7 +86,7 @@ public class BaseTest<M> where M : BaseTest<M>
         if (!domainEvents.Any()) return;
         foreach (var domainEvent in domainEvents)
         {
-            var received = DomainEvent.NextEvent() ?? throw new Exception("No event received");
+            var received = DomainEventQueue.NextEvent() ?? throw new Exception("No event received");
             if (domainEvent.Empty) Assert.Equal(domainEvent.Event.GetType(), received.GetType());
             else Assert.True(domainEvent.Equals(received), "DomainEvent is not equal");
         }
