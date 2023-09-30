@@ -20,7 +20,6 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\..\scyna\scyna.csproj" />
     <ProjectReference Include="..\hello\hello.csproj" />
   </ItemGroup>
 

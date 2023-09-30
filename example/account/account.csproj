@@ -8,13 +8,6 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <PackageReference Include="FluentValidation" Version="11.5.1" />
-    <PackageReference Include="NATS.Client" Version="1.0.1" />
-    <PackageReference Include="Google.Protobuf" Version="3.23.2" />
-    <PackageReference Include="CassandraCSharpDriver" Version="3.19.2" />
-  </ItemGroup>
-
-  <ItemGroup>
     <ProjectReference Include="..\..\scyna\scyna.csproj" />
   </ItemGroup>
 

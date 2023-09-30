@@ -5,14 +5,7 @@
     <TargetFramework>net6.0</TargetFramework>
     <ImplicitUsings>enable</ImplicitUsings>
     <Nullable>enable</Nullable>
-    <StartupObject>ex.hello.Hello</StartupObject>
   </PropertyGroup>
-
-  <ItemGroup>
-    <PackageReference Include="NATS.Client" Version="1.0.1" />
-    <PackageReference Include="Google.Protobuf" Version="3.23.2" />
-    <PackageReference Include="CassandraCSharpDriver" Version="3.19.2" />
-  </ItemGroup>
 
   <ItemGroup>
     <ProjectReference Include="..\..\scyna\scyna.csproj" />

@@ -20,8 +20,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\..\scyna\scyna.csproj" />
-    <ProjectReference Include="..\registering\registering.csproj" />
+    <ProjectReference Include="..\account\account.csproj" />
   </ItemGroup>
 
 </Project>
