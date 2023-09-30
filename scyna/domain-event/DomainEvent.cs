@@ -13,7 +13,7 @@ public abstract class DomainEvent<T> : IDomainEvent where T : IMessage<T>, new()
         context.Error(e.ToString());
     }
 
-    public abstract void Execute();
+    public abstract void Handle();
     public void EventReceived(DomainEventData data)
     {
         this.data = (T)data.Data;
@@ -21,7 +21,7 @@ public abstract class DomainEvent<T> : IDomainEvent where T : IMessage<T>, new()
         trace.Reset(data.TraceID);
         try
         {
-            Execute();
+            Handle();
         }
         catch (scyna.Error e)
         {
@@ -42,7 +42,7 @@ public abstract class DomainEvent<T> : IDomainEvent where T : IMessage<T>, new()
     {
         try
         {
-            this.Execute();
+            this.Handle();
         }
         catch (scyna.Error e)
         {
@@ -62,7 +62,7 @@ public abstract class DomainEvent<T> : IDomainEvent where T : IMessage<T>, new()
         this.data = (T)data.Data;
         context.Reset(data.TraceID);
         trace.Reset(data.TraceID);
-        Execute();
+        Handle();
         trace.Record();
     }
 }

@@ -33,10 +33,11 @@ public class DB
     public void Execute(string query, params object[] values)
     {
         var statement = new SimpleStatement(query, values);
+
         Execute(statement);
     }
 
-    public void Execute(Statement statement, params object[] values)
+    public void Execute(Statement statement)
     {
         try
         {
@@ -94,7 +95,20 @@ public class DB
     {
         try
         {
-            var statement = new SimpleStatement(query, values);
+            var args = values;
+            var pageSize = 0;
+            if (values.Length > 0)
+            {
+                var last = values.Last();
+                if (last is Paging paging)
+                {
+                    args = values.SkipLast(1).ToArray();
+                    pageSize = (int)paging.size;
+                }
+            }
+
+            var statement = new SimpleStatement(query, args);
+            if (pageSize > 0) statement.SetPageSize(pageSize);
             var rs = session.Execute(statement);
             return rs;
         }
@@ -188,6 +202,13 @@ public class DB
         if (!query.Contains("LIMIT", StringComparison.CurrentCultureIgnoreCase)) return query + " LIMIT 1";
         return query;
     }
+}
+
+public class Paging
+{
+    internal readonly int size;
+    private Paging(int size) => this.size = size;
+    public static Paging Size(int size) => new(size);
 }
 
 public static class DBExtension

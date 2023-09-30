@@ -1,4 +1,5 @@
 using System.ComponentModel;
+using System.Globalization;
 using Cassandra;
 using Google.Protobuf;
 
@@ -6,8 +7,6 @@ namespace scyna;
 
 public class EventStore<D> where D : IMessage<D>, new()
 {
-    private static EventStore<D>? instance;
-
     private string TableName { get; }
     private readonly List<IProjection> projections = new();
     private readonly PreparedStatement getModelQuery;
@@ -17,7 +16,7 @@ public class EventStore<D> where D : IMessage<D>, new()
     private readonly PreparedStatement markSyncedQuery;
     private readonly PreparedStatement getSyncRowQuery;
 
-    private EventStore(string table)
+    protected EventStore(string table)
     {
         TableName = table;
         getModelQuery = Engine.DB.Session.Prepare(
@@ -40,36 +39,11 @@ public class EventStore<D> where D : IMessage<D>, new()
             WHERE id=? AND version=? LIMIT 1");
     }
 
-    public static EventStore<D> Instance()
+    public Model<D> ReadModel(object id)
     {
-        if (instance is null) throw new Exception($"Event stote not initlized");
-        return instance;
-    }
-
-
-    public static EventStore<D> New(string table)
-    {
-        if (instance is not null) throw new Exception($"You create EventStore for {table} twice");
-        instance = new EventStore<D>(table);
-        return instance;
-    }
-
-    public static void Reset() { instance = null; }
-    public static string Table
-    {
-        get
-        {
-            if (instance is null) throw scyna.Error.EVENT_STORE_NULL;
-            return instance.TableName;
-        }
-    }
-
-    public static Model<D> ReadModel(object id)
-    {
-        if (instance is null) throw scyna.Error.EVENT_STORE_NULL;
         try
         {
-            var rs = Engine.DB.Session.Execute(instance.getModelQuery.Bind(id));
+            var rs = Engine.DB.Session.Execute(getModelQuery.Bind(id));
             var row = rs.First();
             var version = row.GetValue<long>("version");
 
@@ -78,7 +52,7 @@ public class EventStore<D> where D : IMessage<D>, new()
             try
             {
                 var data = parser.ParseFrom(row.GetValue<byte[]>("data"));
-                return new Model<D>(id, version, data, instance);
+                return new Model<D>(id, version, data, this);
             }
             catch (Exception e)
             {
@@ -97,14 +71,13 @@ public class EventStore<D> where D : IMessage<D>, new()
         }
     }
 
-    public static Model<D> CreateModel(object id)
+    public Model<D> CreateModel(object id)
     {
-        if (instance is null) throw scyna.Error.EVENT_STORE_NULL;
         try
         {
-            var rs = Engine.DB.Session.Execute(instance.getModelQuery.Bind(id));
+            var rs = Engine.DB.Session.Execute(getModelQuery.Bind(id));
             if (rs.Any()) throw scyna.Error.OBJECT_EXISTS;
-            return new Model<D>(id, 0, new D(), instance);
+            return new Model<D>(id, 0, new D(), this);
         }
         catch (scyna.Error) { throw; }
         catch (Exception e)
@@ -130,11 +103,6 @@ public class EventStore<D> where D : IMessage<D>, new()
             Engine.LOG.Error(e.Message);
             throw scyna.Error.COMMAND_NOT_COMPLETED;
         }
-    }
-
-    internal void PublishToEventStream(string channel, IMessage event_)
-    {
-        /*TODO*/
     }
 
     internal void UpdateReadModel(object id)
@@ -200,9 +168,8 @@ public class EventStore<D> where D : IMessage<D>, new()
             }
             return false;
         }
-        catch (Exception e)
+        catch (Exception)
         {
-            Engine.LOG.Error("LockLongLockingRow:" + e.Message);
             return false;
         }
     }
@@ -278,13 +245,7 @@ public class EventStore<D> where D : IMessage<D>, new()
         return null;
     }
 
-    public static List<EventData> ListActivity(object id, long position, int count)
-    {
-        if (instance is null) throw scyna.Error.EVENT_STORE_NULL;
-        return instance.ListEvent(id, position, count);
-    }
-
-    private List<EventData> ListEvent(object id, long position, int count)
+    public List<EventData> ListEvent(object id, long position, int count)
     {
         if (position == 0) position = Int64.MaxValue;
         if (count == 0) count = 50;

@@ -38,19 +38,23 @@ namespace scyna.proto {
             "c2N5bmFfcHJvdG+qAgtzY3luYS5wcm90b2IGcHJvdG8z"));
       descriptor = pbr::FileDescriptor.FromGeneratedCode(descriptorData,
           new pbr::FileDescriptor[] { },
-          new pbr::GeneratedClrTypeInfo(null, new pbr::GeneratedClrTypeInfo[] {
-            new pbr::GeneratedClrTypeInfo(typeof(global::scyna.proto.Configuration), global::scyna.proto.Configuration.Parser, new[]{ "NatsUrl", "NatsUsername", "NatsPassword", "DBHost", "DBUsername", "DBPassword", "DBLocation", "DBPemFile", "IsAWSKeyspaces" }, null, null, null),
-            new pbr::GeneratedClrTypeInfo(typeof(global::scyna.proto.CreateSessionRequest), global::scyna.proto.CreateSessionRequest.Parser, new[]{ "Module", "Secret" }, null, null, null),
-            new pbr::GeneratedClrTypeInfo(typeof(global::scyna.proto.CreateSessionResponse), global::scyna.proto.CreateSessionResponse.Parser, new[]{ "SessionID", "Config" }, null, null, null),
-            new pbr::GeneratedClrTypeInfo(typeof(global::scyna.proto.EndSessionSignal), global::scyna.proto.EndSessionSignal.Parser, new[]{ "ID", "Code", "Module" }, null, null, null),
-            new pbr::GeneratedClrTypeInfo(typeof(global::scyna.proto.UpdateSessionSignal), global::scyna.proto.UpdateSessionSignal.Parser, new[]{ "ID", "Module" }, null, null, null)
+          new pbr::GeneratedClrTypeInfo(null, null, new pbr::GeneratedClrTypeInfo[] {
+            new pbr::GeneratedClrTypeInfo(typeof(global::scyna.proto.Configuration), global::scyna.proto.Configuration.Parser, new[]{ "NatsUrl", "NatsUsername", "NatsPassword", "DBHost", "DBUsername", "DBPassword", "DBLocation", "DBPemFile", "IsAWSKeyspaces" }, null, null, null, null),
+            new pbr::GeneratedClrTypeInfo(typeof(global::scyna.proto.CreateSessionRequest), global::scyna.proto.CreateSessionRequest.Parser, new[]{ "Module", "Secret" }, null, null, null, null),
+            new pbr::GeneratedClrTypeInfo(typeof(global::scyna.proto.CreateSessionResponse), global::scyna.proto.CreateSessionResponse.Parser, new[]{ "SessionID", "Config" }, null, null, null, null),
+            new pbr::GeneratedClrTypeInfo(typeof(global::scyna.proto.EndSessionSignal), global::scyna.proto.EndSessionSignal.Parser, new[]{ "ID", "Code", "Module" }, null, null, null, null),
+            new pbr::GeneratedClrTypeInfo(typeof(global::scyna.proto.UpdateSessionSignal), global::scyna.proto.UpdateSessionSignal.Parser, new[]{ "ID", "Module" }, null, null, null, null)
           }));
     }
     #endregion
 
   }
   #region Messages
-  public sealed partial class Configuration : pb::IMessage<Configuration> {
+  public sealed partial class Configuration : pb::IMessage<Configuration>
+  #if !GOOGLE_PROTOBUF_REFSTRUCT_COMPATIBILITY_MODE
+      , pb::IBufferMessage
+  #endif
+  {
     private static readonly pb::MessageParser<Configuration> _parser = new pb::MessageParser<Configuration>(() => new Configuration());
     private pb::UnknownFieldSet _unknownFields;
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
@@ -241,6 +245,9 @@ namespace scyna.proto {
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     public void WriteTo(pb::CodedOutputStream output) {
+    #if !GOOGLE_PROTOBUF_REFSTRUCT_COMPATIBILITY_MODE
+      output.WriteRawMessage(this);
+    #else
       if (NatsUrl.Length != 0) {
         output.WriteRawTag(10);
         output.WriteString(NatsUrl);
@@ -280,7 +287,53 @@ namespace scyna.proto {
       if (_unknownFields != null) {
         _unknownFields.WriteTo(output);
       }
+    #endif
     }
+
+    #if !GOOGLE_PROTOBUF_REFSTRUCT_COMPATIBILITY_MODE
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    void pb::IBufferMessage.InternalWriteTo(ref pb::WriteContext output) {
+      if (NatsUrl.Length != 0) {
+        output.WriteRawTag(10);
+        output.WriteString(NatsUrl);
+      }
+      if (NatsUsername.Length != 0) {
+        output.WriteRawTag(18);
+        output.WriteString(NatsUsername);
+      }
+      if (NatsPassword.Length != 0) {
+        output.WriteRawTag(26);
+        output.WriteString(NatsPassword);
+      }
+      if (DBHost.Length != 0) {
+        output.WriteRawTag(34);
+        output.WriteString(DBHost);
+      }
+      if (DBUsername.Length != 0) {
+        output.WriteRawTag(42);
+        output.WriteString(DBUsername);
+      }
+      if (DBPassword.Length != 0) {
+        output.WriteRawTag(50);
+        output.WriteString(DBPassword);
+      }
+      if (DBLocation.Length != 0) {
+        output.WriteRawTag(58);
+        output.WriteString(DBLocation);
+      }
+      if (DBPemFile.Length != 0) {
+        output.WriteRawTag(66);
+        output.WriteString(DBPemFile);
+      }
+      if (IsAWSKeyspaces != false) {
+        output.WriteRawTag(72);
+        output.WriteBool(IsAWSKeyspaces);
+      }
+      if (_unknownFields != null) {
+        _unknownFields.WriteTo(ref output);
+      }
+    }
+    #endif
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     public int CalculateSize() {
@@ -355,6 +408,9 @@ namespace scyna.proto {
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     public void MergeFrom(pb::CodedInputStream input) {
+    #if !GOOGLE_PROTOBUF_REFSTRUCT_COMPATIBILITY_MODE
+      input.ReadRawMessage(this);
+    #else
       uint tag;
       while ((tag = input.ReadTag()) != 0) {
         switch(tag) {
@@ -399,14 +455,69 @@ namespace scyna.proto {
           }
         }
       }
+    #endif
     }
+
+    #if !GOOGLE_PROTOBUF_REFSTRUCT_COMPATIBILITY_MODE
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    void pb::IBufferMessage.InternalMergeFrom(ref pb::ParseContext input) {
+      uint tag;
+      while ((tag = input.ReadTag()) != 0) {
+        switch(tag) {
+          default:
+            _unknownFields = pb::UnknownFieldSet.MergeFieldFrom(_unknownFields, ref input);
+            break;
+          case 10: {
+            NatsUrl = input.ReadString();
+            break;
+          }
+          case 18: {
+            NatsUsername = input.ReadString();
+            break;
+          }
+          case 26: {
+            NatsPassword = input.ReadString();
+            break;
+          }
+          case 34: {
+            DBHost = input.ReadString();
+            break;
+          }
+          case 42: {
+            DBUsername = input.ReadString();
+            break;
+          }
+          case 50: {
+            DBPassword = input.ReadString();
+            break;
+          }
+          case 58: {
+            DBLocation = input.ReadString();
+            break;
+          }
+          case 66: {
+            DBPemFile = input.ReadString();
+            break;
+          }
+          case 72: {
+            IsAWSKeyspaces = input.ReadBool();
+            break;
+          }
+        }
+      }
+    }
+    #endif
 
   }
 
   /// <summary>
   ///session
   /// </summary>
-  public sealed partial class CreateSessionRequest : pb::IMessage<CreateSessionRequest> {
+  public sealed partial class CreateSessionRequest : pb::IMessage<CreateSessionRequest>
+  #if !GOOGLE_PROTOBUF_REFSTRUCT_COMPATIBILITY_MODE
+      , pb::IBufferMessage
+  #endif
+  {
     private static readonly pb::MessageParser<CreateSessionRequest> _parser = new pb::MessageParser<CreateSessionRequest>(() => new CreateSessionRequest());
     private pb::UnknownFieldSet _unknownFields;
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
@@ -499,6 +610,9 @@ namespace scyna.proto {
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     public void WriteTo(pb::CodedOutputStream output) {
+    #if !GOOGLE_PROTOBUF_REFSTRUCT_COMPATIBILITY_MODE
+      output.WriteRawMessage(this);
+    #else
       if (Module.Length != 0) {
         output.WriteRawTag(10);
         output.WriteString(Module);
@@ -510,7 +624,25 @@ namespace scyna.proto {
       if (_unknownFields != null) {
         _unknownFields.WriteTo(output);
       }
+    #endif
     }
+
+    #if !GOOGLE_PROTOBUF_REFSTRUCT_COMPATIBILITY_MODE
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    void pb::IBufferMessage.InternalWriteTo(ref pb::WriteContext output) {
+      if (Module.Length != 0) {
+        output.WriteRawTag(10);
+        output.WriteString(Module);
+      }
+      if (Secret.Length != 0) {
+        output.WriteRawTag(18);
+        output.WriteString(Secret);
+      }
+      if (_unknownFields != null) {
+        _unknownFields.WriteTo(ref output);
+      }
+    }
+    #endif
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     public int CalculateSize() {
@@ -543,6 +675,9 @@ namespace scyna.proto {
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     public void MergeFrom(pb::CodedInputStream input) {
+    #if !GOOGLE_PROTOBUF_REFSTRUCT_COMPATIBILITY_MODE
+      input.ReadRawMessage(this);
+    #else
       uint tag;
       while ((tag = input.ReadTag()) != 0) {
         switch(tag) {
@@ -559,11 +694,38 @@ namespace scyna.proto {
           }
         }
       }
+    #endif
     }
+
+    #if !GOOGLE_PROTOBUF_REFSTRUCT_COMPATIBILITY_MODE
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    void pb::IBufferMessage.InternalMergeFrom(ref pb::ParseContext input) {
+      uint tag;
+      while ((tag = input.ReadTag()) != 0) {
+        switch(tag) {
+          default:
+            _unknownFields = pb::UnknownFieldSet.MergeFieldFrom(_unknownFields, ref input);
+            break;
+          case 10: {
+            Module = input.ReadString();
+            break;
+          }
+          case 18: {
+            Secret = input.ReadString();
+            break;
+          }
+        }
+      }
+    }
+    #endif
 
   }
 
-  public sealed partial class CreateSessionResponse : pb::IMessage<CreateSessionResponse> {
+  public sealed partial class CreateSessionResponse : pb::IMessage<CreateSessionResponse>
+  #if !GOOGLE_PROTOBUF_REFSTRUCT_COMPATIBILITY_MODE
+      , pb::IBufferMessage
+  #endif
+  {
     private static readonly pb::MessageParser<CreateSessionResponse> _parser = new pb::MessageParser<CreateSessionResponse>(() => new CreateSessionResponse());
     private pb::UnknownFieldSet _unknownFields;
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
@@ -656,6 +818,9 @@ namespace scyna.proto {
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     public void WriteTo(pb::CodedOutputStream output) {
+    #if !GOOGLE_PROTOBUF_REFSTRUCT_COMPATIBILITY_MODE
+      output.WriteRawMessage(this);
+    #else
       if (SessionID != 0UL) {
         output.WriteRawTag(8);
         output.WriteUInt64(SessionID);
@@ -667,7 +832,25 @@ namespace scyna.proto {
       if (_unknownFields != null) {
         _unknownFields.WriteTo(output);
       }
+    #endif
     }
+
+    #if !GOOGLE_PROTOBUF_REFSTRUCT_COMPATIBILITY_MODE
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    void pb::IBufferMessage.InternalWriteTo(ref pb::WriteContext output) {
+      if (SessionID != 0UL) {
+        output.WriteRawTag(8);
+        output.WriteUInt64(SessionID);
+      }
+      if (config_ != null) {
+        output.WriteRawTag(42);
+        output.WriteMessage(Config);
+      }
+      if (_unknownFields != null) {
+        _unknownFields.WriteTo(ref output);
+      }
+    }
+    #endif
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     public int CalculateSize() {
@@ -694,7 +877,7 @@ namespace scyna.proto {
       }
       if (other.config_ != null) {
         if (config_ == null) {
-          config_ = new global::scyna.proto.Configuration();
+          Config = new global::scyna.proto.Configuration();
         }
         Config.MergeFrom(other.Config);
       }
@@ -703,6 +886,9 @@ namespace scyna.proto {
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     public void MergeFrom(pb::CodedInputStream input) {
+    #if !GOOGLE_PROTOBUF_REFSTRUCT_COMPATIBILITY_MODE
+      input.ReadRawMessage(this);
+    #else
       uint tag;
       while ((tag = input.ReadTag()) != 0) {
         switch(tag) {
@@ -715,18 +901,48 @@ namespace scyna.proto {
           }
           case 42: {
             if (config_ == null) {
-              config_ = new global::scyna.proto.Configuration();
+              Config = new global::scyna.proto.Configuration();
             }
-            input.ReadMessage(config_);
+            input.ReadMessage(Config);
+            break;
+          }
+        }
+      }
+    #endif
+    }
+
+    #if !GOOGLE_PROTOBUF_REFSTRUCT_COMPATIBILITY_MODE
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    void pb::IBufferMessage.InternalMergeFrom(ref pb::ParseContext input) {
+      uint tag;
+      while ((tag = input.ReadTag()) != 0) {
+        switch(tag) {
+          default:
+            _unknownFields = pb::UnknownFieldSet.MergeFieldFrom(_unknownFields, ref input);
+            break;
+          case 8: {
+            SessionID = input.ReadUInt64();
+            break;
+          }
+          case 42: {
+            if (config_ == null) {
+              Config = new global::scyna.proto.Configuration();
+            }
+            input.ReadMessage(Config);
             break;
           }
         }
       }
     }
+    #endif
 
   }
 
-  public sealed partial class EndSessionSignal : pb::IMessage<EndSessionSignal> {
+  public sealed partial class EndSessionSignal : pb::IMessage<EndSessionSignal>
+  #if !GOOGLE_PROTOBUF_REFSTRUCT_COMPATIBILITY_MODE
+      , pb::IBufferMessage
+  #endif
+  {
     private static readonly pb::MessageParser<EndSessionSignal> _parser = new pb::MessageParser<EndSessionSignal>(() => new EndSessionSignal());
     private pb::UnknownFieldSet _unknownFields;
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
@@ -833,6 +1049,9 @@ namespace scyna.proto {
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     public void WriteTo(pb::CodedOutputStream output) {
+    #if !GOOGLE_PROTOBUF_REFSTRUCT_COMPATIBILITY_MODE
+      output.WriteRawMessage(this);
+    #else
       if (ID != 0UL) {
         output.WriteRawTag(8);
         output.WriteUInt64(ID);
@@ -848,7 +1067,29 @@ namespace scyna.proto {
       if (_unknownFields != null) {
         _unknownFields.WriteTo(output);
       }
+    #endif
     }
+
+    #if !GOOGLE_PROTOBUF_REFSTRUCT_COMPATIBILITY_MODE
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    void pb::IBufferMessage.InternalWriteTo(ref pb::WriteContext output) {
+      if (ID != 0UL) {
+        output.WriteRawTag(8);
+        output.WriteUInt64(ID);
+      }
+      if (Code.Length != 0) {
+        output.WriteRawTag(18);
+        output.WriteString(Code);
+      }
+      if (Module.Length != 0) {
+        output.WriteRawTag(26);
+        output.WriteString(Module);
+      }
+      if (_unknownFields != null) {
+        _unknownFields.WriteTo(ref output);
+      }
+    }
+    #endif
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     public int CalculateSize() {
@@ -887,6 +1128,9 @@ namespace scyna.proto {
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     public void MergeFrom(pb::CodedInputStream input) {
+    #if !GOOGLE_PROTOBUF_REFSTRUCT_COMPATIBILITY_MODE
+      input.ReadRawMessage(this);
+    #else
       uint tag;
       while ((tag = input.ReadTag()) != 0) {
         switch(tag) {
@@ -907,11 +1151,42 @@ namespace scyna.proto {
           }
         }
       }
+    #endif
     }
+
+    #if !GOOGLE_PROTOBUF_REFSTRUCT_COMPATIBILITY_MODE
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    void pb::IBufferMessage.InternalMergeFrom(ref pb::ParseContext input) {
+      uint tag;
+      while ((tag = input.ReadTag()) != 0) {
+        switch(tag) {
+          default:
+            _unknownFields = pb::UnknownFieldSet.MergeFieldFrom(_unknownFields, ref input);
+            break;
+          case 8: {
+            ID = input.ReadUInt64();
+            break;
+          }
+          case 18: {
+            Code = input.ReadString();
+            break;
+          }
+          case 26: {
+            Module = input.ReadString();
+            break;
+          }
+        }
+      }
+    }
+    #endif
 
   }
 
-  public sealed partial class UpdateSessionSignal : pb::IMessage<UpdateSessionSignal> {
+  public sealed partial class UpdateSessionSignal : pb::IMessage<UpdateSessionSignal>
+  #if !GOOGLE_PROTOBUF_REFSTRUCT_COMPATIBILITY_MODE
+      , pb::IBufferMessage
+  #endif
+  {
     private static readonly pb::MessageParser<UpdateSessionSignal> _parser = new pb::MessageParser<UpdateSessionSignal>(() => new UpdateSessionSignal());
     private pb::UnknownFieldSet _unknownFields;
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
@@ -1004,6 +1279,9 @@ namespace scyna.proto {
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     public void WriteTo(pb::CodedOutputStream output) {
+    #if !GOOGLE_PROTOBUF_REFSTRUCT_COMPATIBILITY_MODE
+      output.WriteRawMessage(this);
+    #else
       if (ID != 0UL) {
         output.WriteRawTag(8);
         output.WriteUInt64(ID);
@@ -1015,7 +1293,25 @@ namespace scyna.proto {
       if (_unknownFields != null) {
         _unknownFields.WriteTo(output);
       }
+    #endif
     }
+
+    #if !GOOGLE_PROTOBUF_REFSTRUCT_COMPATIBILITY_MODE
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    void pb::IBufferMessage.InternalWriteTo(ref pb::WriteContext output) {
+      if (ID != 0UL) {
+        output.WriteRawTag(8);
+        output.WriteUInt64(ID);
+      }
+      if (Module.Length != 0) {
+        output.WriteRawTag(18);
+        output.WriteString(Module);
+      }
+      if (_unknownFields != null) {
+        _unknownFields.WriteTo(ref output);
+      }
+    }
+    #endif
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     public int CalculateSize() {
@@ -1048,6 +1344,9 @@ namespace scyna.proto {
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     public void MergeFrom(pb::CodedInputStream input) {
+    #if !GOOGLE_PROTOBUF_REFSTRUCT_COMPATIBILITY_MODE
+      input.ReadRawMessage(this);
+    #else
       uint tag;
       while ((tag = input.ReadTag()) != 0) {
         switch(tag) {
@@ -1064,7 +1363,30 @@ namespace scyna.proto {
           }
         }
       }
+    #endif
     }
+
+    #if !GOOGLE_PROTOBUF_REFSTRUCT_COMPATIBILITY_MODE
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    void pb::IBufferMessage.InternalMergeFrom(ref pb::ParseContext input) {
+      uint tag;
+      while ((tag = input.ReadTag()) != 0) {
+        switch(tag) {
+          default:
+            _unknownFields = pb::UnknownFieldSet.MergeFieldFrom(_unknownFields, ref input);
+            break;
+          case 8: {
+            ID = input.ReadUInt64();
+            break;
+          }
+          case 18: {
+            Module = input.ReadString();
+            break;
+          }
+        }
+      }
+    }
+    #endif
 
   }
 

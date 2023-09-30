@@ -3,13 +3,23 @@ using System.Text;
 
 namespace scyna;
 
-public interface IEndpoint { void Run(NATS.Client.Msg message); }
+public interface IEndpoint
+{
+    void Run(NATS.Client.Msg message);
+    void OnInit();
+}
 
 [AttributeUsage(AttributeTargets.Class, AllowMultiple = false)]
 public class EndpointAttribute : Attribute
 {
     public string Url { get; }
     public EndpointAttribute(string url) { this.Url = url; }
+    static public string GetUrl<E>() where E : IEndpoint
+    {
+        EndpointAttribute attr = (EndpointAttribute)Attribute.GetCustomAttribute(typeof(E), typeof(EndpointAttribute));
+        if (attr == null) throw new Exception($"Endpoint {typeof(E).Name} not found");
+        return attr.Url;
+    }
 }
 
 public abstract class Endpoint<T> : IEndpoint where T : IMessage<T>, new()
@@ -26,6 +36,7 @@ public abstract class Endpoint<T> : IEndpoint where T : IMessage<T>, new()
     protected T request = new();
 
     public abstract void Handle();
+    public virtual void OnInit() {/*do nothing*/ }
 
     public void Run(NATS.Client.Msg message)
     {

@@ -118,10 +118,37 @@ public class Event
                 this.Execute();
                 trace.Record();
             }
+            catch (scyna.Error e)
+            {
+                if (e == Error.COMMAND_NOT_COMPLETED)
+                {
+                    for (int i = 0; i < 5; i++) { if (Retry()) return; }
+                }
+                OnError(e);
+            }
             catch (Exception e)
             {
                 OnError(e);
             }
+        }
+
+        private bool Retry()
+        {
+            try
+            {
+                this.Execute();
+            }
+            catch (scyna.Error e)
+            {
+                if (e == Error.COMMAND_NOT_COMPLETED) return false;
+                OnError(e);
+            }
+            catch (Exception e)
+            {
+                Console.WriteLine(e.ToString());
+                OnError(e);
+            }
+            return true;
         }
     }
 }

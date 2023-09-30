@@ -11,13 +11,16 @@ public class Trace
     private ulong parentID;
     private ulong id;
     private uint type;
+    private uint status;
     private readonly string path;
     private ulong sessionID;
+
 
     private ulong t1;
     public ulong time;
 
     public ulong ID() { return id; }
+    public void SetStatus(uint status) { this.status = status; }
 
     private Trace(string path)
     {
@@ -100,6 +103,7 @@ public class Trace
             Type = type,
             Path = path,
             SessionID = sessionID,
+            Status = status,
         };
         Signal.Emit(Path.TRACE_CREATED_CHANNEL, signal);
     }

@@ -24,11 +24,4 @@ public class Model<D> where D : IMessage<D>, new()
         store.UpdateWriteModel(this, event_);
         store.UpdateReadModel(ID);
     }
-
-    public void CommitAndPublish(string channel, IMessage event_)
-    {
-        this.Event = event_;
-        store.UpdateWriteModel(this, event_);
-        store.PublishToEventStream(channel, event_);
-    }
 }

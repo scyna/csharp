@@ -24,20 +24,24 @@ namespace scyna.proto {
     static ErrorReflection() {
       byte[] descriptorData = global::System.Convert.FromBase64String(
           string.Concat(
-            "CgtlcnJvci5wcm90bxIFc2N5bmEiNQoFRXJyb3ISDAoEQ29kZRgBIAEoBRIP",
+            "CgtlcnJvci5wcm90bxIFc2N5bmEiNQoFRXJyb3ISDAoEQ29kZRgBIAEoCRIP",
             "CgdNZXNzYWdlGAIgASgJEg0KBVRyYWNlGAMgASgDQi8KC3NjeW5hLnByb3Rv",
             "SAJQAVoOLi87c2N5bmFfcHJvdG+qAgtzY3luYS5wcm90b2IGcHJvdG8z"));
       descriptor = pbr::FileDescriptor.FromGeneratedCode(descriptorData,
           new pbr::FileDescriptor[] { },
-          new pbr::GeneratedClrTypeInfo(null, new pbr::GeneratedClrTypeInfo[] {
-            new pbr::GeneratedClrTypeInfo(typeof(global::scyna.proto.Error), global::scyna.proto.Error.Parser, new[]{ "Code", "Message", "Trace" }, null, null, null)
+          new pbr::GeneratedClrTypeInfo(null, null, new pbr::GeneratedClrTypeInfo[] {
+            new pbr::GeneratedClrTypeInfo(typeof(global::scyna.proto.Error), global::scyna.proto.Error.Parser, new[]{ "Code", "Message", "Trace" }, null, null, null, null)
           }));
     }
     #endregion
 
   }
   #region Messages
-  public sealed partial class Error : pb::IMessage<Error> {
+  public sealed partial class Error : pb::IMessage<Error>
+  #if !GOOGLE_PROTOBUF_REFSTRUCT_COMPATIBILITY_MODE
+      , pb::IBufferMessage
+  #endif
+  {
     private static readonly pb::MessageParser<Error> _parser = new pb::MessageParser<Error>(() => new Error());
     private pb::UnknownFieldSet _unknownFields;
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
@@ -75,12 +79,12 @@ namespace scyna.proto {
 
     /// <summary>Field number for the "Code" field.</summary>
     public const int CodeFieldNumber = 1;
-    private int code_;
+    private string code_ = "";
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
-    public int Code {
+    public string Code {
       get { return code_; }
       set {
-        code_ = value;
+        code_ = pb::ProtoPreconditions.CheckNotNull(value, "value");
       }
     }
 
@@ -128,7 +132,7 @@ namespace scyna.proto {
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     public override int GetHashCode() {
       int hash = 1;
-      if (Code != 0) hash ^= Code.GetHashCode();
+      if (Code.Length != 0) hash ^= Code.GetHashCode();
       if (Message.Length != 0) hash ^= Message.GetHashCode();
       if (Trace != 0L) hash ^= Trace.GetHashCode();
       if (_unknownFields != null) {
@@ -144,9 +148,12 @@ namespace scyna.proto {
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     public void WriteTo(pb::CodedOutputStream output) {
-      if (Code != 0) {
-        output.WriteRawTag(8);
-        output.WriteInt32(Code);
+    #if !GOOGLE_PROTOBUF_REFSTRUCT_COMPATIBILITY_MODE
+      output.WriteRawMessage(this);
+    #else
+      if (Code.Length != 0) {
+        output.WriteRawTag(10);
+        output.WriteString(Code);
       }
       if (Message.Length != 0) {
         output.WriteRawTag(18);
@@ -159,13 +166,35 @@ namespace scyna.proto {
       if (_unknownFields != null) {
         _unknownFields.WriteTo(output);
       }
+    #endif
     }
+
+    #if !GOOGLE_PROTOBUF_REFSTRUCT_COMPATIBILITY_MODE
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    void pb::IBufferMessage.InternalWriteTo(ref pb::WriteContext output) {
+      if (Code.Length != 0) {
+        output.WriteRawTag(10);
+        output.WriteString(Code);
+      }
+      if (Message.Length != 0) {
+        output.WriteRawTag(18);
+        output.WriteString(Message);
+      }
+      if (Trace != 0L) {
+        output.WriteRawTag(24);
+        output.WriteInt64(Trace);
+      }
+      if (_unknownFields != null) {
+        _unknownFields.WriteTo(ref output);
+      }
+    }
+    #endif
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     public int CalculateSize() {
       int size = 0;
-      if (Code != 0) {
-        size += 1 + pb::CodedOutputStream.ComputeInt32Size(Code);
+      if (Code.Length != 0) {
+        size += 1 + pb::CodedOutputStream.ComputeStringSize(Code);
       }
       if (Message.Length != 0) {
         size += 1 + pb::CodedOutputStream.ComputeStringSize(Message);
@@ -184,7 +213,7 @@ namespace scyna.proto {
       if (other == null) {
         return;
       }
-      if (other.Code != 0) {
+      if (other.Code.Length != 0) {
         Code = other.Code;
       }
       if (other.Message.Length != 0) {
@@ -198,14 +227,43 @@ namespace scyna.proto {
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     public void MergeFrom(pb::CodedInputStream input) {
+    #if !GOOGLE_PROTOBUF_REFSTRUCT_COMPATIBILITY_MODE
+      input.ReadRawMessage(this);
+    #else
       uint tag;
       while ((tag = input.ReadTag()) != 0) {
         switch(tag) {
           default:
             _unknownFields = pb::UnknownFieldSet.MergeFieldFrom(_unknownFields, input);
             break;
-          case 8: {
-            Code = input.ReadInt32();
+          case 10: {
+            Code = input.ReadString();
+            break;
+          }
+          case 18: {
+            Message = input.ReadString();
+            break;
+          }
+          case 24: {
+            Trace = input.ReadInt64();
+            break;
+          }
+        }
+      }
+    #endif
+    }
+
+    #if !GOOGLE_PROTOBUF_REFSTRUCT_COMPATIBILITY_MODE
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    void pb::IBufferMessage.InternalMergeFrom(ref pb::ParseContext input) {
+      uint tag;
+      while ((tag = input.ReadTag()) != 0) {
+        switch(tag) {
+          default:
+            _unknownFields = pb::UnknownFieldSet.MergeFieldFrom(_unknownFields, ref input);
+            break;
+          case 10: {
+            Code = input.ReadString();
             break;
           }
           case 18: {
@@ -219,6 +277,7 @@ namespace scyna.proto {
         }
       }
     }
+    #endif
 
   }
 

@@ -16,7 +16,7 @@ public class Engine
     private readonly DB db;
     private readonly IJetStream stream;
     private readonly DomainEventQueue domainEventQueue;
-    private bool TestMode = false;
+    private static bool TestMode = false;
 
     public static Engine Instance
     {
@@ -70,9 +70,9 @@ public class Engine
         Console.WriteLine("Engine Created, SessionID:" + sid);
     }
 
-    static public async void TestInit(string managerURL, string module, string secret)
+    static public void TestInit(string managerURL, string module, string secret)
     {
-        Instance.TestMode = true;
+        TestMode = true;
         Init(managerURL, module, secret);
     }
 
@@ -141,6 +141,7 @@ public class Engine
                 Console.WriteLine("Register endpoint: " + t.Name);
                 var instance = (IEndpoint)Activator.CreateInstance(t) ?? throw new Exception("Can not create endpoint instance");
                 Connection.SubscribeAsync(Utils.SubscribeURL(attr.Url), "API", (sender, args) => { instance.Run(args.Message); });
+                instance.OnInit();
             }
             else
             {
@@ -151,7 +152,7 @@ public class Engine
 
     static void RegisterDomainEvents()
     {
-        if (Engine.Instance.TestMode) return;
+        if (TestMode) return;
 
         var type = typeof(IDomainEvent);
 

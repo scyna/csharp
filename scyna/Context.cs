@@ -7,19 +7,19 @@ public class Context : Logger
 {
     public Context(ulong id) : base(id) { }
 
-    public void Command(String url, IMessage request, scyna.Error error)
+    public void Command(string url, IMessage request, scyna.Error error)
     {
         try { SendRequest(url, request); }
         catch { throw error; }
     }
 
-    public T Query<T>(String url, IMessage request, scyna.Error error) where T : IMessage<T>, new()
+    public T Query<T>(string url, IMessage request, scyna.Error error) where T : IMessage<T>, new()
     {
         try { return SendRequest<T>(url, request); }
         catch { throw error; }
     }
 
-    public void SendRequest(String url, IMessage request)
+    public void SendRequest(string url, IMessage request)
     {
         Trace trace = Trace.NewEndpointTrace(url, this.ID);
         var req = new scyna.proto.Request
@@ -47,7 +47,7 @@ public class Context : Logger
         }
     }
 
-    public T SendRequest<T>(String url, IMessage request) where T : IMessage<T>, new()
+    public T SendRequest<T>(string url, IMessage request) where T : IMessage<T>, new()
     {
         Trace trace = Trace.NewEndpointTrace(url, this.ID);
         var req = new scyna.proto.Request
