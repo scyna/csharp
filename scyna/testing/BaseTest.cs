@@ -29,7 +29,7 @@ public class BaseTest<M> where M : BaseTest<M>
         return (M)this;
     }
 
-    public M DomainEventRaised<T>(out T event_) where T : IMessage<T>, new()
+    public M GotDomainEvent<T>(out T event_) where T : IMessage<T>, new()
     {
         var received = DomainEvent.NextEvent();
 
@@ -43,7 +43,7 @@ public class BaseTest<M> where M : BaseTest<M>
         return (M)this;
     }
 
-    public M EventPublished<T>(string channel, out T event_) where T : IMessage<T>, new()
+    public M GotEvent<T>(string channel, out T event_) where T : IMessage<T>, new()
     {
         if (this.event_ is not null) throw new Exception("Event is received with ExpectEvent()");
 

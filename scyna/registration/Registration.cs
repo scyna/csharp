@@ -27,8 +27,8 @@ public class Registration<M> where M : IMessage<M>, new()
 
     public registration.Command<M> Command(string url) => new(this, url);
     public registration.DomainEvent<M> DomainEvent() => new(this);
-    public registration.Event<M> Event(string module, string channel) => new(this, module, channel);
-    public registration.Task<M> Task(string module, string channel) => new(this, module, channel);
+    public registration.Event<M> Event(string module, string channel) => new(module, channel);
+    public registration.Task<M> Task(string module, string channel) => new(module, channel);
     public void Endpoint<R, H>(string url)
         where R : IMessage<R>, new()
         where H : Endpoint.Handler<R>, new()

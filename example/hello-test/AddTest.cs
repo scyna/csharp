@@ -15,7 +15,8 @@ public class AddTest : TestsBase
         Testing.Endpoint(Path.ADD_URL)
             .WithRequest(new proto.AddRequest { A = a, B = b })
             .ExpectResponse(new proto.AddResponse { Sum = sum })
-            .ShouldBeFine();
+            .ExpectSucess()
+            .Run();
     }
 
     [Theory]
@@ -25,6 +26,7 @@ public class AddTest : TestsBase
     {
         Testing.Endpoint(Path.ADD_URL)
             .WithRequest(new proto.AddRequest { A = a, B = b })
-            .ShouldFailWith(Error.REQUEST_INVALID);
+            .ExpectError(Error.REQUEST_INVALID)
+            .Run();
     }
 }

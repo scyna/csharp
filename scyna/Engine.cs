@@ -69,26 +69,6 @@ public class Engine
         Console.WriteLine("Engine Created, SessionID:" + sid);
     }
 
-    static public async void TestInit(string managerURL, string module, string secret)
-    {
-        var client = new HttpClient();
-        var request = new proto.CreateSessionRequest { Module = module, Secret = secret, };
-        var task = client.PostAsync(managerURL + Path.SESSION_CREATE_URL, new ByteArrayContent(request.ToByteArray()));
-        if (!task.Wait(5000))
-        {
-            Console.WriteLine("Timeout");
-            throw new Exception();
-        }
-
-        var responseBody = await task.GetAwaiter().GetResult().Content.ReadAsByteArrayAsync();
-        var response = proto.CreateSessionResponse.Parser.ParseFrom(responseBody);
-        instance = new Engine(module, response.SessionID, response.Config);
-
-        /*setting*/
-        Signal.RegisterBySession(Path.SETTING_UPDATE_CHANNEL + module, new Settings.UpdatedSignal());
-        Signal.RegisterBySession(Path.SETTING_REMOVE_CHANNEL + module, new Settings.RemovedSignal());
-    }
-
     static public async void Init(string managerURL, string module, string secret)
     {
         var client = new HttpClient();

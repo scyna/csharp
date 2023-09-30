@@ -7,7 +7,7 @@ public class DomainEventTest<T> : BaseTest<DomainEventTest<T>>
 {
     private readonly DomainEvent.Handler<T> handler;
     private IMessage? input;
-    private bool expectSuccess = true;
+    private scyna.Error? error;
 
     internal DomainEventTest(DomainEvent.Handler<T> handler) { this.handler = handler; }
 
@@ -17,19 +17,13 @@ public class DomainEventTest<T> : BaseTest<DomainEventTest<T>>
         return this;
     }
 
-    public DomainEventTest<T> ShouldBeFine()
+    public DomainEventTest<T> ExpectError(Error error)
     {
-        expectSuccess = true;
-        return Run();
+        this.error = error;
+        return this;
     }
 
-    public DomainEventTest<T> ShouldFail()
-    {
-        expectSuccess = false;
-        return Run();
-    }
-
-    private DomainEventTest<T> Run()
+    public DomainEventTest<T> Run()
     {
         DomainEvent.Clear();
         try
@@ -42,15 +36,14 @@ public class DomainEventTest<T> : BaseTest<DomainEventTest<T>>
             ReceiveDomainEvent();
             ReceiveEvent();
             DeleteStream();
-            if (expectSuccess) return this;
-            expectSuccess = true;
-            Assert.False(expectSuccess);
         }
-        catch (Exception e)
+        catch (Error e)
         {
-            Console.WriteLine(e);
-            Assert.False(expectSuccess);
+            if (error is null) throw;
+            Assert.Equal(error.Code, e.Code);
+            Assert.Equal(error.Message, e.Message);
         }
+        catch { throw; }
         return this;
     }
 }

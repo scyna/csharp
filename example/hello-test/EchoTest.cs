@@ -13,6 +13,6 @@ public class EchoTest : TestsBase
         Testing.Endpoint(Path.ECHO_URL)
             .WithRequest(new proto.EchoRequest { Text = "Hello" })
             .ExpectResponse(new proto.EchoResponse { Text = "Hello" })
-            .ShouldBeFine();
+            .Run();
     }
 }

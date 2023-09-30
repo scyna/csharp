@@ -10,14 +10,9 @@ public class Logger
     public const uint FATAL = 5;
     private ulong id;
 
-    public Logger(ulong id)
-    {
-        this.id = id;
-    }
-
+    public Logger(ulong id) => this.id = id;
     public ulong ID { get { return id; } }
-
-    public void Reset(ulong id) { this.id = id; }
+    public void Reset(ulong id) => this.id = id;
 
     private void Add(uint level, string messgage)
     {

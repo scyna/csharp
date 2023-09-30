@@ -27,17 +27,17 @@ public class EndpointTest : BaseTest<EndpointTest>
         return this;
     }
 
-    public EndpointTest ShouldBeFine()
+    public EndpointTest ExpectSucess()
     {
         this.status = 200;
-        return Run();
+        return this;
     }
 
-    public EndpointTest ShouldFailWith(scyna.Error error)
+    public EndpointTest ExpectError(scyna.Error error)
     {
         this.status = 400;
         this.error = error.ToProto();
-        return Run();
+        return this;
     }
 
     public EndpointTest ExpectResponse(IMessage response)
@@ -56,14 +56,14 @@ public class EndpointTest : BaseTest<EndpointTest>
         return this;
     }
 
-    public EndpointTest ResponseReceived<T>(out T response) where T : IMessage<T>, new()
+    public EndpointTest GotResponse<T>(out T response) where T : IMessage<T>, new()
     {
         MessageParser<T> parser = new(() => new T());
         response = parser.ParseFrom(responseData);
         return this;
     }
 
-    private EndpointTest Run()
+    public EndpointTest Run()
     {
         DomainEvent.Clear();
         CreateStream();

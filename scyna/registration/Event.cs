@@ -6,13 +6,11 @@ public class Event<M> where M : IMessage<M>, new()
 {
     readonly string module;
     readonly string channel;
-    readonly Registration<M> registration;
 
-    internal Event(Registration<M> registration, string module, string channel)
+    internal Event(string module, string channel)
     {
         this.module = module;
         this.channel = channel;
-        this.registration = registration;
     }
 
     public Request<R> Given<R>() where R : IMessage<R>, new() => new(this);

@@ -11,6 +11,6 @@ public class GenerateOtpTest : TestBase
         Testing.DomainEvent(new GenerateOtpHandler())
             .WithData(new PROTO.RegistrationCreated { Email = "a@gmail.com", Name = "Nguyen Van A" })
             .ExpectDomainEvent(new PROTO.OtpGenerated { Email = "a@gmail.com", Otp = "123456" })
-            .ShouldBeFine();
+            .Run();
     }
 }
