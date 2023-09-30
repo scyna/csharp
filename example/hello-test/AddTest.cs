@@ -16,7 +16,6 @@ public class AddTest : TestsBase
         Testing.Endpoint<AddService>()
             .WithRequest(new AddRequest { A = a, B = b })
             .ExpectResponse(new AddResponse { Sum = sum })
-            .ExpectSucess()
             .Run();
     }
 

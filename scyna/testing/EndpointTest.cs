@@ -4,7 +4,7 @@ using Xunit;
 
 public class EndpointTest : BaseTest<EndpointTest>
 {
-    private int status;
+    private int status = 200;
     private readonly string url;
     private IMessage? request;
     private IMessage? metadata;
@@ -24,12 +24,6 @@ public class EndpointTest : BaseTest<EndpointTest>
     public EndpointTest WithMetadata(IMessage data)
     {
         this.metadata = data;
-        return this;
-    }
-
-    public EndpointTest ExpectSucess()
-    {
-        this.status = 200;
         return this;
     }
 
